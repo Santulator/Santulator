@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<!--
+  ~ Open Source Software published under the Apache Licence, Version 2.0.
+  -->
+
+<ruleset name="VocabHunter PMD Configuration"
+         xmlns="http://pmd.sf.net/ruleset/1.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd"
+         xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
+
+    <description>VocabHunter PMD Configuration</description>
+
+    <rule ref="rulesets/java/basic.xml"/>
+
+    <rule ref="rulesets/java/braces.xml"/>
+
+    <rule ref="rulesets/java/clone.xml"/>
+
+    <rule ref="rulesets/java/codesize.xml">
+        <exclude name="TooManyMethods"/>
+        <exclude name="TooManyFields"/>
+    </rule>
+
+    <rule ref="rulesets/java/controversial.xml">
+        <exclude name="NullAssignment"/>
+        <exclude name="OnlyOneReturn"/>
+        <exclude name="AtLeastOneConstructor"/>
+        <exclude name="DataflowAnomalyAnalysis"/>
+        <exclude name="UseConcurrentHashMap"/>
+        <exclude name="AvoidLiteralsInIfCondition"/>
+        <exclude name="CallSuperInConstructor"/>
+        <exclude name="AvoidPrefixingMethodParameters"/>
+        <exclude name="DefaultPackage"/>
+    </rule>
+
+    <rule ref="rulesets/java/coupling.xml">
+        <exclude name="CouplingBetweenObjects"/>
+        <exclude name="ExcessiveImports"/>
+        <exclude name="LoosePackageCoupling"/>
+        <exclude name="LawOfDemeter"/>
+    </rule>
+
+    <rule ref="rulesets/java/design.xml">
+        <exclude name="AccessorMethodGeneration"/>
+    </rule>
+
+    <rule ref="rulesets/java/empty.xml"/>
+
+    <rule ref="rulesets/java/finalizers.xml"/>
+
+    <rule ref="rulesets/java/imports.xml">
+        <exclude name="TooManyStaticImports"/>
+    </rule>
+
+    <rule ref="rulesets/java/junit.xml">
+        <exclude name="JUnitTestContainsTooManyAsserts"/>
+        <exclude name="JUnitAssertionsShouldIncludeMessage"/>
+    </rule>
+
+    <rule ref="rulesets/java/logging-java.xml"/>
+
+    <rule ref="rulesets/java/naming.xml">
+        <exclude name="ShortVariable"/>
+        <exclude name="LongVariable"/>
+        <exclude name="AvoidFieldNameMatchingMethodName"/>
+    </rule>
+
+    <rule ref="rulesets/java/migrating.xml">
+        <exclude name="JUnit4TestShouldUseBeforeAnnotation"/>
+        <exclude name="JUnit4TestShouldUseAfterAnnotation"/>
+        <exclude name="JUnit4TestShouldUseTestAnnotation"/>
+    </rule>
+
+    <rule ref="rulesets/java/optimizations.xml">
+        <exclude name="LocalVariableCouldBeFinal"/>
+        <exclude name="RedundantFieldInitializer"/>
+        <exclude name="AvoidInstantiatingObjectsInLoops"/>
+    </rule>
+
+    <rule ref="rulesets/java/sunsecure.xml"/>
+
+    <rule ref="rulesets/java/strings.xml">
+        <exclude name="AvoidDuplicateLiterals"/>
+    </rule>
+
+    <rule ref="rulesets/java/typeresolution.xml">
+        <exclude name="SignatureDeclareThrowsException"/>
+    </rule>
+
+    <rule ref="rulesets/java/unusedcode.xml"/>
+
+    <rule ref="rulesets/java/unnecessary.xml"/>
+
+    <exclude-pattern>.*/MatcherPairTest.java</exclude-pattern>
+    <exclude-pattern>.*/*AbstractBeanTest.java</exclude-pattern>
+
+</ruleset>

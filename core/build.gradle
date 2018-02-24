@@ -1,0 +1,17 @@
+/*
+ * Open Source Software published under the Apache Licence, Version 2.0.
+ */
+
+dependencies {
+    compile 'org.apache.commons:commons-lang3:3.7'
+    compile 'org.apache.poi:poi:3.17'
+    compile 'org.apache.poi:poi-ooxml:3.17'
+    compile 'com.github.librepdf:openpdf:1.0.5'
+    compile 'org.slf4j:slf4j-api:1.7.25'
+    compile 'com.google.inject:guice:4.1.0'
+
+    testCompile 'com.github.spotbugs:spotbugs-annotations:3.1.1'
+    testCompile 'commons-io:commons-io:2.6'
+
+    runtime 'ch.qos.logback:logback-classic:1.2.3'
+}

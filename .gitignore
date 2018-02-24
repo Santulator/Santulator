@@ -1,0 +1,16 @@
+.DS_Store
+
+.idea
+*.iml
+.gradle
+build
+out
+
+.settings
+.project
+.classpath
+
+*.log
+
+# JEnv Java Version
+.java-version
