@@ -3,7 +3,7 @@
  */
 
 allprojects {
-    group 'io.github.vocabhunter'
+    group 'io.github.santulator'
 }
 
 task wrapper(type: Wrapper) {
