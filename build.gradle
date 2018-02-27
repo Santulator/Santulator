@@ -23,8 +23,8 @@ buildscript {
     dependencies {
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.17.0'
         classpath 'net.researchgate:gradle-release:2.6.0'
-        classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.1'
-        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.2'
+        classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.2'
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.1.0'
         classpath 'gradle.plugin.com.github.spotbugs:gradlePlugin:1.6.0'
     }
 }
@@ -51,10 +51,10 @@ subprojects {
     }
 
     dependencies {
-        testCompile 'org.junit.jupiter:junit-jupiter-api:5.0.3'
-        testCompile 'org.junit.jupiter:junit-jupiter-params:5.0.3'
-        testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.0.3'
-        testCompile 'org.mockito:mockito-core:2.13.0'
+        testCompile 'org.junit.jupiter:junit-jupiter-api:5.1.0'
+        testCompile 'org.junit.jupiter:junit-jupiter-params:5.1.0'
+        testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.1.0'
+        testCompile 'org.mockito:mockito-core:2.15.0'
         runtime 'ch.qos.logback:logback-classic:1.2.3'
     }
 
@@ -64,7 +64,7 @@ subprojects {
     }
 
     checkstyle {
-        toolVersion = '8.7'
+        toolVersion = '8.8'
         configFile = file("$rootProject.projectDir/config/checkstyle/checkstyle.xml")
     }
 
@@ -73,7 +73,7 @@ subprojects {
     }
 
     spotbugs {
-        toolVersion = '3.1.1'
+        toolVersion = '3.1.2'
         effort = 'max'
         reportLevel = 'medium'
     }
