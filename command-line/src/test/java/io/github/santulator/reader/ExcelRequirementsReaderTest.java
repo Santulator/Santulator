@@ -5,11 +5,12 @@
 package io.github.santulator.reader;
 
 import io.github.santulator.model.DrawRequirements;
+import io.github.santulator.model.TestDataBuilder;
 import org.junit.jupiter.api.Test;
 
 import java.io.InputStream;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ExcelRequirementsReaderTest {
     private static final String SPREADSHEET_XLS = "/spreadsheets/SantaRequirements.xls";
@@ -18,10 +19,11 @@ public class ExcelRequirementsReaderTest {
 
     @Test
     public void loadRequirements() throws Exception {
-        InputStream stream = ExcelRequirementsReaderTest.class.getResourceAsStream(SPREADSHEET_XLS);
-        DrawRequirements requirements = target.read(SPREADSHEET_XLS, stream);
+        try (InputStream stream = ExcelRequirementsReaderTest.class.getResourceAsStream(SPREADSHEET_XLS)) {
+            DrawRequirements requirements = target.read(SPREADSHEET_XLS, stream);
+            DrawRequirements expected = TestDataBuilder.buildDrawRequirements();
 
-        assertNotNull(requirements, "Requirements");
-        stream.close();
+            assertEquals(expected, requirements);
+        }
     }
 }

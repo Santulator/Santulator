@@ -4,6 +4,7 @@
 
 dependencies {
     compile project(':core')
+    testCompile project(path: ':core', configuration: 'tests')
 
     compile 'org.apache.poi:poi:3.17'
     compile 'org.apache.poi:poi-ooxml:3.17'

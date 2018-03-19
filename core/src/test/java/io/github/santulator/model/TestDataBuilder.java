@@ -46,7 +46,7 @@ public final class TestDataBuilder {
         addRestrictions(restrictions, CARLA, DAVID);
         addRestrictions(restrictions, EDITH, FRED);
         addRestrictions(restrictions, GINA, HARRY);
-        addRestrictions(restrictions, JOHN, IRIS);
+        addRestrictions(restrictions, IRIS, JOHN);
 
         return new DrawRequirements(PEOPLE, restrictions);
     }
