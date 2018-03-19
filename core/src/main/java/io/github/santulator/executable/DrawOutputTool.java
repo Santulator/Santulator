@@ -38,7 +38,9 @@ public class DrawOutputTool {
 
     private void revealNumber(final int i) {
         Person participant = participants.get(i);
-        LOG.info("{} = {}", i + 1, participant.getName());
+        int displayNumber = i + 1;
+
+        LOG.info("{} = {}", displayNumber, participant.getName());
     }
 
     public void showSelection(final DrawSelection selection) {
