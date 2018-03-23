@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static java.util.Collections.emptyList;
@@ -34,18 +35,23 @@ public class DrawServiceTest {
 
     private void validateSelection(final DrawRequirements requirements) {
         DrawSelection selection = target.draw(requirements);
-        Set<Person> people = people(requirements);
-        Set<Person> givers = givers(selection);
-        Set<Person> receivers = receivers(selection);
+        Set<Person> expectedGivers = participants(requirements, ParticipantRole::isGiver);
+        Set<Person> expectedReceivers = participants(requirements, ParticipantRole::isReceiver);
+        Set<Person> actualGivers = givers(selection);
+        Set<Person> actualReceivers = receivers(selection);
 
         assertAll(
-            () -> assertEquals(people, givers, "Givers"),
-            () -> assertEquals(people, receivers, "Receivers")
+            () -> assertEquals(expectedGivers, actualGivers, "Givers"),
+            () -> assertEquals(expectedReceivers, actualReceivers, "Receivers")
         );
     }
 
-    private Set<Person> people(final DrawRequirements requirements) {
-        return new HashSet<>(requirements.getParticipants());
+    private Set<Person> participants(final DrawRequirements requirements, final Predicate<ParticipantRole> roleFilter) {
+        HashSet<Person> people = new HashSet<>(requirements.getParticipants());
+
+        people.removeIf(p -> !roleFilter.test(p.getRole()));
+
+        return people;
     }
 
     private Set<Person> givers(final DrawSelection selection) {

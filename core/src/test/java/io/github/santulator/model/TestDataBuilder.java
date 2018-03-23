@@ -8,30 +8,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static io.github.santulator.core.CoreTool.listOf;
+import static io.github.santulator.model.ParticipantRole.*;
 import static java.util.Collections.unmodifiableList;
 
 public final class TestDataBuilder {
-    public static final Person ALBERT = new Person("Albert");
+    public static final Person ALBERT = new Person("Albert", GIVER);
 
-    public static final Person BERYL = new Person("Beryl");
+    public static final Person BERYL = new Person("Beryl", BOTH);
 
-    public static final Person CARLA = new Person("Carla");
+    public static final Person CARLA = new Person("Carla", BOTH);
 
-    public static final Person DAVID = new Person("David");
+    public static final Person DAVID = new Person("David", BOTH);
 
-    public static final Person EDITH = new Person("Edith");
+    public static final Person EDITH = new Person("Edith", BOTH);
 
-    public static final Person FRED = new Person("Fred");
+    public static final Person FRED = new Person("Fred", BOTH);
 
-    public static final Person GINA = new Person("Gina");
+    public static final Person GINA = new Person("Gina", BOTH);
 
-    public static final Person HARRY = new Person("Harry");
+    public static final Person HARRY = new Person("Harry", BOTH);
 
-    public static final Person IRIS = new Person("Iris");
+    public static final Person IRIS = new Person("Iris", BOTH);
 
-    public static final Person JOHN = new Person("John");
+    public static final Person JOHN = new Person("John", BOTH);
 
-    public static final Person KATE = new Person("Kate");
+    public static final Person KATE = new Person("Kate", RECEIVER);
 
     public static final List<Person> PEOPLE = unmodifiableList(listOf(ALBERT, BERYL, CARLA, DAVID, EDITH, FRED, GINA, HARRY, IRIS, JOHN, KATE));
 

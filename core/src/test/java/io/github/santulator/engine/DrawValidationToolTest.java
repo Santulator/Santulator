@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static io.github.santulator.core.CoreTool.listOf;
+import static java.util.Collections.emptyList;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DrawValidationToolTest {
@@ -21,19 +22,35 @@ public class DrawValidationToolTest {
 
     private static final Person PERSON_3 = new Person("PERSON_3");
 
-    private static final List<Person> PARTICIPANTS = listOf(PERSON_1, PERSON_2, PERSON_3);
+    private static final Person GIVER_ONLY = new Person("GIVER", ParticipantRole.GIVER);
+
+    private static final Person RECEIVER_ONLY = new Person("RECEIVER", ParticipantRole.RECEIVER);
 
     private static final Restriction RESTRICTION_1 = new Restriction(PERSON_1, PERSON_2);
 
     private static final List<Restriction> RESTRICTIONS = Collections.singletonList(RESTRICTION_1);
 
-    private static final DrawRequirements REQUIREMENTS = new DrawRequirements(PARTICIPANTS, RESTRICTIONS);
+    private static final DrawRequirements REQUIREMENTS = requirements(RESTRICTIONS, PERSON_1, PERSON_2, PERSON_3);
 
     @Test
     public void testAcceptedSelection() {
         DrawSelection selection = selection(giver(PERSON_3, PERSON_2), giver(PERSON_2, PERSON_1), giver(PERSON_1, PERSON_3));
 
         DrawValidationTool.validate(REQUIREMENTS, selection);
+    }
+
+    @Test
+    public void testSimpleGiveAndReceive() {
+        DrawSelection selection = selection(giver(GIVER_ONLY, RECEIVER_ONLY));
+
+        DrawValidationTool.validate(requirements(GIVER_ONLY, RECEIVER_ONLY), selection);
+    }
+
+    @Test
+    public void testInverseGiveAndReceive() {
+        DrawSelection selection = selection(giver(RECEIVER_ONLY, GIVER_ONLY));
+
+        validateBadSelection(requirements(GIVER_ONLY, RECEIVER_ONLY), selection);
     }
 
     @Test
@@ -64,8 +81,34 @@ public class DrawValidationToolTest {
         validateBadSelection(selection);
     }
 
+    @Test
+    public void testBadGiverOnly() {
+        DrawSelection selection = selection(giver(PERSON_1, GIVER_ONLY), giver(GIVER_ONLY, PERSON_1));
+
+        validateBadSelection(requirements(PERSON_1, GIVER_ONLY), selection);
+    }
+
+    @Test
+    public void testBadReceiverOnly() {
+        DrawSelection selection = selection(giver(PERSON_1, RECEIVER_ONLY), giver(RECEIVER_ONLY, PERSON_1));
+
+        validateBadSelection(requirements(PERSON_1, GIVER_ONLY), selection);
+    }
+
     private void validateBadSelection(final DrawSelection selection) {
-        assertThrows(SantaException.class, () -> DrawValidationTool.validate(REQUIREMENTS, selection));
+        validateBadSelection(REQUIREMENTS, selection);
+    }
+
+    private void validateBadSelection(final DrawRequirements requirements, final DrawSelection selection) {
+        assertThrows(SantaException.class, () -> DrawValidationTool.validate(requirements, selection));
+    }
+
+    private static DrawRequirements requirements(final Person... participants) {
+        return new DrawRequirements(listOf(participants), emptyList());
+    }
+
+    private static DrawRequirements requirements(final List<Restriction> restrictions, final Person... participants) {
+        return new DrawRequirements(listOf(participants), restrictions);
     }
 
     private DrawSelection selection(final GiverAssignment... givers) {

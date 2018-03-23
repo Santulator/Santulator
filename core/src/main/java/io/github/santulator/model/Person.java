@@ -12,12 +12,23 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public final class Person {
     private final String name;
 
+    private final ParticipantRole role;
+
     public Person(final String name) {
+        this(name, ParticipantRole.BOTH);
+    }
+
+    public Person(final String name, final ParticipantRole role) {
         this.name = name;
+        this.role = role;
     }
 
     public String getName() {
         return name;
+    }
+
+    public ParticipantRole getRole() {
+        return role;
     }
 
     @Override
@@ -33,21 +44,24 @@ public final class Person {
         Person person = (Person) o;
 
         return new EqualsBuilder()
-                .append(name, person.name)
-                .isEquals();
+            .append(name, person.name)
+            .append(role, person.role)
+            .isEquals();
     }
 
     @Override
     public int hashCode() {
         return new HashCodeBuilder()
-                .append(name)
-                .toHashCode();
+            .append(name)
+            .append(role)
+            .toHashCode();
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
             .append(name)
+            .append(role)
             .toString();
     }
 }

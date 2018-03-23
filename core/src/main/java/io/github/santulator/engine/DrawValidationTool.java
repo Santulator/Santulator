@@ -10,9 +10,14 @@ import io.github.santulator.model.DrawSelection;
 import io.github.santulator.model.GiverAssignment;
 import io.github.santulator.model.Person;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.toSet;
 
 public final class DrawValidationTool {
@@ -21,12 +26,12 @@ public final class DrawValidationTool {
     }
 
     public static void validate(final DrawRequirements requirements, final DrawSelection selection) {
-        validateGiverAssignments(requirements, selection);
-        validatePresentsForAll(requirements, selection);
-        validateGiverSetSize(selection);
+        validateRestrictions(requirements, selection);
+        validateRecipients(requirements, selection);
+        validateGivers(requirements, selection);
     }
 
-    private static void validateGiverAssignments(final DrawRequirements requirements, final DrawSelection selection) {
+    private static void validateRestrictions(final DrawRequirements requirements, final DrawSelection selection) {
         Set<GiverAssignment> prohibited = requirements.getRestrictions().stream()
             .map(r -> new GiverAssignment(r.getFromPerson(), r.getToPerson()))
             .collect(toSet());
@@ -39,27 +44,41 @@ public final class DrawValidationTool {
         });
     }
 
-    private static void validatePresentsForAll(final DrawRequirements requirements, final DrawSelection selection) {
-        Set<Person> recipients = selection.getGivers().stream()
-            .map(GiverAssignment::getTo)
-            .collect(toSet());
-        Set<Person> remaining = new LinkedHashSet<>(requirements.getParticipants());
-
-        remaining.removeAll(recipients);
-
-        if (!remaining.isEmpty()) {
-            throw new SantaException(String.format("No present for %s", remaining.iterator().next()));
-        }
+    private static void validateRecipients(final DrawRequirements requirements, final DrawSelection selection) {
+        validateSide(requirements, selection, GiverAssignment::getTo, p1 -> p1.getRole().isReceiver(), "receiver");
     }
 
-    private static void validateGiverSetSize(final DrawSelection selection) {
-        List<Person> givers = selection.getGivers().stream()
-            .map(GiverAssignment::getFrom)
-            .collect(toList());
-        Set<Person> giverSet = new HashSet<>(givers);
+    private static void validateGivers(final DrawRequirements requirements, final DrawSelection selection) {
+        validateSide(requirements, selection, GiverAssignment::getFrom, p1 -> p1.getRole().isGiver(), "giver");
+    }
 
-        if (givers.size() != giverSet.size()) {
-            throw new SantaException("The number of present givers is incorrect");
-        }
+    private static void validateSide(final DrawRequirements requirements, final DrawSelection selection, final Function<GiverAssignment, Person> extractSide,
+                                     final Predicate<Person> roleFilter, final String sideName) {
+        Set<Person> expected = requirements.getParticipants().stream()
+            .filter(roleFilter)
+            .collect(toSet());
+        Map<Person, Long> appearances = selection.getGivers().stream()
+            .collect(Collectors.groupingBy(extractSide, counting()));
+
+        appearances.keySet().stream()
+            .filter(p -> !expected.contains(p))
+            .findFirst()
+            .ifPresent(p -> {
+                throw new SantaException(String.format("Invalid %s '%s'", sideName, p.getName()));
+            });
+        appearances.entrySet().stream()
+            .filter(e -> e.getValue() > 1)
+            .map(Map.Entry::getKey)
+            .findFirst()
+            .ifPresent(p -> {
+                throw new SantaException(String.format("Duplicate %s '%s", sideName, p.getName()));
+            });
+        requirements.getParticipants().stream()
+            .filter(roleFilter)
+            .filter(key -> !appearances.containsKey(key))
+            .findFirst()
+            .ifPresent(p -> {
+                throw new SantaException(String.format("Missing %s '%s'", sideName, p.getName()));
+            });
     }
 }
