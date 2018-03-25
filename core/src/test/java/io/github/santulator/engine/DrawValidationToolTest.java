@@ -22,9 +22,13 @@ public class DrawValidationToolTest {
 
     private static final Person PERSON_3 = new Person("PERSON_3");
 
-    private static final Person GIVER_ONLY = new Person("GIVER", ParticipantRole.GIVER);
+    private static final Person GIVER_ONLY_1 = new Person("GIVER_1", ParticipantRole.GIVER);
 
-    private static final Person RECEIVER_ONLY = new Person("RECEIVER", ParticipantRole.RECEIVER);
+    private static final Person GIVER_ONLY_2 = new Person("GIVER_2", ParticipantRole.GIVER);
+
+    private static final Person RECEIVER_ONLY_1 = new Person("RECEIVER_1", ParticipantRole.RECEIVER);
+
+    private static final Person RECEIVER_ONLY_2 = new Person("RECEIVER_2", ParticipantRole.RECEIVER);
 
     private static final Restriction RESTRICTION_1 = new Restriction(PERSON_1, PERSON_2);
 
@@ -41,16 +45,16 @@ public class DrawValidationToolTest {
 
     @Test
     public void testSimpleGiveAndReceive() {
-        DrawSelection selection = selection(giver(GIVER_ONLY, RECEIVER_ONLY));
+        DrawSelection selection = selection(giver(GIVER_ONLY_1, RECEIVER_ONLY_1));
 
-        DrawValidationTool.validate(requirements(GIVER_ONLY, RECEIVER_ONLY), selection);
+        DrawValidationTool.validate(requirements(GIVER_ONLY_1, RECEIVER_ONLY_1), selection);
     }
 
     @Test
     public void testInverseGiveAndReceive() {
-        DrawSelection selection = selection(giver(RECEIVER_ONLY, GIVER_ONLY));
+        DrawSelection selection = selection(giver(RECEIVER_ONLY_1, GIVER_ONLY_1));
 
-        validateBadSelection(requirements(GIVER_ONLY, RECEIVER_ONLY), selection);
+        validateBadSelection(requirements(GIVER_ONLY_1, RECEIVER_ONLY_1), selection);
     }
 
     @Test
@@ -69,30 +73,30 @@ public class DrawValidationToolTest {
 
     @Test
     public void testDuplicateGiver() {
-        DrawSelection selection = selection(giver(PERSON_3, PERSON_2), giver(PERSON_2, PERSON_1), giver(PERSON_1, PERSON_3), giver(PERSON_1, PERSON_3));
+        DrawSelection selection = selection(giver(GIVER_ONLY_1, RECEIVER_ONLY_1), giver(GIVER_ONLY_1, RECEIVER_ONLY_2));
 
-        validateBadSelection(selection);
+        validateBadSelection(requirements(GIVER_ONLY_1, RECEIVER_ONLY_1, RECEIVER_ONLY_2), selection);
     }
 
     @Test
-    public void testDuplicateGift() {
-        DrawSelection selection = selection(giver(PERSON_3, PERSON_2), giver(PERSON_2, PERSON_1), giver(PERSON_1, PERSON_3), giver(PERSON_2, PERSON_3));
+    public void testDuplicateReceiver() {
+        DrawSelection selection = selection(giver(GIVER_ONLY_1, RECEIVER_ONLY_1), giver(GIVER_ONLY_2, RECEIVER_ONLY_1));
 
-        validateBadSelection(selection);
+        validateBadSelection(requirements(GIVER_ONLY_1, GIVER_ONLY_2, RECEIVER_ONLY_1), selection);
     }
 
     @Test
     public void testBadGiverOnly() {
-        DrawSelection selection = selection(giver(PERSON_1, GIVER_ONLY), giver(GIVER_ONLY, PERSON_1));
+        DrawSelection selection = selection(giver(PERSON_1, GIVER_ONLY_1), giver(GIVER_ONLY_1, PERSON_1));
 
-        validateBadSelection(requirements(PERSON_1, GIVER_ONLY), selection);
+        validateBadSelection(requirements(PERSON_1, GIVER_ONLY_1), selection);
     }
 
     @Test
     public void testBadReceiverOnly() {
-        DrawSelection selection = selection(giver(PERSON_1, RECEIVER_ONLY), giver(RECEIVER_ONLY, PERSON_1));
+        DrawSelection selection = selection(giver(PERSON_1, RECEIVER_ONLY_1), giver(RECEIVER_ONLY_1, PERSON_1));
 
-        validateBadSelection(requirements(PERSON_1, GIVER_ONLY), selection);
+        validateBadSelection(requirements(PERSON_1, GIVER_ONLY_1), selection);
     }
 
     private void validateBadSelection(final DrawSelection selection) {

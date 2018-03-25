@@ -5,7 +5,7 @@
 package io.github.santulator.reader;
 
 import io.github.santulator.model.DrawRequirements;
-import io.github.santulator.model.TestDataBuilder;
+import io.github.santulator.model.TestRequirementsTool;
 import org.junit.jupiter.api.Test;
 
 import java.io.InputStream;
@@ -21,9 +21,8 @@ public class ExcelRequirementsReaderTest {
     public void loadRequirements() throws Exception {
         try (InputStream stream = ExcelRequirementsReaderTest.class.getResourceAsStream(SPREADSHEET_XLS)) {
             DrawRequirements requirements = target.read(SPREADSHEET_XLS, stream);
-            DrawRequirements expected = TestDataBuilder.buildDrawRequirements();
 
-            assertEquals(expected, requirements);
+            assertEquals(TestRequirementsTool.REQUIREMENTS, requirements);
         }
     }
 }

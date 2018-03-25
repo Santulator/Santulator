@@ -6,7 +6,7 @@ public class PersonTest extends AbstractBeanTest<Person> {
 
     @Override
     protected Person buildPrimary() {
-        return TestDataBuilder.EDITH;
+        return TestRequirementsTool.EDITH;
     }
 
     @Override

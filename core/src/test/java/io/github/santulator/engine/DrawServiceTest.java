@@ -4,7 +4,12 @@
 
 package io.github.santulator.engine;
 
-import io.github.santulator.model.*;
+import io.github.santulator.model.DrawRequirements;
+import io.github.santulator.model.DrawSelection;
+import io.github.santulator.model.GiverAssignment;
+import io.github.santulator.model.ParticipantRole;
+import io.github.santulator.model.Person;
+import io.github.santulator.model.RequirementsBuilder;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
@@ -12,7 +17,9 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import static java.util.Collections.emptyList;
+import static io.github.santulator.model.TestRequirementsTool.REQUIREMENTS;
+import static io.github.santulator.model.TestRequirementsTool.person;
+import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,19 +28,64 @@ public class DrawServiceTest {
 
     @Test
     public void testEmpty() {
-        DrawRequirements requirements = new DrawRequirements(emptyList(), emptyList());
+        DrawRequirements requirements = new RequirementsBuilder()
+            .build();
 
-        validateSelection(requirements);
+        validateDeterministic(requirements);
+    }
+
+    @Test
+    public void testSingleGiver() {
+        DrawRequirements requirements = new RequirementsBuilder()
+            .person("Giver", ParticipantRole.GIVER)
+            .person("Receiver", ParticipantRole.RECEIVER)
+            .build();
+
+        validateDeterministic(requirements, giver(requirements, "Giver", "Receiver"));
+    }
+
+    @Test
+    public void testSingleGiftExchange() {
+        DrawRequirements requirements = new RequirementsBuilder()
+            .person("Person 1", ParticipantRole.BOTH)
+            .person("Person 2", ParticipantRole.BOTH)
+            .build();
+
+        validateDeterministic(requirements, giver(requirements, "Person 1", "Person 2"), giver(requirements, "Person 2", "Person 1"));
+    }
+
+    @Test
+    public void testOnlyOneSolution() {
+        DrawRequirements requirements = new RequirementsBuilder()
+            .person("A", ParticipantRole.BOTH)
+            .person("B", ParticipantRole.BOTH)
+            .person("C", ParticipantRole.BOTH)
+            .person("D", ParticipantRole.BOTH)
+            .restrictions("A", "C", "D")
+            .restrictions("B", "A", "D")
+            .restrictions("C", "A", "B")
+            .build();
+
+        validateDeterministic(requirements, giver(requirements, "A", "B"), giver(requirements, "B", "C"), giver(requirements, "C", "D"), giver(requirements, "D", "A"));
+    }
+
+    private GiverAssignment giver(final DrawRequirements requirements, final String from, final String to) {
+        return new GiverAssignment(person(requirements, from), person(requirements, to));
+    }
+
+    private void validateDeterministic(final DrawRequirements requirements, final GiverAssignment... assignments) {
+        DrawSelection expected = new DrawSelection(asList(assignments));
+        DrawSelection actual = target.draw(requirements);
+
+        assertEquals(expected, actual, "Draw Selection");
     }
 
     @Test
     public void testRealisticSelection() {
-        DrawRequirements requirements = TestDataBuilder.buildDrawRequirements();
-
-        validateSelection(requirements);
+        validateNondeterministic(REQUIREMENTS);
     }
 
-    private void validateSelection(final DrawRequirements requirements) {
+    private void validateNondeterministic(final DrawRequirements requirements) {
         DrawSelection selection = target.draw(requirements);
         Set<Person> expectedGivers = participants(requirements, ParticipantRole::isGiver);
         Set<Person> expectedReceivers = participants(requirements, ParticipantRole::isReceiver);

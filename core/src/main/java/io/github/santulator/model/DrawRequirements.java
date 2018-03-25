@@ -9,26 +9,27 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public final class DrawRequirements {
-    private final List<Person> participants;
+    private final Set<Person> participants;
 
-    private final List<Restriction> restrictions;
+    private final Set<Restriction> restrictions;
 
-    public DrawRequirements(final List<Person> participants, final List<Restriction> restrictions) {
-        this.participants = new ArrayList<>(participants);
-        this.restrictions = new ArrayList<>(restrictions);
+    public DrawRequirements(final Collection<Person> participants, final Collection<Restriction> restrictions) {
+        this.participants = new HashSet<>(participants);
+        this.restrictions = new HashSet<>(restrictions);
     }
 
-    public List<Person> getParticipants() {
-        return Collections.unmodifiableList(participants);
+    public Set<Person> getParticipants() {
+        return Collections.unmodifiableSet(participants);
     }
 
-    public List<Restriction> getRestrictions() {
-        return Collections.unmodifiableList(restrictions);
+    public Set<Restriction> getRestrictions() {
+        return Collections.unmodifiableSet(restrictions);
     }
 
     @Override
