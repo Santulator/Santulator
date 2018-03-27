@@ -4,6 +4,7 @@
 
 package io.github.santulator.engine;
 
+import io.github.santulator.core.SantaException;
 import io.github.santulator.model.DrawRequirements;
 import io.github.santulator.model.DrawSelection;
 import io.github.santulator.model.GiverAssignment;
@@ -11,6 +12,8 @@ import io.github.santulator.model.ParticipantRole;
 import io.github.santulator.model.Person;
 import io.github.santulator.model.RequirementsBuilder;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +25,7 @@ import static io.github.santulator.model.TestRequirementsTool.person;
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DrawServiceTest {
     private final DrawService target = new DrawServiceImpl();
@@ -35,7 +39,7 @@ public class DrawServiceTest {
     }
 
     @Test
-    public void testSingleGiver() {
+    public void testSingleGiverToReceiver() {
         DrawRequirements requirements = new RequirementsBuilder()
             .person("Giver", ParticipantRole.GIVER)
             .person("Receiver", ParticipantRole.RECEIVER)
@@ -67,6 +71,51 @@ public class DrawServiceTest {
             .build();
 
         validateDeterministic(requirements, giver(requirements, "A", "B"), giver(requirements, "B", "C"), giver(requirements, "C", "D"), giver(requirements, "D", "A"));
+    }
+
+    @ParameterizedTest
+    @EnumSource(ParticipantRole.class)
+    public void testSingleParticipant(final ParticipantRole role) {
+        DrawRequirements requirements = new RequirementsBuilder()
+            .person("Single", role)
+            .build();
+
+        assertThrows(SantaException.class, () -> target.draw(requirements));
+    }
+
+    @Test
+    public void testImpossibleSingleGiverToReceiver() {
+        DrawRequirements requirements = new RequirementsBuilder()
+            .person("Giver", ParticipantRole.GIVER)
+            .person("Receiver", ParticipantRole.RECEIVER)
+            .restrictions("Giver", "Receiver")
+            .build();
+
+        assertThrows(SantaException.class, () -> target.draw(requirements));
+    }
+
+    @Test
+    public void testImpossibleSingleGiftExchange() {
+        DrawRequirements requirements = new RequirementsBuilder()
+            .person("Person 1", ParticipantRole.BOTH)
+            .person("Person 2", ParticipantRole.BOTH)
+            .restrictions("Person 1", "Person 2")
+            .build();
+
+        assertThrows(SantaException.class, () -> target.draw(requirements));
+    }
+
+    @Test
+    public void testNoSolutionForGroup() {
+        DrawRequirements requirements = new RequirementsBuilder()
+            .person("A", ParticipantRole.BOTH)
+            .person("B", ParticipantRole.BOTH)
+            .person("C", ParticipantRole.BOTH)
+            .person("D", ParticipantRole.BOTH)
+            .restrictions("A", "B", "C", "D")
+            .build();
+
+        assertThrows(SantaException.class, () -> target.draw(requirements));
     }
 
     private GiverAssignment giver(final DrawRequirements requirements, final String from, final String to) {
