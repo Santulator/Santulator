@@ -141,7 +141,7 @@ public class DrawServiceTest {
     }
 
     private Set<Person> participants(final DrawRequirements requirements, final Predicate<ParticipantRole> roleFilter) {
-        HashSet<Person> people = new HashSet<>(requirements.getParticipants());
+        Set<Person> people = new HashSet<>(requirements.getParticipants());
 
         people.removeIf(p -> !roleFilter.test(p.getRole()));
 

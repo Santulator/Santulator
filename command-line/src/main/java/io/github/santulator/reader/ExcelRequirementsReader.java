@@ -17,6 +17,7 @@ import org.apache.poi.ss.usermodel.Row.MissingCellPolicy;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.OptionalInt;
 import java.util.function.Function;
 import java.util.stream.IntStream;
@@ -127,7 +128,7 @@ public class ExcelRequirementsReader implements RequirementsReader {
             .map(this::cellValue)
             .map(StringUtils::trimToNull)
             .collect(toList());
-        int last = CoreTool.findLast(result, v -> v != null).orElse(-1);
+        int last = CoreTool.findLast(result, Objects::nonNull).orElse(-1);
 
         return result.subList(0, last + 1);
     }
