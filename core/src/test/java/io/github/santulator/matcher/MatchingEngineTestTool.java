@@ -4,24 +4,27 @@
 
 package io.github.santulator.matcher;
 
+import io.github.santulator.model.GiverAssignment;
+import io.github.santulator.model.Person;
+
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static io.github.santulator.core.CoreTool.listOf;
+import static java.util.stream.Collectors.toSet;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MatchingEngineTestTool {
-    private List<Node> nodes;
+    private List<Person> participants;
 
-    private Set<MatcherPair<Node>> restrictions;
+    private Set<GiverAssignment> restrictions;
 
-    private final Set<Set<MatcherPair<Node>>> expectations = new HashSet<>();
+    private final Set<Set<GiverAssignment>> expectations = new HashSet<>();
 
-    public void setNodes(final Node... nodes) {
-        this.nodes = listOf(nodes);
+    public void setParticipants(final Person... participants) {
+        this.participants = listOf(participants);
     }
 
-    public void setRestrictions(final NodePairSet restrictions) {
+    public void setRestrictions(final PairSetTool restrictions) {
         this.restrictions = restrictions.toSet();
     }
 
@@ -29,61 +32,51 @@ public class MatchingEngineTestTool {
         expectations.add(null);
     }
 
-    public void addExpectation(final NodePairSet expectation) {
+    public void addExpectation(final PairSetTool expectation) {
         expectations.add(expectation.toSet());
     }
 
     public void performValidation() {
         MatchingEngine engine = new MatchingEngine();
-        Set<Set<MatcherPair<Node>>> matches = new HashSet<>();
-
-        for (List<Node> list : generatePermutations()) {
-            ConsIterable<MatcherPair<Node>> match = engine.findMatch(nodes, list, restrictions);
-
-            matches.add(matchSet(match));
-        }
+        List<List<Person>> permutations = generatePermutations();
+        Set<Set<GiverAssignment>> matches = permutations.stream()
+            .map(list -> engine.findMatch(participants, list, restrictions))
+            .map(this::matchSet)
+            .collect(toSet());
 
         assertEquals(expectations, matches, "Match set");
     }
 
-    private Set<MatcherPair<Node>> matchSet(
-            final ConsIterable<MatcherPair<Node>> match) {
-        if (match == null) {
-            return null;
-        } else {
-            return match.stream()
-                    .collect(Collectors.toSet());
-        }
+    private Set<GiverAssignment> matchSet(final Optional<MatchExtender> match) {
+        return match.map(this::matchSet)
+            .orElse(null);
     }
 
-    private List<List<Node>> generatePermutations() {
-        List<List<Node>> result = new ArrayList<>();
+    private Set<GiverAssignment> matchSet(final MatchExtender match) {
+        return match.assignmentStream()
+            .collect(toSet());
+    }
 
-        addPermutations(result, new ArrayList<>(), copyOf(nodes));
+    private List<List<Person>> generatePermutations() {
+        List<List<Person>> result = new ArrayList<>();
+
+        addPermutations(result, new ArrayList<>(), new HashSet<>(participants));
 
         return result;
     }
 
-    private void addPermutations(final List<List<Node>> accumulator, final List<Node> current, final Set<Node> remaining) {
+    private void addPermutations(final List<List<Person>> accumulator, final List<Person> current, final Set<Person> remaining) {
         if (remaining.isEmpty()) {
             accumulator.add(current);
         } else {
-            for (Node node : remaining) {
-                List<Node> nextCurrent = new ArrayList<>(current);
-                Set<Node> nextRemaining = copyOf(remaining);
+            for (Person person : remaining) {
+                List<Person> nextCurrent = new ArrayList<>(current);
+                Set<Person> nextRemaining = new HashSet<>(remaining);
 
-                nextCurrent.add(node);
-                nextRemaining.remove(node);
+                nextCurrent.add(person);
+                nextRemaining.remove(person);
                 addPermutations(accumulator, nextCurrent, nextRemaining);
             }
-        }
-    }
-
-    private Set<Node> copyOf(final Collection<Node> original) {
-        if (original.isEmpty()) {
-            return EnumSet.noneOf(Node.class);
-        } else {
-            return EnumSet.copyOf(original);
         }
     }
 }

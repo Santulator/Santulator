@@ -4,43 +4,43 @@
 
 package io.github.santulator.matcher;
 
+import io.github.santulator.model.GiverAssignment;
+import io.github.santulator.model.Person;
+
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public class MatchingEngine {
-    public <T> ConsIterable<MatcherPair<T>> findMatch(
-            final List<T> givers, final Collection<T> receivers, final Set<MatcherPair<T>> restrictions) {
-        PairMatcher<T> matcher = new RootMatcher<>(restrictions);
-        ConsIterable<MatcherPair<T>> empty = new ConsIterable<>();
+    public Optional<MatchExtender> findMatch(
+        final List<Person> givers, final Collection<Person> receivers, final Set<GiverAssignment> restrictions) {
+        MatchExtender matcher = new RootMatcher(restrictions);
 
-        return completeMatch(matcher, empty, givers, receivers);
+        return completeMatch(matcher, givers, receivers);
     }
 
-    private <T> ConsIterable<MatcherPair<T>> completeMatch(
-            final PairMatcher<T> matcher, final ConsIterable<MatcherPair<T>> partialMatch, final List<T> remaining, final Collection<T> receivers) {
+    private Optional<MatchExtender> completeMatch(
+        final MatchExtender matcher, final List<Person> remaining, final Collection<Person> receivers) {
         if (remaining.isEmpty()) {
-            return partialMatch;
+            return Optional.of(matcher);
         } else {
-            T head = remaining.get(0);
-            List<T> tail = remaining.subList(1, remaining.size());
+            Person head = remaining.get(0);
+            List<Person> tail = remaining.subList(1, remaining.size());
 
-            for (T rhs : receivers) {
-                MatcherPair<T> pair = new MatcherPair<>(head, rhs);
+            for (Person rhs : receivers) {
+                GiverAssignment pair = new GiverAssignment(head, rhs);
 
-                if (!head.equals(rhs) && matcher.isPossibleMatch(pair)) {
-                    ConsIterable<MatcherPair<T>> result = completeMatch(
-                        new PartialMatcher<>(matcher, pair),
-                        new ConsIterable<>(pair, partialMatch),
-                        tail, receivers);
+                if (matcher.isPossibleExtension(pair)) {
+                    Optional<MatchExtender> result = completeMatch(new PairMatch(matcher, pair), tail, receivers);
 
-                    if (result != null) {
+                    if (result.isPresent()) {
                         return result;
                     }
                 }
             }
 
-            return null;
+            return Optional.empty();
         }
     }
 }

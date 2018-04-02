@@ -5,15 +5,11 @@
 package io.github.santulator.engine;
 
 import io.github.santulator.core.SantaException;
-import io.github.santulator.matcher.ConsIterable;
-import io.github.santulator.matcher.MatcherPair;
+import io.github.santulator.matcher.MatchExtender;
 import io.github.santulator.matcher.MatchingEngine;
 import io.github.santulator.model.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import javax.inject.Singleton;
@@ -26,9 +22,10 @@ public class DrawServiceImpl implements DrawService {
     public DrawSelection draw(final DrawRequirements requirements) {
         List<Person> givers = participants(requirements, ParticipantRole::isGiver);
         List<Person> receivers = shuffle(participants(requirements, ParticipantRole::isReceiver));
-        Set<MatcherPair<Person>> restrictions = restrictions(requirements);
+        Set<GiverAssignment> restrictions = restrictions(requirements);
         MatchingEngine engine = new MatchingEngine();
-        ConsIterable<MatcherPair<Person>> match = engine.findMatch(givers, receivers, restrictions);
+        MatchExtender match = engine.findMatch(givers, receivers, restrictions)
+            .orElseThrow(() -> new SantaException("Unable to find match"));
         DrawSelection selection = selection(match);
 
         DrawValidationTool.validate(requirements, selection);
@@ -50,21 +47,16 @@ public class DrawServiceImpl implements DrawService {
         return result;
     }
 
-    private Set<MatcherPair<Person>> restrictions(final DrawRequirements requirements) {
+    private Set<GiverAssignment> restrictions(final DrawRequirements requirements) {
         return requirements.getRestrictions().stream()
-            .map(r -> new MatcherPair<>(r.getFromPerson(), r.getToPerson()))
+            .map(r -> new GiverAssignment(r.getFromPerson(), r.getToPerson()))
             .collect(Collectors.toSet());
     }
 
-    private DrawSelection selection(final ConsIterable<MatcherPair<Person>> pairs) {
-        if (pairs == null) {
-            throw new SantaException("Unable to find match");
-        } else {
-            List<GiverAssignment> givers = pairs.stream()
-                .map(p -> new GiverAssignment(p.getLeft(), p.getRight()))
-                .collect(toList());
+    private DrawSelection selection(final MatchExtender found) {
+        List<GiverAssignment> givers = found.assignmentStream()
+            .collect(toList());
 
-            return new DrawSelection(givers);
-        }
+        return new DrawSelection(givers);
     }
 }
