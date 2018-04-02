@@ -9,12 +9,15 @@ import io.github.santulator.matcher.MatchExtender;
 import io.github.santulator.matcher.MatchingEngine;
 import io.github.santulator.model.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import javax.inject.Singleton;
 
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 
 @Singleton
 public class DrawServiceImpl implements DrawService {
@@ -50,7 +53,7 @@ public class DrawServiceImpl implements DrawService {
     private Set<GiverAssignment> restrictions(final DrawRequirements requirements) {
         return requirements.getRestrictions().stream()
             .map(r -> new GiverAssignment(r.getFromPerson(), r.getToPerson()))
-            .collect(Collectors.toSet());
+            .collect(toSet());
     }
 
     private DrawSelection selection(final MatchExtender found) {

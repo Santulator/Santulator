@@ -15,10 +15,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.counting;
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.*;
 
 public final class DrawValidationTool {
     private DrawValidationTool() {
@@ -58,7 +56,7 @@ public final class DrawValidationTool {
             .filter(roleFilter)
             .collect(toSet());
         Map<Person, Long> appearances = selection.getGivers().stream()
-            .collect(Collectors.groupingBy(extractSide, counting()));
+            .collect(groupingBy(extractSide, counting()));
 
         appearances.keySet().stream()
             .filter(p -> !expected.contains(p))

@@ -19,13 +19,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.OptionalInt;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 import javax.inject.Singleton;
 
 import static io.github.santulator.core.CoreConstants.LOCALE;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 
 @Singleton
 public class ExcelRequirementsReader implements RequirementsReader {
@@ -44,7 +45,7 @@ public class ExcelRequirementsReader implements RequirementsReader {
         List<List<String>> content = readContent(name, stream);
         List<Person> participants = content.stream()
             .map(l -> new Person(l.get(0), role(name, l)))
-            .collect(Collectors.toList());
+            .collect(toList());
         Map<String, Person> participantMap = participantMap(name, participants);
         List<Restriction> restrictions = restrictions(name, participantMap, content);
 
@@ -70,7 +71,7 @@ public class ExcelRequirementsReader implements RequirementsReader {
     private List<Restriction> restrictions(final String name, final Map<String, Person> people, final List<List<String>> content) {
         return content.stream()
             .flatMap(l -> restrictionsForPerson(name, people, l))
-            .collect(Collectors.toList());
+            .collect(toList());
     }
 
     private Stream<Restriction> restrictionsForPerson(final String name, final Map<String, Person> people, final List<String> line) {
@@ -92,7 +93,7 @@ public class ExcelRequirementsReader implements RequirementsReader {
 
     private Map<String, Person> participantMap(final String name, final List<Person> participants) {
         return participants.stream()
-            .collect(Collectors.toMap(Person::getName, Function.identity(), (p1, p2) -> {
+            .collect(toMap(Person::getName, Function.identity(), (p1, p2) -> {
                 throw new SantaException(String.format(ERROR_DUPLICATE, p1, name));
             }));
     }
@@ -103,7 +104,7 @@ public class ExcelRequirementsReader implements RequirementsReader {
         List<List<String>> content = StreamSupport.stream(sheet.spliterator(), false)
             .map(this::row)
             .filter(l -> !l.isEmpty())
-            .collect(Collectors.toList());
+            .collect(toList());
 
         rejectBlanks(name, content);
 
@@ -125,7 +126,7 @@ public class ExcelRequirementsReader implements RequirementsReader {
             .mapToObj(i -> row.getCell(i, MissingCellPolicy.RETURN_BLANK_AS_NULL))
             .map(this::cellValue)
             .map(StringUtils::trimToNull)
-            .collect(Collectors.toList());
+            .collect(toList());
         int last = CoreTool.findLast(result, v -> v != null).orElse(-1);
 
         return result.subList(0, last + 1);

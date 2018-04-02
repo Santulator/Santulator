@@ -5,12 +5,7 @@
 package io.github.santulator.engine;
 
 import io.github.santulator.core.SantaException;
-import io.github.santulator.model.DrawRequirements;
-import io.github.santulator.model.DrawSelection;
-import io.github.santulator.model.GiverAssignment;
-import io.github.santulator.model.ParticipantRole;
-import io.github.santulator.model.Person;
-import io.github.santulator.model.RequirementsBuilder;
+import io.github.santulator.model.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
@@ -18,14 +13,12 @@ import org.junit.jupiter.params.provider.EnumSource;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import static io.github.santulator.model.TestRequirementsTool.REQUIREMENTS;
 import static io.github.santulator.model.TestRequirementsTool.person;
 import static java.util.Arrays.asList;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static java.util.stream.Collectors.toSet;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DrawServiceTest {
     private final DrawService target = new DrawServiceImpl();
@@ -158,12 +151,12 @@ public class DrawServiceTest {
     private Set<Person> givers(final DrawSelection selection) {
         return selection.getGivers().stream()
             .map(GiverAssignment::getFrom)
-            .collect(Collectors.toSet());
+            .collect(toSet());
     }
 
     private Set<Person> receivers(final DrawSelection selection) {
         return selection.getGivers().stream()
             .map(GiverAssignment::getTo)
-            .collect(Collectors.toSet());
+            .collect(toSet());
     }
 }
