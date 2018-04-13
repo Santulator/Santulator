@@ -1,0 +1,76 @@
+package io.github.santulator.session;
+
+import io.github.santulator.core.SantaException;
+import io.github.santulator.test.TestFileManager;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collections;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class SessionSerialiserTest {
+    private TestFileManager files;
+
+    private Path file;
+
+    private final SessionState state1 = TestSessionStateTool.buildState("State 1");
+
+    private final SessionState state2 = TestSessionStateTool.buildState("State 2");
+
+    private final SessionSerialiser target = new SessionSerialiserImpl();
+
+    @BeforeEach
+    public void setUp() throws Exception {
+        files = new TestFileManager(getClass());
+        file = files.addFile("file.json");
+    }
+
+    @AfterEach
+    public void tearDown() throws Exception {
+        files.cleanup();
+    }
+
+    @Test
+    public void testNonexistentFile() {
+        assertThrows(SantaException.class, () -> target.read(Paths.get("does-not-exist.json")));
+    }
+
+    @Test
+    public void testEmptyFile() throws Exception {
+        Files.createFile(file);
+
+        assertThrows(SantaException.class, () -> target.read(file));
+    }
+
+    @Test
+    public void testInvalidFile() throws Exception {
+        Files.write(file, Collections.singletonList("unreadable"));
+
+        assertThrows(SantaException.class, () -> target.read(file));
+    }
+
+    @Test
+    public void testSameState() {
+        SessionState read = writeAndReadBackState1();
+
+        assertEquals(state1, read, "Same state");
+    }
+
+    @Test
+    public void testDifferentState() {
+        SessionState read = writeAndReadBackState1();
+
+        assertNotEquals(state2, read, "Different state");
+    }
+
+    private SessionState writeAndReadBackState1() {
+        target.write(file, state1);
+
+        return target.read(file);
+    }
+}

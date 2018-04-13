@@ -1,0 +1,84 @@
+{
+  "formatName": "unknown-format",
+  "formatVersion": 1,
+  "drawName": "Test State",
+  "password": "TOP-SECRET",
+  "directory": "TEST-DIRECTORY",
+  "participants": [
+    {
+      "name": "Albert",
+      "role": "GIVER",
+      "exclusions": [
+        "Beryl"
+      ]
+    },
+    {
+      "name": "Beryl",
+      "role": "BOTH",
+      "exclusions": [
+        "Albert"
+      ]
+    },
+    {
+      "name": "Carla",
+      "role": "BOTH",
+      "exclusions": [
+        "David"
+      ]
+    },
+    {
+      "name": "David",
+      "role": "BOTH",
+      "exclusions": [
+        "Carla"
+      ]
+    },
+    {
+      "name": "Edith",
+      "role": "BOTH",
+      "exclusions": [
+        "Fred"
+      ]
+    },
+    {
+      "name": "Fred",
+      "role": "BOTH",
+      "exclusions": [
+        "Edith"
+      ]
+    },
+    {
+      "name": "Gina",
+      "role": "BOTH",
+      "exclusions": [
+        "Harry"
+      ]
+    },
+    {
+      "name": "Harry",
+      "role": "BOTH",
+      "exclusions": [
+        "Gina"
+      ]
+    },
+    {
+      "name": "Iris",
+      "role": "BOTH",
+      "exclusions": [
+        "John"
+      ]
+    },
+    {
+      "name": "John",
+      "role": "BOTH",
+      "exclusions": [
+        "Iris"
+      ]
+    },
+    {
+      "name": "Kate",
+      "role": "RECEIVER",
+      "exclusions": []
+    }
+  ]
+}
