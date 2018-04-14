@@ -1,0 +1,32 @@
+/*
+ * Open Source Software published under the Apache Licence, Version 2.0.
+ */
+import org.apache.tools.ant.filters.*
+
+apply plugin: 'application'
+
+mainClassName = "io.github.santulator.gui.main.SantulatorGuiExecutable"
+
+applicationName = "Santulator"
+
+ext.buildTimestamp = new Date().format('yyyy-MM-dd HH:mm:ss')
+
+processResources {
+    filesMatching('properties/*.properties') {
+        filter ReplaceTokens, tokens: [
+                'build.version': project.property("version"),
+                'build.timestamp': project.buildTimestamp
+        ]
+    }
+}
+
+jar {
+    from(buildDir) {
+        include 'build-info.properties'
+    }
+}
+
+dependencies {
+    compile project(':core')
+    compile 'com.gluonhq:ignite-guice:1.0.2'
+}

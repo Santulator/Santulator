@@ -6,3 +6,4 @@ rootProject.name = 'santulator'
 
 include 'core'
 include 'command-line'
+include 'gui'
