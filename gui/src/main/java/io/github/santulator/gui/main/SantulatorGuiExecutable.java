@@ -42,7 +42,7 @@ public class SantulatorGuiExecutable extends Application {
     }
 
     public static void main(final String... args) {
-        runApp(args, Application::launch, new CoreGuiModule());
+        runApp(args, Application::launch, new CoreGuiModule(), new LiveGuiModule());
     }
 
     protected static void runApp(final String[] args, final Consumer<String[]> launcher, final Module... modules) {

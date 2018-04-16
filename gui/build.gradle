@@ -29,4 +29,6 @@ jar {
 dependencies {
     compile project(':core')
     compile 'com.gluonhq:ignite-guice:1.0.2'
+
+    testCompile project(path: ':core', configuration: 'tests')
 }
