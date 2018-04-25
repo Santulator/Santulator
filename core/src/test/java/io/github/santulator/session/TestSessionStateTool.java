@@ -19,14 +19,14 @@ public final class TestSessionStateTool {
 
         bean.setDrawName(drawName);
         bean.setFormatVersion(SessionFormatVersion.FORMAT_1);
-        bean.setParticipants(buildPariParticipants());
+        bean.setParticipants(buildParticipants());
         bean.setDirectory("TEST-DIRECTORY");
         bean.setPassword("TOP-SECRET");
 
         return bean;
     }
 
-    private static List<ParticipantState> buildPariParticipants() {
+    private static List<ParticipantState> buildParticipants() {
         return CoreTool.listOf(
             new ParticipantState("Albert", ParticipantRole.GIVER, "Beryl"),
             new ParticipantState("Beryl",  ParticipantRole.BOTH,  "Albert"),
