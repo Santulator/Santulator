@@ -1,6 +1,7 @@
 package io.github.santulator.gui.main;
 
 import io.github.santulator.gui.common.Placement;
+import io.github.santulator.gui.controller.GuiFileHandler;
 import io.github.santulator.gui.controller.MainController;
 import io.github.santulator.gui.controller.TitleHandler;
 import io.github.santulator.gui.model.MainModel;
@@ -24,6 +25,8 @@ public class SantulatorGuiImpl implements SantulatorGui {
 
     private final PlacementManager placementManager;
 
+    private final GuiFileHandler guiFileHandler;
+
     private final MainController mainController;
 
     private final TitleHandler titleHandler;
@@ -31,9 +34,11 @@ public class SantulatorGuiImpl implements SantulatorGui {
     private final MainModel model;
 
     @Inject
-    public SantulatorGuiImpl(final FXMLLoader mainLoader, final PlacementManager placementManager, final MainController mainController, final TitleHandler titleHandler, final MainModel model) {
+    public SantulatorGuiImpl(final FXMLLoader mainLoader, final PlacementManager placementManager,
+        final GuiFileHandler guiFileHandler, final MainController mainController, final TitleHandler titleHandler, final MainModel model) {
         this.mainLoader = mainLoader;
         this.placementManager = placementManager;
+        this.guiFileHandler = guiFileHandler;
         this.mainController = mainController;
         this.titleHandler = titleHandler;
         this.model = model;
@@ -62,6 +67,7 @@ public class SantulatorGuiImpl implements SantulatorGui {
 
     private void initialise(final Stage stage) {
         mainController.initialise(stage);
+        guiFileHandler.initialise(stage);
         titleHandler.initialise();
 
         stage.titleProperty().bind(model.titleProperty());

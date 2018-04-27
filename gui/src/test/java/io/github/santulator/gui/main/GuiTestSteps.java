@@ -4,6 +4,8 @@
 
 package io.github.santulator.gui.main;
 
+import io.github.santulator.gui.dialogues.FileDialogueType;
+import io.github.santulator.gui.dialogues.FileFormatType;
 import io.github.santulator.test.TestFileManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,8 +46,12 @@ public class GuiTestSteps {
             verifyThat("#deleteme", isVisible());
         });
 
-        // TODO Fix this step
-        LOG.info("Add session save and validate session file {}", sessionFile);
+        step("Save the session", () -> {
+            validator.setUpFileDialogue(FileDialogueType.SAVE_SESSION, FileFormatType.SESSION, sessionFile);
+            robot.clickOn("#buttonSave");
+            // TODO Fix the name being passed here and any other required parameters
+            validator.validateSavedSession(sessionFile, "");
+        });
     }
 
     public void part2WebLinks() {
