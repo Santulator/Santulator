@@ -4,11 +4,33 @@
   ~ Open Source Software published under the Apache Licence, Version 2.0.
   -->
 
-<?import javafx.scene.layout.BorderPane?>
-
 <?import javafx.scene.control.Label?>
-<BorderPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.santulator.gui.controller.SessionController">
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<BorderPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.santulator.gui.controller.SessionController">
+   <top>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints />
+          <ColumnConstraints />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints />
+          <RowConstraints />
+        </rowConstraints>
+         <children>
+            <Label text="Draw Name:" />
+            <Label text="Secret Password:" GridPane.rowIndex="1" />
+            <TextField fx:id="fieldDrawName" GridPane.columnIndex="1" />
+            <TextField fx:id="fieldPassword" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+   </top>
     <center>
-        <Label text="Hello, World!" fx:id="deleteme"/>
+        <Label fx:id="deleteme" text="Secret Santulator, coming soon..." />
     </center>
 </BorderPane>
