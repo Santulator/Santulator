@@ -3,25 +3,40 @@ package io.github.santulator.session;
 import io.github.santulator.core.CoreTool;
 import io.github.santulator.model.ParticipantRole;
 
+import java.util.Collections;
 import java.util.List;
 
 public final class TestSessionStateTool {
+    public static final String DRAW_NAME = "Secret Santa Draw";
+
+    public static final String PASSWORD = "TopSecret";
+
     private TestSessionStateTool() {
         // Prevent instantiation - all methods are static
     }
 
-    public static SessionState buildState() {
-        return buildState("Test State");
+    public static SessionState buildFullState() {
+        return buildFullState(DRAW_NAME);
     }
 
-    public static SessionState buildState(final String drawName) {
+    public static SessionState buildFullState(final String drawName) {
+        SessionState bean = buildState(drawName, buildParticipants());
+
+        bean.setDirectory("TEST-DIRECTORY");
+
+        return bean;
+    }
+
+    public static SessionState buildSimpleState() {
+        return buildState(DRAW_NAME, Collections.emptyList());
+    }
+
+    private static SessionState buildState(final String drawName, final List<ParticipantState> participants) {
         SessionState bean = new SessionState();
 
         bean.setDrawName(drawName);
-        bean.setFormatVersion(SessionFormatVersion.FORMAT_1);
-        bean.setParticipants(buildParticipants());
-        bean.setDirectory("TEST-DIRECTORY");
-        bean.setPassword("TOP-SECRET");
+        bean.setParticipants(participants);
+        bean.setPassword(PASSWORD);
 
         return bean;
     }

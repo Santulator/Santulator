@@ -14,8 +14,12 @@ import org.testfx.api.FxRobot;
 import java.nio.file.Path;
 
 import static io.github.santulator.gui.common.GuiConstants.*;
+import static io.github.santulator.session.TestSessionStateTool.DRAW_NAME;
+import static io.github.santulator.session.TestSessionStateTool.PASSWORD;
+import static io.github.santulator.session.TestSessionStateTool.buildSimpleState;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
+import static org.testfx.util.NodeQueryUtils.hasText;
 
 public class GuiTestSteps {
     private static final Logger LOG = LoggerFactory.getLogger(GuiTestSteps.class);
@@ -46,11 +50,20 @@ public class GuiTestSteps {
             verifyThat("#deleteme", isVisible());
         });
 
+        step("Enter draw name", () -> {
+            robot.clickOn("#fieldDrawName").write(DRAW_NAME);
+            verifyThat("#fieldDrawName", hasText(DRAW_NAME));
+        });
+
+        step("Enter password", () -> {
+            robot.clickOn("#fieldPassword").write(PASSWORD);
+            verifyThat("#fieldPassword", hasText(PASSWORD));
+        });
+
         step("Save the session", () -> {
             validator.setUpFileDialogue(FileDialogueType.SAVE_SESSION, FileFormatType.SESSION, sessionFile);
             robot.clickOn("#buttonSave");
-            // TODO Fix the name being passed here and any other required parameters
-            validator.validateSavedSession(sessionFile, "");
+            validator.validateSavedSession(sessionFile, buildSimpleState());
         });
     }
 

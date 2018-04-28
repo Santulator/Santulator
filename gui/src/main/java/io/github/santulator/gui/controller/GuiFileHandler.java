@@ -5,6 +5,7 @@
 package io.github.santulator.gui.controller;
 
 import io.github.santulator.core.GuiTaskHandler;
+import io.github.santulator.core.SantaException;
 import io.github.santulator.gui.dialogues.*;
 import io.github.santulator.gui.model.MainModel;
 import io.github.santulator.gui.model.SessionModel;
@@ -139,7 +140,7 @@ public class GuiFileHandler {
         statusManager.performAction(file);
         LOG.info("Saving file '{}'", file);
 
-        SessionState sessionState = sessionStateHandler.getSessionState();
+        SessionState sessionState = buildSessionState();
         GuiTask<Boolean> task = new GuiTask<>(
             guiTaskHandler,
             statusManager,
@@ -224,7 +225,7 @@ public class GuiFileHandler {
 
         try {
             LOG.info("Saving file '{}'", file);
-            sessionSerialiser.write(file, sessionStateHandler.getSessionState());
+            sessionSerialiser.write(file, buildSessionState());
             model.setChangesSaved(true);
 
             return true;
@@ -233,5 +234,12 @@ public class GuiFileHandler {
 
             return false;
         }
+    }
+
+    private SessionState buildSessionState() {
+        SessionModel model = this.model.getSessionModel()
+            .orElseThrow(() -> new SantaException("No session available"));
+
+        return sessionStateHandler.getSessionState(model);
     }
 }

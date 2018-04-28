@@ -1,12 +1,18 @@
 package io.github.santulator.gui.controller;
 
 import io.github.santulator.gui.model.SessionModel;
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 
 public class SessionController {
-    // TODO Create the session controller
+    @FXML
+    private TextField fieldDrawName;
 
+    @FXML
+    private TextField fieldPassword;
 
     public void initialise(final SessionModel sessionModel) {
-        // TODO Session controller initialisation
+        sessionModel.drawNameProperty().bind(fieldDrawName.textProperty());
+        sessionModel.passwordProperty().bind(fieldPassword.textProperty());
     }
 }

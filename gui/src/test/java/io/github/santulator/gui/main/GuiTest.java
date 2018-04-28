@@ -19,6 +19,8 @@ import io.github.santulator.gui.services.PlacementManager;
 import io.github.santulator.gui.services.WebPageTool;
 import io.github.santulator.gui.settings.SettingsManager;
 import io.github.santulator.gui.settings.SettingsManagerImpl;
+import io.github.santulator.session.SessionSerialiser;
+import io.github.santulator.session.SessionState;
 import io.github.santulator.test.TestFileManager;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
@@ -38,8 +40,6 @@ import java.nio.file.Path;
 import static io.github.santulator.gui.main.GuiTestConstants.WINDOW_HEIGHT;
 import static io.github.santulator.gui.main.GuiTestConstants.WINDOW_WIDTH;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 import static org.testfx.api.FxToolkit.registerPrimaryStage;
 import static org.testfx.api.FxToolkit.setupApplication;
@@ -64,6 +64,8 @@ public class GuiTest extends FxRobot implements GuiTestValidator {
 
     @Captor
     private ArgumentCaptor<String> webPageCaptor;
+
+    private SantulatorGuiExecutable executable;
 
     @BeforeEach
     public void initMocks() {
@@ -107,7 +109,7 @@ public class GuiTest extends FxRobot implements GuiTestValidator {
         };
         SantulatorGuiExecutable.setModules(coreModule, testModule);
 
-        setupApplication(SantulatorGuiExecutable.class);
+        executable = (SantulatorGuiExecutable) setupApplication(SantulatorGuiExecutable.class);
     }
 
     @Override
@@ -148,7 +150,10 @@ public class GuiTest extends FxRobot implements GuiTestValidator {
     }
 
     @Override
-    public void validateSavedSession(final Path file, final String name) {
-        // TODO Implement session validation
+    public void validateSavedSession(final Path file, final SessionState expected) {
+        SessionSerialiser serialiser = executable.getInstance(SessionSerialiser.class);
+        SessionState state = serialiser.read(file);
+
+        assertEquals(expected, state);
     }
 }

@@ -1,8 +1,8 @@
 {
   "formatName": "santulator",
   "formatVersion": 1,
-  "drawName": "Test State",
-  "password": "TOP-SECRET",
+  "drawName": "Secret Santa Draw",
+  "password": "TopSecret",
   "directory": "TEST-DIRECTORY",
   "participants": [
     {

@@ -18,9 +18,9 @@ public class SessionSerialiserTest {
 
     private Path file;
 
-    private final SessionState state1 = TestSessionStateTool.buildState("State 1");
+    private final SessionState state1 = TestSessionStateTool.buildFullState("State 1");
 
-    private final SessionState state2 = TestSessionStateTool.buildState("State 2");
+    private final SessionState state2 = TestSessionStateTool.buildFullState("State 2");
 
     private final SessionSerialiser target = new SessionSerialiserImpl();
 

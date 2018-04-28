@@ -6,22 +6,26 @@ package io.github.santulator.gui.controller;
 
 import io.github.santulator.gui.model.SessionModel;
 import io.github.santulator.session.SessionState;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import javax.inject.Singleton;
+
+@Singleton
 public class SessionModelTool {
-    private static final Logger LOG = LoggerFactory.getLogger(SessionModelTool.class);
+    public SessionModel buildGuiModel(final SessionState state) {
+        SessionModel model = new SessionModel();
 
-    private final SessionState state;
+        model.setDrawName(state.getDrawName());
+        model.setPassword(state.getPassword());
 
-    public SessionModelTool(final SessionState state) {
-        this.state = state;
+        return model;
     }
 
-    public SessionModel buildModel() {
-        // TODO Add session model construction
-        LOG.info("TODO - build model for session {}", state);
+    public SessionState buildFileModel(final SessionModel model) {
+        SessionState state = new SessionState();
 
-        return new SessionModel();
+        state.setDrawName(model.getDrawName());
+        state.setPassword(model.getPassword());
+
+        return state;
     }
 }

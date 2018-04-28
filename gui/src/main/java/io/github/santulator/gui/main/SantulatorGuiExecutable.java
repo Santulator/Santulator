@@ -29,6 +29,10 @@ public class SantulatorGuiExecutable extends Application {
         modules = Arrays.asList(m);
     }
 
+    public <T> T getInstance(final Class<T> c) {
+        return context.getInstance(c);
+    }
+
     @Override
     public void start(final Stage stage) {
         Thread.currentThread().setUncaughtExceptionHandler((t, e) -> logError(e));

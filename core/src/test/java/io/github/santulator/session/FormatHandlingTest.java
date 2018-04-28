@@ -18,7 +18,7 @@ public class FormatHandlingTest {
 
     private static final String FORMAT_UNSUPPORTED_NAME = "format-unsupported-name.santa";
 
-    private static final SessionState EXPECTED_STATE = TestSessionStateTool.buildState();
+    private static final SessionState EXPECTED_STATE = TestSessionStateTool.buildFullState();
 
     private final SessionSerialiser target = new SessionSerialiserImpl();
 
