@@ -47,7 +47,7 @@ dependencies {
 
 test {
     if (project.hasProperty("skipGuiTests")) {
-        exclude 'io/github/vocabhunter/gui/main/GuiTest*'
+        exclude 'io/github/santulator/gui/main/GuiTest*'
     }
     if (!project.hasProperty("noHeadless")) {
         jvmArgs "-Dheadless=true"
