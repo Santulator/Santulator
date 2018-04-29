@@ -14,9 +14,7 @@ import org.testfx.api.FxRobot;
 import java.nio.file.Path;
 
 import static io.github.santulator.gui.common.GuiConstants.*;
-import static io.github.santulator.session.TestSessionStateTool.DRAW_NAME;
-import static io.github.santulator.session.TestSessionStateTool.PASSWORD;
-import static io.github.santulator.session.TestSessionStateTool.buildSimpleState;
+import static io.github.santulator.session.TestSessionStateTool.*;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
 import static org.testfx.util.NodeQueryUtils.hasText;
@@ -45,11 +43,6 @@ public class GuiTestSteps {
             verifyThat("#mainBorderPane", isVisible());
         });
 
-        step("Start new session", () -> {
-            robot.clickOn("#buttonNew");
-            verifyThat("#deleteme", isVisible());
-        });
-
         step("Enter draw name", () -> {
             robot.clickOn("#fieldDrawName").write(DRAW_NAME);
             verifyThat("#fieldDrawName", hasText(DRAW_NAME));
@@ -64,6 +57,11 @@ public class GuiTestSteps {
             validator.setUpFileDialogue(FileDialogueType.SAVE_SESSION, FileFormatType.SESSION, sessionFile);
             robot.clickOn("#buttonSave");
             validator.validateSavedSession(sessionFile, buildSimpleState());
+        });
+
+        step("Start new session", () -> {
+            robot.clickOn("#buttonNew");
+            verifyThat("#fieldDrawName", hasText(""));
         });
     }
 

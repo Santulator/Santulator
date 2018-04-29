@@ -1,9 +1,11 @@
 package io.github.santulator.gui.controller;
 
 import io.github.santulator.gui.common.GuiConstants;
+import io.github.santulator.gui.model.MainModel;
 import io.github.santulator.gui.model.StatusModel;
 import io.github.santulator.gui.services.EnvironmentManager;
 import io.github.santulator.gui.services.WebPageTool;
+import io.github.santulator.session.SessionState;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -66,6 +68,8 @@ public class MainController {
     @FXML
     private Pane maskerPane;
 
+    private final MainModel model;
+
     private final StatusModel statusModel;
 
     private final EnvironmentManager environmentManager;
@@ -77,8 +81,9 @@ public class MainController {
     private final GuiFileHandler guiFileHandler;
 
     @Inject
-    public MainController(final StatusModel statusModel, final EnvironmentManager environmentManager, final WebPageTool webPageTool,
-        final SessionStateHandler sessionStateHandler, final GuiFileHandler guiFileHandler) {
+    public MainController(final MainModel model, final StatusModel statusModel, final EnvironmentManager environmentManager, final WebPageTool webPageTool,
+                          final SessionStateHandler sessionStateHandler, final GuiFileHandler guiFileHandler) {
+        this.model = model;
         this.statusModel = statusModel;
         this.environmentManager = environmentManager;
         this.webPageTool = webPageTool;
@@ -88,6 +93,7 @@ public class MainController {
 
     public void initialise(final Stage stage) {
         sessionStateHandler.initialise(mainBorderPane);
+        model.initialise(sessionStateHandler.addSession(new SessionState()));
 
         handler(buttonOpen, menuOpen, guiFileHandler::handleOpenSession);
         handler(buttonNew, menuNew, guiFileHandler::handleNewSession);

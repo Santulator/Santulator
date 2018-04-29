@@ -9,7 +9,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.nio.file.Path;
-import java.util.Optional;
 import javax.inject.Singleton;
 
 @Singleton
@@ -18,25 +17,27 @@ public class MainModel {
 
     private SessionModel sessionModel;
 
-    private final SimpleBooleanProperty sessionOpen = new SimpleBooleanProperty(false);
-
     private final SimpleObjectProperty<Path> sessionFile = new SimpleObjectProperty<>(null);
 
     private final SimpleBooleanProperty changesSaved = new SimpleBooleanProperty(true);
 
+    public void initialise(final SessionModel sessionModel) {
+        setupSessionModel(sessionModel, null);
+    }
+
     public void replaceSessionModel(final SessionModel sessionModel, final Path sessionFile) {
         unbindOldSession();
+        setupSessionModel(sessionModel, sessionFile);
+    }
 
+    private void setupSessionModel(final SessionModel sessionModel, final Path sessionFile) {
         this.sessionModel = sessionModel;
         this.sessionFile.set(sessionFile);
-        sessionOpen.set(true);
         changesSaved.bindBidirectional(sessionModel.changesSavedProperty());
     }
 
     private void unbindOldSession() {
-        if (sessionOpen.get()) {
-            changesSaved.unbindBidirectional(sessionModel.changesSavedProperty());
-        }
+        changesSaved.unbindBidirectional(sessionModel.changesSavedProperty());
     }
 
     public SimpleObjectProperty<Path> sessionFileProperty() {
@@ -63,10 +64,6 @@ public class MainModel {
         return changesSaved.get();
     }
 
-    public SimpleBooleanProperty sessionOpenProperty() {
-        return sessionOpen;
-    }
-
     public void setSessionFile(final Path sessionFile) {
         this.sessionFile.set(sessionFile);
     }
@@ -79,7 +76,7 @@ public class MainModel {
         return sessionFile.get();
     }
 
-    public Optional<SessionModel> getSessionModel() {
-        return Optional.ofNullable(sessionModel);
+    public SessionModel getSessionModel() {
+        return sessionModel;
     }
 }

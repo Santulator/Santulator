@@ -5,7 +5,6 @@
 package io.github.santulator.gui.controller;
 
 import io.github.santulator.core.GuiTaskHandler;
-import io.github.santulator.core.SantaException;
 import io.github.santulator.gui.dialogues.*;
 import io.github.santulator.gui.model.MainModel;
 import io.github.santulator.gui.model.SessionModel;
@@ -237,9 +236,8 @@ public class GuiFileHandler {
     }
 
     private SessionState buildSessionState() {
-        SessionModel model = this.model.getSessionModel()
-            .orElseThrow(() -> new SantaException("No session available"));
+        SessionModel sessionModel = model.getSessionModel();
 
-        return sessionStateHandler.getSessionState(model);
+        return sessionStateHandler.getSessionState(sessionModel);
     }
 }
