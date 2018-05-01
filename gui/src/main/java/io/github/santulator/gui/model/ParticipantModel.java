@@ -9,22 +9,29 @@ import javafx.util.Callback;
 
 public class ParticipantModel {
     public static final Callback<ParticipantModel, Observable[]> PROPERTY_EXTRACTOR
-        = m -> new Observable[] {m.name, m.role, m.exclusions};
+        = m -> new Observable[] {m.name, m.role, m.exclusions, m.isPlaceholder};
 
-    private final SimpleStringProperty name = new SimpleStringProperty();
+    private final SimpleStringProperty name;
 
-    private final SimpleObjectProperty<ParticipantRole> role = new SimpleObjectProperty<>(ParticipantRole.BOTH);
+    private final SimpleObjectProperty<ParticipantRole> role;
 
-    private final SimpleStringProperty exclusions = new SimpleStringProperty();
+    private final SimpleStringProperty exclusions;
 
     private final SimpleBooleanProperty isPlaceholder;
 
-    public ParticipantModel() {
-        this(true);
+    public ParticipantModel(final String name, final ParticipantRole role, final String exclusions) {
+        this(false, name, role, exclusions);
     }
 
     public ParticipantModel(final boolean isPlaceholder) {
+        this(isPlaceholder, "", ParticipantRole.BOTH, "");
+    }
+
+    private ParticipantModel(final boolean isPlaceholder, final String name, final ParticipantRole role, final String exclusions) {
         this.isPlaceholder = new SimpleBooleanProperty(isPlaceholder);
+        this.name = new SimpleStringProperty(name);
+        this.role = new SimpleObjectProperty<>(role);
+        this.exclusions = new SimpleStringProperty(exclusions);
     }
 
     public String getName() {
@@ -51,7 +58,7 @@ public class ParticipantModel {
         this.exclusions.set(exclusions);
     }
 
-    public boolean isIsPlaceholder() {
+    public boolean isPlaceholder() {
         return isPlaceholder.get();
     }
 

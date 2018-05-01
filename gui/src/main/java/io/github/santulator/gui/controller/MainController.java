@@ -5,7 +5,6 @@ import io.github.santulator.gui.model.MainModel;
 import io.github.santulator.gui.model.StatusModel;
 import io.github.santulator.gui.services.EnvironmentManager;
 import io.github.santulator.gui.services.WebPageTool;
-import io.github.santulator.session.SessionState;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -93,7 +92,7 @@ public class MainController {
 
     public void initialise(final Stage stage) {
         sessionStateHandler.initialise(mainBorderPane);
-        model.initialise(sessionStateHandler.addSession(new SessionState()));
+        model.initialise(sessionStateHandler.addSession());
 
         handler(buttonOpen, menuOpen, guiFileHandler::handleOpenSession);
         handler(buttonNew, menuNew, guiFileHandler::handleNewSession);

@@ -9,7 +9,8 @@
       "name": "Albert",
       "role": "GIVER",
       "exclusions": [
-        "Beryl"
+        "Beryl",
+        "Carla"
       ]
     },
     {

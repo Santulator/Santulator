@@ -5,6 +5,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.List;
+
 public class SessionModel {
     private final SimpleBooleanProperty changesSaved = new SimpleBooleanProperty(true);
 
@@ -12,11 +14,18 @@ public class SessionModel {
 
     private final SimpleStringProperty password = new SimpleStringProperty();
 
+    private final SimpleStringProperty directory = new SimpleStringProperty();
+
     private final ObservableList<ParticipantModel> participants = FXCollections.observableArrayList(ParticipantModel.PROPERTY_EXTRACTOR);
 
     public SessionModel() {
         participants.add(new ParticipantModel(false));
-        participants.add(new ParticipantModel());
+        participants.add(new ParticipantModel(true));
+    }
+
+    public SessionModel(final List<ParticipantModel> participants) {
+        this.participants.addAll(participants);
+        this.participants.add(new ParticipantModel(true));
     }
 
     public SimpleBooleanProperty changesSavedProperty() {
@@ -53,6 +62,14 @@ public class SessionModel {
 
     public void setPassword(final String password) {
         this.password.set(password);
+    }
+
+    public String getDirectory() {
+        return directory.get();
+    }
+
+    public void setDirectory(final String directory) {
+        this.directory.set(directory);
     }
 
     public ObservableList<ParticipantModel> getParticipants() {

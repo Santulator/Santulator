@@ -23,9 +23,13 @@ public class ParticipantState {
     }
 
     public ParticipantState(final String name, final ParticipantRole role, final String... exclusions) {
+        this(name, role, listOf(exclusions));
+    }
+
+    public ParticipantState(final String name, final ParticipantRole role, final List<String> exclusions) {
         this.name = name;
         this.role = role;
-        this.exclusions = listOf(exclusions);
+        this.exclusions = new ArrayList<>(exclusions);
     }
 
     public String getName() {

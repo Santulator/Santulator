@@ -35,8 +35,15 @@ public class SessionStateHandler {
         return sessionModelTool.buildFileModel(model);
     }
 
+    public SessionModel addSession() {
+        return addSession(new SessionModel());
+    }
+
     public SessionModel addSession(final SessionState state) {
-        SessionModel sessionModel = sessionModelTool.buildGuiModel(state);
+        return addSession(sessionModelTool.buildGuiModel(state));
+    }
+
+    private SessionModel addSession(final SessionModel sessionModel) {
         ControllerAndView<SessionController, Node> cav = sessionProvider.get();
         SessionController controller = cav.getController();
 

@@ -43,7 +43,7 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
             lastItem = item;
             setGraphic(hbox);
 
-            boolean isPlaceholder = item.isIsPlaceholder();
+            boolean isPlaceholder = item.isPlaceholder();
 
             fieldName.setText(item.getName());
             fieldName.disableProperty().set(isPlaceholder);

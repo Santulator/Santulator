@@ -7,9 +7,13 @@ import java.util.Collections;
 import java.util.List;
 
 public final class TestSessionStateTool {
+    public static final int PARTICIPANT_COUNT = buildParticipants().size();
+
     public static final String DRAW_NAME = "Secret Santa Draw";
 
     public static final String PASSWORD = "TopSecret";
+
+    public static final String DIRECTORY = "TEST-DIRECTORY";
 
     private TestSessionStateTool() {
         // Prevent instantiation - all methods are static
@@ -22,13 +26,13 @@ public final class TestSessionStateTool {
     public static SessionState buildFullState(final String drawName) {
         SessionState bean = buildState(drawName, buildParticipants());
 
-        bean.setDirectory("TEST-DIRECTORY");
+        bean.setDirectory(DIRECTORY);
 
         return bean;
     }
 
     public static SessionState buildSimpleState() {
-        return buildState(DRAW_NAME, Collections.emptyList());
+        return buildState(DRAW_NAME, Collections.singletonList(new ParticipantState("", ParticipantRole.BOTH)));
     }
 
     private static SessionState buildState(final String drawName, final List<ParticipantState> participants) {
@@ -43,7 +47,7 @@ public final class TestSessionStateTool {
 
     private static List<ParticipantState> buildParticipants() {
         return CoreTool.listOf(
-            new ParticipantState("Albert", ParticipantRole.GIVER, "Beryl"),
+            new ParticipantState("Albert", ParticipantRole.GIVER, "Beryl", "Carla"),
             new ParticipantState("Beryl",  ParticipantRole.BOTH,  "Albert"),
             new ParticipantState("Carla",  ParticipantRole.BOTH,  "David"),
             new ParticipantState("David",  ParticipantRole.BOTH,  "Carla"),
