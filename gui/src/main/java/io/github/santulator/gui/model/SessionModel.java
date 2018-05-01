@@ -2,6 +2,8 @@ package io.github.santulator.gui.model;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class SessionModel {
     private final SimpleBooleanProperty changesSaved = new SimpleBooleanProperty(true);
@@ -9,6 +11,13 @@ public class SessionModel {
     private final SimpleStringProperty drawName = new SimpleStringProperty();
 
     private final SimpleStringProperty password = new SimpleStringProperty();
+
+    private final ObservableList<ParticipantModel> participants = FXCollections.observableArrayList(ParticipantModel.PROPERTY_EXTRACTOR);
+
+    public SessionModel() {
+        participants.add(new ParticipantModel(false));
+        participants.add(new ParticipantModel());
+    }
 
     public SimpleBooleanProperty changesSavedProperty() {
         return changesSaved;
@@ -44,5 +53,9 @@ public class SessionModel {
 
     public void setPassword(final String password) {
         this.password.set(password);
+    }
+
+    public ObservableList<ParticipantModel> getParticipants() {
+        return participants;
     }
 }
