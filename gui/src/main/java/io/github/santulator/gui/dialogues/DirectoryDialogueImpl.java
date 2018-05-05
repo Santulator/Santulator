@@ -5,30 +5,22 @@
 package io.github.santulator.gui.dialogues;
 
 import io.github.santulator.gui.settings.SettingsManager;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.File;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import static java.util.stream.Collectors.toList;
-
-public class FileDialogueImpl implements FileDialogue {
+public class DirectoryDialogueImpl implements FileDialogue {
     private final FileDialogueType type;
+
+    private final FileFormatType formatType;
 
     private final Stage stage;
 
     private final SettingsManager settingsManager;
-
-    private final List<ExtensionFilter> filters;
-
-    private final BiFunction<FileChooser, Window, File> openFunction;
 
     private final Function<SettingsManager, Path> pathGetter;
 
@@ -36,44 +28,38 @@ public class FileDialogueImpl implements FileDialogue {
 
     private FileChoice selected;
 
-    public FileDialogueImpl(final FileDialogueType type, final Stage stage, final SettingsManager settingsManager, final List<FileFormatType> formats,
-        final BiFunction<FileChooser, Window, File> openFunction, final Function<SettingsManager, Path> pathGetter, final BiConsumer<SettingsManager, Path> pathSetter) {
+    public DirectoryDialogueImpl(final FileDialogueType type, final FileFormatType formatType, final Stage stage, final SettingsManager settingsManager,
+        final Function<SettingsManager, Path> pathGetter, final BiConsumer<SettingsManager, Path> pathSetter) {
         this.stage = stage;
+        this.formatType = formatType;
         this.type = type;
         this.settingsManager = settingsManager;
-        this.filters = formats.stream()
-            .map(FileFormatType::getFilter)
-            .collect(toList());
-        this.openFunction = openFunction;
         this.pathGetter = pathGetter;
         this.pathSetter = pathSetter;
     }
 
     @Override
     public void showChooser() {
-        FileChooser chooser = new FileChooser();
+        DirectoryChooser chooser = new DirectoryChooser();
 
         chooser.setTitle(type.getTitle());
-        chooser.getExtensionFilters().addAll(filters);
         File initialDirectory = pathGetter.apply(this.settingsManager).toFile();
         chooser.setInitialDirectory(initialDirectory);
 
         selected = showChooser(chooser);
     }
 
-    private FileChoice showChooser(final FileChooser chooser) {
-        File result = openFunction.apply(chooser, stage);
+    private FileChoice showChooser(final DirectoryChooser chooser) {
+        File result = chooser.showDialog(stage);
 
         if (result == null) {
             return null;
         } else {
             Path file = result.toPath();
-            ExtensionFilter extensionFilter = chooser.getSelectedExtensionFilter();
-            FileFormatType type = FileFormatType.getByFilter(extensionFilter);
 
             pathSetter.accept(this.settingsManager, file.getParent());
 
-            return new FileChoice(file, type);
+            return new FileChoice(file, formatType);
         }
     }
 

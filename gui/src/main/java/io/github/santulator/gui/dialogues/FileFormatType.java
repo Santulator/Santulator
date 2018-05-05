@@ -20,9 +20,9 @@ public enum FileFormatType {
     SESSION("Santulator Session Files", "*" + FileNameTool.SESSION_SUFFIX),
     DRAW("Santulator draw directories", "*");
 
-    static final List<FileFormatType> TYPES_SESSIONS = listOf(SESSION);
+    public static final List<FileFormatType> TYPES_SESSIONS = listOf(SESSION);
 
-    static final List<FileFormatType> TYPES_DRAW = listOf(DRAW);
+    public static final List<FileFormatType> TYPES_DRAW = listOf(DRAW);
 
     private static final Map<ExtensionFilter, FileFormatType> TYPES = Stream.of(FileFormatType.values())
         .collect(toMap(FileFormatType::getFilter, identity()));
