@@ -15,6 +15,8 @@ public interface GuiTestValidator {
 
     void validateSavedSession(Path file, final SessionState expected);
 
+    void validateDraw(final Path directory, final String... names);
+
     void setUpFileDialogue(FileDialogueType dialogueType, final FileFormatType fileType, String file);
 
     void setUpFileDialogue(FileDialogueType dialogueType, final FileFormatType fileType, Path file);

@@ -36,11 +36,15 @@ import org.testfx.api.FxRobot;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Set;
+import java.util.stream.Stream;
 
 import static io.github.santulator.core.Language.ENGLISH;
 import static io.github.santulator.gui.main.GuiTestConstants.WINDOW_HEIGHT;
 import static io.github.santulator.gui.main.GuiTestConstants.WINDOW_WIDTH;
+import static java.util.stream.Collectors.toSet;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 import static org.testfx.api.FxToolkit.registerPrimaryStage;
@@ -140,9 +144,11 @@ public class GuiTest extends FxRobot implements GuiTestValidator {
     public void testWalkThrough() {
         GuiTestSteps steps = new GuiTestSteps(this, this, manager);
 
-        steps.part1BasicWalkThrough();
-        steps.part2WebLinks();
-        steps.part3Exit();
+        steps.part1SetupDraw();
+        steps.part2StartNewSession();
+        steps.part3RunDraw();
+        steps.part4WebLinks();
+        steps.part5Exit();
     }
 
     @Override
@@ -157,5 +163,20 @@ public class GuiTest extends FxRobot implements GuiTestValidator {
         SessionState state = serialiser.read(file);
 
         assertEquals(expected, state);
+    }
+
+    @Override
+    public void validateDraw(final Path directory, final String... names) {
+        try (Stream<Path> files = Files.list(directory)) {
+            Set<Path> result = files
+                .collect(toSet());
+            Set<Path> expected = Stream.of(names)
+                .map(directory::resolve)
+                .collect(toSet());
+
+            assertEquals(expected, result);
+        } catch (final IOException e) {
+            throw new SantaException(String.format("Unable to list directory '%s'", directory), e);
+        }
     }
 }

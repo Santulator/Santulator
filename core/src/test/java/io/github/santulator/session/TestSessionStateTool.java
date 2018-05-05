@@ -3,11 +3,10 @@ package io.github.santulator.session;
 import io.github.santulator.core.CoreTool;
 import io.github.santulator.model.ParticipantRole;
 
-import java.util.Collections;
 import java.util.List;
 
 public final class TestSessionStateTool {
-    public static final int PARTICIPANT_COUNT = buildParticipants().size();
+    public static final int PARTICIPANT_COUNT = buildFullParticipants().size();
 
     public static final String DRAW_NAME = "Secret Santa Draw";
 
@@ -24,7 +23,7 @@ public final class TestSessionStateTool {
     }
 
     public static SessionState buildFullState(final String drawName) {
-        SessionState bean = buildState(drawName, buildParticipants());
+        SessionState bean = buildState(drawName, buildFullParticipants());
 
         bean.setDirectory(DIRECTORY);
 
@@ -32,7 +31,7 @@ public final class TestSessionStateTool {
     }
 
     public static SessionState buildSimpleState() {
-        return buildState(DRAW_NAME, Collections.singletonList(new ParticipantState("", ParticipantRole.BOTH)));
+        return buildState(DRAW_NAME, buildSimpleParticipants());
     }
 
     private static SessionState buildState(final String drawName, final List<ParticipantState> participants) {
@@ -45,7 +44,7 @@ public final class TestSessionStateTool {
         return bean;
     }
 
-    private static List<ParticipantState> buildParticipants() {
+    private static List<ParticipantState> buildFullParticipants() {
         return CoreTool.listOf(
             new ParticipantState("Albert", ParticipantRole.GIVER, "Beryl", "Carla"),
             new ParticipantState("Beryl",  ParticipantRole.BOTH,  "Albert"),
@@ -58,6 +57,15 @@ public final class TestSessionStateTool {
             new ParticipantState("Iris",   ParticipantRole.BOTH,  "John"),
             new ParticipantState("John",   ParticipantRole.BOTH,  "Iris"),
             new ParticipantState("Kate",   ParticipantRole.RECEIVER)
+        );
+    }
+
+    private static List<ParticipantState> buildSimpleParticipants() {
+        return CoreTool.listOf(
+            new ParticipantState("Albert", ParticipantRole.GIVER,    "Beryl", "Carla"),
+            new ParticipantState("Beryl",  ParticipantRole.BOTH,     "David"),
+            new ParticipantState("Carla",  ParticipantRole.BOTH),
+            new ParticipantState("David",  ParticipantRole.RECEIVER)
         );
     }
 }
