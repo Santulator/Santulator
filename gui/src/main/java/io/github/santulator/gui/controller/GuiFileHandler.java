@@ -8,6 +8,7 @@ import io.github.santulator.core.GuiTaskHandler;
 import io.github.santulator.gui.dialogues.*;
 import io.github.santulator.gui.model.MainModel;
 import io.github.santulator.gui.model.SessionModel;
+import io.github.santulator.gui.services.GuiDrawService;
 import io.github.santulator.gui.status.GuiTask;
 import io.github.santulator.gui.status.StatusManager;
 import io.github.santulator.session.FileNameTool;
@@ -37,17 +38,20 @@ public class GuiFileHandler {
 
     private final GuiTaskHandler guiTaskHandler;
 
+    private final GuiDrawService drawService;
+
     private Stage stage;
 
     @Inject
-    public GuiFileHandler(final FileDialogueFactory fileDialogueFactory, final SessionSerialiser sessionSerialiser,
-        final StatusManager statusManager, final MainModel model, final SessionStateHandler sessionStateHandler, final GuiTaskHandler guiTaskHandler) {
+    public GuiFileHandler(final FileDialogueFactory fileDialogueFactory, final SessionSerialiser sessionSerialiser, final StatusManager statusManager, final MainModel model,
+        final SessionStateHandler sessionStateHandler, final GuiTaskHandler guiTaskHandler, final GuiDrawService drawService) {
         this.fileDialogueFactory = fileDialogueFactory;
         this.sessionSerialiser = sessionSerialiser;
         this.statusManager = statusManager;
         this.model = model;
         this.sessionStateHandler = sessionStateHandler;
         this.guiTaskHandler = guiTaskHandler;
+        this.drawService = drawService;
     }
 
     public void initialise(final Stage stage) {
@@ -149,6 +153,37 @@ public class GuiFileHandler {
         );
 
         guiTaskHandler.executeInBackground(task);
+    }
+
+    public void handleRunDraw() {
+        if (statusManager.beginRunDraw()) {
+            guiTaskHandler.pauseThenExecuteOnGuiThread(this::processRunDraw);
+        }
+    }
+
+    private void processRunDraw() {
+        Path directory = chooseFile(FileDialogueType.RUN_DRAW);
+
+        if (directory == null) {
+            statusManager.completeAction();
+        } else {
+            statusManager.performAction(directory);
+            LOG.info("Running draw in directory '{}'", directory);
+
+            Runnable task = new GuiTask<>(
+                guiTaskHandler,
+                statusManager,
+                () -> runDraw(directory),
+                e -> FileErrorTool.saveResults(directory, e));
+
+            guiTaskHandler.executeInBackground(task);
+        }
+    }
+
+    private boolean runDraw(final Path directory) {
+        drawService.draw(directory);
+
+        return true;
     }
 
     private boolean saveFile(final Path file, final SessionState sessionState) {

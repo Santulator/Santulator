@@ -35,6 +35,9 @@ public class MainController {
     private MenuItem menuSaveAs;
 
     @FXML
+    private MenuItem menuRunDraw;
+
+    @FXML
     private MenuItem menuWebsite;
 
     @FXML
@@ -51,6 +54,9 @@ public class MainController {
 
     @FXML
     private Button buttonSave;
+
+    @FXML
+    private Button buttonRunDraw;
 
     @FXML
     private MenuItem menuExit;
@@ -98,6 +104,7 @@ public class MainController {
         handler(buttonNew, menuNew, guiFileHandler::handleNewSession);
         handler(buttonSave, menuSave, guiFileHandler::handleSave);
         handler(menuSaveAs, guiFileHandler::handleSaveAs);
+        handler(buttonRunDraw, menuRunDraw, guiFileHandler::handleRunDraw);
 
         menuWebsite.setOnAction(e -> webPageTool.showWebPage(GuiConstants.WEBSITE));
         menuHowTo.setOnAction(e -> webPageTool.showWebPage(GuiConstants.WEBPAGE_HELP));

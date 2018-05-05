@@ -17,9 +17,12 @@ import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toMap;
 
 public enum FileFormatType {
-    SESSION("Santulator Session Files", "*" + FileNameTool.SESSION_SUFFIX);
+    SESSION("Santulator Session Files", "*" + FileNameTool.SESSION_SUFFIX),
+    DRAW("Santulator draw directories", "*");
 
     static final List<FileFormatType> TYPES_SESSIONS = listOf(SESSION);
+
+    static final List<FileFormatType> TYPES_DRAW = listOf(DRAW);
 
     private static final Map<ExtensionFilter, FileFormatType> TYPES = Stream.of(FileFormatType.values())
         .collect(toMap(FileFormatType::getFilter, identity()));

@@ -1,4 +1,4 @@
-package io.github.santulator.gui.controller;
+package io.github.santulator.gui.services;
 
 import io.github.santulator.gui.model.ParticipantModel;
 import io.github.santulator.gui.model.SessionModel;
@@ -19,7 +19,7 @@ public class SessionModelToolTest {
 
     private static final int INDEX_CARLA = 2;
 
-    private static final int INDEX_DAVD = 3;
+    private static final int INDEX_DAVID = 3;
 
     private static final int INDEX_EDITH = 4;
 
@@ -79,7 +79,7 @@ public class SessionModelToolTest {
                     () -> validate(albert,      participants.get(INDEX_ALBERT)),
                     () -> validate(beryl,       participants.get(INDEX_BERYL)),
                     () -> validate(carla,       participants.get(INDEX_CARLA)),
-                    () -> validate(david,       participants.get(INDEX_DAVD)),
+                    () -> validate(david,       participants.get(INDEX_DAVID)),
                     () -> validate(edith,       participants.get(INDEX_EDITH)),
                     () -> validate(fred,        participants.get(INDEX_FRED)),
                     () -> validate(gina,        participants.get(INDEX_GINA)),

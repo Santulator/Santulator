@@ -19,7 +19,8 @@ import java.util.stream.Collectors;
 
 public enum FileDialogueType {
     OPEN_SESSION("Open", FileFormatType.TYPES_SESSIONS, FileChooser::showOpenDialog, SettingsManager::getSessionsPath, SettingsManager::setSessionsPath),
-    SAVE_SESSION("Save", FileFormatType.TYPES_SESSIONS, FileChooser::showSaveDialog, SettingsManager::getSessionsPath, SettingsManager::setSessionsPath);
+    SAVE_SESSION("Save", FileFormatType.TYPES_SESSIONS, FileChooser::showSaveDialog, SettingsManager::getSessionsPath, SettingsManager::setSessionsPath),
+    RUN_DRAW("Run draw", FileFormatType.TYPES_DRAW, FileChooser::showSaveDialog, SettingsManager::getDrawPath, SettingsManager::setDrawPath);
 
     private final String title;
 

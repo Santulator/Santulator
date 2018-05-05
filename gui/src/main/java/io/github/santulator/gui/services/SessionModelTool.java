@@ -2,7 +2,7 @@
  * Open Source Software published under the Apache Licence, Version 2.0.
  */
 
-package io.github.santulator.gui.controller;
+package io.github.santulator.gui.services;
 
 import io.github.santulator.core.CsvTool;
 import io.github.santulator.gui.model.ParticipantModel;

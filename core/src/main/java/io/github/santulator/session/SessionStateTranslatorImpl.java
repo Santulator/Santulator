@@ -48,7 +48,7 @@ public class SessionStateTranslatorImpl implements SessionStateTranslator {
             if (StringUtils.isBlank(name)) {
                 throw new SantaException("Empty participant name");
             } else if (people.containsKey(name)) {
-                throw new SantaException(String.format("Duplicate paricipant '%s'", name));
+                throw new SantaException(String.format("Duplicate participant '%s'", name));
             } else {
                 people.put(name, new Person(name, participant.getRole()));
             }

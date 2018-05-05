@@ -23,11 +23,26 @@ public class SettingsManagerImpl implements SettingsManager {
     @Override
     public Path getSessionsPath() {
         // TODO Get saved sessions path
-        return Paths.get(System.getProperty("user.home"));
+        return homeDirectory();
     }
 
     @Override
     public void setSessionsPath(final Path path) {
         // TODO Save sessions path
+    }
+
+    @Override
+    public Path getDrawPath() {
+        // TODO Get draw path
+        return homeDirectory();
+    }
+
+    @Override
+    public void setDrawPath(final Path path) {
+        // TODO Save draw path
+    }
+
+    private Path homeDirectory() {
+        return Paths.get(System.getProperty("user.home"));
     }
 }

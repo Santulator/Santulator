@@ -24,6 +24,10 @@ public final class FileErrorTool {
         handleFileError(file, e, "Save Session Error", "Couldn't save file '%s'", "Unable to save session file '{}'");
     }
 
+    public static void saveResults(final Path directory, final RuntimeException e) {
+        handleFileError(directory, e, "Save Draw Results Error", "Couldn't save to directory '%s'", "Unable to save draw results '{}'");
+    }
+
     private static void handleFileError(final Path file, final RuntimeException e, final String title, final String message, final String log) {
         LOG.info(log, file, e);
 

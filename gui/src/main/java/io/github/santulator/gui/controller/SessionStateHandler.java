@@ -6,6 +6,7 @@ package io.github.santulator.gui.controller;
 
 import io.github.santulator.gui.common.ControllerAndView;
 import io.github.santulator.gui.model.SessionModel;
+import io.github.santulator.gui.services.SessionModelTool;
 import io.github.santulator.session.SessionState;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;

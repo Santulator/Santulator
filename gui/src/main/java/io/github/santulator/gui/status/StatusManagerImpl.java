@@ -28,6 +28,8 @@ public class StatusManagerImpl implements StatusManager {
 
     private static final String NAME_SAVE_SESSION = "Save the Santulator session";
 
+    private static final String NAME_RUN_DRAW = "Run the secret santa draw";
+
     private static final String NAME_EXIT = "Exit Santulator";
 
     private static final String NAME_ABOUT = "About Santulator";
@@ -60,6 +62,11 @@ public class StatusManagerImpl implements StatusManager {
     @Override
     public boolean beginSaveSession() {
         return begin(NAME_SAVE_SESSION);
+    }
+
+    @Override
+    public boolean beginRunDraw() {
+        return begin(NAME_RUN_DRAW);
     }
 
     @Override

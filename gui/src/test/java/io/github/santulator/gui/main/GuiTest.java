@@ -22,6 +22,7 @@ import io.github.santulator.gui.settings.SettingsManagerImpl;
 import io.github.santulator.session.SessionSerialiser;
 import io.github.santulator.session.SessionState;
 import io.github.santulator.test.TestFileManager;
+import io.github.santulator.writer.WriterModule;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -37,6 +38,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 
+import static io.github.santulator.core.Language.ENGLISH;
 import static io.github.santulator.gui.main.GuiTestConstants.WINDOW_HEIGHT;
 import static io.github.santulator.gui.main.GuiTestConstants.WINDOW_WIDTH;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -107,7 +109,7 @@ public class GuiTest extends FxRobot implements GuiTestValidator {
                 bind(GuiTaskHandler.class).to(GuiTaskHandlerForTesting.class);
             }
         };
-        SantulatorGuiExecutable.setModules(coreModule, testModule);
+        SantulatorGuiExecutable.setModules(coreModule, testModule, new WriterModule(ENGLISH));
 
         executable = (SantulatorGuiExecutable) setupApplication(SantulatorGuiExecutable.class);
     }

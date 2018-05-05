@@ -11,5 +11,9 @@ public interface SettingsManager {
 
     void setSessionsPath(Path path);
 
+    Path getDrawPath();
+
+    void setDrawPath(Path path);
+
     // TODO Add remaining settings
 }

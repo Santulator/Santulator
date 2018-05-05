@@ -13,6 +13,8 @@ public interface StatusManager {
 
     boolean beginSaveSession();
 
+    boolean beginRunDraw();
+
     boolean beginExit();
 
     boolean beginAbout();

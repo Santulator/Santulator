@@ -27,6 +27,11 @@
                                             <MenuItem fx:id="menuExit" mnemonicParsing="false" text="Exit Santulator" />
                                         </items>
                                     </Menu>
+                                    <Menu fx:id="menuDraw" mnemonicParsing="false" text="Draw">
+                                        <items>
+                                            <MenuItem fx:id="menuRunDraw" mnemonicParsing="false" text="Run the Draw..." />
+                                        </items>
+                                    </Menu>
                                     <Menu fx:id="menuHelp" mnemonicParsing="false" text="Help">
                                         <items>
                                             <MenuItem fx:id="menuWebsite" mnemonicParsing="false" text="Santulator Website" />
@@ -52,6 +57,11 @@
                                     <Button fx:id="buttonSave" mnemonicParsing="false" styleClass="buttonSave" text="Save">
                                         <tooltip>
                                             <Tooltip text="Save the session" />
+                                        </tooltip>
+                                    </Button>
+                                    <Button fx:id="buttonRunDraw" mnemonicParsing="false" styleClass="buttonRunDraw" text="Run the Draw">
+                                        <tooltip>
+                                            <Tooltip text="Run the secret santa draw" />
                                         </tooltip>
                                     </Button>
                                 </items>

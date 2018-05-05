@@ -6,6 +6,7 @@ package io.github.santulator.gui.main;
 
 import com.gluonhq.ignite.guice.GuiceContext;
 import com.google.inject.Module;
+import io.github.santulator.writer.WriterModule;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -15,6 +16,7 @@ import java.util.Collection;
 import java.util.function.Consumer;
 import javax.inject.Inject;
 
+import static io.github.santulator.core.Language.ENGLISH;
 import static io.github.santulator.gui.main.ExecutableLogTool.*;
 
 public class SantulatorGuiExecutable extends Application {
@@ -46,7 +48,7 @@ public class SantulatorGuiExecutable extends Application {
     }
 
     public static void main(final String... args) {
-        runApp(args, Application::launch, new CoreGuiModule(), new LiveGuiModule());
+        runApp(args, Application::launch, new CoreGuiModule(), new WriterModule(ENGLISH), new LiveGuiModule());
     }
 
     protected static void runApp(final String[] args, final Consumer<String[]> launcher, final Module... modules) {
