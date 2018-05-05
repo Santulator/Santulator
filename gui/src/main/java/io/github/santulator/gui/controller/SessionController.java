@@ -32,7 +32,7 @@ public class SessionController {
     private void onActionButton(final ParticipantModel participant) {
         if (participant.isPlaceholder()) {
             participant.setPlaceholder(false);
-            model.getParticipants().add(new ParticipantModel(true));
+            model.getParticipants().add(new ParticipantModel());
         } else {
             model.getParticipants().remove(participant);
         }

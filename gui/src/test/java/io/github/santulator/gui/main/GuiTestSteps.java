@@ -100,7 +100,7 @@ public class GuiTestSteps {
     public void part2StartNewSession() {
         step("Start new session", () -> {
             robot.clickOn("#buttonNew");
-            verifyThat("#fieldDrawName", hasText(""));
+            verifyThat("#listParticipants", hasItems(2));
         });
     }
 

@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 
 import java.util.List;
 
+import static java.util.Collections.singletonList;
+
 public class SessionModel {
     private final SimpleBooleanProperty changesSaved = new SimpleBooleanProperty(true);
 
@@ -19,13 +21,12 @@ public class SessionModel {
     private final ObservableList<ParticipantModel> participants = FXCollections.observableArrayList(ParticipantModel.PROPERTY_EXTRACTOR);
 
     public SessionModel() {
-        participants.add(new ParticipantModel(false));
-        participants.add(new ParticipantModel(true));
+        this(singletonList(new ParticipantModel(false)));
     }
 
     public SessionModel(final List<ParticipantModel> participants) {
         this.participants.addAll(participants);
-        this.participants.add(new ParticipantModel(true));
+        this.participants.add(new ParticipantModel());
     }
 
     public SimpleBooleanProperty changesSavedProperty() {

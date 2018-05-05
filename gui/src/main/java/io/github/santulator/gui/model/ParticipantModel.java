@@ -23,6 +23,10 @@ public class ParticipantModel {
         this(false, name, role, exclusions);
     }
 
+    public ParticipantModel() {
+        this(true);
+    }
+
     public ParticipantModel(final boolean isPlaceholder) {
         this(isPlaceholder, "", ParticipantRole.BOTH, "");
     }

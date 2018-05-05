@@ -84,6 +84,13 @@ public class GuiFileHandler {
         }
     }
 
+    private void finishOpen(final SessionState state) {
+        SessionModel sessionModel = sessionStateHandler.addSession(state);
+
+        // TODO Add in the missing session file
+        model.replaceSessionModel(sessionModel, null);
+    }
+
     public void handleNewSession() {
         if (statusManager.beginNewSession()) {
             guiTaskHandler.pauseThenExecuteOnGuiThread(this::processNewSession);
@@ -94,7 +101,7 @@ public class GuiFileHandler {
         try {
             if (unsavedChangesCheck()) {
                 LOG.info("New session started");
-                finishOpen(new SessionState());
+                finishNew();
                 statusManager.markSuccess();
             }
         } finally {
@@ -102,10 +109,9 @@ public class GuiFileHandler {
         }
     }
 
-    private void finishOpen(final SessionState state) {
-        SessionModel sessionModel = sessionStateHandler.addSession(state);
+    private void finishNew() {
+        SessionModel sessionModel = sessionStateHandler.addSession();
 
-        // TODO Add in the missing session file
         model.replaceSessionModel(sessionModel, null);
     }
 

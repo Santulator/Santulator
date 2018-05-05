@@ -59,7 +59,7 @@ public class SessionModelToolTest {
 
     private final ParticipantModel kate = new ParticipantModel("Kate", ParticipantRole.RECEIVER, "");
 
-    private final ParticipantModel placeholder = new ParticipantModel(true);
+    private final ParticipantModel placeholder = new ParticipantModel();
 
     @Test
     public void testBuildGuiModel() {
