@@ -1,4 +1,4 @@
-# Santulator
+# 🎁 Santulator
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/vocabhunterapp.svg?style=social&label=Follow)](https://twitter.com/vocabhunterapp)
 
