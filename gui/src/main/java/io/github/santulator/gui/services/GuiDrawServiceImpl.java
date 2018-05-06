@@ -38,6 +38,6 @@ public class GuiDrawServiceImpl implements GuiDrawService {
         DrawRequirements requirements = translator.toRequirements(state);
         DrawSelection selection = drawService.draw(requirements);
 
-        writer.writeDrawSelection(selection, directory);
+        writer.writeDrawSelection(selection, directory, state.getPassword());
     }
 }

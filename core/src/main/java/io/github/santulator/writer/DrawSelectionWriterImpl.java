@@ -13,6 +13,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 @Singleton
@@ -23,24 +24,34 @@ public class DrawSelectionWriterImpl implements DrawSelectionWriter {
 
     private final GiverAssignmentWriter writer;
 
+    private final String presetPassword;
+
     @Inject
-    public DrawSelectionWriterImpl(final GiverAssignmentWriter writer) {
+    public DrawSelectionWriterImpl(
+        final GiverAssignmentWriter writer,
+        @Named("password") final String presetPassword) {
         this.writer = writer;
+        this.presetPassword = presetPassword;
     }
 
     @Override
     public void writeDrawSelection(final DrawSelection selection, final Path dir) {
-        mkdir(dir);
-        selection.getGivers()
-            .forEach(assignment -> writeGiverAssignment(dir, assignment));
+        writeDrawSelection(selection, dir, presetPassword);
     }
 
-    private void writeGiverAssignment(final Path dir, final GiverAssignment assignment) {
+    @Override
+    public void writeDrawSelection(final DrawSelection selection, final Path dir, final String password) {
+        mkdir(dir);
+        selection.getGivers()
+            .forEach(assignment -> writeGiverAssignment(dir, assignment, password));
+    }
+
+    private void writeGiverAssignment(final Path dir, final GiverAssignment assignment, final String password) {
         String name = assignment.getFrom().getName() + writer.getFormatSuffix();
         Path file = dir.resolve(name);
 
         try (OutputStream out = Files.newOutputStream(file)) {
-            writer.writeGiverAssignment(name, assignment, out);
+            writer.writeGiverAssignment(name, assignment, out, password);
         } catch (IOException e) {
             throw new SantaException(String.format(ERROR_ASSIGNMENT, file), e);
         }

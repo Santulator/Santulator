@@ -9,7 +9,7 @@ import io.github.santulator.model.GiverAssignment;
 import java.io.OutputStream;
 
 public interface GiverAssignmentWriter {
-    void writeGiverAssignment(String name, GiverAssignment assignment, OutputStream out);
+    void writeGiverAssignment(String name, GiverAssignment assignment, OutputStream out, String password);
 
     String getFormatSuffix();
 }

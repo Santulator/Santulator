@@ -26,23 +26,18 @@ public class PdfGiverAssignmentWriter implements GiverAssignmentWriter {
 
     private final URL headerImage;
 
-    private final String password;
-
     private final String phrase;
 
     @Inject
     public PdfGiverAssignmentWriter(
         @Named("header.image") final String headerImage,
-        @Named("password") final String password,
         @Named("phrase") final String phrase) {
         this.headerImage = PdfGiverAssignmentWriter.class.getResource(headerImage);
-        this.password = password;
         this.phrase = phrase;
     }
 
-
     @Override
-    public void writeGiverAssignment(final String name, final GiverAssignment assignment, final OutputStream out) {
+    public void writeGiverAssignment(final String name, final GiverAssignment assignment, final OutputStream out, final String password) {
         try {
             Document document = new Document(PageSize.A5.rotate());
             PdfWriter writer = PdfWriter.getInstance(document, out);

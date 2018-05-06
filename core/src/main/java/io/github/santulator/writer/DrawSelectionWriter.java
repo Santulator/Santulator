@@ -10,4 +10,6 @@ import java.nio.file.Path;
 
 public interface DrawSelectionWriter {
     void writeDrawSelection(DrawSelection selection, Path output);
+
+    void writeDrawSelection(DrawSelection selection, Path output, String password);
 }

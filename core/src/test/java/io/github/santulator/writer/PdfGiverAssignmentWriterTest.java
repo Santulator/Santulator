@@ -48,7 +48,7 @@ public class PdfGiverAssignmentWriterTest {
         try (OutputStream out = Files.newOutputStream(file)) {
             GiverAssignment assignment = WriterTestTool.assignment("Albert", "Beryl");
 
-            target.writeGiverAssignment(file.toString(), assignment, out);
+            target.writeGiverAssignment(file.toString(), assignment, out, "secret");
             assertTrue(Files.size(file) > 0, "Output");
         }
     }
