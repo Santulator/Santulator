@@ -3,6 +3,7 @@ package io.github.santulator.gui.controller;
 import io.github.santulator.gui.model.ParticipantModel;
 import io.github.santulator.gui.model.SessionModel;
 import io.github.santulator.gui.view.ParticipantCell;
+import io.github.santulator.gui.view.ParticipantTableTool;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -25,8 +26,10 @@ public class SessionController {
         model.drawNameProperty().bind(fieldDrawName.textProperty());
         model.passwordProperty().bind(fieldPassword.textProperty());
 
+        ParticipantTableTool tool = new ParticipantTableTool();
+
         listParticipants.setItems(model.getParticipants());
-        listParticipants.setCellFactory(p -> new ParticipantCell(this::onActionButton));
+        listParticipants.setCellFactory(p -> new ParticipantCell(this::onActionButton, tool));
     }
 
     private void onActionButton(final ParticipantModel participant) {

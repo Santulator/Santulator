@@ -30,9 +30,13 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
 
     private final HBox hbox = new HBox(fieldName, choiceRole, fieldExclusions, buttonAction);
 
+    private final ParticipantTableTool tool;
+
     private ParticipantModel lastItem;
 
-    public ParticipantCell(final Consumer<ParticipantModel> actionButtonHandler) {
+    public ParticipantCell(final Consumer<ParticipantModel> actionButtonHandler, final ParticipantTableTool tool) {
+        this.tool = tool;
+
         choiceRole.getItems().setAll(ParticipantRole.values());
 
         applyStyle(fieldName, CLASS_FIELD_NAME);
@@ -72,6 +76,8 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
             fieldExclusions.setText(item.getExclusions());
             fieldExclusions.disableProperty().set(isPlaceholder);
             buttonAction.setText(buttonName(isPlaceholder));
+
+            tool.registerField(fieldName, getIndex());
         }
     }
 
