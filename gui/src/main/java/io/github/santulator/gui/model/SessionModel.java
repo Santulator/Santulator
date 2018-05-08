@@ -10,11 +10,15 @@ import java.util.List;
 import static java.util.Collections.singletonList;
 
 public class SessionModel {
+    public static final String DEFAULT_DRAW_NAME = "My Secret Santa Draw";
+
+    public static final String DEFAULT_PASSWORD = "christmas";
+
     private final SimpleBooleanProperty changesSaved = new SimpleBooleanProperty(true);
 
-    private final SimpleStringProperty drawName = new SimpleStringProperty();
+    private final SimpleStringProperty drawName = new SimpleStringProperty(DEFAULT_DRAW_NAME);
 
-    private final SimpleStringProperty password = new SimpleStringProperty();
+    private final SimpleStringProperty password = new SimpleStringProperty(DEFAULT_PASSWORD);
 
     private final SimpleStringProperty directory = new SimpleStringProperty();
 

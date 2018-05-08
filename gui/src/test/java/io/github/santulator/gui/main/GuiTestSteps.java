@@ -6,6 +6,7 @@ package io.github.santulator.gui.main;
 
 import io.github.santulator.gui.dialogues.FileDialogueType;
 import io.github.santulator.gui.dialogues.FileFormatType;
+import io.github.santulator.gui.model.SessionModel;
 import io.github.santulator.test.TestFileManager;
 import javafx.scene.Node;
 import org.slf4j.Logger;
@@ -49,11 +50,13 @@ public class GuiTestSteps {
         });
 
         step("Enter draw name", () -> {
+            robot.lookup("#fieldDrawName").queryTextInputControl().clear();
             robot.clickOn("#fieldDrawName").write(DRAW_NAME);
             verifyThat("#fieldDrawName", hasText(DRAW_NAME));
         });
 
         step("Enter password", () -> {
+            robot.lookup("#fieldPassword").queryTextInputControl().clear();
             robot.clickOn("#fieldPassword").write(PASSWORD);
             verifyThat("#fieldPassword", hasText(PASSWORD));
         });
@@ -93,7 +96,8 @@ public class GuiTestSteps {
 
         step("Start new session", () -> {
             robot.clickOn("#buttonNew");
-            verifyThat("#fieldDrawName", hasText(""));
+            verifyThat("#fieldDrawName", hasText(SessionModel.DEFAULT_DRAW_NAME));
+            verifyThat("#fieldPassword", hasText(SessionModel.DEFAULT_PASSWORD));
         });
     }
 
@@ -108,6 +112,8 @@ public class GuiTestSteps {
         step("Open saved the session", () -> {
             validator.setUpFileDialogue(FileDialogueType.OPEN_SESSION, FileFormatType.SESSION, sessionFile);
             robot.clickOn("#buttonOpen");
+            verifyThat("#fieldDrawName", hasText(DRAW_NAME));
+            verifyThat("#fieldPassword", hasText(PASSWORD));
             verifyThat("#listParticipants", hasItems(5));
         });
 

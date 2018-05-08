@@ -23,7 +23,10 @@ public class SessionController {
     public void initialise(final SessionModel model) {
         this.model = model;
 
+        fieldDrawName.setText(model.getDrawName());
         model.drawNameProperty().bind(fieldDrawName.textProperty());
+
+        fieldPassword.setText(model.getPassword());
         model.passwordProperty().bind(fieldPassword.textProperty());
 
         ParticipantTableTool tool = new ParticipantTableTool();
