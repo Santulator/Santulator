@@ -5,6 +5,7 @@
 package io.github.santulator.gui.settings;
 
 import java.nio.file.Path;
+import java.util.Optional;
 
 public interface SettingsManager {
     Path getSessionsPath();
@@ -15,5 +16,7 @@ public interface SettingsManager {
 
     void setDrawPath(Path path);
 
-    // TODO Add remaining settings
+    Optional<WindowSettings> getWindowSettings();
+
+    void setWindowSettings(WindowSettings windowSettings);
 }
