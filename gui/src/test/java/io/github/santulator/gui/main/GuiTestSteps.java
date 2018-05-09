@@ -39,7 +39,6 @@ public class GuiTestSteps {
         this.robot = robot;
         this.validator = validator;
 
-        // TODO Make use of this file
         sessionFile = manager.addFile("session.santa");
         drawDirectory = manager.addFile("draw");
     }
