@@ -5,6 +5,7 @@ import io.github.santulator.gui.model.MainModel;
 import io.github.santulator.gui.model.StatusModel;
 import io.github.santulator.gui.services.EnvironmentManager;
 import io.github.santulator.gui.services.WebPageTool;
+import io.github.santulator.gui.status.StatusManager;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -73,6 +74,8 @@ public class MainController {
     @FXML
     private Pane maskerPane;
 
+    private final StatusManager statusManager;
+
     private final MainModel model;
 
     private final StatusModel statusModel;
@@ -85,15 +88,19 @@ public class MainController {
 
     private final GuiFileHandler guiFileHandler;
 
+    private final ExitRequestHandler exitRequestHandler;
+
     @Inject
-    public MainController(final MainModel model, final StatusModel statusModel, final EnvironmentManager environmentManager, final WebPageTool webPageTool,
-                          final SessionStateHandler sessionStateHandler, final GuiFileHandler guiFileHandler) {
+    public MainController(final StatusManager statusManager, final MainModel model, final StatusModel statusModel, final EnvironmentManager environmentManager,
+        final WebPageTool webPageTool, final SessionStateHandler sessionStateHandler, final GuiFileHandler guiFileHandler, final ExitRequestHandler exitRequestHandler) {
+        this.statusManager = statusManager;
         this.model = model;
         this.statusModel = statusModel;
         this.environmentManager = environmentManager;
         this.webPageTool = webPageTool;
         this.sessionStateHandler = sessionStateHandler;
         this.guiFileHandler = guiFileHandler;
+        this.exitRequestHandler = exitRequestHandler;
     }
 
     public void initialise(final Stage stage) {
@@ -134,5 +141,21 @@ public class MainController {
 
         button.setOnAction(handler);
         menuItem.setOnAction(handler);
+    }
+
+    public EventHandler<WindowEvent> getCloseRequestHandler() {
+        return this::processCloseRequest;
+    }
+
+    private void processCloseRequest(final WindowEvent e) {
+        if (statusManager.beginExit()) {
+            try {
+                if (exitRequestHandler.handleExitRequest(e)) {
+                    statusManager.markSuccess();
+                }
+            } finally {
+                statusManager.completeAction();
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 package io.github.santulator.gui.main;
 
 import io.github.santulator.gui.common.Placement;
+import io.github.santulator.gui.controller.ExitRequestHandler;
 import io.github.santulator.gui.controller.GuiFileHandler;
 import io.github.santulator.gui.controller.MainController;
 import io.github.santulator.gui.controller.TitleHandler;
@@ -33,15 +34,18 @@ public class SantulatorGuiImpl implements SantulatorGui {
 
     private final MainModel model;
 
+    private final ExitRequestHandler exitRequestHandler;
+
     @Inject
-    public SantulatorGuiImpl(final FXMLLoader mainLoader, final PlacementManager placementManager,
-        final GuiFileHandler guiFileHandler, final MainController mainController, final TitleHandler titleHandler, final MainModel model) {
+    public SantulatorGuiImpl(final FXMLLoader mainLoader, final PlacementManager placementManager, final GuiFileHandler guiFileHandler,
+        final MainController mainController, final TitleHandler titleHandler, final MainModel model, final ExitRequestHandler exitRequestHandler) {
         this.mainLoader = mainLoader;
         this.placementManager = placementManager;
         this.guiFileHandler = guiFileHandler;
         this.mainController = mainController;
         this.titleHandler = titleHandler;
         this.model = model;
+        this.exitRequestHandler = exitRequestHandler;
     }
 
     @Override
@@ -51,6 +55,8 @@ public class SantulatorGuiImpl implements SantulatorGui {
         initialise(stage);
 
         Scene scene = new Scene(root);
+
+        stage.setOnCloseRequest(mainController.getCloseRequestHandler());
 
         Placement placement = placementManager.getMainWindow();
 
@@ -68,6 +74,7 @@ public class SantulatorGuiImpl implements SantulatorGui {
     private void initialise(final Stage stage) {
         mainController.initialise(stage);
         guiFileHandler.initialise(stage);
+        exitRequestHandler.initialise(stage);
         titleHandler.initialise();
 
         stage.titleProperty().bind(model.titleProperty());
