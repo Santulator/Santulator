@@ -1,10 +1,12 @@
 package io.github.santulator.gui.model;
 
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.nio.file.Path;
 import java.util.List;
 
 import static java.util.Collections.singletonList;
@@ -23,6 +25,8 @@ public class SessionModel {
     private final SimpleStringProperty directory = new SimpleStringProperty();
 
     private final ObservableList<ParticipantModel> participants = FXCollections.observableArrayList(ParticipantModel.PROPERTY_EXTRACTOR);
+
+    private final SimpleObjectProperty<Path> sessionFile = new SimpleObjectProperty<>(null);
 
     public SessionModel() {
         this(singletonList(new ParticipantModel(false)));
@@ -79,5 +83,17 @@ public class SessionModel {
 
     public ObservableList<ParticipantModel> getParticipants() {
         return participants;
+    }
+
+    public Path getSessionFile() {
+        return sessionFile.get();
+    }
+
+    public void setSessionFile(final Path sessionFile) {
+        this.sessionFile.set(sessionFile);
+    }
+
+    public SimpleObjectProperty<Path> sessionFileProperty() {
+        return sessionFile;
     }
 }

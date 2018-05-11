@@ -6,6 +6,8 @@ import io.github.santulator.model.ParticipantRole;
 import io.github.santulator.session.SessionState;
 import org.junit.jupiter.api.Test;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import static io.github.santulator.core.CoreTool.listOf;
@@ -13,6 +15,8 @@ import static io.github.santulator.session.TestSessionStateTool.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SessionModelToolTest {
+    private static final Path FILE = Paths.get("FILE");
+
     private static final int INDEX_ALBERT = 0;
 
     private static final int INDEX_BERYL = 1;
@@ -64,13 +68,14 @@ public class SessionModelToolTest {
     @Test
     public void testBuildGuiModel() {
         SessionState input = buildFullState();
-        SessionModel result = target.buildGuiModel(input);
+        SessionModel result = target.buildGuiModel(input, FILE);
 
         assertAll(
             () -> assertTrue(result.isChangesSaved()),
             () -> assertEquals(DRAW_NAME, result.getDrawName()),
             () -> assertEquals(PASSWORD, result.getPassword()),
             () -> assertEquals(DIRECTORY, result.getDirectory()),
+            () -> assertEquals(FILE, result.getSessionFile()),
             () -> {
                 List<ParticipantModel> participants = result.getParticipants();
 

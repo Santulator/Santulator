@@ -6,8 +6,6 @@ package io.github.santulator.gui.controller;
 
 import io.github.santulator.gui.common.ControllerAndView;
 import io.github.santulator.gui.model.SessionModel;
-import io.github.santulator.gui.services.SessionModelTool;
-import io.github.santulator.session.SessionState;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
@@ -18,39 +16,30 @@ import javax.inject.Singleton;
 public class SessionStateHandler {
     private final SessionProvider sessionProvider;
 
-    private final SessionModelTool sessionModelTool;
-
     private BorderPane mainBorderPane;
 
     @Inject
-    public SessionStateHandler(final SessionProvider sessionProvider, final SessionModelTool sessionModelTool) {
+    public SessionStateHandler(final SessionProvider sessionProvider) {
         this.sessionProvider = sessionProvider;
-        this.sessionModelTool = sessionModelTool;
     }
 
     public void initialise(final BorderPane mainBorderPane) {
         this.mainBorderPane = mainBorderPane;
     }
 
-    public SessionState getSessionState(final SessionModel model) {
-        return sessionModelTool.buildFileModel(model);
-    }
-
     public SessionModel addSession() {
-        return addSession(new SessionModel());
+        SessionModel model = new SessionModel();
+
+        addSession(model);
+
+        return model;
     }
 
-    public SessionModel addSession(final SessionState state) {
-        return addSession(sessionModelTool.buildGuiModel(state));
-    }
-
-    private SessionModel addSession(final SessionModel sessionModel) {
+    public void addSession(final SessionModel sessionModel) {
         ControllerAndView<SessionController, Node> cav = sessionProvider.get();
         SessionController controller = cav.getController();
 
         controller.initialise(sessionModel);
         mainBorderPane.setCenter(cav.getView());
-
-        return sessionModel;
     }
 }

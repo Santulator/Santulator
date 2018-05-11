@@ -9,6 +9,7 @@ import io.github.santulator.gui.dialogues.*;
 import io.github.santulator.gui.model.MainModel;
 import io.github.santulator.gui.model.SessionModel;
 import io.github.santulator.gui.services.GuiDrawService;
+import io.github.santulator.gui.services.SessionModelTool;
 import io.github.santulator.gui.status.GuiTask;
 import io.github.santulator.gui.status.StatusManager;
 import io.github.santulator.session.FileNameTool;
@@ -40,11 +41,14 @@ public class GuiFileHandler {
 
     private final GuiDrawService drawService;
 
+    private final SessionModelTool sessionModelTool;
+
     private Stage stage;
 
     @Inject
-    public GuiFileHandler(final FileDialogueFactory fileDialogueFactory, final SessionSerialiser sessionSerialiser, final StatusManager statusManager, final MainModel model,
-        final SessionStateHandler sessionStateHandler, final GuiTaskHandler guiTaskHandler, final GuiDrawService drawService) {
+    public GuiFileHandler(final FileDialogueFactory fileDialogueFactory, final SessionSerialiser sessionSerialiser, final StatusManager statusManager,
+        final MainModel model, final SessionStateHandler sessionStateHandler, final GuiTaskHandler guiTaskHandler, final GuiDrawService drawService,
+        final SessionModelTool sessionModelTool) {
         this.fileDialogueFactory = fileDialogueFactory;
         this.sessionSerialiser = sessionSerialiser;
         this.statusManager = statusManager;
@@ -52,6 +56,7 @@ public class GuiFileHandler {
         this.sessionStateHandler = sessionStateHandler;
         this.guiTaskHandler = guiTaskHandler;
         this.drawService = drawService;
+        this.sessionModelTool = sessionModelTool;
     }
 
     public void initialise(final Stage stage) {
@@ -73,10 +78,10 @@ public class GuiFileHandler {
             statusManager.performAction(file);
             LOG.info("Opening session file '{}'", file);
 
-            GuiTask<SessionState> task = new GuiTask<>(
+            GuiTask<SessionModel> task = new GuiTask<>(
                 guiTaskHandler,
                 statusManager,
-                () -> sessionSerialiser.read(file),
+                () -> readSession(file),
                 this::finishOpen,
                 e -> FileErrorTool.open(file, e));
 
@@ -84,11 +89,15 @@ public class GuiFileHandler {
         }
     }
 
-    private void finishOpen(final SessionState state) {
-        SessionModel sessionModel = sessionStateHandler.addSession(state);
+    private SessionModel readSession(final Path file) {
+        SessionState state = sessionSerialiser.read(file);
 
-        // TODO Add in the missing session file
-        model.replaceSessionModel(sessionModel, null);
+        return sessionModelTool.buildGuiModel(state, file);
+    }
+
+    private void finishOpen(final SessionModel sessionModel) {
+        sessionStateHandler.addSession(sessionModel);
+        model.replaceSessionModel(sessionModel);
     }
 
     public void handleNewSession() {
@@ -112,7 +121,7 @@ public class GuiFileHandler {
     private void finishNew() {
         SessionModel sessionModel = sessionStateHandler.addSession();
 
-        model.replaceSessionModel(sessionModel, null);
+        model.replaceSessionModel(sessionModel);
     }
 
     public void handleSave() {
@@ -279,6 +288,6 @@ public class GuiFileHandler {
     private SessionState buildSessionState() {
         SessionModel sessionModel = model.getSessionModel();
 
-        return sessionStateHandler.getSessionState(sessionModel);
+        return sessionModelTool.buildFileModel(sessionModel);
     }
 }

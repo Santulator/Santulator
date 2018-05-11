@@ -22,22 +22,23 @@ public class MainModel {
     private final SimpleBooleanProperty changesSaved = new SimpleBooleanProperty(true);
 
     public void initialise(final SessionModel sessionModel) {
-        setupSessionModel(sessionModel, null);
+        setupSessionModel(sessionModel);
     }
 
-    public void replaceSessionModel(final SessionModel sessionModel, final Path sessionFile) {
+    public void replaceSessionModel(final SessionModel sessionModel) {
         unbindOldSession();
-        setupSessionModel(sessionModel, sessionFile);
+        setupSessionModel(sessionModel);
     }
 
-    private void setupSessionModel(final SessionModel sessionModel, final Path sessionFile) {
+    private void setupSessionModel(final SessionModel sessionModel) {
         this.sessionModel = sessionModel;
-        this.sessionFile.set(sessionFile);
         changesSaved.bindBidirectional(sessionModel.changesSavedProperty());
+        sessionFile.bindBidirectional(sessionModel.sessionFileProperty());
     }
 
     private void unbindOldSession() {
         changesSaved.unbindBidirectional(sessionModel.changesSavedProperty());
+        sessionFile.unbindBidirectional(sessionModel.sessionFileProperty());
     }
 
     public SimpleObjectProperty<Path> sessionFileProperty() {

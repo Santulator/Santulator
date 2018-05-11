@@ -10,6 +10,7 @@ import io.github.santulator.gui.model.SessionModel;
 import io.github.santulator.session.ParticipantState;
 import io.github.santulator.session.SessionState;
 
+import java.nio.file.Path;
 import java.util.List;
 import javax.inject.Singleton;
 
@@ -18,7 +19,7 @@ import static java.util.stream.Collectors.toList;
 
 @Singleton
 public class SessionModelTool {
-    public SessionModel buildGuiModel(final SessionState state) {
+    public SessionModel buildGuiModel(final SessionState state, final Path file) {
         List<ParticipantModel> participants = state.getParticipants().stream()
             .map(this::buildParticipantModel)
             .collect(toList());
@@ -27,6 +28,7 @@ public class SessionModelTool {
         model.setDrawName(state.getDrawName());
         model.setPassword(state.getPassword());
         model.setDirectory(state.getDirectory());
+        model.setSessionFile(file);
 
         return model;
     }
