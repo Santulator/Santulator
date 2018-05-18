@@ -21,6 +21,8 @@ public class MainModel {
 
     private final SimpleBooleanProperty changesSaved = new SimpleBooleanProperty(true);
 
+    private final SimpleStringProperty drawName = new SimpleStringProperty();
+
     public void initialise(final SessionModel sessionModel) {
         setupSessionModel(sessionModel);
     }
@@ -34,9 +36,11 @@ public class MainModel {
         this.sessionModel = sessionModel;
         changesSaved.bindBidirectional(sessionModel.changesSavedProperty());
         sessionFile.bindBidirectional(sessionModel.sessionFileProperty());
+        drawName.bind(sessionModel.drawNameProperty());
     }
 
     private void unbindOldSession() {
+        drawName.unbind();
         changesSaved.unbindBidirectional(sessionModel.changesSavedProperty());
         sessionFile.unbindBidirectional(sessionModel.sessionFileProperty());
     }
@@ -79,5 +83,13 @@ public class MainModel {
 
     public SessionModel getSessionModel() {
         return sessionModel;
+    }
+
+    public SimpleStringProperty drawNameProperty() {
+        return drawName;
+    }
+
+    public String getDrawName() {
+        return drawName.get();
     }
 }

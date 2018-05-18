@@ -4,12 +4,14 @@
 
 package io.github.santulator.gui.controller;
 
-import io.github.santulator.gui.common.GuiConstants;
 import io.github.santulator.gui.model.MainModel;
 import javafx.beans.value.ChangeListener;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import static io.github.santulator.gui.common.GuiConstants.UNTITLED;
 
 @Singleton
 public class TitleHandler {
@@ -27,6 +29,7 @@ public class TitleHandler {
 
         model.sessionFileProperty().addListener(listener);
         model.changesSavedProperty().addListener(listener);
+        model.drawNameProperty().addListener(listener);
 
         updateTitle();
     }
@@ -34,13 +37,19 @@ public class TitleHandler {
     private void updateTitle() {
         StringBuilder title = new StringBuilder(TITLE_BUFFER_SIZE);
 
-        if (model.hasSessionFile()) {
-            title.append(model.getSessionFile().getFileName());
+        String drawName = model.getDrawName();
+
+        if (StringUtils.isNotBlank(drawName)) {
+            title.append(drawName);
         } else {
-            title.append(GuiConstants.UNTITLED);
+            title.append(UNTITLED);
         }
 
-        if (!model.changesSavedProperty().get()) {
+        if (model.hasSessionFile()) {
+            title.append(" (").append(model.getSessionFile().getFileName()).append(')');
+        }
+
+        if (!model.isChangesSaved()) {
             title.append(" - Unsaved Changes");
         }
 

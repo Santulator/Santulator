@@ -8,7 +8,9 @@ import io.github.santulator.gui.dialogues.FileDialogueType;
 import io.github.santulator.gui.dialogues.FileFormatType;
 import io.github.santulator.gui.model.SessionModel;
 import io.github.santulator.test.TestFileManager;
+import javafx.application.Platform;
 import javafx.scene.Node;
+import javafx.scene.control.TextInputControl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testfx.api.FxRobot;
@@ -49,13 +51,13 @@ public class GuiTestSteps {
         });
 
         step("Enter draw name", () -> {
-            robot.lookup("#fieldDrawName").queryTextInputControl().clear();
+            clearField("#fieldDrawName");
             robot.clickOn("#fieldDrawName").write(DRAW_NAME);
             verifyThat("#fieldDrawName", hasText(DRAW_NAME));
         });
 
         step("Enter password", () -> {
-            robot.lookup("#fieldPassword").queryTextInputControl().clear();
+            clearField("#fieldPassword");
             robot.clickOn("#fieldPassword").write(PASSWORD);
             verifyThat("#fieldPassword", hasText(PASSWORD));
         });
@@ -159,5 +161,11 @@ public class GuiTestSteps {
 
     private Node participantNode(final String style, final int index) {
         return robot.lookup("." + style).nth(index).query();
+    }
+
+    private void clearField(final String query) {
+        TextInputControl control = robot.lookup(query).queryTextInputControl();
+
+        Platform.runLater(control::clear);
     }
 }
