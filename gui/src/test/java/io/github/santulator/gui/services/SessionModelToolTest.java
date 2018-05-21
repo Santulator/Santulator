@@ -72,7 +72,7 @@ public class SessionModelToolTest {
 
         assertAll(
             () -> assertTrue(result.isChangesSaved()),
-            () -> assertEquals(DRAW_NAME, result.getDrawName()),
+            () -> assertEquals(DRAW_NAME_1, result.getDrawName()),
             () -> assertEquals(PASSWORD, result.getPassword()),
             () -> assertEquals(DIRECTORY, result.getDirectory()),
             () -> assertEquals(FILE, result.getSessionFile()),
@@ -103,7 +103,7 @@ public class SessionModelToolTest {
         List<ParticipantModel> participants = listOf(albert, beryl, carla, david, edith, fred, gina, harry, iris, john, kate);
         SessionModel input = new SessionModel(participants);
 
-        input.setDrawName(DRAW_NAME);
+        input.setDrawName(DRAW_NAME_1);
         input.setPassword(PASSWORD);
         input.setDirectory(DIRECTORY);
 

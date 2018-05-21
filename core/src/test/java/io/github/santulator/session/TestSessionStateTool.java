@@ -8,7 +8,9 @@ import java.util.List;
 public final class TestSessionStateTool {
     public static final int PARTICIPANT_COUNT = buildFullParticipants().size();
 
-    public static final String DRAW_NAME = "Secret Santa Draw";
+    public static final String DRAW_NAME_1 = "Secret Santa Draw";
+
+    public static final String DRAW_NAME_2 = "New Draw Name";
 
     public static final String PASSWORD = "TopSecret";
 
@@ -19,7 +21,7 @@ public final class TestSessionStateTool {
     }
 
     public static SessionState buildFullState() {
-        return buildFullState(DRAW_NAME);
+        return buildFullState(DRAW_NAME_1);
     }
 
     public static SessionState buildFullState(final String drawName) {
@@ -31,7 +33,11 @@ public final class TestSessionStateTool {
     }
 
     public static SessionState buildSimpleState() {
-        return buildState(DRAW_NAME, buildSimpleParticipants());
+        return buildSimpleState(DRAW_NAME_1);
+    }
+
+    public static SessionState buildSimpleState(final String drawName) {
+        return buildState(drawName, buildSimpleParticipants());
     }
 
     private static SessionState buildState(final String drawName, final List<ParticipantState> participants) {

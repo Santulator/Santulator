@@ -2,6 +2,7 @@ package io.github.santulator.gui.controller;
 
 import io.github.santulator.gui.model.ParticipantModel;
 import io.github.santulator.gui.model.SessionModel;
+import io.github.santulator.gui.services.UnsavedChangesTool;
 import io.github.santulator.gui.view.ParticipantCell;
 import io.github.santulator.gui.view.ParticipantTableTool;
 import javafx.fxml.FXML;
@@ -33,6 +34,8 @@ public class SessionController {
 
         listParticipants.setItems(model.getParticipants());
         listParticipants.setCellFactory(p -> new ParticipantCell(this::onActionButton, tool));
+
+        UnsavedChangesTool.createBindings(model);
     }
 
     private void onActionButton(final ParticipantModel participant) {

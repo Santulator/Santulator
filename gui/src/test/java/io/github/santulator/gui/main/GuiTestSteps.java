@@ -14,6 +14,7 @@ import javafx.scene.control.TextInputControl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testfx.api.FxRobot;
+import org.testfx.service.query.NodeQuery;
 
 import java.nio.file.Path;
 
@@ -52,8 +53,8 @@ public class GuiTestSteps {
 
         step("Enter draw name", () -> {
             clearField("#fieldDrawName");
-            robot.clickOn("#fieldDrawName").write(DRAW_NAME);
-            verifyThat("#fieldDrawName", hasText(DRAW_NAME));
+            robot.clickOn("#fieldDrawName").write(DRAW_NAME_1);
+            verifyThat("#fieldDrawName", hasText(DRAW_NAME_1));
         });
 
         step("Enter password", () -> {
@@ -110,10 +111,10 @@ public class GuiTestSteps {
     }
 
     public void part3RunDraw() {
-        step("Open saved the session", () -> {
+        step("Open the saved session", () -> {
             validator.setUpFileDialogue(FileDialogueType.OPEN_SESSION, FileFormatType.SESSION, sessionFile);
             robot.clickOn("#buttonOpen");
-            verifyThat("#fieldDrawName", hasText(DRAW_NAME));
+            verifyThat("#fieldDrawName", hasText(DRAW_NAME_1));
             verifyThat("#fieldPassword", hasText(PASSWORD));
             verifyThat("#listParticipants", hasItems(5));
         });
@@ -146,9 +147,31 @@ public class GuiTestSteps {
     }
 
     public void part5Exit() {
-        step("Exit", () -> {
+        step("Reopen the saved session", () -> {
+            validator.setUpFileDialogue(FileDialogueType.OPEN_SESSION, FileFormatType.SESSION, sessionFile);
+            robot.clickOn("#buttonOpen");
+            verifyThat("#fieldDrawName", hasText(DRAW_NAME_1));
+        });
+
+        step("Update draw name", () -> {
+            clearField("#fieldDrawName");
+            robot.clickOn("#fieldDrawName").write(DRAW_NAME_2);
+            verifyThat("#fieldDrawName", hasText(DRAW_NAME_2));
+        });
+
+        step("Cancel exit", () -> {
             robot.clickOn("#menuFile");
             robot.clickOn("#menuExit");
+            robot.clickOn(lookup("#unsavedChanges", "Cancel"));
+            verifyThat("#fieldDrawName", hasText(DRAW_NAME_2));
+        });
+
+        step("Exit", () -> {
+            validator.setUpFileDialogue(FileDialogueType.SAVE_SESSION, FileFormatType.SESSION, sessionFile);
+            robot.clickOn("#menuFile");
+            robot.clickOn("#menuExit");
+            robot.clickOn(lookup("#unsavedChanges", "Save"));
+            validator.validateSavedSession(sessionFile, buildSimpleState(DRAW_NAME_2));
         });
     }
 
@@ -167,5 +190,15 @@ public class GuiTestSteps {
         TextInputControl control = robot.lookup(query).queryTextInputControl();
 
         Platform.runLater(control::clear);
+    }
+
+    private Node lookup(final String first, final String... queries) {
+        NodeQuery nodeQuery = robot.lookup(first);
+
+        for (String query : queries) {
+            nodeQuery = nodeQuery.lookup(query);
+        }
+
+        return nodeQuery.query();
     }
 }
