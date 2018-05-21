@@ -9,7 +9,7 @@ public class ParticipantTableTool {
     public void registerField(final TextField field, final int index) {
         if (index == requested) {
             field.focusedProperty().addListener((old, o, v) -> onFocus());
-            Platform.runLater(() -> field.requestFocus());
+            Platform.runLater(field::requestFocus);
         }
     }
 
