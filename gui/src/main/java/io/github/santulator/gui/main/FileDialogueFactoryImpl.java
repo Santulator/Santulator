@@ -7,7 +7,7 @@ package io.github.santulator.gui.main;
 import io.github.santulator.gui.dialogues.*;
 import io.github.santulator.gui.settings.SettingsManager;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -23,7 +23,7 @@ import static java.util.Collections.unmodifiableMap;
 public class FileDialogueFactoryImpl implements FileDialogueFactory {
     private final SettingsManager settingsManager;
 
-    private final Map<FileDialogueType, Function<Stage, FileDialogue>> creators = buildCreatorMap();
+    private final Map<FileDialogueType, Function<Window, FileDialogue>> creators = buildCreatorMap();
 
     @Inject
     public FileDialogueFactoryImpl(final SettingsManager settingsManager) {
@@ -31,29 +31,29 @@ public class FileDialogueFactoryImpl implements FileDialogueFactory {
     }
 
     @Override
-    public FileDialogue create(final FileDialogueType type, final Stage stage) {
-        Function<Stage, FileDialogue> factory = creators.get(type);
+    public FileDialogue create(final FileDialogueType type, final Window window) {
+        Function<Window, FileDialogue> factory = creators.get(type);
 
-        return factory.apply(stage);
+        return factory.apply(window);
     }
 
-    private FileDialogue createOpenSessionDialogue(final Stage stage) {
+    private FileDialogue createOpenSessionDialogue(final Window window) {
         return new FileDialogueImpl(
-            OPEN_SESSION, stage, settingsManager, FileFormatType.TYPES_SESSIONS, FileChooser::showOpenDialog, SettingsManager::getSessionsPath, SettingsManager::setSessionsPath);
+            OPEN_SESSION, window, settingsManager, FileFormatType.TYPES_SESSIONS, FileChooser::showOpenDialog, SettingsManager::getSessionsPath, SettingsManager::setSessionsPath);
     }
 
-    private FileDialogue createSaveSessionDialogue(final Stage stage) {
+    private FileDialogue createSaveSessionDialogue(final Window window) {
         return new FileDialogueImpl(
-            SAVE_SESSION, stage, settingsManager, FileFormatType.TYPES_SESSIONS, FileChooser::showSaveDialog, SettingsManager::getSessionsPath, SettingsManager::setSessionsPath);
+            SAVE_SESSION, window, settingsManager, FileFormatType.TYPES_SESSIONS, FileChooser::showSaveDialog, SettingsManager::getSessionsPath, SettingsManager::setSessionsPath);
     }
 
-    private FileDialogue createRunDrawDialogue(final Stage stage) {
+    private FileDialogue createRunDrawDialogue(final Window window) {
         return new DirectoryDialogueImpl(
-            RUN_DRAW, DRAW, stage, settingsManager, SettingsManager::getDrawPath, SettingsManager::setDrawPath);
+            RUN_DRAW, DRAW, window, settingsManager, SettingsManager::getDrawPath, SettingsManager::setDrawPath);
     }
 
-    private Map<FileDialogueType, Function<Stage, FileDialogue>> buildCreatorMap() {
-        Map<FileDialogueType, Function<Stage, FileDialogue>> map = new EnumMap<>(FileDialogueType.class);
+    private Map<FileDialogueType, Function<Window, FileDialogue>> buildCreatorMap() {
+        Map<FileDialogueType, Function<Window, FileDialogue>> map = new EnumMap<>(FileDialogueType.class);
 
         map.put(OPEN_SESSION, this::createOpenSessionDialogue);
         map.put(SAVE_SESSION, this::createSaveSessionDialogue);

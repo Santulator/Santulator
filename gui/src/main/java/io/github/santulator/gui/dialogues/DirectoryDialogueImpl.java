@@ -6,7 +6,7 @@ package io.github.santulator.gui.dialogues;
 
 import io.github.santulator.gui.settings.SettingsManager;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -18,7 +18,7 @@ public class DirectoryDialogueImpl implements FileDialogue {
 
     private final FileFormatType formatType;
 
-    private final Stage stage;
+    private final Window window;
 
     private final SettingsManager settingsManager;
 
@@ -28,9 +28,9 @@ public class DirectoryDialogueImpl implements FileDialogue {
 
     private FileChoice selected;
 
-    public DirectoryDialogueImpl(final FileDialogueType type, final FileFormatType formatType, final Stage stage, final SettingsManager settingsManager,
+    public DirectoryDialogueImpl(final FileDialogueType type, final FileFormatType formatType, final Window window, final SettingsManager settingsManager,
         final Function<SettingsManager, Path> pathGetter, final BiConsumer<SettingsManager, Path> pathSetter) {
-        this.stage = stage;
+        this.window = window;
         this.formatType = formatType;
         this.type = type;
         this.settingsManager = settingsManager;
@@ -50,7 +50,7 @@ public class DirectoryDialogueImpl implements FileDialogue {
     }
 
     private FileChoice showChooser(final DirectoryChooser chooser) {
-        File result = chooser.showDialog(stage);
+        File result = chooser.showDialog(window);
 
         if (result == null) {
             return null;

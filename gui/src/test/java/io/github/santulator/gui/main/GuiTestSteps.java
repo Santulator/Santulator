@@ -119,10 +119,24 @@ public class GuiTestSteps {
             verifyThat("#listParticipants", hasItems(5));
         });
 
-        step("Run draw", () -> {
-            validator.setUpFileDialogue(FileDialogueType.RUN_DRAW, FileFormatType.DRAW, drawDirectory);
+        step("Open the draw wizard", () -> {
             robot.clickOn("#buttonRunDraw");
+            verifyThat("#paneDraw1", isVisible());
+        });
+
+        step("Move to wizard step 2", () -> {
+            robot.clickOn("Next");
+            verifyThat("#paneDraw2", isVisible());
+        });
+
+        step("Save the draw results", () -> {
+            validator.setUpFileDialogue(FileDialogueType.RUN_DRAW, FileFormatType.DRAW, drawDirectory);
+            robot.clickOn("#buttonDraw2SaveResults");
             validator.validateDraw(drawDirectory, "Albert.pdf", "Beryl.pdf", "Carla.pdf");
+        });
+
+        step("Close the draw wizard", () -> {
+            robot.clickOn("Finish ");
         });
     }
 

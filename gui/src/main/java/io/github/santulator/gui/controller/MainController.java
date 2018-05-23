@@ -90,9 +90,12 @@ public class MainController {
 
     private final ExitRequestHandler exitRequestHandler;
 
+    private final DrawHandler drawHandler;
+
     @Inject
     public MainController(final StatusManager statusManager, final MainModel model, final StatusModel statusModel, final EnvironmentManager environmentManager,
-        final WebPageTool webPageTool, final SessionStateHandler sessionStateHandler, final GuiFileHandler guiFileHandler, final ExitRequestHandler exitRequestHandler) {
+        final WebPageTool webPageTool, final SessionStateHandler sessionStateHandler, final GuiFileHandler guiFileHandler, final ExitRequestHandler exitRequestHandler,
+        final DrawHandler drawHandler) {
         this.statusManager = statusManager;
         this.model = model;
         this.statusModel = statusModel;
@@ -101,17 +104,19 @@ public class MainController {
         this.sessionStateHandler = sessionStateHandler;
         this.guiFileHandler = guiFileHandler;
         this.exitRequestHandler = exitRequestHandler;
+        this.drawHandler = drawHandler;
     }
 
     public void initialise(final Stage stage) {
         sessionStateHandler.initialise(mainBorderPane);
         model.initialise(sessionStateHandler.addSession());
+        drawHandler.initialise(model);
 
         handler(buttonOpen, menuOpen, guiFileHandler::handleOpenSession);
         handler(buttonNew, menuNew, guiFileHandler::handleNewSession);
         handler(buttonSave, menuSave, guiFileHandler::handleSave);
         handler(menuSaveAs, guiFileHandler::handleSaveAs);
-        handler(buttonRunDraw, menuRunDraw, guiFileHandler::handleRunDraw);
+        handler(buttonRunDraw, menuRunDraw, drawHandler::handleRunDraw);
 
         menuWebsite.setOnAction(e -> webPageTool.showWebPage(GuiConstants.WEBSITE));
         menuHowTo.setOnAction(e -> webPageTool.showWebPage(GuiConstants.WEBPAGE_HELP));

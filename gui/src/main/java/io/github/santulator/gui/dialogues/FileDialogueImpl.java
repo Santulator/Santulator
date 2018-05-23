@@ -7,7 +7,6 @@ package io.github.santulator.gui.dialogues;
 import io.github.santulator.gui.settings.SettingsManager;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
-import javafx.stage.Stage;
 import javafx.stage.Window;
 
 import java.io.File;
@@ -22,7 +21,7 @@ import static java.util.stream.Collectors.toList;
 public class FileDialogueImpl implements FileDialogue {
     private final FileDialogueType type;
 
-    private final Stage stage;
+    private final Window window;
 
     private final SettingsManager settingsManager;
 
@@ -36,9 +35,9 @@ public class FileDialogueImpl implements FileDialogue {
 
     private FileChoice selected;
 
-    public FileDialogueImpl(final FileDialogueType type, final Stage stage, final SettingsManager settingsManager, final List<FileFormatType> formats,
+    public FileDialogueImpl(final FileDialogueType type, final Window window, final SettingsManager settingsManager, final List<FileFormatType> formats,
         final BiFunction<FileChooser, Window, File> openFunction, final Function<SettingsManager, Path> pathGetter, final BiConsumer<SettingsManager, Path> pathSetter) {
-        this.stage = stage;
+        this.window = window;
         this.type = type;
         this.settingsManager = settingsManager;
         this.filters = formats.stream()
@@ -62,7 +61,7 @@ public class FileDialogueImpl implements FileDialogue {
     }
 
     private FileChoice showChooser(final FileChooser chooser) {
-        File result = openFunction.apply(chooser, stage);
+        File result = openFunction.apply(chooser, window);
 
         if (result == null) {
             return null;

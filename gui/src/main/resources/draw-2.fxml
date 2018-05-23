@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import org.controlsfx.dialog.WizardPane?>
+
+<WizardPane fx:id="paneDraw2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.santulator.gui.controller.Draw2Controller">
+   <content>
+      <VBox>
+         <children>
+            <Label fx:id="labelDraw2Name" text="Name of the draw" />
+            <Button fx:id="buttonDraw2SaveResults" mnemonicParsing="false" text="Save Draw Results" />
+         </children>
+      </VBox>
+   </content>
+</WizardPane>

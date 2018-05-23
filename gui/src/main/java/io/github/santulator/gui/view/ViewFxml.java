@@ -11,7 +11,9 @@ import java.io.IOException;
 
 public enum ViewFxml {
     MAIN("main.fxml"),
-    SESSION("session.fxml");
+    SESSION("session.fxml"),
+    DRAW_1("draw-1.fxml"),
+    DRAW_2("draw-2.fxml");
 
     private final String name;
 

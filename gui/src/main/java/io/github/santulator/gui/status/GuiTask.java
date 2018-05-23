@@ -21,16 +21,24 @@ public class GuiTask<T> extends Task<Void> {
 
     private final Consumer<RuntimeException> errorHandler;
 
-    public GuiTask(final GuiTaskHandler guiTaskHandler, final StatusManager statusManager, final Supplier<T> body, final Consumer<RuntimeException> errorHandler) {
-        this(guiTaskHandler, statusManager, body, t -> doNothingFinisher(), errorHandler);
+    private final boolean isCompletedInCall;
+
+    public GuiTask(final GuiTaskHandler guiTaskHandler, final StatusManager statusManager, final Supplier<T> body, final Consumer<RuntimeException> errorHandler, final boolean isCompletedInCall) {
+        this(guiTaskHandler, statusManager, body, t -> doNothingFinisher(), errorHandler, isCompletedInCall);
     }
 
     public GuiTask(final GuiTaskHandler guiTaskHandler, final StatusManager statusManager, final Supplier<T> body, final Consumer<T> finisher, final Consumer<RuntimeException> errorHandler) {
+        this(guiTaskHandler, statusManager, body, finisher, errorHandler, true);
+    }
+
+    public GuiTask(final GuiTaskHandler guiTaskHandler, final StatusManager statusManager, final Supplier<T> body, final Consumer<T> finisher,
+        final Consumer<RuntimeException> errorHandler, final boolean isCompletedInCall) {
         this.guiTaskHandler = guiTaskHandler;
         this.statusManager = statusManager;
         this.body = body;
         this.finisher = finisher;
         this.errorHandler = errorHandler;
+        this.isCompletedInCall = isCompletedInCall;
     }
 
     @Override
@@ -44,7 +52,9 @@ public class GuiTask<T> extends Task<Void> {
         } catch (final RuntimeException e) {
             guiTaskHandler.executeOnGuiThread(() -> errorHandler.accept(e));
         } finally {
-            guiTaskHandler.executeOnGuiThread(statusManager::completeAction);
+            if (isCompletedInCall) {
+                guiTaskHandler.executeOnGuiThread(statusManager::completeAction);
+            }
         }
         return null;
     }
