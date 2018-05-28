@@ -121,12 +121,16 @@ public class GuiTestSteps {
 
         step("Open the draw wizard", () -> {
             robot.clickOn("#buttonRunDraw");
-            verifyThat("#paneDraw1", isVisible());
+            verifyThat("#drawWizardPage1", isVisible());
+        });
+
+        step("Run the draw", () -> {
+            robot.clickOn("#buttonDraw1RunDraw");
         });
 
         step("Move to wizard step 2", () -> {
             robot.clickOn("Next");
-            verifyThat("#paneDraw2", isVisible());
+            verifyThat("#drawWizardPage2", isVisible());
         });
 
         step("Save the draw results", () -> {

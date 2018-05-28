@@ -1,10 +1,14 @@
 package io.github.santulator.gui.controller;
 
 import io.github.santulator.gui.model.DrawModel;
+import io.github.santulator.gui.model.DrawWizardPage;
 import io.github.santulator.gui.model.MainModel;
+import io.github.santulator.gui.services.DrawModelTool;
 import io.github.santulator.gui.status.StatusManager;
+import io.github.santulator.gui.view.TrackedWizardPane;
 import io.github.santulator.gui.view.ViewFxml;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import org.controlsfx.dialog.Wizard;
 import org.controlsfx.dialog.WizardPane;
 
@@ -36,22 +40,25 @@ public class DrawHandler {
     }
 
     private void runDrawWizard() {
-        WizardPane wizardPane1 = buildWizardPane(ViewFxml.DRAW_1);
-        WizardPane wizardPane2 = buildWizardPane(ViewFxml.DRAW_2);
-
+        DrawModel drawModel = new DrawModel(mainModel.getDrawName());
+        WizardPane wizardPane1 = buildWizardPane(ViewFxml.DRAW_1, drawModel, DrawWizardPage.RUN_DRAW);
+        WizardPane wizardPane2 = buildWizardPane(ViewFxml.DRAW_2, drawModel, DrawWizardPage.SAVE_RESULTS);
         Wizard wizard = new Wizard();
+
+        DrawModelTool.createBindings(drawModel);
+        wizard.invalidProperty().bind(drawModel.blockNextProperty());
 
         wizard.setFlow(new Wizard.LinearFlow(wizardPane1, wizardPane2));
         wizard.showAndWait();
     }
 
-    private WizardPane buildWizardPane(final ViewFxml viewFxml) {
+    private WizardPane buildWizardPane(final ViewFxml viewFxml, final DrawModel drawModel, final DrawWizardPage page) {
         FXMLLoader loader = loaderProvider.get();
-        WizardPane wizardPane = viewFxml.loadNode(loader);
+        Node wizardPaneContent = viewFxml.loadNode(loader);
+        TrackedWizardPane wizardPane = new TrackedWizardPane(wizardPaneContent, () -> drawModel.setDrawWizardPage(page));
         DrawController controller = loader.getController();
-        DrawModel drawModel = new DrawModel(mainModel.getDrawName());
 
-        controller.initialise(drawModel);
+        controller.initialise(drawModel, () -> wizardPane.getScene().getWindow());
 
         return wizardPane;
     }

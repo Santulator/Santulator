@@ -6,21 +6,29 @@ import io.github.santulator.gui.dialogues.FileDialogueFactory;
 import io.github.santulator.gui.dialogues.FileDialogueType;
 import io.github.santulator.gui.dialogues.FileErrorTool;
 import io.github.santulator.gui.model.DrawModel;
-import io.github.santulator.gui.services.GuiDrawService;
+import io.github.santulator.gui.model.MainModel;
 import io.github.santulator.gui.status.GuiTask;
 import io.github.santulator.gui.status.StatusManager;
+import io.github.santulator.model.DrawSelection;
+import io.github.santulator.writer.DrawSelectionWriter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Window;
-import org.controlsfx.dialog.WizardPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.nio.file.Path;
+import java.util.function.Supplier;
 import javax.inject.Inject;
 
 public class Draw2Controller implements DrawController {
+    @FXML
+    private Label labelDraw2Name;
+
+    @FXML
+    private Button buttonDraw2SaveResults;
+
     private static final Logger LOG = LoggerFactory.getLogger(Draw2Controller.class);
 
     private final FileDialogueFactory fileDialogueFactory;
@@ -29,33 +37,35 @@ public class Draw2Controller implements DrawController {
 
     private final GuiTaskHandler guiTaskHandler;
 
-    private final GuiDrawService drawService;
+    private final DrawSelectionWriter writer;
 
-    @FXML
-    private WizardPane paneDraw2;
+    private final MainModel mainModel;
 
-    @FXML
-    private Label labelDraw2Name;
+    private DrawModel drawModel;
 
-    @FXML
-    private Button buttonDraw2SaveResults;
+    private Supplier<Window> windowSupplier;
 
     @Inject
-    public Draw2Controller(final FileDialogueFactory fileDialogueFactory, final StatusManager statusManager, final GuiTaskHandler guiTaskHandler, final GuiDrawService drawService) {
+    public Draw2Controller(final FileDialogueFactory fileDialogueFactory, final StatusManager statusManager, final GuiTaskHandler guiTaskHandler,
+        final DrawSelectionWriter writer, final MainModel mainModel) {
         this.fileDialogueFactory = fileDialogueFactory;
         this.statusManager = statusManager;
         this.guiTaskHandler = guiTaskHandler;
-        this.drawService = drawService;
+        this.writer = writer;
+        this.mainModel = mainModel;
     }
 
     @Override
-    public void initialise(final DrawModel drawModel) {
+    public void initialise(final DrawModel drawModel, final Supplier<Window> windowSupplier) {
+        this.drawModel = drawModel;
+        this.windowSupplier = windowSupplier;
         labelDraw2Name.textProperty().bind(drawModel.drawNameProperty());
-        buttonDraw2SaveResults.setOnAction(e -> processRunDraw());
+        buttonDraw2SaveResults.setOnAction(e -> processSaveResults());
+        buttonDraw2SaveResults.disableProperty().bind(drawModel.drawSavedProperty());
     }
 
-    private void processRunDraw() {
-        Path directory = chooseFile();
+    private void processSaveResults() {
+        Path directory = chooseDirectory();
 
         if (directory != null) {
             statusManager.performAction(directory);
@@ -64,7 +74,8 @@ public class Draw2Controller implements DrawController {
             Runnable task = new GuiTask<>(
                 guiTaskHandler,
                 statusManager,
-                () -> runDraw(directory),
+                () -> saveResults(directory),
+                this::markResultsSaved,
                 e -> FileErrorTool.saveResults(directory, e),
                 false);
 
@@ -72,14 +83,16 @@ public class Draw2Controller implements DrawController {
         }
     }
 
-    private boolean runDraw(final Path directory) {
-        drawService.draw(directory);
+    private Path saveResults(final Path directory) {
+        DrawSelection selection = drawModel.getDrawSelection();
 
-        return true;
+        writer.writeDrawSelection(selection, directory, mainModel.getSessionModel().getPassword());
+
+        return directory;
     }
 
-    private Path chooseFile() {
-        Window window = paneDraw2.getScene().getWindow();
+    private Path chooseDirectory() {
+        Window window = windowSupplier.get();
         FileDialogue dialogue = fileDialogueFactory.create(FileDialogueType.RUN_DRAW, window);
 
         dialogue.showChooser();
@@ -88,5 +101,9 @@ public class Draw2Controller implements DrawController {
         } else {
             return null;
         }
+    }
+
+    private void markResultsSaved(final Path directory) {
+        drawModel.setDirectory(directory);
     }
 }
