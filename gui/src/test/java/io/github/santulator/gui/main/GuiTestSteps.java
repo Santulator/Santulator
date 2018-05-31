@@ -126,6 +126,7 @@ public class GuiTestSteps {
 
         step("Run the draw", () -> {
             robot.clickOn("#buttonDraw1RunDraw");
+            verifyThat("#labelDraw1Result", hasText("Draw complete: 3 gifts will be given."));
         });
 
         step("Move to wizard step 2", () -> {
@@ -136,6 +137,7 @@ public class GuiTestSteps {
         step("Save the draw results", () -> {
             validator.setUpFileDialogue(FileDialogueType.RUN_DRAW, FileFormatType.DRAW, drawDirectory);
             robot.clickOn("#buttonDraw2SaveResults");
+            verifyThat("#labelDraw2SavedDescription", hasText("Draw results saved to directory 'draw'."));
             validator.validateDraw(drawDirectory, "Albert.pdf", "Beryl.pdf", "Carla.pdf");
         });
 

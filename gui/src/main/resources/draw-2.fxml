@@ -8,5 +8,6 @@
    <children>
       <Label fx:id="labelDraw2Name" text="Name of the draw" />
       <Button fx:id="buttonDraw2SaveResults" mnemonicParsing="false" text="Save Draw Results" />
+      <Label fx:id="labelDraw2SavedDescription" text="Draw saved description" />
    </children>
 </VBox>

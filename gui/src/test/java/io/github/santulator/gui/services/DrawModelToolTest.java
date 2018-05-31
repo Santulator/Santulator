@@ -36,6 +36,12 @@ public class DrawModelToolTest {
     }
 
     @Test
+    public void testDrawFailed() {
+        model.setDrawFailed(true);
+        validate(true, false, true);
+    }
+
+    @Test
     public void testDrawPerformedSecondScreen() {
         model.setDrawSelection(DRAW_SELECTION);
         model.setDrawWizardPage(DrawWizardPage.SAVE_RESULTS);

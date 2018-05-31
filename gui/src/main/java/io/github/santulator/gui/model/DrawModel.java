@@ -12,6 +12,10 @@ public class DrawModel {
 
     private final SimpleObjectProperty<DrawSelection> drawSelection = new SimpleObjectProperty<>();
 
+    private final SimpleStringProperty drawResultDescription = new SimpleStringProperty();
+
+    private final SimpleBooleanProperty drawFailed = new SimpleBooleanProperty();
+
     private final SimpleBooleanProperty drawPerformed = new SimpleBooleanProperty();
 
     private final SimpleObjectProperty<Path> directory = new SimpleObjectProperty<>();
@@ -21,6 +25,8 @@ public class DrawModel {
     private final SimpleObjectProperty<DrawWizardPage> drawWizardPage = new SimpleObjectProperty<>(DrawWizardPage.RUN_DRAW);
 
     private final SimpleBooleanProperty blockNext = new SimpleBooleanProperty();
+
+    private final SimpleStringProperty savedDrawDescription = new SimpleStringProperty();
 
     public DrawModel(final String drawName) {
         this.drawName = new SimpleStringProperty(drawName);
@@ -80,5 +86,29 @@ public class DrawModel {
 
     public boolean isBlockNext() {
         return blockNext.get();
+    }
+
+    public void setDrawResultDescription(final String drawResultDescription) {
+        this.drawResultDescription.set(drawResultDescription);
+    }
+
+    public SimpleStringProperty drawResultDescriptionProperty() {
+        return drawResultDescription;
+    }
+
+    public void setDrawFailed(final boolean drawFailed) {
+        this.drawFailed.set(drawFailed);
+    }
+
+    public SimpleBooleanProperty drawFailedProperty() {
+        return drawFailed;
+    }
+
+    public void setSavedDrawDescription(final String savedDrawDescription) {
+        this.savedDrawDescription.set(savedDrawDescription);
+    }
+
+    public SimpleStringProperty savedDrawDescriptionProperty() {
+        return savedDrawDescription;
     }
 }

@@ -22,12 +22,19 @@ import java.nio.file.Path;
 import java.util.function.Supplier;
 import javax.inject.Inject;
 
+import static io.github.santulator.session.FileNameTool.filename;
+
 public class Draw2Controller implements DrawController {
+    private static final String TEMPLATE_RESULTS_SAVED = "Draw results saved to directory '%s'.";
+
     @FXML
     private Label labelDraw2Name;
 
     @FXML
     private Button buttonDraw2SaveResults;
+
+    @FXML
+    private Label labelDraw2SavedDescription;
 
     private static final Logger LOG = LoggerFactory.getLogger(Draw2Controller.class);
 
@@ -60,6 +67,7 @@ public class Draw2Controller implements DrawController {
         this.drawModel = drawModel;
         this.windowSupplier = windowSupplier;
         labelDraw2Name.textProperty().bind(drawModel.drawNameProperty());
+        labelDraw2SavedDescription.textProperty().bind(drawModel.savedDrawDescriptionProperty());
         buttonDraw2SaveResults.setOnAction(e -> processSaveResults());
         buttonDraw2SaveResults.disableProperty().bind(drawModel.drawSavedProperty());
     }
@@ -105,5 +113,6 @@ public class Draw2Controller implements DrawController {
 
     private void markResultsSaved(final Path directory) {
         drawModel.setDirectory(directory);
+        drawModel.setSavedDrawDescription(String.format(TEMPLATE_RESULTS_SAVED, filename(directory)));
     }
 }
