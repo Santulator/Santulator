@@ -22,6 +22,7 @@ import static io.github.santulator.gui.common.GuiConstants.*;
 import static io.github.santulator.gui.view.ParticipantCell.*;
 import static io.github.santulator.session.TestSessionStateTool.*;
 import static org.testfx.api.FxAssert.verifyThat;
+import static org.testfx.matcher.base.NodeMatchers.isVisible;
 import static org.testfx.matcher.control.ListViewMatchers.hasItems;
 import static org.testfx.util.NodeQueryUtils.*;
 
@@ -146,7 +147,24 @@ public class GuiTestSteps {
         });
     }
 
-    public void part4WebLinks() {
+    public void part4AboutDialogue() {
+        step("Open About dialogue", () -> {
+            robot.clickOn("#menuHelp");
+            robot.clickOn("#menuAbout");
+            verifyThat("#aboutDialogue", isVisible());
+        });
+
+        step("Open website from About dialogue", () -> {
+            robot.clickOn("#linkWebsite");
+            validator.validateWebPage(WEBSITE);
+        });
+
+        step("Close About dialogue", () -> {
+            robot.clickOn("#buttonClose");
+        });
+    }
+
+    public void part5WebLinks() {
         step("Open website", () -> {
             robot.clickOn("#menuHelp");
             robot.clickOn("#menuWebsite");
@@ -166,7 +184,7 @@ public class GuiTestSteps {
         });
     }
 
-    public void part5Exit() {
+    public void part6Exit() {
         step("Reopen the saved session", () -> {
             validator.setUpFileDialogue(FileDialogueType.OPEN_SESSION, FileFormatType.SESSION, sessionFile);
             robot.clickOn("#buttonOpen");

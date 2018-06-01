@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Open Source Software published under the Apache Licence, Version 2.0.
+  -->
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<Pane fx:id="aboutDialogue" styleClass="about" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.santulator.gui.controller.AboutController">
+    <children>
+        <BorderPane>
+            <top>
+                <Text styleClass="title" text="Santulator" />
+            </top>
+            <right>
+                <Button fx:id="buttonClose" mnemonicParsing="false" text="Close" BorderPane.alignment="BOTTOM_RIGHT" />
+            </right>
+            <left>
+                <VBox>
+                    <children>
+                        <Label text="Santulator is Open Source Software,&#10;published under the Apache Licence, Version 2.0." />
+                        <Label fx:id="labelVersion" text="Santulator Version: %s." />
+                        <Label text="Copyright (c) 2018 Adam Carroll." />
+                        <Hyperlink fx:id="linkWebsite" text="https://santulator.github.io/" styleClass="website" >
+                            <!-- TODO Add the website icon here -->
+                        </Hyperlink>
+                        <Hyperlink fx:id="linkTwitter" text="\@vocabhunterapp" styleClass="twitter" >
+                            <!-- TODO Add the twitter icon here -->
+                        </Hyperlink>
+                    </children>
+                </VBox>
+            </left>
+        </BorderPane>
+    </children>
+</Pane>

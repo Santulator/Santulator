@@ -13,7 +13,8 @@ public enum ViewFxml {
     MAIN("main.fxml"),
     SESSION("session.fxml"),
     DRAW_1("draw-1.fxml"),
-    DRAW_2("draw-2.fxml");
+    DRAW_2("draw-2.fxml"),
+    ABOUT("about.fxml");
 
     private final String name;
 

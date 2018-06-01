@@ -48,6 +48,9 @@ public class MainController {
     private MenuItem menuIssue;
 
     @FXML
+    private MenuItem menuAbout;
+
+    @FXML
     private Button buttonNew;
 
     @FXML
@@ -92,10 +95,12 @@ public class MainController {
 
     private final DrawHandler drawHandler;
 
+    private final AboutHandler aboutHandler;
+
     @Inject
     public MainController(final StatusManager statusManager, final MainModel model, final StatusModel statusModel, final EnvironmentManager environmentManager,
         final WebPageTool webPageTool, final SessionStateHandler sessionStateHandler, final GuiFileHandler guiFileHandler, final ExitRequestHandler exitRequestHandler,
-        final DrawHandler drawHandler) {
+        final DrawHandler drawHandler, final AboutHandler aboutHandler) {
         this.statusManager = statusManager;
         this.model = model;
         this.statusModel = statusModel;
@@ -105,6 +110,7 @@ public class MainController {
         this.guiFileHandler = guiFileHandler;
         this.exitRequestHandler = exitRequestHandler;
         this.drawHandler = drawHandler;
+        this.aboutHandler = aboutHandler;
     }
 
     public void initialise(final Stage stage) {
@@ -121,6 +127,7 @@ public class MainController {
         menuWebsite.setOnAction(e -> webPageTool.showWebPage(GuiConstants.WEBSITE));
         menuHowTo.setOnAction(e -> webPageTool.showWebPage(GuiConstants.WEBPAGE_HELP));
         menuIssue.setOnAction(e -> webPageTool.showWebPage(GuiConstants.WEBPAGE_ISSUE));
+        menuAbout.setOnAction(e -> processAbout());
 
         menuBar.setUseSystemMenuBar(environmentManager.useSystemMenuBar());
 
@@ -146,6 +153,17 @@ public class MainController {
 
         button.setOnAction(handler);
         menuItem.setOnAction(handler);
+    }
+
+    private void processAbout() {
+        if (statusManager.beginAbout()) {
+            try {
+                aboutHandler.show();
+                statusManager.markSuccess();
+            } finally {
+                statusManager.completeAction();
+            }
+        }
     }
 
     public EventHandler<WindowEvent> getCloseRequestHandler() {
