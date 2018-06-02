@@ -10,6 +10,8 @@ import java.nio.file.Path;
 public class DrawModel {
     private final SimpleStringProperty drawName;
 
+    private final SimpleBooleanProperty drawStarted = new SimpleBooleanProperty();
+
     private final SimpleObjectProperty<DrawSelection> drawSelection = new SimpleObjectProperty<>();
 
     private final SimpleStringProperty drawResultDescription = new SimpleStringProperty();
@@ -34,6 +36,14 @@ public class DrawModel {
 
     public SimpleStringProperty drawNameProperty() {
         return drawName;
+    }
+
+    public SimpleBooleanProperty drawStartedProperty() {
+        return drawStarted;
+    }
+
+    public void setDrawStarted(final boolean drawStarted) {
+        this.drawStarted.set(drawStarted);
     }
 
     public void setDrawSelection(final DrawSelection drawSelection) {

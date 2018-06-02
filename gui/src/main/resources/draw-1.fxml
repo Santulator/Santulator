@@ -2,12 +2,19 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="drawWizardPage1" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0" fx:controller="io.github.santulator.gui.controller.Draw1Controller">
+<VBox fx:id="drawWizardPage1" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.santulator.gui.controller.Draw1Controller">
    <children>
       <Label fx:id="labelDraw1Name" text="Name of the draw" />
-      <Button fx:id="buttonDraw1RunDraw" mnemonicParsing="false" text="Run The Draw" />
+      <HBox>
+         <children>
+            <Button fx:id="buttonDraw1RunDraw" mnemonicParsing="false" text="Run The Draw" />
+            <ProgressBar fx:id="barDraw1Progress" progress="0.0" />
+         </children>
+      </HBox>
       <Label fx:id="labelDraw1Result" text="Draw result description" />
    </children>
 </VBox>
