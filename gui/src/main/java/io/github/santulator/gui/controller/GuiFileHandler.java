@@ -64,9 +64,19 @@ public class GuiFileHandler {
         }
     }
 
+    public void handleOpenSession(final Path file) {
+        if (statusManager.beginOpenSession()) {
+            guiTaskHandler.pauseThenExecuteOnGuiThread(() -> processOpenSession(file));
+        }
+    }
+
     private void processOpenSession() {
         Path file = checkUnsavedChangesAndChooseFile(FileDialogueType.OPEN_SESSION);
 
+        processOpenSession(file);
+    }
+
+    private void processOpenSession(final Path file) {
         if (file == null) {
             statusManager.completeAction();
         } else {

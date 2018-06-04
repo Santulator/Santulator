@@ -113,7 +113,7 @@ public class GuiTest extends FxRobot implements GuiTestValidator {
                 bind(GuiTaskHandler.class).to(GuiTaskHandlerForTesting.class);
             }
         };
-        SantulatorGuiExecutable.setModules(coreModule, testModule, new WriterModule(ENGLISH));
+        SantulatorGuiExecutable.setModules(coreModule, testModule, new WriterModule(ENGLISH), new StandardEventSourceModule());
 
         executable = (SantulatorGuiExecutable) setupApplication(SantulatorGuiExecutable.class);
     }
