@@ -5,6 +5,7 @@ import io.github.santulator.core.SantaException;
 import io.github.santulator.engine.DrawService;
 import io.github.santulator.gui.model.DrawModel;
 import io.github.santulator.gui.model.MainModel;
+import io.github.santulator.gui.services.Progressometer;
 import io.github.santulator.gui.services.SessionModelTool;
 import io.github.santulator.model.DrawRequirements;
 import io.github.santulator.model.DrawSelection;
@@ -25,10 +26,6 @@ public class Draw1Controller implements DrawController {
     private static final String TEMPLATE_FAILURE = "Draw failed: %s.";
 
     private static final String TEMPLATE_SUCCESS = "Draw complete: %d gifts will be given.";
-
-    private static final int PROGRESS_WAIT = 1_000;
-
-    private static final int PROGRESS_TICKS = 100;
 
     private static final Logger LOG = LoggerFactory.getLogger(Draw1Controller.class);
 
@@ -52,70 +49,52 @@ public class Draw1Controller implements DrawController {
 
     private final SessionModelTool sessionModelTool;
 
+    private final Progressometer progressometer;
+
     private final MainModel mainModel;
 
     private DrawModel drawModel;
 
     @Inject
     public Draw1Controller(final GuiTaskHandler guiTaskHandler, final DrawService drawService, final SessionStateTranslator translator,
-        final SessionModelTool sessionModelTool, final MainModel mainModel) {
+        final SessionModelTool sessionModelTool, final Progressometer progressometer, final MainModel mainModel) {
         this.guiTaskHandler = guiTaskHandler;
         this.drawService = drawService;
         this.translator = translator;
         this.sessionModelTool = sessionModelTool;
         this.mainModel = mainModel;
+        this.progressometer = progressometer;
     }
 
     @Override
     public void initialise(final DrawModel drawModel, final Supplier<Window> windowSupplier) {
         this.drawModel = drawModel;
         labelDraw1Name.textProperty().bind(drawModel.drawNameProperty());
-        labelDraw1Result.textProperty().bind(drawModel.drawResultDescriptionProperty());
+        labelDraw1Result.textProperty().bind(drawModel.completedDrawDescriptionProperty());
         buttonDraw1RunDraw.setOnAction(e -> runDraw());
         buttonDraw1RunDraw.disableProperty().bind(drawModel.drawStartedProperty());
+        barDraw1Progress.progressProperty().bind(progressometer.progressProperty());
+        drawModel.drawPerformedProperty().bind(progressometer.completeProperty());
     }
 
     private void runDraw() {
-        long start = System.currentTimeMillis();
-
         drawModel.setDrawStarted(true);
-        guiTaskHandler.executeInBackground(() -> runDrawAsynchronous(start));
+        progressometer.start(1);
+        guiTaskHandler.executeInBackground(this::runDrawAsynchronous);
     }
 
-    private void runDrawAsynchronous(final long start) {
+    private void runDrawAsynchronous() {
         try {
             SessionState state = sessionModelTool.buildFileModel(mainModel.getSessionModel());
             DrawRequirements requirements = translator.toRequirements(state);
             DrawSelection selection = drawService.draw(requirements);
 
-            updateDrawProgress(start);
             guiTaskHandler.executeOnGuiThread(() -> reportDrawSuccess(selection));
         } catch (final SantaException e) {
             LOG.debug("Draw failed", e);
             guiTaskHandler.executeOnGuiThread(() -> reportDrawFailure(e));
-        }
-    }
-
-    private void updateDrawProgress(final long start) {
-        for (int i = 0; i < PROGRESS_TICKS  && !Thread.interrupted(); ++i) {
-            double progress = (i + 1.0) / PROGRESS_TICKS;
-
-            pauseProgress(start, i);
-            guiTaskHandler.executeOnGuiThread(() -> barDraw1Progress.setProgress(progress));
-        }
-    }
-
-    private void pauseProgress(final long start, final int i) {
-        try {
-            long now = System.currentTimeMillis();
-            long wait = (PROGRESS_WAIT / PROGRESS_TICKS) * (i + 1) + start - now;
-
-            if (wait > 0) {
-                Thread.sleep(wait);
-            }
-        } catch (final InterruptedException e) {
-            LOG.debug("Thread woken unexpectedly", e);
-            Thread.currentThread().interrupt();
+        } finally {
+            progressometer.completeTask();
         }
     }
 

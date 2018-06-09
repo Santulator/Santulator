@@ -4,11 +4,13 @@
 
 package io.github.santulator.gui.main;
 
+import io.github.santulator.core.SantaException;
 import io.github.santulator.gui.dialogues.FileDialogueType;
 import io.github.santulator.gui.dialogues.FileFormatType;
 import io.github.santulator.gui.model.SessionModel;
 import io.github.santulator.test.TestFileManager;
 import javafx.application.Platform;
+import javafx.beans.value.ObservableBooleanValue;
 import javafx.scene.Node;
 import javafx.scene.control.TextInputControl;
 import org.slf4j.Logger;
@@ -17,6 +19,8 @@ import org.testfx.api.FxRobot;
 import org.testfx.service.query.NodeQuery;
 
 import java.nio.file.Path;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import static io.github.santulator.gui.common.GuiConstants.*;
 import static io.github.santulator.gui.view.ParticipantCell.*;
@@ -24,7 +28,8 @@ import static io.github.santulator.session.TestSessionStateTool.*;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
 import static org.testfx.matcher.control.ListViewMatchers.hasItems;
-import static org.testfx.util.NodeQueryUtils.*;
+import static org.testfx.util.NodeQueryUtils.hasText;
+import static org.testfx.util.WaitForAsyncUtils.waitFor;
 
 public class GuiTestSteps {
     private static final Logger LOG = LoggerFactory.getLogger(GuiTestSteps.class);
@@ -127,6 +132,7 @@ public class GuiTestSteps {
 
         step("Run the draw", () -> {
             robot.clickOn("#buttonDraw1RunDraw");
+            waitUntilEnabled("Next");
             verifyThat("#labelDraw1Result", hasText("Draw complete: 3 gifts will be given."));
         });
 
@@ -222,6 +228,16 @@ public class GuiTestSteps {
 
     private Node participantNode(final String style, final int index) {
         return robot.lookup("." + style).nth(index).query();
+    }
+
+    private void waitUntilEnabled(final String query) {
+        try {
+            ObservableBooleanValue property = robot.lookup(query).query().disableProperty().not();
+
+            waitFor(10, TimeUnit.SECONDS, property);
+        } catch (TimeoutException e) {
+            throw new SantaException(String.format("Timeout waiting for '%s'", query), e);
+        }
     }
 
     private void clearField(final String query) {

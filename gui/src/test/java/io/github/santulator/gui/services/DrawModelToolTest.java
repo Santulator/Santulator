@@ -2,18 +2,16 @@ package io.github.santulator.gui.services;
 
 import io.github.santulator.gui.model.DrawModel;
 import io.github.santulator.gui.model.DrawWizardPage;
-import io.github.santulator.model.DrawSelection;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DrawModelToolTest {
-    private static final DrawSelection DRAW_SELECTION = new DrawSelection(Collections.emptyList());
+    private static final String RESULT_DESCRIPTION = "RESULT_DESCRIPTION";
 
     private static final Path DIRECTORY = Paths.get("test");
 
@@ -26,39 +24,50 @@ public class DrawModelToolTest {
 
     @Test
     public void testInitial() {
-        validate(false, false, true);
+        validate(false, true, "");
+    }
+
+    @Test
+    public void testDesriptionBeforeDrawComplete() {
+        model.setDrawResultDescription(RESULT_DESCRIPTION);
+        validate(false, true, "");
     }
 
     @Test
     public void testDrawPerformedFirstScreen() {
-        model.setDrawSelection(DRAW_SELECTION);
-        validate(true, false, false);
+        model.setDrawResultDescription(RESULT_DESCRIPTION);
+        model.setDrawPerformed(true);
+        validate(false, false, RESULT_DESCRIPTION);
     }
 
     @Test
     public void testDrawFailed() {
+        model.setDrawResultDescription(RESULT_DESCRIPTION);
         model.setDrawFailed(true);
-        validate(true, false, true);
+        model.setDrawPerformed(true);
+        validate(false, true, RESULT_DESCRIPTION);
     }
 
     @Test
     public void testDrawPerformedSecondScreen() {
-        model.setDrawSelection(DRAW_SELECTION);
+        model.setDrawResultDescription(RESULT_DESCRIPTION);
+        model.setDrawPerformed(true);
         model.setDrawWizardPage(DrawWizardPage.SAVE_RESULTS);
-        validate(true, false, true);
+        validate(false, true, RESULT_DESCRIPTION);
     }
 
     @Test
     public void testResultsSaved() {
-        model.setDrawSelection(DRAW_SELECTION);
+        model.setDrawResultDescription(RESULT_DESCRIPTION);
+        model.setDrawPerformed(true);
         model.setDirectory(DIRECTORY);
         model.setDrawWizardPage(DrawWizardPage.SAVE_RESULTS);
-        validate(true, true, false);
+        validate(true, false, RESULT_DESCRIPTION);
     }
 
-    private void validate(final boolean isDrawPerformed, final boolean isDrawSaved, final boolean isNextBlocked) {
-        assertEquals(isDrawPerformed, model.isDrawPerformed());
+    private void validate(final boolean isDrawSaved, final boolean isNextBlocked, final String description) {
         assertEquals(isDrawSaved, model.isDrawSaved());
         assertEquals(isNextBlocked, model.isBlockNext());
+        assertEquals(description, model.getCompletedDrawDescription());
     }
 }

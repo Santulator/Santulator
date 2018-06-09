@@ -9,11 +9,14 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.inject.Singleton;
 
 @Singleton
 public class ThreadPoolToolImpl implements ThreadPoolTool {
+    private static final int CORE_POOL_SIZE = 3;
+
     private final List<ExecutorService> services = new ArrayList<>();
 
     @Override
@@ -23,6 +26,15 @@ public class ThreadPoolToolImpl implements ThreadPoolTool {
         services.add(executor);
 
         return executor;
+    }
+
+    @Override
+    public ScheduledExecutorService guiThreadPool() {
+        ScheduledExecutorService service = Executors.newScheduledThreadPool(CORE_POOL_SIZE, r -> newDaemonThread(r, "gui-background-worker"));
+
+        services.add(service);
+
+        return service;
     }
 
     @Override

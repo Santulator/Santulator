@@ -16,6 +16,8 @@ public class DrawModel {
 
     private final SimpleStringProperty drawResultDescription = new SimpleStringProperty();
 
+    private final SimpleStringProperty completedDrawDescription = new SimpleStringProperty();
+
     private final SimpleBooleanProperty drawFailed = new SimpleBooleanProperty();
 
     private final SimpleBooleanProperty drawPerformed = new SimpleBooleanProperty();
@@ -54,16 +56,12 @@ public class DrawModel {
         return drawSelection.get();
     }
 
-    public SimpleObjectProperty<DrawSelection> drawSelectionProperty() {
-        return drawSelection;
-    }
-
     public SimpleBooleanProperty drawPerformedProperty() {
         return drawPerformed;
     }
 
-    public boolean isDrawPerformed() {
-        return drawPerformed.get();
+    public void setDrawPerformed(final boolean drawPerformed) {
+        this.drawPerformed.set(drawPerformed);
     }
 
     public void setDirectory(final Path directory) {
@@ -104,6 +102,14 @@ public class DrawModel {
 
     public SimpleStringProperty drawResultDescriptionProperty() {
         return drawResultDescription;
+    }
+
+    public SimpleStringProperty completedDrawDescriptionProperty() {
+        return completedDrawDescription;
+    }
+
+    public String getCompletedDrawDescription() {
+        return completedDrawDescription.get();
     }
 
     public void setDrawFailed(final boolean drawFailed) {

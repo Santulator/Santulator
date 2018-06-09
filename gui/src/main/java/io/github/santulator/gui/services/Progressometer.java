@@ -1,0 +1,68 @@
+package io.github.santulator.gui.services;
+
+import io.github.santulator.core.ThreadPoolTool;
+import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+import javax.inject.Inject;
+
+public class Progressometer {
+    private static final int PROGRESS_WAIT = 1_000;
+
+    private static final int PROGRESS_TICKS = 100;
+
+    private final ThreadPoolTool threadPoolTool;
+
+    private final AtomicInteger completedCount = new AtomicInteger();
+
+    private final ProgressSequencer sequencer;
+
+    private final DoubleProperty progress = new SimpleDoubleProperty();
+
+    private final BooleanProperty complete = new SimpleBooleanProperty();
+
+    private ScheduledFuture<?> future;
+
+    @Inject
+    public Progressometer(final ThreadPoolTool threadPoolTool, final ProgressSequencer sequencer) {
+        this.threadPoolTool = threadPoolTool;
+        this.sequencer = sequencer;
+    }
+
+    public void start(final int size) {
+        ScheduledExecutorService executor = threadPoolTool.guiThreadPool();
+        int betweenTicks = PROGRESS_WAIT / PROGRESS_TICKS;
+        ProgressState state = new ProgressState(sequencer.sequence(size));
+
+        future = executor.scheduleAtFixedRate(() -> executeTick(state), betweenTicks, betweenTicks, TimeUnit.MILLISECONDS);
+    }
+
+    public void completeTask() {
+        completedCount.incrementAndGet();
+    }
+
+    private void executeTick(final ProgressState state) {
+        int tick = state.tick(completedCount.get());
+
+        if (state.isComplete()) {
+            future.cancel(true);
+            Platform.runLater(() -> complete.set(true));
+        }
+        Platform.runLater(() -> progress.set((double) tick / PROGRESS_TICKS));
+    }
+
+    public DoubleProperty progressProperty() {
+        return progress;
+    }
+
+    public BooleanProperty completeProperty() {
+        return complete;
+    }
+}

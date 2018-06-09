@@ -3,6 +3,7 @@ package io.github.santulator.gui.services;
 import io.github.santulator.gui.model.DrawModel;
 import io.github.santulator.gui.model.DrawWizardPage;
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.binding.StringBinding;
 import javafx.beans.property.SimpleBooleanProperty;
 
 import static javafx.beans.binding.Bindings.*;
@@ -17,7 +18,6 @@ public final class DrawModelTool {
         SimpleBooleanProperty drawSaved = model.drawSavedProperty();
         SimpleBooleanProperty drawFailed = model.drawFailedProperty();
 
-        drawPerformed.bind(isNotNull(model.drawSelectionProperty()).or(drawFailed));
         drawSaved.bind(isNotNull(model.directoryProperty()));
 
         BooleanBinding nextAllowed = when(equal(model.drawWizardPageProperty(), DrawWizardPage.RUN_DRAW))
@@ -25,5 +25,10 @@ public final class DrawModelTool {
             .otherwise(drawSaved)
             .and(drawFailed.not());
         model.blockNextProperty().bind(nextAllowed.not());
+
+        StringBinding completedDrawDescription = when(model.drawPerformedProperty())
+            .then(model.drawResultDescriptionProperty())
+            .otherwise("");
+        model.completedDrawDescriptionProperty().bind(completedDrawDescription);
     }
 }
