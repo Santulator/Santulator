@@ -18,8 +18,6 @@ public final class DrawModelTool {
         SimpleBooleanProperty drawSaved = model.drawSavedProperty();
         SimpleBooleanProperty drawFailed = model.drawFailedProperty();
 
-        drawSaved.bind(isNotNull(model.directoryProperty()));
-
         BooleanBinding nextAllowed = when(equal(model.drawWizardPageProperty(), DrawWizardPage.RUN_DRAW))
             .then(drawPerformed)
             .otherwise(drawSaved)
@@ -30,5 +28,10 @@ public final class DrawModelTool {
             .then(model.drawResultDescriptionProperty())
             .otherwise("");
         model.completedDrawDescriptionProperty().bind(completedDrawDescription);
+
+        StringBinding completedSaveDescription = when(model.drawSavedProperty())
+            .then(model.savedDrawDescriptionProperty())
+            .otherwise("");
+        model.completedSaveDescriptionProperty().bind(completedSaveDescription);
     }
 }

@@ -144,6 +144,7 @@ public class GuiTestSteps {
         step("Save the draw results", () -> {
             validator.setUpFileDialogue(FileDialogueType.RUN_DRAW, FileFormatType.DRAW, drawDirectory);
             robot.clickOn("#buttonDraw2SaveResults");
+            waitUntilEnabled("Finish ");
             verifyThat("#labelDraw2SavedDescription", hasText("Draw results saved to directory 'draw'."));
             validator.validateDraw(drawDirectory, "Albert.pdf", "Beryl.pdf", "Carla.pdf");
         });

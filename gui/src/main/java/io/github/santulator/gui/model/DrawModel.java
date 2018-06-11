@@ -32,6 +32,8 @@ public class DrawModel {
 
     private final SimpleStringProperty savedDrawDescription = new SimpleStringProperty();
 
+    private final SimpleStringProperty completedSaveDescription = new SimpleStringProperty();
+
     public DrawModel(final String drawName) {
         this.drawName = new SimpleStringProperty(drawName);
     }
@@ -68,16 +70,12 @@ public class DrawModel {
         this.directory.set(directory);
     }
 
-    public SimpleObjectProperty<Path> directoryProperty() {
-        return directory;
-    }
-
     public SimpleBooleanProperty drawSavedProperty() {
         return drawSaved;
     }
 
-    public boolean isDrawSaved() {
-        return drawSaved.get();
+    public void setDrawSaved(final boolean drawSaved) {
+        this.drawSaved.set(drawSaved);
     }
 
     public void setDrawWizardPage(final DrawWizardPage drawWizardPage) {
@@ -126,5 +124,13 @@ public class DrawModel {
 
     public SimpleStringProperty savedDrawDescriptionProperty() {
         return savedDrawDescription;
+    }
+
+    public SimpleStringProperty completedSaveDescriptionProperty() {
+        return completedSaveDescription;
+    }
+
+    public String getCompletedSaveDescription() {
+        return completedSaveDescription.get();
     }
 }

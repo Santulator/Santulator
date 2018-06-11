@@ -36,22 +36,23 @@ public class DrawSelectionWriterImpl implements DrawSelectionWriter {
 
     @Override
     public void writeDrawSelection(final DrawSelection selection, final Path dir) {
-        writeDrawSelection(selection, dir, presetPassword);
+        writeDrawSelection(selection, dir, presetPassword, this::emptyOnWriteComplete);
     }
 
     @Override
-    public void writeDrawSelection(final DrawSelection selection, final Path dir, final String password) {
+    public void writeDrawSelection(final DrawSelection selection, final Path dir, final String password, final Runnable onWriteComplete) {
         mkdir(dir);
         selection.getGivers()
-            .forEach(assignment -> writeGiverAssignment(dir, assignment, password));
+            .forEach(assignment -> writeGiverAssignment(dir, assignment, password, onWriteComplete));
     }
 
-    private void writeGiverAssignment(final Path dir, final GiverAssignment assignment, final String password) {
+    private void writeGiverAssignment(final Path dir, final GiverAssignment assignment, final String password, final Runnable onWriteComplete) {
         String name = assignment.getFrom().getName() + writer.getFormatSuffix();
         Path file = dir.resolve(name);
 
         try (OutputStream out = Files.newOutputStream(file)) {
             writer.writeGiverAssignment(name, assignment, out, password);
+            onWriteComplete.run();
         } catch (IOException e) {
             throw new SantaException(String.format(ERROR_ASSIGNMENT, file), e);
         }
@@ -63,5 +64,9 @@ public class DrawSelectionWriterImpl implements DrawSelectionWriter {
         } catch (IOException e) {
             throw new SantaException(String.format(ERROR_DIR, dir), e);
         }
+    }
+
+    private void emptyOnWriteComplete() {
+        // No work required
     }
 }
