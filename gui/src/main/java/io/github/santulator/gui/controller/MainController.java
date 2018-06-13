@@ -4,8 +4,8 @@ import io.github.santulator.gui.common.GuiConstants;
 import io.github.santulator.gui.event.ExternalEventBroker;
 import io.github.santulator.gui.model.MainModel;
 import io.github.santulator.gui.model.StatusModel;
+import io.github.santulator.gui.services.DesktopResourceTool;
 import io.github.santulator.gui.services.EnvironmentManager;
-import io.github.santulator.gui.services.WebPageTool;
 import io.github.santulator.gui.status.StatusManager;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -86,7 +86,7 @@ public class MainController {
 
     private final EnvironmentManager environmentManager;
 
-    private final WebPageTool webPageTool;
+    private final DesktopResourceTool desktopResourceTool;
 
     private final SessionStateHandler sessionStateHandler;
 
@@ -102,13 +102,13 @@ public class MainController {
 
     @Inject
     public MainController(final StatusManager statusManager, final MainModel model, final StatusModel statusModel, final EnvironmentManager environmentManager,
-        final WebPageTool webPageTool, final SessionStateHandler sessionStateHandler, final GuiFileHandler guiFileHandler, final ExitRequestHandler exitRequestHandler,
-        final DrawHandler drawHandler, final AboutHandler aboutHandler, final ExternalEventBroker externalEventSource) {
+        final DesktopResourceTool desktopResourceTool, final SessionStateHandler sessionStateHandler, final GuiFileHandler guiFileHandler,
+        final ExitRequestHandler exitRequestHandler, final DrawHandler drawHandler, final AboutHandler aboutHandler, final ExternalEventBroker externalEventSource) {
         this.statusManager = statusManager;
         this.model = model;
         this.statusModel = statusModel;
         this.environmentManager = environmentManager;
-        this.webPageTool = webPageTool;
+        this.desktopResourceTool = desktopResourceTool;
         this.sessionStateHandler = sessionStateHandler;
         this.guiFileHandler = guiFileHandler;
         this.exitRequestHandler = exitRequestHandler;
@@ -128,9 +128,9 @@ public class MainController {
         handler(menuSaveAs, guiFileHandler::handleSaveAs);
         handler(buttonRunDraw, menuRunDraw, drawHandler::handleRunDraw);
 
-        menuWebsite.setOnAction(e -> webPageTool.showWebPage(GuiConstants.WEBSITE));
-        menuHowTo.setOnAction(e -> webPageTool.showWebPage(GuiConstants.WEBPAGE_HELP));
-        menuIssue.setOnAction(e -> webPageTool.showWebPage(GuiConstants.WEBPAGE_ISSUE));
+        menuWebsite.setOnAction(e -> desktopResourceTool.showWebPage(GuiConstants.WEBSITE));
+        menuHowTo.setOnAction(e -> desktopResourceTool.showWebPage(GuiConstants.WEBPAGE_HELP));
+        menuIssue.setOnAction(e -> desktopResourceTool.showWebPage(GuiConstants.WEBPAGE_ISSUE));
         menuAbout.setOnAction(e -> processAbout());
 
         externalEventSource.setListener(e -> guiFileHandler.handleOpenSession(e.getFile()));

@@ -43,12 +43,13 @@ public class DrawHandler {
         DrawModel drawModel = new DrawModel(mainModel.getDrawName());
         WizardPane wizardPane1 = buildWizardPane(ViewFxml.DRAW_1, drawModel, DrawWizardPage.RUN_DRAW);
         WizardPane wizardPane2 = buildWizardPane(ViewFxml.DRAW_2, drawModel, DrawWizardPage.SAVE_RESULTS);
+        WizardPane wizardPane3 = buildWizardPane(ViewFxml.DRAW_3, drawModel, DrawWizardPage.OPEN_RESULTS);
         Wizard wizard = new Wizard();
 
         DrawModelTool.createBindings(drawModel);
         wizard.invalidProperty().bind(drawModel.blockNextProperty());
 
-        wizard.setFlow(new Wizard.LinearFlow(wizardPane1, wizardPane2));
+        wizard.setFlow(new Wizard.LinearFlow(wizardPane1, wizardPane2, wizardPane3));
         wizard.showAndWait();
     }
 

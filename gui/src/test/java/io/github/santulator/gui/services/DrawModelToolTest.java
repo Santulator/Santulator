@@ -32,20 +32,28 @@ public class DrawModelToolTest {
 
     @Test
     public void testDescriptionBeforeDrawComplete() {
-        model.setDrawResultDescription(RESULT_DESCRIPTION);
+        prepareDescriptionBeforeDrawComplete();
         validate(true, "", "");
+    }
+
+    private void prepareDescriptionBeforeDrawComplete() {
+        model.setDrawResultDescription(RESULT_DESCRIPTION);
     }
 
     @Test
     public void testDrawPerformedFirstScreen() {
-        model.setDrawResultDescription(RESULT_DESCRIPTION);
-        model.setDrawPerformed(true);
+        prepareDrawPerformedFirstScreen();
         validate(false, RESULT_DESCRIPTION, "");
+    }
+
+    private void prepareDrawPerformedFirstScreen() {
+        prepareDescriptionBeforeDrawComplete();
+        model.setDrawPerformed(true);
     }
 
     @Test
     public void testDrawFailed() {
-        model.setDrawResultDescription(RESULT_DESCRIPTION);
+        prepareDescriptionBeforeDrawComplete();
         model.setDrawFailed(true);
         model.setDrawPerformed(true);
         validate(true, RESULT_DESCRIPTION, "");
@@ -53,30 +61,53 @@ public class DrawModelToolTest {
 
     @Test
     public void testDrawPerformedSecondScreen() {
-        model.setDrawResultDescription(RESULT_DESCRIPTION);
-        model.setDrawPerformed(true);
-        model.setDrawWizardPage(DrawWizardPage.SAVE_RESULTS);
+        prepareDrawPerformedSecondScreen();
         validate(true, RESULT_DESCRIPTION, "");
+    }
+
+    private void prepareDrawPerformedSecondScreen() {
+        prepareDrawPerformedFirstScreen();
+        model.setDrawWizardPage(DrawWizardPage.SAVE_RESULTS);
     }
 
     @Test
     public void testResultsSavedBeforeComplete() {
-        model.setDrawResultDescription(RESULT_DESCRIPTION);
-        model.setDrawPerformed(true);
-        model.setDirectory(DIRECTORY);
-        model.setDrawWizardPage(DrawWizardPage.SAVE_RESULTS);
-        model.setSavedDrawDescription(SAVED_DESCRIPTION);
+        prepareResultsSavedBeforeComplete();
         validate(true, RESULT_DESCRIPTION, "");
+    }
+
+    private void prepareResultsSavedBeforeComplete() {
+        prepareDrawPerformedSecondScreen();
+        model.setDirectory(DIRECTORY);
+        model.setSavedDrawDescription(SAVED_DESCRIPTION);
     }
 
     @Test
     public void testResultsSaved() {
-        model.setDrawResultDescription(RESULT_DESCRIPTION);
-        model.setDrawPerformed(true);
-        model.setDirectory(DIRECTORY);
-        model.setDrawWizardPage(DrawWizardPage.SAVE_RESULTS);
+        prepareResultsSaved();
+        validate(false, RESULT_DESCRIPTION, SAVED_DESCRIPTION);
+    }
+
+    private void prepareResultsSaved() {
+        prepareResultsSavedBeforeComplete();
         model.setDrawSaved(true);
-        model.setSavedDrawDescription(SAVED_DESCRIPTION);
+    }
+
+    @Test
+    public void testResultsDirectoryNotOpened() {
+        prepareResultsDirectoryNotOpened();
+        validate(true, RESULT_DESCRIPTION, SAVED_DESCRIPTION);
+    }
+
+    private void prepareResultsDirectoryNotOpened() {
+        prepareResultsSaved();
+        model.setDrawWizardPage(DrawWizardPage.OPEN_RESULTS);
+    }
+
+    @Test
+    public void testResultsDirectoryOpened() {
+        prepareResultsDirectoryNotOpened();
+        model.setResultsDirectoryOpened(true);
         validate(false, RESULT_DESCRIPTION, SAVED_DESCRIPTION);
     }
 

@@ -144,9 +144,19 @@ public class GuiTestSteps {
         step("Save the draw results", () -> {
             validator.setUpFileDialogue(FileDialogueType.RUN_DRAW, FileFormatType.DRAW, drawDirectory);
             robot.clickOn("#buttonDraw2SaveResults");
-            waitUntilEnabled("Finish ");
+            waitUntilEnabled("Next");
             verifyThat("#labelDraw2SavedDescription", hasText("Draw results saved to directory 'draw'."));
             validator.validateDraw(drawDirectory, "Albert.pdf", "Beryl.pdf", "Carla.pdf");
+        });
+
+        step("Move to wizard step 3", () -> {
+            robot.clickOn("Next");
+            verifyThat("#drawWizardPage3", isVisible());
+        });
+
+        step("Open the results directory", () -> {
+            robot.clickOn("#buttonDraw3Open");
+            validator.validateOpenPath(drawDirectory);
         });
 
         step("Close the draw wizard", () -> {

@@ -14,9 +14,9 @@ import io.github.santulator.gui.dialogues.FileDialogue;
 import io.github.santulator.gui.dialogues.FileDialogueFactory;
 import io.github.santulator.gui.dialogues.FileDialogueType;
 import io.github.santulator.gui.dialogues.FileFormatType;
+import io.github.santulator.gui.services.DesktopResourceTool;
 import io.github.santulator.gui.services.EnvironmentManager;
 import io.github.santulator.gui.services.PlacementManager;
-import io.github.santulator.gui.services.WebPageTool;
 import io.github.santulator.gui.settings.SettingsManager;
 import io.github.santulator.gui.settings.SettingsManagerImpl;
 import io.github.santulator.session.SessionSerialiser;
@@ -71,10 +71,13 @@ public class GuiTest extends FxRobot implements GuiTestValidator {
     private FileDialogue fileDialogue;
 
     @Mock
-    private WebPageTool webPageTool;
+    private DesktopResourceTool desktopResourceTool;
 
     @Captor
     private ArgumentCaptor<String> webPageCaptor;
+
+    @Captor
+    private ArgumentCaptor<Path> pathCaptor;
 
     private SantulatorGuiExecutable executable;
 
@@ -109,7 +112,7 @@ public class GuiTest extends FxRobot implements GuiTestValidator {
                 bind(FileDialogueFactory.class).toInstance(fileDialogueFactory);
                 bind(EnvironmentManager.class).toInstance(environmentManager);
                 bind(PlacementManager.class).toInstance(placementManager);
-                bind(WebPageTool.class).toInstance(webPageTool);
+                bind(DesktopResourceTool.class).toInstance(desktopResourceTool);
                 bind(GuiTaskHandler.class).to(GuiTaskHandlerForTesting.class);
             }
         };
@@ -154,8 +157,14 @@ public class GuiTest extends FxRobot implements GuiTestValidator {
 
     @Override
     public void validateWebPage(final String page) {
-        verify(webPageTool, atLeastOnce()).showWebPage(webPageCaptor.capture());
+        verify(desktopResourceTool, atLeastOnce()).showWebPage(webPageCaptor.capture());
         assertEquals(page, webPageCaptor.getValue(), "Website");
+    }
+
+    @Override
+    public void validateOpenPath(final Path path) {
+        verify(desktopResourceTool, atLeastOnce()).openPath(pathCaptor.capture());
+        assertEquals(path, pathCaptor.getValue(), "Path");
     }
 
     @Override

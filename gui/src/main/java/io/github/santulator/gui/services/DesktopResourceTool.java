@@ -4,6 +4,10 @@
 
 package io.github.santulator.gui.services;
 
-public interface WebPageTool {
+import java.nio.file.Path;
+
+public interface DesktopResourceTool {
     void showWebPage(final String page);
+
+    void openPath(final Path path);
 }

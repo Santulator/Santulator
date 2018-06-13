@@ -19,7 +19,7 @@ public class LiveGuiModule extends AbstractModule {
         bind(FileDialogueFactory.class).to(FileDialogueFactoryImpl.class);
         bind(PlacementManager.class).to(PlacementManagerImpl.class);
         bind(EnvironmentManager.class).to(EnvironmentManagerImpl.class);
-        bind(WebPageTool.class).to(WebPageToolImpl.class);
+        bind(DesktopResourceTool.class).to(DesktopResourceToolImpl.class);
         bind(GuiTaskHandler.class).to(GuiTaskHandlerImpl.class);
     }
 }

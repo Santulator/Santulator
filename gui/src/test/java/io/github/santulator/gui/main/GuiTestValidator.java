@@ -13,6 +13,8 @@ import java.nio.file.Path;
 public interface GuiTestValidator {
     void validateWebPage(final String page);
 
+    void validateOpenPath(final Path path);
+
     void validateSavedSession(Path file, final SessionState expected);
 
     void validateDraw(final Path directory, final String... names);

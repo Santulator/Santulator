@@ -9,6 +9,8 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.concurrent.ExecutorService;
 import java.util.function.Consumer;
 
@@ -17,8 +19,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class WebPageToolTest {
+public class DesktopResourceToolTest {
     private static final String WEB_PAGE = "WEB_PAGE";
+
+    private static final Path PATH = Paths.get("PATH");
 
     @Mock
     private ThreadPoolTool threadPoolTool;
@@ -29,15 +33,18 @@ public class WebPageToolTest {
     @Mock
     private Consumer<String> pageOpener;
 
+    @Mock
+    private Consumer<Path> pathOpener;
+
     @Captor
     private ArgumentCaptor<Runnable> captor;
 
-    private WebPageTool target;
+    private DesktopResourceTool target;
 
     @BeforeEach
     public void setUp() {
         when(threadPoolTool.singleDaemonExecutor(anyString())).thenReturn(executorService);
-        target = new WebPageToolImpl(threadPoolTool, pageOpener);
+        target = new DesktopResourceToolImpl(threadPoolTool, pageOpener, pathOpener);
     }
 
     @Test
@@ -46,5 +53,13 @@ public class WebPageToolTest {
         verify(executorService).execute(captor.capture());
         captor.getValue().run();
         verify(pageOpener).accept(WEB_PAGE);
+    }
+
+    @Test
+    public void testOpenPath() {
+        target.openPath(PATH);
+        verify(executorService).execute(captor.capture());
+        captor.getValue().run();
+        verify(pathOpener).accept(PATH);
     }
 }
