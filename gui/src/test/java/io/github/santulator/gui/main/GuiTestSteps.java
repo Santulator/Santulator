@@ -72,14 +72,15 @@ public class GuiTestSteps {
         step("Add Albert", () -> {
             robot.clickOn(participantNode(CLASS_FIELD_NAME, 0)).write("Albert");
             robot.clickOn(participantNode(CLASS_CHOICE_ROLE, 0)).clickOn("GIVER");
-            robot.clickOn(participantNode(CLASS_FIELD_EXCLUSIONS, 0)).write("Beryl, Carla");
+            robot.clickOn(participantNode(CLASS_FIELD_EXCLUSIONS, 0, 0)).write("Beryl");
+            robot.clickOn(participantNode(CLASS_FIELD_EXCLUSIONS, 0, 1)).write("Carla");
             verifyThat("#listParticipants", hasItems(2));
         });
 
         step("Add Beryl", () -> {
             robot.clickOn(participantNode(CLASS_BUTTON_ACTION, 1));
             robot.clickOn(participantNode(CLASS_FIELD_NAME, 1)).write("Beryl");
-            robot.clickOn(participantNode(CLASS_FIELD_EXCLUSIONS, 1)).write("David");
+            robot.clickOn(participantNode(CLASS_FIELD_EXCLUSIONS, 1, 0)).write("David");
             verifyThat("#listParticipants", hasItems(3));
         });
 
@@ -237,8 +238,12 @@ public class GuiTestSteps {
         LOG.info("STEP {}:   End - {}", stepNo, step);
     }
 
-    private Node participantNode(final String style, final int index) {
-        return robot.lookup("." + style).nth(index).query();
+    private Node participantNode(final String style, final int row, final int column) {
+        return participantNode(style + "_" + column, row);
+    }
+
+    private Node participantNode(final String style, final int row) {
+        return robot.lookup("." + style).nth(row).query();
     }
 
     private void waitUntilEnabled(final String query) {

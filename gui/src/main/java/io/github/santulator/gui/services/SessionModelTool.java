@@ -4,7 +4,6 @@
 
 package io.github.santulator.gui.services;
 
-import io.github.santulator.core.CsvTool;
 import io.github.santulator.gui.model.ParticipantModel;
 import io.github.santulator.gui.model.SessionModel;
 import io.github.santulator.session.ParticipantState;
@@ -14,7 +13,6 @@ import java.nio.file.Path;
 import java.util.List;
 import javax.inject.Singleton;
 
-import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 @Singleton
@@ -34,9 +32,7 @@ public class SessionModelTool {
     }
 
     private ParticipantModel buildParticipantModel(final ParticipantState state) {
-        String exclusions = state.getExclusions().stream()
-            .collect(joining(", "));
-        return new ParticipantModel(state.getName(), state.getRole(), exclusions);
+        return new ParticipantModel(state.getName(), state.getRole(), state.getExclusions());
     }
 
     public SessionState buildFileModel(final SessionModel model) {
@@ -55,6 +51,6 @@ public class SessionModelTool {
     }
 
     public ParticipantState buildParticipantState(final ParticipantModel model) {
-        return new ParticipantState(model.getName(), model.getRole(), CsvTool.splitToList(model.getExclusions()));
+        return new ParticipantState(model.getName(), model.getRole(), model.getExclusions());
     }
 }

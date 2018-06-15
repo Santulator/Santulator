@@ -5,7 +5,14 @@ import javafx.beans.Observable;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.util.Callback;
+
+import java.util.Collections;
+import java.util.List;
+
+import static io.github.santulator.core.CoreTool.listOf;
 
 public class ParticipantModel {
     public static final Callback<ParticipantModel, Observable[]> PROPERTY_EXTRACTOR
@@ -15,11 +22,15 @@ public class ParticipantModel {
 
     private final SimpleObjectProperty<ParticipantRole> role;
 
-    private final SimpleStringProperty exclusions;
+    private final ObservableList<String> exclusions;
 
     private final SimpleBooleanProperty isPlaceholder;
 
-    public ParticipantModel(final String name, final ParticipantRole role, final String exclusions) {
+    public ParticipantModel(final String name, final ParticipantRole role, final String... exclusions) {
+        this(name, role, listOf(exclusions));
+    }
+
+    public ParticipantModel(final String name, final ParticipantRole role, final List<String> exclusions) {
         this(false, name, role, exclusions);
     }
 
@@ -28,14 +39,14 @@ public class ParticipantModel {
     }
 
     public ParticipantModel(final boolean isPlaceholder) {
-        this(isPlaceholder, "", ParticipantRole.BOTH, "");
+        this(isPlaceholder, "", ParticipantRole.BOTH, Collections.emptyList());
     }
 
-    private ParticipantModel(final boolean isPlaceholder, final String name, final ParticipantRole role, final String exclusions) {
+    private ParticipantModel(final boolean isPlaceholder, final String name, final ParticipantRole role, final List<String> exclusions) {
         this.isPlaceholder = new SimpleBooleanProperty(isPlaceholder);
         this.name = new SimpleStringProperty(name);
         this.role = new SimpleObjectProperty<>(role);
-        this.exclusions = new SimpleStringProperty(exclusions);
+        this.exclusions = FXCollections.observableArrayList(exclusions);
     }
 
     public String getName() {
@@ -54,12 +65,8 @@ public class ParticipantModel {
         this.role.set(role);
     }
 
-    public String getExclusions() {
-        return exclusions.get();
-    }
-
-    public void setExclusions(final String exclusions) {
-        this.exclusions.set(exclusions);
+    public List<String> getExclusions() {
+        return exclusions;
     }
 
     public boolean isPlaceholder() {

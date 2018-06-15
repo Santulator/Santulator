@@ -41,7 +41,7 @@ public class SessionModelToolTest {
 
     private final SessionModelTool target = new SessionModelTool();
 
-    private final ParticipantModel albert = new ParticipantModel("Albert", ParticipantRole.GIVER, "Beryl, Carla");
+    private final ParticipantModel albert = new ParticipantModel("Albert", ParticipantRole.GIVER, "Beryl", "Carla");
 
     private final ParticipantModel beryl = new ParticipantModel("Beryl", ParticipantRole.BOTH, "Albert");
 
@@ -61,7 +61,7 @@ public class SessionModelToolTest {
 
     private final ParticipantModel john = new ParticipantModel("John", ParticipantRole.BOTH, "Iris");
 
-    private final ParticipantModel kate = new ParticipantModel("Kate", ParticipantRole.RECEIVER, "");
+    private final ParticipantModel kate = new ParticipantModel("Kate", ParticipantRole.RECEIVER);
 
     private final ParticipantModel placeholder = new ParticipantModel();
 

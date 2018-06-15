@@ -75,7 +75,7 @@ public class UnsavedChangesToolTest {
     public void testSetParticipantExclusions() {
         SessionModel model = createBoundModelWithParticipant();
 
-        participant.setExclusions("New Exclusions");
+        participant.getExclusions().add("New Exclusion");
 
         assertFalse(model.isChangesSaved());
     }

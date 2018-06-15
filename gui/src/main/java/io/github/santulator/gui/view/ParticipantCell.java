@@ -24,11 +24,11 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
 
     private final ChoiceBox<ParticipantRole> choiceRole = new ChoiceBox<>();
 
-    private final TextField fieldExclusions = new TextField();
-
     private final Button buttonAction = new Button();
 
-    private final HBox hbox = new HBox(fieldName, choiceRole, fieldExclusions, buttonAction);
+    private final ExclusionFields exclusionFields = new ExclusionFields();
+
+    private final HBox lineBox = new HBox(fieldName, choiceRole, exclusionFields.getBox(), buttonAction);
 
     private final ParticipantTableTool tool;
 
@@ -44,9 +44,6 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
 
         applyStyle(choiceRole, CLASS_CHOICE_ROLE);
         choiceRole.setOnAction(e -> lastItem.setRole(choiceRole.getValue()));
-
-        applyStyle(fieldExclusions, CLASS_FIELD_EXCLUSIONS);
-        fieldExclusions.textProperty().addListener((o, old, v) -> lastItem.setExclusions(v));
 
         applyStyle(buttonAction, CLASS_BUTTON_ACTION);
         buttonAction.setOnAction(e -> actionButtonHandler.accept(lastItem));
@@ -65,7 +62,7 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
             lastItem = null;
         } else {
             lastItem = item;
-            setGraphic(hbox);
+            setGraphic(lineBox);
 
             boolean isPlaceholder = item.isPlaceholder();
 
@@ -73,8 +70,7 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
             fieldName.disableProperty().set(isPlaceholder);
             choiceRole.getSelectionModel().select(item.getRole());
             choiceRole.disableProperty().set(isPlaceholder);
-            fieldExclusions.setText(item.getExclusions());
-            fieldExclusions.disableProperty().set(isPlaceholder);
+            exclusionFields.updateModel(item);
             buttonAction.setText(buttonName(isPlaceholder));
 
             tool.registerField(fieldName, getIndex());
