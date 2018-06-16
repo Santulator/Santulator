@@ -11,7 +11,7 @@
     <children>
         <BorderPane>
             <top>
-                <Text styleClass="title" text="Santulator" />
+                <Text styleClass="title" text="Santulator" BorderPane.alignment="CENTER" />
             </top>
             <right>
                 <Button fx:id="buttonClose" mnemonicParsing="false" text="Close" BorderPane.alignment="BOTTOM_RIGHT" />

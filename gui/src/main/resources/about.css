@@ -1,0 +1,23 @@
+/*
+ * Styles for the "About" dialogue.
+ *
+ * Open Source Software published under the Apache Licence, Version 2.0.
+ */
+
+.about BorderPane {
+    -fx-padding: 10 20 10 10;
+    -fx-border-insets: 10 10 10 10;
+    -fx-border-color: lightgrey;
+    -fx-border-style: dashed;
+}
+.about Label, .about Hyperlink {
+    -fx-font-size: 20;
+    -fx-padding: 7 0 7 0;
+}
+.about .title {
+    -fx-font-size: 90;
+    -fx-font-family: sans-serif;
+    -fx-font-style: italic;
+    -fx-stroke: black;
+    -fx-stroke-width: 1;
+}
