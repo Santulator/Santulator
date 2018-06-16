@@ -9,31 +9,21 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.HBox?>
 
-<BorderPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.santulator.gui.controller.SessionController">
+<BorderPane prefHeight="500.0" prefWidth="700.0" styleClass="session" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.santulator.gui.controller.SessionController">
    <top>
-      <GridPane BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints />
-          <ColumnConstraints />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints />
-          <RowConstraints />
-        </rowConstraints>
+      <HBox alignment="CENTER_LEFT" styleClass="drawBar" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Draw Name:" />
-            <Label text="Secret Password:" GridPane.rowIndex="1" />
-            <TextField fx:id="fieldDrawName" GridPane.columnIndex="1" />
-            <TextField fx:id="fieldPassword" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label minWidth="-Infinity" text="Draw Name: " />
+            <TextField fx:id="fieldDrawName" prefColumnCount="20" />
+            <Label minWidth="-Infinity" styleClass="passwordPrompt" text="Secret Password: " />
+            <TextField fx:id="fieldPassword" prefColumnCount="7" />
          </children>
-      </GridPane>
+      </HBox>
    </top>
    <center>
-      <ScrollPane BorderPane.alignment="CENTER" fitToHeight="true" fitToWidth="true">
+      <ScrollPane fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER">
          <content>
             <ListView fx:id="listParticipants" />
          </content>

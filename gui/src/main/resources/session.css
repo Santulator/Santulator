@@ -1,0 +1,12 @@
+/*
+ * Styles for the main session window.
+ *
+ * Open Source Software published under the Apache Licence, Version 2.0.
+ */
+
+.session .drawBar {
+    -fx-padding: 10;
+}
+.session .drawBar .passwordPrompt {
+    -fx-padding: 0 0 0 30;
+}
