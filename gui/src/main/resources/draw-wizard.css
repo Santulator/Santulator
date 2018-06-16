@@ -1,0 +1,23 @@
+/*
+ * Styles for the draw wizard.
+ *
+ * Open Source Software published under the Apache Licence, Version 2.0.
+ */
+
+.drawWizardPane .title {
+    -fx-font-size: 20;
+    -fx-padding: 0 0 10 0;
+}
+.drawWizardPane .title .prompt {
+    -fx-font-weight: bold;
+}
+.drawWizardPane .message {
+    -fx-font-size: 15;
+    -fx-padding: 10 0 0 0;
+}
+.drawWizardPane .actionLine {
+    -fx-alignment: center-left;
+}
+.drawWizardPane .actionLine ProgressBar {
+    -fx-padding: 0 0 0 10;
+}

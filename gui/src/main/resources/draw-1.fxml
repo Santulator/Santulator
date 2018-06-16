@@ -6,15 +6,20 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="drawWizardPage1" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.santulator.gui.controller.Draw1Controller">
+<VBox fx:id="drawWizardPage1" prefHeight="130.0" prefWidth="400.0" styleClass="drawWizardPane" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.santulator.gui.controller.Draw1Controller">
    <children>
-      <Label fx:id="labelDraw1Name" text="Name of the draw" />
-      <HBox>
+      <HBox alignment="TOP_CENTER" styleClass="title" VBox.vgrow="ALWAYS">
          <children>
-            <Button fx:id="buttonDraw1RunDraw" mnemonicParsing="false" text="Run The Draw" />
-            <ProgressBar fx:id="barDraw1Progress" progress="0.0" />
+            <Label minWidth="-Infinity" styleClass="prompt" text="Draw: " />
+            <Label fx:id="labelDraw1Name" text="Name of the draw" />
          </children>
       </HBox>
-      <Label fx:id="labelDraw1Result" text="Draw result description" />
+      <HBox styleClass="actionLine">
+         <children>
+            <Button fx:id="buttonDraw1RunDraw" mnemonicParsing="false" text="Run The Draw" />
+            <ProgressBar fx:id="barDraw1Progress" maxWidth="Infinity" progress="0.0" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+      <Label fx:id="labelDraw1Result" styleClass="message" text="Draw result description" />
    </children>
 </VBox>

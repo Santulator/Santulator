@@ -23,9 +23,9 @@ import java.util.function.Supplier;
 import javax.inject.Inject;
 
 public class Draw1Controller implements DrawController {
-    private static final String TEMPLATE_FAILURE = "Draw failed: %s.";
+    private static final String TEMPLATE_FAILURE = "Draw failed: %s";
 
-    private static final String TEMPLATE_SUCCESS = "Draw complete: %d gifts will be given.";
+    private static final String TEMPLATE_SUCCESS = "Draw complete, %d gifts will be given";
 
     private static final Logger LOG = LoggerFactory.getLogger(Draw1Controller.class);
 

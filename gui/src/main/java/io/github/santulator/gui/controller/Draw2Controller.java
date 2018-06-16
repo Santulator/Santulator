@@ -27,7 +27,7 @@ import javax.inject.Inject;
 import static io.github.santulator.session.FileNameTool.filename;
 
 public class Draw2Controller implements DrawController {
-    private static final String TEMPLATE_RESULTS_SAVED = "Draw results saved to directory '%s'.";
+    private static final String TEMPLATE_RESULTS_SAVED = "Results saved in directory '%s'";
 
     private static final Logger LOG = LoggerFactory.getLogger(Draw2Controller.class);
 

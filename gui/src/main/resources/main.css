@@ -5,3 +5,8 @@
  */
 
 @import "about.css"
+@import "draw-wizard.css"
+
+.root * {
+    -fx-font-family: "Helvetica";
+}

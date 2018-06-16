@@ -134,7 +134,7 @@ public class GuiTestSteps {
         step("Run the draw", () -> {
             robot.clickOn("#buttonDraw1RunDraw");
             waitUntilEnabled("Next");
-            verifyThat("#labelDraw1Result", hasText("Draw complete: 3 gifts will be given."));
+            verifyThat("#labelDraw1Result", hasText("Draw complete, 3 gifts will be given"));
         });
 
         step("Move to wizard step 2", () -> {
@@ -146,7 +146,7 @@ public class GuiTestSteps {
             validator.setUpFileDialogue(FileDialogueType.RUN_DRAW, FileFormatType.DRAW, drawDirectory);
             robot.clickOn("#buttonDraw2SaveResults");
             waitUntilEnabled("Next");
-            verifyThat("#labelDraw2SavedDescription", hasText("Draw results saved to directory 'draw'."));
+            verifyThat("#labelDraw2SavedDescription", hasText("Results saved in directory 'draw'"));
             validator.validateDraw(drawDirectory, "Albert.pdf", "Beryl.pdf", "Carla.pdf");
         });
 

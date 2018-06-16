@@ -1,6 +1,7 @@
 package io.github.santulator.gui.view;
 
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import org.controlsfx.dialog.Wizard;
 import org.controlsfx.dialog.WizardPane;
 
@@ -10,6 +11,15 @@ public class TrackedWizardPane extends WizardPane {
     public TrackedWizardPane(final Node content, final Runnable onEnterCallback) {
         this.onEnterCallback = onEnterCallback;
         setContent(content);
+        setHeader(createHeader());
+    }
+
+    private Node createHeader() {
+        Label label = new Label();
+
+        label.setPrefSize(0, 0);
+
+        return label;
     }
 
     @Override
