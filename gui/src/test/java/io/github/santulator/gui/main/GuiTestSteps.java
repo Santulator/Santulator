@@ -34,6 +34,8 @@ import static org.testfx.util.WaitForAsyncUtils.waitFor;
 public class GuiTestSteps {
     private static final Logger LOG = LoggerFactory.getLogger(GuiTestSteps.class);
 
+    private static final int BRIEF_PAUSE_MILLIS = 100;
+
     private final FxRobot robot;
 
     private final GuiTestValidator validator;
@@ -249,22 +251,34 @@ public class GuiTestSteps {
     private void waitUntilEnabled(final String query) {
         ObservableBooleanValue property = robot.lookup(query).query().disableProperty().not();
 
-        waitForProperty(property);
+        waitForProperty(property, query);
     }
 
     private void clearField(final String query) {
         TextInputControl control = robot.lookup(query).queryTextInputControl();
         ObservableBooleanValue property = control.textProperty().isEmpty();
 
-        Platform.runLater(control::clear);
-        waitForProperty(property);
+        if (!property.get()) {
+            Platform.runLater(control::clear);
+            waitForProperty(property, query);
+            briefPause();
+        }
     }
 
-    private void waitForProperty(final ObservableBooleanValue property) {
+    private void waitForProperty(final ObservableBooleanValue property, final String name) {
         try {
             waitFor(10, TimeUnit.SECONDS, property);
         } catch (TimeoutException e) {
-            throw new SantaException(String.format("Timeout waiting for '%s'", property), e);
+            throw new SantaException(String.format("Timeout waiting for '%s'", name), e);
+        }
+    }
+
+    private void briefPause() {
+        try {
+            Thread.sleep(BRIEF_PAUSE_MILLIS);
+        } catch (final InterruptedException e) {
+            LOG.debug("Thread woken unexpectedly", e);
+            Thread.currentThread().interrupt();
         }
     }
 
