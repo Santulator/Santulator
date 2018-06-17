@@ -247,19 +247,25 @@ public class GuiTestSteps {
     }
 
     private void waitUntilEnabled(final String query) {
-        try {
-            ObservableBooleanValue property = robot.lookup(query).query().disableProperty().not();
+        ObservableBooleanValue property = robot.lookup(query).query().disableProperty().not();
 
-            waitFor(10, TimeUnit.SECONDS, property);
-        } catch (TimeoutException e) {
-            throw new SantaException(String.format("Timeout waiting for '%s'", query), e);
-        }
+        waitForProperty(property);
     }
 
     private void clearField(final String query) {
         TextInputControl control = robot.lookup(query).queryTextInputControl();
+        ObservableBooleanValue property = control.textProperty().isEmpty();
 
         Platform.runLater(control::clear);
+        waitForProperty(property);
+    }
+
+    private void waitForProperty(final ObservableBooleanValue property) {
+        try {
+            waitFor(10, TimeUnit.SECONDS, property);
+        } catch (TimeoutException e) {
+            throw new SantaException(String.format("Timeout waiting for '%s'", property), e);
+        }
     }
 
     private Node lookup(final String first, final String... queries) {
