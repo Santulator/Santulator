@@ -1,0 +1,12 @@
+/*
+ * Styles for the list of participants in the draw.
+ *
+ * Open Source Software published under the Apache Licence, Version 2.0.
+ */
+
+.session .participantsPane .buttonParticipantAction {
+    -fx-pref-width: 70;
+}
+.session .participantsPane HBox {
+    -fx-spacing: 5;
+}

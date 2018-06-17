@@ -23,7 +23,7 @@
       </HBox>
    </top>
    <center>
-      <ScrollPane fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER">
+      <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="participantsPane" BorderPane.alignment="CENTER">
          <content>
             <ListView fx:id="listParticipants" />
          </content>

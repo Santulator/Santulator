@@ -28,7 +28,7 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
 
     private final ExclusionFields exclusionFields = new ExclusionFields();
 
-    private final HBox lineBox = new HBox(fieldName, choiceRole, exclusionFields.getBox(), buttonAction);
+    private final HBox lineBox = new HBox(buttonAction, fieldName, choiceRole, exclusionFields.getBox());
 
     private final ParticipantTableTool tool;
 
