@@ -6,7 +6,7 @@ allprojects {
     group 'io.github.santulator'
 }
 
-task wrapper(type: Wrapper) {
+wrapper {
     description 'Setup the Gradle wrapper'
     gradleVersion = '4.8'
     distributionUrl = "https://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
