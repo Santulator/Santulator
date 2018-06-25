@@ -26,27 +26,31 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
 
     private final Button buttonAction = new Button();
 
-    private final ExclusionFields exclusionFields = new ExclusionFields();
+    private final ExclusionFields exclusionFields;
 
-    private final HBox lineBox = new HBox(buttonAction, fieldName, choiceRole, exclusionFields.getBox());
+    private final HBox lineBox;
 
     private final ParticipantTableTool tool;
 
     private ParticipantModel lastItem;
 
-    public ParticipantCell(final Consumer<ParticipantModel> actionButtonHandler, final ParticipantTableTool tool) {
+    public ParticipantCell(final Consumer<ParticipantModel> actionButtonHandler, final Consumer<ParticipantModel> enterPressHandler, final ParticipantTableTool tool) {
         this.tool = tool;
 
         choiceRole.getItems().setAll(ParticipantRole.values());
 
         applyStyle(fieldName, CLASS_FIELD_NAME);
         fieldName.textProperty().addListener((o, old, v) -> lastItem.setName(v));
+        fieldName.setOnAction(e -> enterPressHandler.accept(lastItem));
 
         applyStyle(choiceRole, CLASS_CHOICE_ROLE);
         choiceRole.setOnAction(e -> lastItem.setRole(choiceRole.getValue()));
 
         applyStyle(buttonAction, CLASS_BUTTON_ACTION);
         buttonAction.setOnAction(e -> actionButtonHandler.accept(lastItem));
+
+        exclusionFields = new ExclusionFields(() -> enterPressHandler.accept(lastItem));
+        lineBox = new HBox(buttonAction, fieldName, choiceRole, exclusionFields.getBox());
     }
 
     private void applyStyle(final Node node, final String styleClass) {

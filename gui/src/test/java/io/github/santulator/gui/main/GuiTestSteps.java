@@ -13,6 +13,7 @@ import javafx.application.Platform;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.scene.Node;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testfx.api.FxRobot;
@@ -86,15 +87,15 @@ public class GuiTestSteps {
             verifyThat("#listParticipants", hasItems(3));
         });
 
-        step("Add Carla", () -> {
-            robot.clickOn(participantNode(CLASS_BUTTON_ACTION, 2));
-            robot.clickOn(participantNode(CLASS_FIELD_NAME, 2)).write("Carla");
+        step("Add Carla (after pressing enter on exclusion field)", () -> {
+            robot.type(KeyCode.ENTER);
+            robot.write("Carla");
             verifyThat("#listParticipants", hasItems(4));
         });
 
-        step("Add David", () -> {
-            robot.clickOn(participantNode(CLASS_BUTTON_ACTION, 3));
-            robot.clickOn(participantNode(CLASS_FIELD_NAME, 3)).write("David");
+        step("Add David (after pressing enter on name field)", () -> {
+            robot.type(KeyCode.ENTER);
+            robot.write("David");
             robot.clickOn(participantNode(CLASS_CHOICE_ROLE, 3)).clickOn("RECEIVER");
             verifyThat("#listParticipants", hasItems(5));
         });

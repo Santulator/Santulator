@@ -23,11 +23,18 @@ public class ExclusionFields {
 
     private ParticipantModel model;
 
+    private final Runnable enterPressHandler;
+
+    public ExclusionFields(final Runnable enterPressHandler) {
+        this.enterPressHandler = enterPressHandler;
+    }
+
     private TextField prepareExclusionField(final int index) {
         TextField field = new TextField();
 
         applyStyle(field, CLASS_FIELD_EXCLUSIONS + "_" + index);
         field.textProperty().addListener((o, old, v) -> updateExclusions(model.getExclusions(), index, v));
+        field.setOnAction(e -> enterPressHandler.run());
 
         return field;
     }
