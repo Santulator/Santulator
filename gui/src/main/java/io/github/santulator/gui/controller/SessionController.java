@@ -3,6 +3,7 @@ package io.github.santulator.gui.controller;
 import io.github.santulator.gui.model.ParticipantModel;
 import io.github.santulator.gui.model.SessionModel;
 import io.github.santulator.gui.services.UnsavedChangesTool;
+import io.github.santulator.gui.view.NoSelectionModel;
 import io.github.santulator.gui.view.ParticipantCell;
 import io.github.santulator.gui.view.ParticipantTableTool;
 import javafx.fxml.FXML;
@@ -37,6 +38,7 @@ public class SessionController {
         tableTool = new ParticipantTableTool(listParticipants);
         tableTool.requestSelection(0);
 
+        listParticipants.setSelectionModel(new NoSelectionModel<>());
         listParticipants.setItems(model.getParticipants());
         listParticipants.setCellFactory(p -> new ParticipantCell(this::onActionButton, this::onEnterPress, tableTool));
 
