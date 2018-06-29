@@ -29,7 +29,7 @@
                                     </Menu>
                                     <Menu fx:id="menuDraw" mnemonicParsing="false" text="Draw">
                                         <items>
-                                            <MenuItem fx:id="menuRunDraw" mnemonicParsing="false" text="Run the Draw..." />
+                                            <MenuItem fx:id="menuRunDraw" accelerator="Shortcut+D" mnemonicParsing="false" text="Run the Draw..." />
                                         </items>
                                     </Menu>
                                     <Menu fx:id="menuHelp" mnemonicParsing="false" text="Help">
