@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import java.util.IdentityHashMap;
 import java.util.Map;
 
-public class ParticipantTableTool {
+public class ParticipantSelectionTool {
     private static final int NO_SELECTION = Integer.MIN_VALUE;
 
     private final ChangeListener<Boolean> listener = (old, o, v) -> onFocus();
@@ -19,7 +19,7 @@ public class ParticipantTableTool {
 
     private final ListView<?> listView;
 
-    public ParticipantTableTool(final ListView<?> listView) {
+    public ParticipantSelectionTool(final ListView<?> listView) {
         this.listView = listView;
     }
 
@@ -40,6 +40,6 @@ public class ParticipantTableTool {
     }
 
     private void onFocus() {
-        requested = Integer.MIN_VALUE;
+        requested = NO_SELECTION;
     }
 }

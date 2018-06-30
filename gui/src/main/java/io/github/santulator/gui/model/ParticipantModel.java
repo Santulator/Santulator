@@ -15,6 +15,8 @@ import java.util.List;
 import static io.github.santulator.core.CoreTool.listOf;
 
 public class ParticipantModel {
+    private static final ParticipantRole DEFAULT_ROLE = ParticipantRole.BOTH;
+
     public static final Callback<ParticipantModel, Observable[]> PROPERTY_EXTRACTOR
         = m -> new Observable[] {m.name, m.role, m.exclusions, m.isPlaceholder};
 
@@ -39,7 +41,7 @@ public class ParticipantModel {
     }
 
     public ParticipantModel(final boolean isPlaceholder) {
-        this(isPlaceholder, "", ParticipantRole.BOTH, Collections.emptyList());
+        this(isPlaceholder, "", DEFAULT_ROLE, Collections.emptyList());
     }
 
     private ParticipantModel(final boolean isPlaceholder, final String name, final ParticipantRole role, final List<String> exclusions) {
@@ -75,5 +77,11 @@ public class ParticipantModel {
 
     public void setPlaceholder(final boolean isPlaceholder) {
         this.isPlaceholder.set(isPlaceholder);
+    }
+
+    public void clear() {
+        name.set("");
+        role.set(DEFAULT_ROLE);
+        exclusions.clear();
     }
 }

@@ -30,11 +30,11 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
 
     private final HBox lineBox;
 
-    private final ParticipantTableTool tool;
+    private final ParticipantSelectionTool tool;
 
     private ParticipantModel lastItem;
 
-    public ParticipantCell(final Consumer<ParticipantModel> actionButtonHandler, final Consumer<ParticipantModel> enterPressHandler, final ParticipantTableTool tool) {
+    public ParticipantCell(final Consumer<ParticipantModel> actionButtonHandler, final Consumer<ParticipantModel> enterPressHandler, final ParticipantSelectionTool tool) {
         this.tool = tool;
 
         choiceRole.getItems().setAll(ParticipantRole.values());
