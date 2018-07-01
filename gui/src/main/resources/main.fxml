@@ -70,6 +70,7 @@
                                             <Glyph icon="SAVE"/>
                                         </graphic>
                                     </Button>
+                                    <Separator orientation="VERTICAL" />
                                     <Button fx:id="buttonRunDraw" mnemonicParsing="false" styleClass="buttonRunDraw" text="Run the Draw">
                                         <tooltip>
                                             <Tooltip text="Run the secret santa draw" />
