@@ -3,10 +3,7 @@ package io.github.santulator.gui.view;
 import io.github.santulator.gui.model.ParticipantModel;
 import io.github.santulator.model.ParticipantRole;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import org.controlsfx.glyphfont.FontAwesome;
 import org.controlsfx.glyphfont.Glyph;
@@ -26,7 +23,7 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
 
     private final TextField fieldName = new TextField();
 
-    private final ChoiceBox<ParticipantRole> choiceRole = new ChoiceBox<>();
+    private final ComboBox<ParticipantRole> choiceRole = new ComboBox<>();
 
     private final Button buttonAction = new Button();
 
@@ -49,6 +46,8 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
 
         applyStyle(choiceRole, CLASS_CHOICE_ROLE);
         choiceRole.setOnAction(e -> lastItem.setRole(choiceRole.getValue()));
+        choiceRole.setCellFactory(p -> new RoleCell(true));
+        choiceRole.setButtonCell(new RoleCell(false));
 
         applyStyle(buttonAction, CLASS_BUTTON_ACTION);
         buttonAction.setOnAction(e -> actionButtonHandler.accept(lastItem));

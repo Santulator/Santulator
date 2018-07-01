@@ -74,7 +74,7 @@ public class GuiTestSteps {
 
         step("Add Albert", () -> {
             robot.clickOn(participantNode(CLASS_FIELD_NAME, 0)).write("Albert");
-            robot.clickOn(participantNode(CLASS_CHOICE_ROLE, 0)).clickOn("GIVER");
+            robot.clickOn(participantNode(CLASS_CHOICE_ROLE, 0)).clickOn("This person only gives a gift");
             robot.clickOn(participantNode(CLASS_FIELD_EXCLUSIONS, 0, 0)).write("Beryl");
             robot.clickOn(participantNode(CLASS_FIELD_EXCLUSIONS, 0, 1)).write("Carla");
             verifyThat("#listParticipants", hasItems(2));
@@ -96,7 +96,7 @@ public class GuiTestSteps {
         step("Add David (after pressing enter on name field)", () -> {
             robot.type(KeyCode.ENTER);
             robot.write("David");
-            robot.clickOn(participantNode(CLASS_CHOICE_ROLE, 3)).clickOn("RECEIVER");
+            robot.clickOn(participantNode(CLASS_CHOICE_ROLE, 3)).clickOn("This person only receives a gift");
             verifyThat("#listParticipants", hasItems(5));
         });
 

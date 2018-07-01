@@ -16,3 +16,9 @@
     -fx-spacing: 5;
     -fx-alignment: center-left;
 }
+.session .choiceRole {
+    -fx-pref-width: 100;
+}
+.session .choiceRole Glyph * {
+    -fx-fill: black;
+}
