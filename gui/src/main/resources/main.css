@@ -9,6 +9,15 @@
 @import "about.css"
 @import "draw-wizard.css"
 
+* {
+   -colour-about-link: #0095C9;
+}
 .root * {
     -fx-font-family: "Helvetica";
+}
+.buttonNew Glyph *, .buttonOpen Glyph *, .buttonSave Glyph *, .buttonRunDraw Glyph *, .buttonParticipantAction Glyph *, .website Glyph *, .twitter Glyph * {
+    -fx-font-family: "FontAwesome";
+}
+.buttonNew Glyph *, .buttonOpen Glyph *, .buttonSave Glyph *, .buttonRunDraw Glyph * {
+    -fx-font-size: 24;
 }

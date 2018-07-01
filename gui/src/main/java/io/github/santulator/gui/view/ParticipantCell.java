@@ -8,8 +8,12 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import org.controlsfx.glyphfont.FontAwesome;
+import org.controlsfx.glyphfont.Glyph;
 
 import java.util.function.Consumer;
+
+import static io.github.santulator.gui.common.GuiConstants.FONT_AWESOME;
 
 public class ParticipantCell extends ListCell<ParticipantModel> {
     public static final String CLASS_FIELD_NAME = "fieldParticipantName";
@@ -75,17 +79,17 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
             choiceRole.getSelectionModel().select(item.getRole());
             choiceRole.disableProperty().set(isPlaceholder);
             exclusionFields.updateModel(item);
-            buttonAction.setText(buttonName(isPlaceholder));
+            buttonAction.setGraphic(buttonGraphic(isPlaceholder));
 
             tool.registerField(fieldName, getIndex());
         }
     }
 
-    private String buttonName(final boolean isPlaceholder) {
+    private Node buttonGraphic(final boolean isPlaceholder) {
         if (isPlaceholder) {
-            return "Add";
+            return new Glyph(FONT_AWESOME, FontAwesome.Glyph.PLUS_CIRCLE);
         } else {
-            return "Delete";
+            return new Glyph(FONT_AWESOME, FontAwesome.Glyph.MINUS_CIRCLE);
         }
     }
 }

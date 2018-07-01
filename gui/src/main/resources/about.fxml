@@ -7,6 +7,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
+<?import org.controlsfx.glyphfont.Glyph?>
+
 <Pane fx:id="aboutDialogue" styleClass="about" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.santulator.gui.controller.AboutController">
     <children>
         <BorderPane>
@@ -23,10 +25,14 @@
                         <Label fx:id="labelVersion" text="Santulator Version: %s." />
                         <Label text="Copyright (c) 2018 Adam Carroll." />
                         <Hyperlink fx:id="linkWebsite" text="https://santulator.github.io/" styleClass="website" >
-                            <!-- TODO Add the website icon here -->
+                            <graphic>
+                                <Glyph icon="HOME"/>
+                            </graphic>
                         </Hyperlink>
                         <Hyperlink fx:id="linkTwitter" text="\@vocabhunterapp" styleClass="twitter" >
-                            <!-- TODO Add the twitter icon here -->
+                            <graphic>
+                                <Glyph icon="TWITTER"/>
+                            </graphic>
                         </Hyperlink>
                     </children>
                 </VBox>

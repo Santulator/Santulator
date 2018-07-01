@@ -21,3 +21,7 @@
     -fx-stroke: black;
     -fx-stroke-width: 1;
 }
+.about .website Glyph *, .about .twitter Glyph * {
+    -fx-fill: -colour-about-link;
+    -glyph-size: 30;
+}

@@ -7,6 +7,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import org.controlsfx.control.StatusBar?>
+<?import org.controlsfx.glyphfont.Glyph?>
+
 <BorderPane prefHeight="500.0" prefWidth="1000.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.santulator.gui.controller.MainController">
    <center>
       <StackPane>
@@ -48,21 +50,33 @@
                                         <tooltip>
                                             <Tooltip text="Start a new session" />
                                         </tooltip>
+                                        <graphic>
+                                            <Glyph icon="FILE_ALT"/>
+                                        </graphic>
                                     </Button>
                                     <Button fx:id="buttonOpen" mnemonicParsing="false" styleClass="buttonOpen" text="Open">
                                         <tooltip>
                                             <Tooltip text="Open a saved session" />
                                         </tooltip>
+                                        <graphic>
+                                            <Glyph icon="FOLDER_OPEN_ALT"/>
+                                        </graphic>
                                     </Button>
                                     <Button fx:id="buttonSave" mnemonicParsing="false" styleClass="buttonSave" text="Save">
                                         <tooltip>
                                             <Tooltip text="Save the session" />
                                         </tooltip>
+                                        <graphic>
+                                            <Glyph icon="SAVE"/>
+                                        </graphic>
                                     </Button>
                                     <Button fx:id="buttonRunDraw" mnemonicParsing="false" styleClass="buttonRunDraw" text="Run the Draw">
                                         <tooltip>
                                             <Tooltip text="Run the secret santa draw" />
                                         </tooltip>
+                                        <graphic>
+                                            <Glyph icon="GIFT"/>
+                                        </graphic>
                                     </Button>
                                 </items>
                             </ToolBar>
