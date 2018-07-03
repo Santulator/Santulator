@@ -15,7 +15,18 @@
 .root * {
     -fx-font-family: "Helvetica";
 }
-.buttonNew Glyph *, .buttonOpen Glyph *, .buttonSave Glyph *, .buttonRunDraw Glyph *, .buttonParticipantAction Glyph *, .website Glyph *, .twitter Glyph *, .choiceRole Glyph * {
+.buttonNew Glyph *,
+.buttonOpen Glyph *,
+.buttonSave Glyph *,
+.buttonRunDraw Glyph *,
+.buttonParticipantAction Glyph *,
+.website Glyph *,
+.twitter Glyph *,
+.choiceRole Glyph *,
+.fieldParticipantName Glyph *,
+.fieldExclusions Glyph *,
+.buttonDraw1RunDraw Glyph *,
+.buttonDraw2SaveResults Glyph * {
     -fx-font-family: "FontAwesome";
 }
 .buttonNew Glyph *, .buttonOpen Glyph *, .buttonSave Glyph *, .buttonRunDraw Glyph * {

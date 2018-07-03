@@ -4,22 +4,25 @@ import io.github.santulator.gui.model.ParticipantModel;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import org.controlsfx.control.textfield.CustomTextField;
+import org.controlsfx.glyphfont.FontAwesome;
+import org.controlsfx.glyphfont.Glyph;
 
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static io.github.santulator.gui.view.ExclusionFieldTool.*;
+import static io.github.santulator.gui.common.GuiConstants.FONT_AWESOME;
+import static io.github.santulator.gui.view.ExclusionFieldTool.updateExclusions;
 import static io.github.santulator.gui.view.ParticipantCell.CLASS_FIELD_EXCLUSIONS;
-import static java.util.stream.Collectors.toList;
 
 public class ExclusionFields {
     private static final int MAX_EXCLUSION_FIELDS = 5;
 
-    private final List<TextField> fields = IntStream.range(0, MAX_EXCLUSION_FIELDS)
+    private final TextField[] fields = IntStream.range(0, MAX_EXCLUSION_FIELDS)
         .mapToObj(this::prepareExclusionField)
-        .collect(toList());
+        .toArray(TextField[]::new);
 
-    private final HBox box = new HBox(fields.toArray(new TextField[0]));
+    private final HBox box = new HBox(fields);
 
     private ParticipantModel model;
 
@@ -30,17 +33,21 @@ public class ExclusionFields {
     }
 
     private TextField prepareExclusionField(final int index) {
-        TextField field = new TextField();
+        CustomTextField field = new CustomTextField();
 
-        applyStyle(field, CLASS_FIELD_EXCLUSIONS + "_" + index);
+        applyStyles(field, CLASS_FIELD_EXCLUSIONS, index);
         field.textProperty().addListener((o, old, v) -> updateExclusions(model.getExclusions(), index, v));
         field.setOnAction(e -> enterPressHandler.run());
+        field.setLeft(new Glyph(FONT_AWESOME, FontAwesome.Glyph.USER_TIMES));
 
         return field;
     }
 
-    private void applyStyle(final Node node, final String styleClass) {
-        node.getStyleClass().add(styleClass);
+    private void applyStyles(final Node node, final String styleClass, final int index) {
+        List<String> styles = node.getStyleClass();
+
+        styles.add(styleClass);
+        styles.add(styleClass + "_" + index);
     }
 
     public void updateModel(final ParticipantModel model) {
@@ -54,7 +61,7 @@ public class ExclusionFields {
     }
 
     private void updateExclusionFieldContent(final int index) {
-        TextField field = fields.get(index);
+        TextField field = fields[index];
         List<String> exclusions = model.getExclusions();
         int exclusionCount = exclusions.size();
         boolean isVisible = index <= exclusionCount;

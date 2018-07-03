@@ -5,6 +5,7 @@ import io.github.santulator.model.ParticipantRole;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import org.controlsfx.control.textfield.CustomTextField;
 import org.controlsfx.glyphfont.FontAwesome;
 import org.controlsfx.glyphfont.Glyph;
 
@@ -21,7 +22,7 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
 
     public static final String CLASS_BUTTON_ACTION = "buttonParticipantAction";
 
-    private final TextField fieldName = new TextField();
+    private final CustomTextField fieldName = new CustomTextField();
 
     private final ComboBox<ParticipantRole> choiceRole = new ComboBox<>();
 
@@ -43,6 +44,7 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
         applyStyle(fieldName, CLASS_FIELD_NAME);
         fieldName.textProperty().addListener((o, old, v) -> lastItem.setName(v));
         fieldName.setOnAction(e -> enterPressHandler.accept(lastItem));
+        fieldName.setLeft(glyph(FontAwesome.Glyph.USER));
 
         applyStyle(choiceRole, CLASS_CHOICE_ROLE);
         choiceRole.setOnAction(e -> lastItem.setRole(choiceRole.getValue()));
@@ -86,9 +88,13 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
 
     private Node buttonGraphic(final boolean isPlaceholder) {
         if (isPlaceholder) {
-            return new Glyph(FONT_AWESOME, FontAwesome.Glyph.PLUS_CIRCLE);
+            return glyph(FontAwesome.Glyph.PLUS_CIRCLE);
         } else {
-            return new Glyph(FONT_AWESOME, FontAwesome.Glyph.MINUS_CIRCLE);
+            return glyph(FontAwesome.Glyph.MINUS_CIRCLE);
         }
+    }
+
+    private Glyph glyph(final FontAwesome.Glyph icon) {
+        return new Glyph(FONT_AWESOME, icon);
     }
 }
