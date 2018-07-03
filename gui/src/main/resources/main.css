@@ -14,6 +14,7 @@
 }
 .root * {
     -fx-font-family: "Helvetica";
+    -fx-font-size: 16;
 }
 .buttonNew Glyph *,
 .buttonOpen Glyph *,

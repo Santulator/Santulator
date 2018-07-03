@@ -17,7 +17,7 @@
     -fx-alignment: center-left;
 }
 .session .choiceRole {
-    -fx-pref-width: 100;
+    -fx-pref-width: 7em;
 }
 .session .choiceRole Glyph * {
     -fx-fill: black;
