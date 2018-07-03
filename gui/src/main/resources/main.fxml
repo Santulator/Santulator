@@ -51,7 +51,7 @@
                                             <Tooltip text="Start a new session" />
                                         </tooltip>
                                         <graphic>
-                                            <Glyph icon="FILE_ALT"/>
+                                            <Glyph icon="FILE_ALT" fontFamily="FontAwesome"/>
                                         </graphic>
                                     </Button>
                                     <Button fx:id="buttonOpen" mnemonicParsing="false" styleClass="buttonOpen" text="Open">
@@ -59,7 +59,7 @@
                                             <Tooltip text="Open a saved session" />
                                         </tooltip>
                                         <graphic>
-                                            <Glyph icon="FOLDER_OPEN_ALT"/>
+                                            <Glyph icon="FOLDER_OPEN_ALT" fontFamily="FontAwesome"/>
                                         </graphic>
                                     </Button>
                                     <Button fx:id="buttonSave" mnemonicParsing="false" styleClass="buttonSave" text="Save">
@@ -67,7 +67,7 @@
                                             <Tooltip text="Save the session" />
                                         </tooltip>
                                         <graphic>
-                                            <Glyph icon="SAVE"/>
+                                            <Glyph icon="SAVE" fontFamily="FontAwesome"/>
                                         </graphic>
                                     </Button>
                                     <Separator orientation="VERTICAL" />
@@ -76,7 +76,7 @@
                                             <Tooltip text="Run the secret santa draw" />
                                         </tooltip>
                                         <graphic>
-                                            <Glyph icon="GIFT"/>
+                                            <Glyph icon="GIFT" fontFamily="FontAwesome"/>
                                         </graphic>
                                     </Button>
                                 </items>
