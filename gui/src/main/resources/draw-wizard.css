@@ -5,15 +5,19 @@
  */
 
 .drawWizardPane .title {
-    -fx-font-size: 20;
     -fx-padding: 0 0 10 0;
+}
+.drawWizardPane .title * {
+    -fx-font-size: 20;
 }
 .drawWizardPane .title .prompt {
     -fx-font-weight: bold;
 }
 .drawWizardPane .message {
-    -fx-font-size: 15;
     -fx-padding: 10 0 0 0;
+}
+.drawWizardPane .message * {
+    -fx-font-size: 18;
 }
 .drawWizardPane .actionLine {
     -fx-alignment: center-left;
