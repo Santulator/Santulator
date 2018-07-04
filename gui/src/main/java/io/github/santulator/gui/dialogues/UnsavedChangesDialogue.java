@@ -14,6 +14,8 @@ import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static io.github.santulator.gui.view.CssTool.applyCss;
+
 public class UnsavedChangesDialogue {
     private static final String ALERT_ID = "unsavedChanges";
 
@@ -35,6 +37,7 @@ public class UnsavedChangesDialogue {
         alert.setHeaderText(message);
         alert.getButtonTypes().setAll(map.keySet());
         alert.getDialogPane().setId(ALERT_ID);
+        applyCss(alert);
 
         result = alert.showAndWait()
             .map(map::get)

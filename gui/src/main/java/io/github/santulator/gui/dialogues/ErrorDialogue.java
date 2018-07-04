@@ -18,6 +18,8 @@ import java.io.StringWriter;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static io.github.santulator.gui.view.CssTool.applyCss;
+
 public class ErrorDialogue {
     private final Alert alert;
 
@@ -25,6 +27,7 @@ public class ErrorDialogue {
         alert = new Alert(AlertType.ERROR);
         alert.setTitle(title);
         alert.setHeaderText(headerText(messages));
+        applyCss(alert);
 
         TextArea textArea = new TextArea(exceptionText(e));
         VBox expContent = new VBox();

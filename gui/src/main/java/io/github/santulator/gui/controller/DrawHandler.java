@@ -15,6 +15,8 @@ import org.controlsfx.dialog.WizardPane;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import static io.github.santulator.gui.view.CssTool.applyCss;
+
 public class DrawHandler {
     private final Provider<FXMLLoader> loaderProvider;
 
@@ -60,6 +62,7 @@ public class DrawHandler {
         DrawController controller = loader.getController();
 
         controller.initialise(drawModel, () -> wizardPane.getScene().getWindow());
+        applyCss(wizardPane);
 
         return wizardPane;
     }
