@@ -51,7 +51,7 @@
                                             <Tooltip text="Start a new session" />
                                         </tooltip>
                                         <graphic>
-                                            <Glyph icon="FILE_ALT" fontFamily="FontAwesome"/>
+                                            <Glyph icon="FILE_ALT" styleClass="fontAwesomeIcon" fontFamily="FontAwesome"/>
                                         </graphic>
                                     </Button>
                                     <Button fx:id="buttonOpen" mnemonicParsing="false" styleClass="buttonOpen" text="Open">
@@ -59,7 +59,7 @@
                                             <Tooltip text="Open a saved session" />
                                         </tooltip>
                                         <graphic>
-                                            <Glyph icon="FOLDER_OPEN_ALT" fontFamily="FontAwesome"/>
+                                            <Glyph icon="FOLDER_OPEN_ALT" styleClass="fontAwesomeIcon" fontFamily="FontAwesome"/>
                                         </graphic>
                                     </Button>
                                     <Button fx:id="buttonSave" mnemonicParsing="false" styleClass="buttonSave" text="Save">
@@ -67,7 +67,7 @@
                                             <Tooltip text="Save the session" />
                                         </tooltip>
                                         <graphic>
-                                            <Glyph icon="SAVE" fontFamily="FontAwesome"/>
+                                            <Glyph icon="SAVE" styleClass="fontAwesomeIcon" fontFamily="FontAwesome"/>
                                         </graphic>
                                     </Button>
                                     <Separator orientation="VERTICAL" />
@@ -76,7 +76,7 @@
                                             <Tooltip text="Run the secret santa draw" />
                                         </tooltip>
                                         <graphic>
-                                            <Glyph icon="GIFT" fontFamily="FontAwesome"/>
+                                            <Glyph icon="GIFT" styleClass="fontAwesomeIcon" fontFamily="FontAwesome"/>
                                         </graphic>
                                     </Button>
                                 </items>

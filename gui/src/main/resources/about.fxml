@@ -26,12 +26,12 @@
                         <Label text="Copyright (c) 2018 Adam Carroll." />
                         <Hyperlink fx:id="linkWebsite" text="https://santulator.github.io/" styleClass="website" >
                             <graphic>
-                                <Glyph icon="HOME" fontFamily="FontAwesome"/>
+                                <Glyph icon="HOME" styleClass="fontAwesomeIcon" fontFamily="FontAwesome"/>
                             </graphic>
                         </Hyperlink>
                         <Hyperlink fx:id="linkTwitter" text="\@vocabhunterapp" styleClass="twitter" >
                             <graphic>
-                                <Glyph icon="TWITTER" fontFamily="FontAwesome"/>
+                                <Glyph icon="TWITTER" styleClass="fontAwesomeIcon" fontFamily="FontAwesome"/>
                             </graphic>
                         </Hyperlink>
                     </children>

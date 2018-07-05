@@ -3,15 +3,16 @@ package io.github.santulator.gui.view;
 import io.github.santulator.gui.model.ParticipantModel;
 import io.github.santulator.model.ParticipantRole;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
 import org.controlsfx.control.textfield.CustomTextField;
 import org.controlsfx.glyphfont.FontAwesome;
-import org.controlsfx.glyphfont.Glyph;
 
 import java.util.function.Consumer;
 
-import static io.github.santulator.gui.common.GuiConstants.FONT_AWESOME;
+import static io.github.santulator.gui.view.IconTool.icon;
 
 public class ParticipantCell extends ListCell<ParticipantModel> {
     public static final String CLASS_FIELD_NAME = "fieldParticipantName";
@@ -44,7 +45,7 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
         applyStyle(fieldName, CLASS_FIELD_NAME);
         fieldName.textProperty().addListener((o, old, v) -> lastItem.setName(v));
         fieldName.setOnAction(e -> enterPressHandler.accept(lastItem));
-        fieldName.setLeft(glyph(FontAwesome.Glyph.USER));
+        fieldName.setLeft(icon(FontAwesome.Glyph.USER));
 
         applyStyle(choiceRole, CLASS_CHOICE_ROLE);
         choiceRole.setOnAction(e -> lastItem.setRole(choiceRole.getValue()));
@@ -88,13 +89,9 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
 
     private Node buttonGraphic(final boolean isPlaceholder) {
         if (isPlaceholder) {
-            return glyph(FontAwesome.Glyph.PLUS_CIRCLE);
+            return icon(FontAwesome.Glyph.PLUS_CIRCLE);
         } else {
-            return glyph(FontAwesome.Glyph.MINUS_CIRCLE);
+            return icon(FontAwesome.Glyph.MINUS_CIRCLE);
         }
-    }
-
-    private Glyph glyph(final FontAwesome.Glyph icon) {
-        return new Glyph(FONT_AWESOME, icon);
     }
 }

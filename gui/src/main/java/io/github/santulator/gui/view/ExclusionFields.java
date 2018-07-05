@@ -6,13 +6,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import org.controlsfx.control.textfield.CustomTextField;
 import org.controlsfx.glyphfont.FontAwesome;
-import org.controlsfx.glyphfont.Glyph;
 
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static io.github.santulator.gui.common.GuiConstants.FONT_AWESOME;
 import static io.github.santulator.gui.view.ExclusionFieldTool.updateExclusions;
+import static io.github.santulator.gui.view.IconTool.icon;
 import static io.github.santulator.gui.view.ParticipantCell.CLASS_FIELD_EXCLUSIONS;
 
 public class ExclusionFields {
@@ -38,7 +37,7 @@ public class ExclusionFields {
         applyStyles(field, CLASS_FIELD_EXCLUSIONS, index);
         field.textProperty().addListener((o, old, v) -> updateExclusions(model.getExclusions(), index, v));
         field.setOnAction(e -> enterPressHandler.run());
-        field.setLeft(new Glyph(FONT_AWESOME, FontAwesome.Glyph.USER_TIMES));
+        field.setLeft(icon(FontAwesome.Glyph.USER_TIMES));
 
         return field;
     }

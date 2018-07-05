@@ -16,7 +16,7 @@
          <children>
             <Button fx:id="buttonDraw2SaveResults" styleClass="buttonDraw2SaveResults" mnemonicParsing="false" text="Save Draw Results">
                <graphic>
-                  <Glyph icon="SAVE" fontFamily="FontAwesome"/>
+                  <Glyph icon="SAVE" styleClass="fontAwesomeIcon" fontFamily="FontAwesome"/>
                </graphic>
             </Button>
             <ProgressBar fx:id="barDraw2Progress" maxWidth="Infinity" progress="0.0" HBox.hgrow="ALWAYS" />

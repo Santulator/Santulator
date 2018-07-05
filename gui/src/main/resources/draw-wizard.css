@@ -8,7 +8,10 @@
     -fx-padding: 0 0 10 0;
 }
 .drawWizardPane .title * {
-    -fx-font-size: 20;
+    -fx-font-size: 24;
+}
+.buttonDraw1RunDraw .fontAwesomeIcon *, .buttonDraw2SaveResults .fontAwesomeIcon * {
+    -fx-font-size: 24;
 }
 .drawWizardPane .title .prompt {
     -fx-font-weight: bold;

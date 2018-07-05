@@ -16,7 +16,7 @@
          <children>
             <Button fx:id="buttonDraw1RunDraw" styleClass="buttonDraw1RunDraw" mnemonicParsing="false" text="Start the Draw">
                <graphic>
-                  <Glyph icon="GIFT" fontFamily="FontAwesome"/>
+                  <Glyph icon="GIFT" styleClass="fontAwesomeIcon" fontFamily="FontAwesome"/>
                </graphic>
             </Button>
             <ProgressBar fx:id="barDraw1Progress" maxWidth="Infinity" progress="0.0" HBox.hgrow="ALWAYS" />

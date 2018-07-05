@@ -11,8 +11,6 @@ import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
 
-import static io.github.santulator.gui.common.GuiConstants.FONT_AWESOME;
-
 public class RoleCell extends ListCell<ParticipantRole> {
     private static final String GIVER_TEXT = "This person only gives a gift";
 
@@ -63,14 +61,10 @@ public class RoleCell extends ListCell<ParticipantRole> {
 
     private Node buildNode(final FontAwesome.Glyph... icons) {
         Glyph[] glyphs = Arrays.stream(icons)
-            .map(this::glyph)
+            .map(IconTool::icon)
             .toArray(Glyph[]::new);
 
         return new HBox(glyphs);
-    }
-
-    private Glyph glyph(final FontAwesome.Glyph icon) {
-        return new Glyph(FONT_AWESOME, icon);
     }
 
     private Map<ParticipantRole, String> buildTextMap() {

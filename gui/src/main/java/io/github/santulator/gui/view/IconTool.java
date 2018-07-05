@@ -1,0 +1,22 @@
+package io.github.santulator.gui.view;
+
+import org.controlsfx.glyphfont.FontAwesome;
+import org.controlsfx.glyphfont.Glyph;
+
+import static io.github.santulator.gui.common.GuiConstants.FONT_AWESOME;
+
+public final class IconTool {
+    private static final String STYLE_CLASS = "fontAwesomeIcon";
+
+    private IconTool() {
+        // Prevent instantiation - all methods are static
+    }
+
+    public static Glyph icon(final FontAwesome.Glyph icon) {
+        Glyph glyph = new Glyph(FONT_AWESOME, icon);
+
+        glyph.getStyleClass().add(STYLE_CLASS);
+
+        return glyph;
+    }
+}

@@ -16,18 +16,7 @@
     -fx-font-family: "Helvetica";
     -fx-font-size: 16;
 }
-.buttonNew Glyph *,
-.buttonOpen Glyph *,
-.buttonSave Glyph *,
-.buttonRunDraw Glyph *,
-.buttonParticipantAction Glyph *,
-.website Glyph *,
-.twitter Glyph *,
-.choiceRole Glyph *,
-.fieldParticipantName Glyph *,
-.fieldExclusions Glyph *,
-.buttonDraw1RunDraw Glyph *,
-.buttonDraw2SaveResults Glyph * {
+.fontAwesomeIcon * {
     -fx-font-family: "FontAwesome";
 }
 .buttonNew Glyph *, .buttonOpen Glyph *, .buttonSave Glyph *, .buttonRunDraw Glyph * {
