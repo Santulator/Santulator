@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import org.controlsfx.glyphfont.Glyph?>
 
-<VBox fx:id="drawWizardPage2" prefHeight="130.0" prefWidth="400.0" styleClass="drawWizardPane" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.santulator.gui.controller.Draw2Controller">
+<VBox fx:id="drawWizardPage2" prefHeight="200.0" prefWidth="600.0" styleClass="drawWizardPane" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.santulator.gui.controller.Draw2Controller">
    <children>
       <HBox alignment="TOP_CENTER" styleClass="title" VBox.vgrow="ALWAYS">
          <children>

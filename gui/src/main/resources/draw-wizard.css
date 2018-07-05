@@ -10,7 +10,7 @@
 .drawWizardPane .title * {
     -fx-font-size: 24;
 }
-.buttonDraw1RunDraw .fontAwesomeIcon *, .buttonDraw2SaveResults .fontAwesomeIcon * {
+.buttonDraw1RunDraw .fontAwesomeIcon *, .buttonDraw2SaveResults .fontAwesomeIcon *, .buttonDraw3Open .fontAwesomeIcon * {
     -fx-font-size: 24;
 }
 .drawWizardPane .title .prompt {

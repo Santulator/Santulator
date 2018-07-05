@@ -5,8 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
-<VBox fx:id="drawWizardPage3" alignment="CENTER" prefHeight="130.0" prefWidth="400.0" styleClass="drawWizardPane" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.santulator.gui.controller.Draw3Controller">
+<?import org.controlsfx.glyphfont.Glyph?>
+<VBox fx:id="drawWizardPage3" alignment="CENTER" prefHeight="200.0" prefWidth="600.0" styleClass="drawWizardPane" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.santulator.gui.controller.Draw3Controller">
    <children>
       <HBox alignment="TOP_CENTER" styleClass="title" VBox.vgrow="ALWAYS">
          <children>
@@ -15,6 +15,9 @@
          </children>
       </HBox>
       <Button fx:id="buttonDraw3Open" mnemonicParsing="false" text="Open Draw Results">
+         <graphic>
+            <Glyph icon="EXTERNAL_LINK" styleClass="fontAwesomeIcon" fontFamily="FontAwesome"/>
+         </graphic>
          <VBox.margin>
             <Insets bottom="30.0" />
          </VBox.margin>
