@@ -50,8 +50,8 @@ public class RoleCell extends ListCell<ParticipantRole> {
         Node giver = buildNode(FontAwesome.Glyph.USER, FontAwesome.Glyph.LONG_ARROW_RIGHT, FontAwesome.Glyph.GIFT);
         nodes.put(ParticipantRole.GIVER, giver);
 
-        Node reciever = buildNode(FontAwesome.Glyph.GIFT, FontAwesome.Glyph.LONG_ARROW_RIGHT, FontAwesome.Glyph.USER);
-        nodes.put(ParticipantRole.RECEIVER, reciever);
+        Node receiver = buildNode(FontAwesome.Glyph.GIFT, FontAwesome.Glyph.LONG_ARROW_RIGHT, FontAwesome.Glyph.USER);
+        nodes.put(ParticipantRole.RECEIVER, receiver);
 
         Node both = buildNode(FontAwesome.Glyph.USER, FontAwesome.Glyph.EXCHANGE, FontAwesome.Glyph.USER);
         nodes.put(ParticipantRole.BOTH, both);
