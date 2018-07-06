@@ -102,7 +102,8 @@ public class Draw2Controller implements DrawController {
             Platform.runLater(() -> markResultsSaved(directory));
             statusManager.markSuccess();
         } catch (RuntimeException e) {
-            FileErrorTool.saveResults(directory, e);
+            progressometer.reset();
+            Platform.runLater(() -> FileErrorTool.saveResults(directory, e));
         }
     }
 

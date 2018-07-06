@@ -11,6 +11,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import javax.inject.Inject;
 
 public class Progressometer {
@@ -28,7 +29,7 @@ public class Progressometer {
 
     private final BooleanProperty complete = new SimpleBooleanProperty();
 
-    private ScheduledFuture<?> future;
+    private final AtomicReference<ScheduledFuture<?>> future = new AtomicReference<>();
 
     @Inject
     public Progressometer(final ThreadPoolTool threadPoolTool, final ProgressSequencer sequencer) {
@@ -41,7 +42,7 @@ public class Progressometer {
         int betweenTicks = PROGRESS_WAIT / PROGRESS_TICKS;
         ProgressState state = new ProgressState(sequencer.sequence(size));
 
-        future = executor.scheduleAtFixedRate(() -> executeTick(state), betweenTicks, betweenTicks, TimeUnit.MILLISECONDS);
+        future.set(executor.scheduleAtFixedRate(() -> executeTick(state), betweenTicks, betweenTicks, TimeUnit.MILLISECONDS));
     }
 
     public void completeTask() {
@@ -52,10 +53,28 @@ public class Progressometer {
         int tick = state.tick(completedCount.get());
 
         if (state.isComplete()) {
-            future.cancel(true);
+            cancel();
             Platform.runLater(() -> complete.set(true));
         }
         Platform.runLater(() -> progress.set((double) tick / PROGRESS_TICKS));
+    }
+
+    public void reset() {
+        cancel();
+        Platform.runLater(() -> resetProperties());
+    }
+
+    private void cancel() {
+        ScheduledFuture<?> task = future.getAndSet(null);
+
+        if (task != null) {
+            task.cancel(true);
+        }
+    }
+
+    private void resetProperties() {
+        progress.set(0);
+        complete.set(false);
     }
 
     public DoubleProperty progressProperty() {
