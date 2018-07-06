@@ -28,3 +28,40 @@
 .drawWizardPane .actionLine ProgressBar {
     -fx-padding: 0 0 0 10;
 }
+.drawWizardPane .breadcrumbs {
+    -fx-spacing: 1em;
+    -fx-padding: 0 0 2em 0;
+}
+.drawWizardPane .breadcrumbs .breadcrumbDone, .drawWizardPane .breadcrumbs .breadcrumbPending {
+    -fx-background-radius: 2em;
+    -fx-min-width: 2em;
+    -fx-min-height: 2em;
+    -fx-alignment: center;
+}
+.drawWizardPane .breadcrumbs .breadcrumbDone {
+    -fx-background-color: slategrey;
+    -fx-text-fill: gainsboro;
+}
+.drawWizardPane .breadcrumbs .breadcrumbPending {
+    -fx-background-color: gainsboro;
+    -fx-text-fill: slategrey;
+    -fx-border-radius: 2em;
+    -fx-border-color: slategrey;
+    -fx-border-width: 1;
+}
+.drawWizardPane .breadcrumbs .breadcrumbDone *, .drawWizardPane .breadcrumbs .breadcrumbPending * {
+    -fx-font-size: 22;
+    -fx-font-weight: bold;
+}
+.drawWizardPane .breadcrumbs .breadcrumbJoinDone, .drawWizardPane .breadcrumbs .breadcrumbJoinPending {
+    -fx-pref-width: 8em;
+    -fx-max-height: 0.5em;
+}
+.drawWizardPane .breadcrumbs .breadcrumbJoinDone {
+    -fx-background-color: slategrey;
+}
+.drawWizardPane .breadcrumbs .breadcrumbJoinPending {
+    -fx-background-color: gainsboro;
+    -fx-border-color: slategrey;
+    -fx-border-width: 1;
+}
