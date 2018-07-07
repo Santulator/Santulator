@@ -17,13 +17,14 @@
     -fx-font-weight: bold;
 }
 .drawWizardPane .message {
-    -fx-padding: 10 0 0 0;
+    -fx-padding: 1.5em 0 0 0;
 }
 .drawWizardPane .message * {
     -fx-font-size: 18;
 }
 .drawWizardPane .actionLine {
     -fx-alignment: center-left;
+    -fx-padding: 2em 0 0 0;
 }
 .drawWizardPane .actionLine ProgressBar {
     -fx-padding: 0 0 0 10;
@@ -64,4 +65,17 @@
     -fx-background-color: gainsboro;
     -fx-border-color: slategrey;
     -fx-border-width: 1;
+}
+.drawWizardPane .passwordNotice {
+    -fx-wrap-text: true;
+    -fx-padding: 0.5em;
+    -fx-border-color: lightgrey;
+    -fx-border-style: dashed;
+}
+.drawWizardPane .passwordNotice Glyph * {
+    -fx-font-size: 40;
+}
+.drawWizardPane .openFileNotice {
+    -fx-wrap-text: true;
+    -fx-padding: 1em 0 1em 0;
 }

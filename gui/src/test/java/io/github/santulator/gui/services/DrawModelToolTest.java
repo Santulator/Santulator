@@ -18,7 +18,7 @@ public class DrawModelToolTest {
 
     private static final Path DIRECTORY = Paths.get("test");
 
-    private final DrawModel model = new DrawModel("Test Draw");
+    private final DrawModel model = new DrawModel("Test Draw", "Secret Password");
 
     @BeforeEach
     public void setUp() {

@@ -10,6 +10,8 @@ import java.nio.file.Path;
 public class DrawModel {
     private final SimpleStringProperty drawName;
 
+    private final SimpleStringProperty password;
+
     private final SimpleBooleanProperty drawStarted = new SimpleBooleanProperty();
 
     private final SimpleObjectProperty<DrawSelection> drawSelection = new SimpleObjectProperty<>();
@@ -36,12 +38,17 @@ public class DrawModel {
 
     private final SimpleBooleanProperty resultsDirectoryOpened = new SimpleBooleanProperty();
 
-    public DrawModel(final String drawName) {
+    public DrawModel(final String drawName, final String password) {
         this.drawName = new SimpleStringProperty(drawName);
+        this.password = new SimpleStringProperty(password);
     }
 
     public SimpleStringProperty drawNameProperty() {
         return drawName;
+    }
+
+    public String getPassword() {
+        return password.get();
     }
 
     public SimpleBooleanProperty drawStartedProperty() {

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.controlsfx.glyphfont.Glyph?>
 
-<VBox fx:id="drawWizardPage3" alignment="CENTER" prefHeight="250.0" prefWidth="600.0" styleClass="drawWizardPane" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.santulator.gui.controller.Draw3Controller">
+<VBox fx:id="drawWizardPage3" prefHeight="300.0" prefWidth="600.0" styleClass="drawWizardPane" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.santulator.gui.controller.Draw3Controller">
    <children>
       <HBox alignment="TOP_CENTER" styleClass="title">
          <children>
@@ -24,11 +24,21 @@
             <Label styleClass="breadcrumbDone" text="3" />
          </children>
       </HBox>
-      <Button fx:id="buttonDraw3Open" mnemonicParsing="false" text="Open Draw Results">
+      <Label fx:id="passwordNotice" styleClass="passwordNotice" text="No secret password was set so you don’t need a password to open the draw results files.">
          <graphic>
-            <Glyph fontFamily="FontAwesome" icon="EXTERNAL_LINK" styleClass="fontAwesomeIcon" />
+            <Glyph fontFamily="FontAwesome" icon="UNLOCK" styleClass="fontAwesomeIcon" />
          </graphic>
-      </Button>
+      </Label>
+      <Label styleClass="openFileNotice" text="Press the button below to open the draw results in your file browser." />
+      <HBox alignment="CENTER">
+         <children>
+            <Button fx:id="buttonDraw3Open" mnemonicParsing="false" text="Open Draw Results">
+               <graphic>
+                  <Glyph fontFamily="FontAwesome" icon="EXTERNAL_LINK" styleClass="fontAwesomeIcon" />
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
       <Pane VBox.vgrow="ALWAYS" />
    </children>
 </VBox>

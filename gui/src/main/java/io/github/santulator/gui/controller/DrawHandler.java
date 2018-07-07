@@ -42,7 +42,7 @@ public class DrawHandler {
     }
 
     private void runDrawWizard() {
-        DrawModel drawModel = new DrawModel(mainModel.getDrawName());
+        DrawModel drawModel = new DrawModel(mainModel.getDrawName(), mainModel.getSessionModel().getPassword());
         WizardPane wizardPane1 = buildWizardPane(ViewFxml.DRAW_1, drawModel, DrawWizardPage.RUN_DRAW);
         WizardPane wizardPane2 = buildWizardPane(ViewFxml.DRAW_2, drawModel, DrawWizardPage.SAVE_RESULTS);
         WizardPane wizardPane3 = buildWizardPane(ViewFxml.DRAW_3, drawModel, DrawWizardPage.OPEN_RESULTS);
