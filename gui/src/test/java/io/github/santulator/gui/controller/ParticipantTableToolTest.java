@@ -38,6 +38,12 @@ public class ParticipantTableToolTest {
     }
 
     @Test
+    public void testPreloadedState() {
+        prepare("A", "B", "C");
+        validateParticipants("A", "B", "C");
+    }
+
+    @Test
     public void testAddAfterInitialState() {
         prepare("");
         triggerAction(1);
@@ -158,31 +164,33 @@ public class ParticipantTableToolTest {
             .map(n -> new ParticipantModel(n, ParticipantRole.BOTH))
             .forEach(participants::add);
         participants.add(new ParticipantModel());
+        target.initialise();
     }
 
     private void validateParticipants(final String... names) {
         assertAll(
             () -> assertEquals(names.length + 1, participants.size()),
             () -> assertAll(placeholderValidationStream(names)),
-            () -> validatePlaceholder(participants.get(participants.size() - 1))
+            () -> validatePlaceholder(names.length + 1, participants.get(participants.size() - 1))
         );
     }
 
     private Stream<Executable> placeholderValidationStream(final String... names) {
         return IntStream.range(0, names.length)
-            .mapToObj(i -> () -> validateParticipant(names[i], participants.get(i)));
+            .mapToObj(i -> () -> validateParticipant(i + 1, participants.get(i), names[i]));
     }
 
-    private void validateParticipant(final String name, final ParticipantModel participant) {
-        validateEntry(name, false, participant);
+    private void validateParticipant(final int rowNumber, final ParticipantModel participant, final String name) {
+        validateEntry(rowNumber, false, participant, name);
     }
 
-    private void validatePlaceholder(final ParticipantModel participant) {
-        validateEntry("", true, participant);
+    private void validatePlaceholder(final int rowNumber, final ParticipantModel participant) {
+        validateEntry(rowNumber, true, participant, "");
     }
 
-    private void validateEntry(final String name, final boolean isPlaceholder, final ParticipantModel participant) {
+    private void validateEntry(final int rowNumber, final boolean isPlaceholder, final ParticipantModel participant, final String name) {
         assertAll(
+            () -> assertEquals(rowNumber, participant.getRowNumber()),
             () -> assertEquals(isPlaceholder, participant.isPlaceholder()),
             () -> assertEquals(name, participant.getName()),
             () -> assertTrue(participant.getExclusions().isEmpty())

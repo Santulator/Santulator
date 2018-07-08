@@ -5,6 +5,7 @@ import io.github.santulator.model.ParticipantRole;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
 import org.controlsfx.control.textfield.CustomTextField;
@@ -17,6 +18,8 @@ import static io.github.santulator.gui.view.IconTool.icon;
 public class ParticipantCell extends ListCell<ParticipantModel> {
     public static final String CLASS_FIELD_NAME = "fieldParticipantName";
 
+    public static final String CLASS_LABEL_ROW_NUMBER = "labelRowNumber";
+
     public static final String CLASS_CHOICE_ROLE = "choiceRole";
 
     public static final String CLASS_FIELD_EXCLUSIONS = "fieldExclusions";
@@ -28,6 +31,8 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
     private final ComboBox<ParticipantRole> choiceRole = new ComboBox<>();
 
     private final Button buttonAction = new Button();
+
+    private final Label labelRowNumber = new Label();
 
     private final ExclusionFields exclusionFields;
 
@@ -47,6 +52,8 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
         fieldName.setOnAction(e -> enterPressHandler.accept(lastItem));
         fieldName.setLeft(icon(FontAwesome.Glyph.USER));
 
+        applyStyle(labelRowNumber, CLASS_LABEL_ROW_NUMBER);
+
         applyStyle(choiceRole, CLASS_CHOICE_ROLE);
         choiceRole.setOnAction(e -> lastItem.setRole(choiceRole.getValue()));
         choiceRole.setCellFactory(p -> new RoleCell(true));
@@ -56,7 +63,7 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
         buttonAction.setOnAction(e -> actionButtonHandler.accept(lastItem));
 
         exclusionFields = new ExclusionFields(() -> enterPressHandler.accept(lastItem));
-        lineBox = new HBox(buttonAction, fieldName, choiceRole, exclusionFields.getBox());
+        lineBox = new HBox(labelRowNumber, buttonAction, fieldName, choiceRole, exclusionFields.getBox());
     }
 
     private void applyStyle(final Node node, final String styleClass) {
@@ -78,12 +85,25 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
 
             fieldName.setText(item.getName());
             fieldName.disableProperty().set(isPlaceholder);
+
+            labelRowNumber.setText(rowNumber(item));
+
             choiceRole.getSelectionModel().select(item.getRole());
             choiceRole.disableProperty().set(isPlaceholder);
+
             exclusionFields.updateModel(item);
+
             buttonAction.setGraphic(buttonGraphic(isPlaceholder));
 
             tool.registerField(fieldName, getIndex());
+        }
+    }
+
+    private String rowNumber(final ParticipantModel item) {
+        if (item.isPlaceholder()) {
+            return "";
+        } else {
+            return Integer.toString(item.getRowNumber());
         }
     }
 

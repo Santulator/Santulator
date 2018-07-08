@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.function.IntConsumer;
+import java.util.stream.IntStream;
 
 public class ParticipantTableTool {
     private static final Logger LOG = LoggerFactory.getLogger(ParticipantTableTool.class);
@@ -17,6 +18,10 @@ public class ParticipantTableTool {
     public ParticipantTableTool(final List<ParticipantModel> participants, final IntConsumer rowSelector) {
         this.participants = participants;
         this.rowSelector = rowSelector;
+    }
+
+    public void initialise() {
+        renumberFrom(0);
     }
 
     public void onActionButton(final ParticipantModel participant) {
@@ -39,13 +44,18 @@ public class ParticipantTableTool {
         } else {
             participants.remove(index);
         }
+
+        int selection;
+
         if (index == 0) {
-            rowSelector.accept(0);
+            selection = 0;
         } else if (isLastParticipant) {
-            rowSelector.accept(index - 1);
+            selection = index - 1;
         } else {
-            rowSelector.accept(index);
+            selection = index;
         }
+        renumberFrom(selection);
+        rowSelector.accept(selection);
     }
 
     public void onEnterPress(final ParticipantModel participant) {
@@ -66,5 +76,11 @@ public class ParticipantTableTool {
         participants.get(index).setPlaceholder(false);
         rowSelector.accept(index);
         participants.add(new ParticipantModel());
+        renumberFrom(index + 1);
+    }
+
+    private void renumberFrom(final int startIndex) {
+        IntStream.range(startIndex, participants.size())
+            .forEach(i -> participants.get(i).setRowNumber(i + 1));
     }
 }

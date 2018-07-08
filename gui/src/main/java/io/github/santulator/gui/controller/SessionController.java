@@ -6,6 +6,7 @@ import io.github.santulator.gui.services.UnsavedChangesTool;
 import io.github.santulator.gui.view.NoSelectionModel;
 import io.github.santulator.gui.view.ParticipantCell;
 import io.github.santulator.gui.view.ParticipantSelectionTool;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -20,23 +21,23 @@ public class SessionController {
     @FXML
     private ListView<ParticipantModel> listParticipants;
 
-    private ParticipantSelectionTool selectionTool;
-
-    private ParticipantTableTool tableTool;
-
     public void initialise(final SessionModel model) {
+        ParticipantSelectionTool selectionTool = new ParticipantSelectionTool(listParticipants);
+        ObservableList<ParticipantModel> participants = model.getParticipants();
+        ParticipantTableTool tableTool = new ParticipantTableTool(participants, selectionTool::requestSelection);
+
+        tableTool.initialise();
+
         fieldDrawName.setText(model.getDrawName());
         model.drawNameProperty().bind(fieldDrawName.textProperty());
 
         fieldPassword.setText(model.getPassword());
         model.passwordProperty().bind(fieldPassword.textProperty());
 
-        selectionTool = new ParticipantSelectionTool(listParticipants);
         selectionTool.requestSelection(0);
-        tableTool = new ParticipantTableTool(model.getParticipants(), selectionTool::requestSelection);
 
         listParticipants.setSelectionModel(new NoSelectionModel<>());
-        listParticipants.setItems(model.getParticipants());
+        listParticipants.setItems(participants);
         listParticipants.setCellFactory(p -> new ParticipantCell(tableTool::onActionButton, tableTool::onEnterPress, selectionTool));
 
         UnsavedChangesTool.createBindings(model);

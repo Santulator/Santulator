@@ -3,6 +3,7 @@ package io.github.santulator.gui.model;
 import io.github.santulator.model.ParticipantRole;
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -15,12 +16,16 @@ import java.util.List;
 import static io.github.santulator.core.CoreTool.listOf;
 
 public class ParticipantModel {
+    private static final int UNDEFINED_ROW_NUMBER = -1;
+
     private static final ParticipantRole DEFAULT_ROLE = ParticipantRole.BOTH;
 
     public static final Callback<ParticipantModel, Observable[]> PROPERTY_EXTRACTOR
-        = m -> new Observable[] {m.name, m.role, m.exclusions, m.isPlaceholder};
+        = m -> new Observable[] {m.name, m.rowNumber, m.role, m.exclusions, m.isPlaceholder};
 
     private final SimpleStringProperty name;
+
+    private final SimpleIntegerProperty rowNumber = new SimpleIntegerProperty(UNDEFINED_ROW_NUMBER);
 
     private final SimpleObjectProperty<ParticipantRole> role;
 
@@ -57,6 +62,14 @@ public class ParticipantModel {
 
     public void setName(final String name) {
         this.name.set(name);
+    }
+
+    public int getRowNumber() {
+        return rowNumber.get();
+    }
+
+    public void setRowNumber(final int rowNumber) {
+        this.rowNumber.set(rowNumber);
     }
 
     public ParticipantRole getRole() {
