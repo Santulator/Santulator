@@ -61,7 +61,7 @@ public class Progressometer {
 
     public void reset() {
         cancel();
-        Platform.runLater(() -> resetProperties());
+        Platform.runLater(this::resetProperties);
     }
 
     private void cancel() {
