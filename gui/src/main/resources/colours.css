@@ -1,0 +1,40 @@
+/*
+ * Colours.
+ *
+ * Open Source Software published under the Apache Licence, Version 2.0.
+ */
+
+.root {
+    -colour-principal: #71CF51;
+    -colour-bow: #FFDA90;
+    -colour-significant-button: #D1141C;
+
+    -colour-panel-weak: derive(-colour-principal, 30%);
+    -colour-panel-strong: derive(-colour-principal, -30%);
+
+    -fx-base: -colour-principal;
+    -fx-focus-color: -colour-bow;
+    -fx-accent: -colour-bow;
+}
+Button.significant {
+    -fx-base: -colour-significant-button;
+}
+.drawWizardPane .breadcrumbs .breadcrumbDone {
+    -fx-background-color: -colour-panel-strong;
+    -fx-text-fill: -colour-panel-weak;
+}
+.drawWizardPane .breadcrumbs .breadcrumbPending {
+    -fx-background-color: -colour-panel-weak;
+    -fx-text-fill: -colour-panel-strong;
+    -fx-border-color: -colour-panel-strong;
+}
+.drawWizardPane .breadcrumbs .breadcrumbJoinDone {
+    -fx-background-color: -colour-panel-strong;
+}
+.drawWizardPane .breadcrumbs .breadcrumbJoinPending {
+    -fx-background-color: -colour-panel-weak;
+    -fx-border-color: -colour-panel-strong;
+}
+.drawWizardPane .passwordNotice, .about BorderPane {
+    -fx-border-color: -colour-panel-strong;
+}

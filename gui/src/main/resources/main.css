@@ -8,10 +8,8 @@
 @import "participant-list.css"
 @import "about.css"
 @import "draw-wizard.css"
+@import "colours.css"
 
-* {
-   -colour-about-link: #0095C9;
-}
 .root * {
     -fx-font-family: "Helvetica";
     -fx-font-size: 16;

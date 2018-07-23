@@ -32,7 +32,7 @@
       <Label styleClass="openFileNotice" text="Press the button below to open the draw results in your file browser." />
       <HBox alignment="CENTER">
          <children>
-            <Button fx:id="buttonDraw3Open" mnemonicParsing="false" text="Open Draw Results">
+            <Button fx:id="buttonDraw3Open" mnemonicParsing="false" styleClass="significant" text="Open Draw Results">
                <graphic>
                   <Glyph fontFamily="FontAwesome" icon="EXTERNAL_LINK" styleClass="fontAwesomeIcon" />
                </graphic>

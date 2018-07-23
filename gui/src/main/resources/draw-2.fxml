@@ -27,7 +27,7 @@
       </HBox>
       <HBox styleClass="actionLine">
          <children>
-            <Button fx:id="buttonDraw2SaveResults" mnemonicParsing="false" styleClass="buttonDraw2SaveResults" text="Save Draw Results">
+            <Button fx:id="buttonDraw2SaveResults" mnemonicParsing="false" styleClass="buttonDraw2SaveResults, significant" text="Save Draw Results">
                <graphic>
                   <Glyph fontFamily="FontAwesome" icon="SAVE" styleClass="fontAwesomeIcon" />
                </graphic>

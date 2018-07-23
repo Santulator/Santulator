@@ -7,7 +7,6 @@
 .about BorderPane {
     -fx-padding: 10 20 10 10;
     -fx-border-insets: 10 10 10 10;
-    -fx-border-color: lightgrey;
     -fx-border-style: dashed;
 }
 .about Label, .about Hyperlink {
@@ -22,6 +21,6 @@
     -fx-stroke-width: 1;
 }
 .about .website Glyph *, .about .twitter Glyph * {
-    -fx-fill: -colour-about-link;
+    -fx-fill: -fx-accent;
     -glyph-size: 30;
 }

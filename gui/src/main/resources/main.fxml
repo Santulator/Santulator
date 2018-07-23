@@ -71,7 +71,7 @@
                                         </graphic>
                                     </Button>
                                     <Separator orientation="VERTICAL" />
-                                    <Button fx:id="buttonRunDraw" mnemonicParsing="false" styleClass="buttonRunDraw" text="Run the Draw">
+                                    <Button fx:id="buttonRunDraw" mnemonicParsing="false" styleClass="buttonRunDraw, significant" text="Run the Draw">
                                         <tooltip>
                                             <Tooltip text="Run the secret santa draw" />
                                         </tooltip>

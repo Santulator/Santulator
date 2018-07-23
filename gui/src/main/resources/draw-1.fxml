@@ -27,7 +27,7 @@
       </HBox>
       <HBox styleClass="actionLine">
          <children>
-            <Button fx:id="buttonDraw1RunDraw" mnemonicParsing="false" styleClass="buttonDraw1RunDraw" text="Start the Draw">
+            <Button fx:id="buttonDraw1RunDraw" mnemonicParsing="false" styleClass="buttonDraw1RunDraw, significant" text="Start the Draw">
                <graphic>
                   <Glyph fontFamily="FontAwesome" icon="GIFT" styleClass="fontAwesomeIcon" />
                </graphic>
