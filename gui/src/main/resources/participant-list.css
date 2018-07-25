@@ -19,9 +19,6 @@
 .session .choiceRole {
     -fx-pref-width: 7em;
 }
-.session .choiceRole Glyph * {
-    -fx-fill: black;
-}
 .session .participantsPane .labelRowNumber {
     -fx-min-width: 3em;
     -fx-alignment: center-right;

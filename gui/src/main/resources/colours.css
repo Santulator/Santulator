@@ -38,3 +38,6 @@ Button.significant {
 .drawWizardPane .passwordNotice, .about BorderPane {
     -fx-border-color: -colour-panel-strong;
 }
+.session .choiceRole Glyph * {
+    -fx-fill: -colour-panel-strong;
+}
