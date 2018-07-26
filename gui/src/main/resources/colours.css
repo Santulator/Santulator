@@ -41,3 +41,15 @@ Button.significant {
 .session .choiceRole Glyph * {
     -fx-fill: -colour-panel-strong;
 }
+.session .participantsPane .fieldParticipantName Glyph * {
+    -fx-fill: -colour-significant-button;
+}
+.session .participantsPane .buttonParticipantAction Glyph * {
+    -fx-fill: -colour-panel-weak;
+}
+.session .participantsPane .fieldExclusions Glyph * {
+    -fx-fill: -colour-panel-strong;
+}
+.text-field {
+    -fx-base: white;
+}
