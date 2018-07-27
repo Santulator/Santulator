@@ -11,10 +11,12 @@
 
     -colour-panel-weak: derive(-colour-principal, 30%);
     -colour-panel-strong: derive(-colour-principal, -30%);
+    -colour-open-weak: derive(-colour-principal, 80%);
 
     -fx-base: -colour-principal;
     -fx-focus-color: -colour-bow;
     -fx-accent: -colour-bow;
+    -fx-default-button: -colour-panel-strong;
 }
 Button.significant {
     -fx-base: -colour-significant-button;
@@ -38,6 +40,12 @@ Button.significant {
 .drawWizardPane .passwordNotice, .about BorderPane {
     -fx-border-color: -colour-panel-strong;
 }
+.about .website Glyph *, .about .twitter Glyph * {
+    -fx-fill: -colour-panel-strong;
+}
+Hyperlink {
+    -fx-text-fill: -colour-panel-strong;
+}
 .session .choiceRole Glyph * {
     -fx-fill: -colour-panel-strong;
 }
@@ -50,6 +58,10 @@ Button.significant {
 .session .participantsPane .fieldExclusions Glyph * {
     -fx-fill: -colour-panel-strong;
 }
+.session .participantsPane .combo-box {
+    -fx-base: -colour-open-weak;
+}
 .text-field {
     -fx-base: white;
+    -fx-highlight-text-fill: black;
 }
