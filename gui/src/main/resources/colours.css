@@ -15,7 +15,7 @@
     -fx-base: -colour-principal;
     -fx-focus-color: -colour-bow;
     -fx-accent: -colour-bow;
-    -fx-default-button: derive(-colour-principal, -30%);
+    -fx-default-button: derive(-colour-principal, -40%);
 }
 
 /*
