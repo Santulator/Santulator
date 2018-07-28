@@ -98,6 +98,13 @@ MenuBar {
 .session .participantsPane .combo-box {
     -fx-base: derive(-colour-principal, 100%);
 }
+.session .participantsPane .numberBar {
+    -fx-background-color: derive(-colour-principal, -30%);
+    -fx-opacity: 0.1;
+}
+.session .participantsPane .labelRowNumber {
+    -fx-text-fill: derive(-colour-principal, -30%);
+}
 
 /*
  * About dialogue.
