@@ -5,63 +5,157 @@
  */
 
 .root {
-    -colour-principal: #71CF51;
+    -colour-principal: #4FB684;
     -colour-bow: #FFDA90;
-    -colour-significant-button: #D1141C;
+    -colour-significant-button: #B21118;
 
-    -colour-panel-weak: derive(-colour-principal, 30%);
-    -colour-panel-strong: derive(-colour-principal, -30%);
-    -colour-open-weak: derive(-colour-principal, 80%);
+    -colour-breadcrumb-weak: derive(-colour-principal, -30%);
+    -colour-breadcrumb-strong: derive(-colour-principal, 70%);
 
     -fx-base: -colour-principal;
     -fx-focus-color: -colour-bow;
     -fx-accent: -colour-bow;
-    -fx-default-button: -colour-panel-strong;
+    -fx-default-button: derive(-colour-principal, -30%);
 }
+
+/*
+ * Common elements.
+ */
+
 Button.significant {
     -fx-base: -colour-significant-button;
 }
-.drawWizardPane .breadcrumbs .breadcrumbDone {
-    -fx-background-color: -colour-panel-strong;
-    -fx-text-fill: -colour-panel-weak;
+Button {
+    -fx-text-fill: derive(-fx-base, 140%);
 }
-.drawWizardPane .breadcrumbs .breadcrumbPending {
-    -fx-background-color: -colour-panel-weak;
-    -fx-text-fill: -colour-panel-strong;
-    -fx-border-color: -colour-panel-strong;
-}
-.drawWizardPane .breadcrumbs .breadcrumbJoinDone {
-    -fx-background-color: -colour-panel-strong;
-}
-.drawWizardPane .breadcrumbs .breadcrumbJoinPending {
-    -fx-background-color: -colour-panel-weak;
-    -fx-border-color: -colour-panel-strong;
-}
-.drawWizardPane .passwordNotice, .about BorderPane {
-    -fx-border-color: -colour-panel-strong;
-}
-.about .website Glyph *, .about .twitter Glyph * {
-    -fx-fill: -colour-panel-strong;
-}
-Hyperlink {
-    -fx-text-fill: -colour-panel-strong;
-}
-.session .choiceRole Glyph * {
-    -fx-fill: -colour-panel-strong;
-}
-.session .participantsPane .fieldParticipantName Glyph * {
-    -fx-fill: -colour-significant-button;
-}
-.session .participantsPane .buttonParticipantAction Glyph * {
-    -fx-fill: -colour-panel-weak;
-}
-.session .participantsPane .fieldExclusions Glyph * {
-    -fx-fill: -colour-panel-strong;
-}
-.session .participantsPane .combo-box {
-    -fx-base: -colour-open-weak;
+Button Glyph * {
+    -fx-fill: derive(-fx-base, 120%);
 }
 .text-field {
     -fx-base: white;
     -fx-highlight-text-fill: black;
+}
+MenuBar {
+    -fx-base: derive(-colour-principal, -80%);
+}
+
+/*
+ * Dialogue pane.
+ */
+
+.dialog-pane {
+    -fx-base: derive(-colour-principal, -40%);
+}
+.dialog-pane Label {
+    -fx-text-fill: derive(-fx-base, 120%);
+}
+
+/*
+ * Draw wizard.
+ */
+
+.drawWizardPane .passwordNotice {
+    -fx-border-color: -colour-principal;
+}
+
+/*
+ * Draw wizard breadcrumbs.
+ */
+
+.drawWizardPane .breadcrumbs .breadcrumbDone {
+    -fx-background-color: -colour-breadcrumb-strong;
+    -fx-text-fill: -colour-breadcrumb-weak;
+}
+.drawWizardPane .breadcrumbs .breadcrumbPending {
+    -fx-background-color: -colour-breadcrumb-weak;
+    -fx-text-fill: -colour-breadcrumb-strong;
+    -fx-border-color: -colour-breadcrumb-strong;
+}
+.drawWizardPane .breadcrumbs .breadcrumbJoinDone {
+    -fx-background-color: -colour-breadcrumb-strong;
+}
+.drawWizardPane .breadcrumbs .breadcrumbJoinPending {
+    -fx-background-color: -colour-breadcrumb-weak;
+    -fx-border-color: -colour-breadcrumb-strong;
+}
+
+/*
+ * Participants table.
+ */
+
+.session .participantsPane {
+    -fx-base: derive(-colour-principal, 70%);
+}
+.session .participantsPane .fieldParticipantName Glyph * {
+    -fx-fill: -colour-significant-button;
+}
+.session .participantsPane .fieldExclusions Glyph *, .session .participantsPane .buttonParticipantAction Glyph *, .session .choiceRole Glyph * {
+    -fx-fill: derive(-colour-principal, -30%);
+}
+.session .participantsPane .combo-box .arrow {
+    -fx-background-color: derive(-colour-principal, -30%);
+}
+.session .participantsPane .combo-box {
+    -fx-base: derive(-colour-principal, 100%);
+}
+
+/*
+ * About dialogue.
+ */
+
+.about {
+    -fx-base: derive(-colour-principal, -40%);
+}
+.about BorderPane {
+    -fx-border-color: -colour-principal;
+}
+.about Text {
+    -fx-fill: derive(-fx-base, 120%);
+}
+.about Label {
+    -fx-text-fill: derive(-fx-base, 120%);
+}
+
+/*
+ * Hyperlinks.
+ */
+
+.about .website Glyph *, .about .twitter Glyph * {
+    -fx-fill: derive(-fx-base, 130%);
+}
+Hyperlink {
+    -fx-text-fill: derive(-fx-base, 130%);
+}
+
+/*
+ * Tool bar.
+ */
+
+ToolBar {
+    -fx-base: derive(-colour-principal, -40%);
+}
+ToolBar Button {
+    -fx-base: derive(-colour-principal, -50%);
+}
+
+/*
+ * Draw bar.
+ */
+
+.drawBar {
+    -fx-background-color: derive(-colour-principal, -30%);
+}
+.drawBar Label {
+    -fx-text-fill: derive(-colour-principal, 90%);
+}
+
+/*
+ * Status bar.
+ */
+
+StatusBar {
+    -fx-base: derive(-colour-principal, -40%);
+}
+StatusBar Label {
+    -fx-text-fill: derive(-colour-principal, 90%);
 }

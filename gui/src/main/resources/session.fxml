@@ -10,17 +10,22 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 
 <BorderPane prefHeight="500.0" prefWidth="700.0" styleClass="session" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.santulator.gui.controller.SessionController">
    <top>
-      <HBox alignment="CENTER_LEFT" styleClass="drawBar" BorderPane.alignment="CENTER">
+      <Pane styleClass="drawBar">
          <children>
-            <Label minWidth="-Infinity" text="Draw Name: " />
-            <TextField fx:id="fieldDrawName" prefColumnCount="20" />
-            <Label minWidth="-Infinity" styleClass="passwordPrompt" text="Secret Password: " />
-            <TextField fx:id="fieldPassword" prefColumnCount="7" />
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <Label minWidth="-Infinity" text="Draw Name: " />
+                  <TextField fx:id="fieldDrawName" prefColumnCount="20" />
+                  <Label minWidth="-Infinity" styleClass="passwordPrompt" text="Secret Password: " />
+                  <TextField fx:id="fieldPassword" prefColumnCount="7" />
+               </children>
+            </HBox>
          </children>
-      </HBox>
+      </Pane>
    </top>
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="participantsPane" BorderPane.alignment="CENTER">

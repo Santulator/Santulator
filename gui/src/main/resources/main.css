@@ -20,3 +20,6 @@
 .buttonNew Glyph *, .buttonOpen Glyph *, .buttonSave Glyph *, .buttonRunDraw Glyph * {
     -fx-font-size: 24;
 }
+Button, StatusBar, MenuBar {
+    -fx-font-weight: bold;
+}
