@@ -7,7 +7,7 @@
 .root {
     -colour-principal: #4FB684;
     -colour-bow: #FFDA90;
-    -colour-significant-button: #B21118;
+    -colour-significant: #B21118;
 
     -colour-breadcrumb-weak: derive(-colour-principal, -30%);
     -colour-breadcrumb-strong: derive(-colour-principal, 70%);
@@ -23,7 +23,7 @@
  */
 
 Button.significant {
-    -fx-base: -colour-significant-button;
+    -fx-base: -colour-significant;
 }
 Button {
     -fx-text-fill: derive(-fx-base, 140%);
@@ -87,7 +87,7 @@ MenuBar {
     -fx-base: derive(-colour-principal, 70%);
 }
 .session .participantsPane .fieldParticipantName Glyph * {
-    -fx-fill: -colour-significant-button;
+    -fx-fill: -colour-significant;
 }
 .session .participantsPane .fieldExclusions Glyph *, .session .participantsPane .buttonParticipantAction Glyph *, .session .choiceRole Glyph * {
     -fx-fill: derive(-colour-principal, -30%);
