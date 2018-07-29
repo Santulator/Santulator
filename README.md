@@ -4,6 +4,8 @@
 
 Santulator is a program for running Secret Santa draws.  You can enter the names of the people participating in the draw and the system will randomly choose who will give presents to whom.  If you want to avoid certainly parings, for example to ensure that people don't get their own partners in the draw, you can add exclusions.  When the draw is run, a PDF will be generated for each person telling them who to buy a present for.  If you want to avoid accidentally seeing all of the results, you can add a secret password to the generated PDF files.
 
+![Santulator](/assets/Santulator-in-use-1.png)
+
 # Important Note
 
 Santulator isn't yet ready for release.  Feel free to take a look around and try it out while development continues towards the first release.
