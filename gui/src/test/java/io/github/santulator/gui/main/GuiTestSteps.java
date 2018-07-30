@@ -253,6 +253,7 @@ public class GuiTestSteps {
         ObservableBooleanValue property = robot.lookup(query).query().disableProperty().not();
 
         waitForProperty(property, query);
+        briefPause();
     }
 
     private void clearField(final String query) {
