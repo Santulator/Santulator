@@ -15,8 +15,6 @@ import javafx.stage.Stage;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static io.github.santulator.gui.view.CssTool.applyCss;
 
@@ -40,8 +38,7 @@ public class ErrorDialogue {
     }
 
     private String headerText(final String... messages) {
-        return Stream.of(messages)
-            .collect(Collectors.joining("\n\n"));
+        return String.join("\n\n", messages);
     }
 
     private void resizeAlert() {
