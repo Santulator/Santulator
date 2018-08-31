@@ -13,7 +13,6 @@ import javax.inject.Inject;
 
 public class AboutController {
     private final DesktopResourceTool desktopResourceTool;
-
     @FXML
     private Button buttonClose;
 
@@ -22,6 +21,12 @@ public class AboutController {
 
     @FXML
     private Hyperlink linkTwitter;
+
+    @FXML
+    private Hyperlink linkGithub;
+
+    @FXML
+    private Hyperlink linkGithubStar;
 
     @FXML
     private Label labelVersion;
@@ -35,6 +40,8 @@ public class AboutController {
         buttonClose.setOnAction(e -> stage.close());
         linkWebsite.setOnAction(e -> desktopResourceTool.showWebPage(GuiConstants.WEBSITE));
         linkTwitter.setOnAction(e -> desktopResourceTool.showWebPage(GuiConstants.TWITTER));
+        linkGithub.setOnAction(e -> desktopResourceTool.showWebPage(GuiConstants.GITHUB));
+        linkGithubStar.setOnAction(e -> desktopResourceTool.showWebPage(GuiConstants.GITHUB));
         setupVersion();
     }
 

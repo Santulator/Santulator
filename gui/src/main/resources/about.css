@@ -4,7 +4,7 @@
  * Open Source Software published under the Apache Licence, Version 2.0.
  */
 
-.about BorderPane {
+.about .aboutContent {
     -fx-padding: 10 20 10 10;
     -fx-border-insets: 10 10 10 10;
     -fx-border-style: dashed;
@@ -14,11 +14,11 @@
     -fx-padding: 7 0 7 0;
 }
 .about .title {
-    -fx-font-size: 90;
+    -fx-font-size: 65;
     -fx-font-family: sans-serif;
     -fx-font-style: italic;
     -fx-stroke-width: 1;
 }
-.about .website Glyph *, .about .twitter Glyph * {
+.about .website Glyph *, .about .twitter Glyph *, .about .github Glyph * {
     -glyph-size: 30;
 }

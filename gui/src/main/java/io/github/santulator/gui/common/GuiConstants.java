@@ -15,6 +15,8 @@ public final class GuiConstants {
 
     public static final String TWITTER = "https://twitter.com/vocabhunterapp";
 
+    public static final String GITHUB = "https://github.com/Santulator/Santulator";
+
     public static final String FONT_AWESOME = "FontAwesome";
 
     private GuiConstants() {

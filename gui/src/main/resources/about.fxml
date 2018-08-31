@@ -4,39 +4,75 @@
   ~ Open Source Software published under the Apache Licence, Version 2.0.
   -->
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.glyphfont.Glyph?>
 
 <Pane fx:id="aboutDialogue" styleClass="about" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.santulator.gui.controller.AboutController">
     <children>
-        <BorderPane>
-            <top>
-                <Text styleClass="title" text="Santulator" BorderPane.alignment="CENTER" />
-            </top>
-            <right>
-                <Button fx:id="buttonClose" mnemonicParsing="false" text="Close" BorderPane.alignment="BOTTOM_RIGHT" />
-            </right>
-            <left>
-                <VBox>
+        <VBox styleClass="aboutContent">
+            <children>
+                <HBox>
                     <children>
-                        <Label text="Santulator is Open Source Software,&#10;published under the Apache Licence, Version 2.0." />
-                        <Label fx:id="labelVersion" text="Santulator Version: %s." />
-                        <Label text="Copyright (c) 2018 Adam Carroll." />
-                        <Hyperlink fx:id="linkWebsite" text="https://santulator.github.io/" styleClass="website" >
-                            <graphic>
-                                <Glyph icon="HOME" styleClass="fontAwesomeIcon" fontFamily="FontAwesome"/>
-                            </graphic>
-                        </Hyperlink>
-                        <Hyperlink fx:id="linkTwitter" text="\@vocabhunterapp" styleClass="twitter" >
-                            <graphic>
-                                <Glyph icon="TWITTER" styleClass="fontAwesomeIcon" fontFamily="FontAwesome"/>
-                            </graphic>
-                        </Hyperlink>
+                        <VBox>
+                            <children>
+                                <Text styleClass="title" text="Santulator" />
+                                <Label text="Santulator is Open Source Software,&#10;published under the Apache Licence, Version 2.0." />
+                                <Label fx:id="labelVersion" text="Santulator Version: %s." />
+                                <Label text="Copyright (c) 2018 Adam Carroll." />
+                            </children>
+                        </VBox>
+                        <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/SantulatorLogo.png" />
+                            </image>
+                        </ImageView>
                     </children>
-                </VBox>
-            </left>
-        </BorderPane>
+                </HBox>
+                <BorderPane>
+                    <right>
+                        <Button fx:id="buttonClose" mnemonicParsing="false" text="Close" BorderPane.alignment="BOTTOM_RIGHT" />
+                    </right>
+                    <left>
+                        <VBox BorderPane.alignment="CENTER">
+                            <children>
+                                <Hyperlink fx:id="linkWebsite" styleClass="website" text="https://santulator.github.io/">
+                                    <graphic>
+                                        <Glyph fontFamily="FontAwesome" icon="HOME" styleClass="fontAwesomeIcon" />
+                                    </graphic>
+                                </Hyperlink>
+                                <Hyperlink fx:id="linkTwitter" styleClass="twitter" text="\@vocabhunterapp">
+                                    <graphic>
+                                        <Glyph fontFamily="FontAwesome" icon="TWITTER" styleClass="fontAwesomeIcon" />
+                                    </graphic>
+                                </Hyperlink>
+                                <HBox>
+                                    <children>
+                                        <Hyperlink fx:id="linkGithub" styleClass="github" text="If you like Santulator, please add a star on GitHub.">
+                                            <graphic>
+                                                <Glyph fontFamily="FontAwesome" icon="GITHUB" styleClass="fontAwesomeIcon" />
+                                            </graphic>
+                                        </Hyperlink>
+                                        <Hyperlink fx:id="linkGithubStar" styleClass="githubStar">
+                                            <graphic>
+                                                <Glyph fontFamily="FontAwesome" icon="STAR" styleClass="fontAwesomeIcon" />
+                                            </graphic>
+                                        </Hyperlink>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </left>
+                </BorderPane>
+            </children>
+        </VBox>
     </children>
 </Pane>

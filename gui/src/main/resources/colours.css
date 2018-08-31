@@ -113,7 +113,7 @@ MenuBar {
 .about {
     -fx-base: derive(-colour-principal, -40%);
 }
-.about BorderPane {
+.about .aboutContent {
     -fx-border-color: -colour-principal;
 }
 .about Text {
@@ -121,6 +121,9 @@ MenuBar {
 }
 .about Label {
     -fx-text-fill: derive(-fx-base, 120%);
+}
+.about .githubStar Glyph * {
+    -fx-fill: -colour-bow;
 }
 
 /*
