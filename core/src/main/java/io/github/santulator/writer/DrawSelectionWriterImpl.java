@@ -53,7 +53,7 @@ public class DrawSelectionWriterImpl implements DrawSelectionWriter {
         try (OutputStream out = Files.newOutputStream(file)) {
             writer.writeGiverAssignment(name, assignment, out, password);
             onWriteComplete.run();
-        } catch (IOException e) {
+        } catch (IOException | NoClassDefFoundError e) {
             throw new SantaException(String.format(ERROR_ASSIGNMENT, file), e);
         }
     }
