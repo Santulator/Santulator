@@ -1,8 +1,8 @@
 package io.github.santulator.gui.controller;
 
-import io.github.santulator.core.GuiTaskHandler;
 import io.github.santulator.core.SantaException;
 import io.github.santulator.engine.DrawService;
+import io.github.santulator.gui.common.GuiTaskHandler;
 import io.github.santulator.gui.model.DrawModel;
 import io.github.santulator.gui.model.MainModel;
 import io.github.santulator.gui.services.Progressometer;

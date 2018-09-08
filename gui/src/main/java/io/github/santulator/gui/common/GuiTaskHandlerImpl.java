@@ -2,8 +2,9 @@
  * Open Source Software published under the Apache Licence, Version 2.0.
  */
 
-package io.github.santulator.core;
+package io.github.santulator.gui.common;
 
+import io.github.santulator.core.ThreadPoolTool;
 import javafx.application.Platform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

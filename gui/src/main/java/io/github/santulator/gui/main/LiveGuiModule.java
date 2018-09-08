@@ -5,8 +5,8 @@
 package io.github.santulator.gui.main;
 
 import com.google.inject.AbstractModule;
-import io.github.santulator.core.GuiTaskHandler;
-import io.github.santulator.core.GuiTaskHandlerImpl;
+import io.github.santulator.gui.common.GuiTaskHandler;
+import io.github.santulator.gui.common.GuiTaskHandlerImpl;
 import io.github.santulator.gui.dialogues.FileDialogueFactory;
 import io.github.santulator.gui.services.*;
 import io.github.santulator.gui.settings.SettingsManager;

@@ -6,9 +6,9 @@ package io.github.santulator.gui.main;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Module;
-import io.github.santulator.core.GuiTaskHandler;
-import io.github.santulator.core.GuiTaskHandlerForTesting;
 import io.github.santulator.core.SantaException;
+import io.github.santulator.gui.common.GuiTaskHandler;
+import io.github.santulator.gui.common.GuiTaskHandlerForTesting;
 import io.github.santulator.gui.common.Placement;
 import io.github.santulator.gui.dialogues.FileDialogue;
 import io.github.santulator.gui.dialogues.FileDialogueFactory;

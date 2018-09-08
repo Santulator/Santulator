@@ -4,7 +4,7 @@
 
 package io.github.santulator.gui.status;
 
-import io.github.santulator.core.GuiTaskHandler;
+import io.github.santulator.gui.common.GuiTaskHandler;
 import javafx.concurrent.Task;
 
 import java.util.function.Consumer;

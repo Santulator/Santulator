@@ -4,7 +4,7 @@
 
 package io.github.santulator.gui.controller;
 
-import io.github.santulator.core.GuiTaskHandler;
+import io.github.santulator.gui.common.GuiTaskHandler;
 import io.github.santulator.gui.dialogues.*;
 import io.github.santulator.gui.model.MainModel;
 import io.github.santulator.gui.model.SessionModel;
