@@ -8,6 +8,7 @@ import io.github.santulator.core.SantaException;
 import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 public enum ViewFxml {
     MAIN("main.fxml"),
@@ -16,6 +17,8 @@ public enum ViewFxml {
     DRAW_2("draw-2.fxml"),
     DRAW_3("draw-3.fxml"),
     ABOUT("about.fxml");
+
+    private static final String RESOURCE_BUNDLE = "bundles/santulator-gui-messages";
 
     private final String name;
 
@@ -26,6 +29,7 @@ public enum ViewFxml {
     public <T> T loadNode(final FXMLLoader loader) {
         try {
             loader.setLocation(getClass().getResource("/" + name));
+            loader.setResources(ResourceBundle.getBundle(RESOURCE_BUNDLE));
 
             return loader.load();
         } catch (final IOException e) {

@@ -4,8 +4,18 @@
   ~ Open Source Software published under the Apache Licence, Version 2.0.
   -->
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import org.controlsfx.control.StatusBar?>
 <?import org.controlsfx.glyphfont.Glyph?>
 
@@ -19,64 +29,64 @@
                         <children>
                             <MenuBar fx:id="menuBar">
                                 <menus>
-                                    <Menu fx:id="menuFile" mnemonicParsing="false" text="File">
+                                    <Menu fx:id="menuFile" mnemonicParsing="false" text="%main.menu.file">
                                         <items>
-                                            <MenuItem fx:id="menuNew" accelerator="Shortcut+N" mnemonicParsing="false" text="New..." />
-                                            <MenuItem fx:id="menuOpen" accelerator="Shortcut+O" mnemonicParsing="false" text="Open..." />
-                                            <MenuItem fx:id="menuSave" accelerator="Shortcut+S" mnemonicParsing="false" text="Save" />
-                                            <MenuItem fx:id="menuSaveAs" accelerator="Shift+Shortcut+S" mnemonicParsing="false" text="Save As..." />
+                                            <MenuItem fx:id="menuNew" accelerator="Shortcut+N" mnemonicParsing="false" text="%main.menu.file.new" />
+                                            <MenuItem fx:id="menuOpen" accelerator="Shortcut+O" mnemonicParsing="false" text="%main.menu.file.open" />
+                                            <MenuItem fx:id="menuSave" accelerator="Shortcut+S" mnemonicParsing="false" text="%main.menu.file.save" />
+                                            <MenuItem fx:id="menuSaveAs" accelerator="Shift+Shortcut+S" mnemonicParsing="false" text="%main.menu.file.save_as" />
                                             <SeparatorMenuItem mnemonicParsing="false" />
-                                            <MenuItem fx:id="menuExit" mnemonicParsing="false" text="Exit Santulator" />
+                                            <MenuItem fx:id="menuExit" mnemonicParsing="false" text="%main.menu.file.exit" />
                                         </items>
                                     </Menu>
-                                    <Menu fx:id="menuDraw" mnemonicParsing="false" text="Draw">
+                                    <Menu fx:id="menuDraw" mnemonicParsing="false" text="%main.menu.draw">
                                         <items>
-                                            <MenuItem fx:id="menuRunDraw" accelerator="Shortcut+D" mnemonicParsing="false" text="Run the Draw..." />
+                                            <MenuItem fx:id="menuRunDraw" accelerator="Shortcut+D" mnemonicParsing="false" text="%main.menu.draw.run" />
                                         </items>
                                     </Menu>
-                                    <Menu fx:id="menuHelp" mnemonicParsing="false" text="Help">
+                                    <Menu fx:id="menuHelp" mnemonicParsing="false" text="%main.menu.help">
                                         <items>
-                                            <MenuItem fx:id="menuWebsite" mnemonicParsing="false" text="Santulator Website" />
-                                            <MenuItem fx:id="menuHowTo" mnemonicParsing="false" text="How to Use Santulator" />
-                                            <MenuItem fx:id="menuIssue" mnemonicParsing="false" text="How to Report a Bug" />
-                                            <MenuItem fx:id="menuAbout" mnemonicParsing="false" text="About" />
+                                            <MenuItem fx:id="menuWebsite" mnemonicParsing="false" text="%main.menu.help.website" />
+                                            <MenuItem fx:id="menuHowTo" mnemonicParsing="false" text="%main.menu.help.help" />
+                                            <MenuItem fx:id="menuIssue" mnemonicParsing="false" text="%main.menu.help.issue" />
+                                            <MenuItem fx:id="menuAbout" mnemonicParsing="false" text="%main.menu.help.about" />
                                         </items>
                                     </Menu>
                                 </menus>
                             </MenuBar>
                             <ToolBar>
                                 <items>
-                                    <Button fx:id="buttonNew" mnemonicParsing="false" styleClass="buttonNew" text="New">
+                                    <Button fx:id="buttonNew" mnemonicParsing="false" styleClass="buttonNew" text="%main.button.new">
                                         <tooltip>
-                                            <Tooltip text="Start a new session" />
+                                            <Tooltip text="%main.button.new.tip" />
                                         </tooltip>
                                         <graphic>
-                                            <Glyph icon="FILE_ALT" styleClass="fontAwesomeIcon" fontFamily="FontAwesome"/>
+                                            <Glyph fontFamily="FontAwesome" icon="FILE_ALT" styleClass="fontAwesomeIcon" />
                                         </graphic>
                                     </Button>
-                                    <Button fx:id="buttonOpen" mnemonicParsing="false" styleClass="buttonOpen" text="Open">
+                                    <Button fx:id="buttonOpen" mnemonicParsing="false" styleClass="buttonOpen" text="%main.button.open">
                                         <tooltip>
-                                            <Tooltip text="Open a saved session" />
+                                            <Tooltip text="%main.button.open.tip" />
                                         </tooltip>
                                         <graphic>
-                                            <Glyph icon="FOLDER_OPEN_ALT" styleClass="fontAwesomeIcon" fontFamily="FontAwesome"/>
+                                            <Glyph fontFamily="FontAwesome" icon="FOLDER_OPEN_ALT" styleClass="fontAwesomeIcon" />
                                         </graphic>
                                     </Button>
-                                    <Button fx:id="buttonSave" mnemonicParsing="false" styleClass="buttonSave" text="Save">
+                                    <Button fx:id="buttonSave" mnemonicParsing="false" styleClass="buttonSave" text="%main.button.save">
                                         <tooltip>
-                                            <Tooltip text="Save the session" />
+                                            <Tooltip text="%main.button.save.tip" />
                                         </tooltip>
                                         <graphic>
-                                            <Glyph icon="SAVE" styleClass="fontAwesomeIcon" fontFamily="FontAwesome"/>
+                                            <Glyph fontFamily="FontAwesome" icon="SAVE" styleClass="fontAwesomeIcon" />
                                         </graphic>
                                     </Button>
                                     <Separator orientation="VERTICAL" />
-                                    <Button fx:id="buttonRunDraw" mnemonicParsing="false" styleClass="buttonRunDraw, significant" text="Run the Draw">
+                                    <Button fx:id="buttonRunDraw" mnemonicParsing="false" styleClass="buttonRunDraw, significant" text="%main.button.run">
                                         <tooltip>
-                                            <Tooltip text="Run the secret santa draw" />
+                                            <Tooltip text="%main.button.run.tip" />
                                         </tooltip>
                                         <graphic>
-                                            <Glyph icon="GIFT" styleClass="fontAwesomeIcon" fontFamily="FontAwesome"/>
+                                            <Glyph fontFamily="FontAwesome" icon="GIFT" styleClass="fontAwesomeIcon" />
                                         </graphic>
                                     </Button>
                                 </items>

@@ -13,15 +13,15 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 
-<BorderPane prefHeight="500.0" prefWidth="700.0" styleClass="session" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.santulator.gui.controller.SessionController">
+<BorderPane prefHeight="500.0" prefWidth="700.0" styleClass="session" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.santulator.gui.controller.SessionController">
    <top>
       <Pane styleClass="drawBar">
          <children>
             <HBox alignment="CENTER_LEFT">
                <children>
-                  <Label minWidth="-Infinity" text="Draw Name: " />
+                  <Label minWidth="-Infinity" text="%session.label.name" />
                   <TextField fx:id="fieldDrawName" prefColumnCount="20" />
-                  <Label minWidth="-Infinity" styleClass="passwordPrompt" text="Secret Password: " />
+                  <Label minWidth="-Infinity" styleClass="passwordPrompt" text="%session.label.password" />
                   <TextField fx:id="fieldPassword" prefColumnCount="7" />
                </children>
             </HBox>

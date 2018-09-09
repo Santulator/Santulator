@@ -11,7 +11,7 @@
    <children>
       <HBox alignment="TOP_CENTER" styleClass="title">
          <children>
-            <Label minWidth="-Infinity" styleClass="prompt" text="Draw: " />
+            <Label minWidth="-Infinity" styleClass="prompt" text="%draw3.title" />
             <Label fx:id="labelDraw3Name" text="Name of the draw" />
          </children>
       </HBox>
@@ -24,15 +24,15 @@
             <Label styleClass="breadcrumbDone" text="3" />
          </children>
       </HBox>
-      <Label fx:id="passwordNotice" styleClass="passwordNotice" text="No secret password was set so you don’t need a password to open the draw results files.">
+      <Label fx:id="passwordNotice" styleClass="passwordNotice" text="%draw3.password.unset">
          <graphic>
             <Glyph fontFamily="FontAwesome" icon="UNLOCK" styleClass="fontAwesomeIcon" />
          </graphic>
       </Label>
-      <Label styleClass="openFileNotice" text="Press the button below to open the draw results in your file browser." />
+      <Label styleClass="openFileNotice" text="%draw3.label.open" />
       <HBox alignment="CENTER">
          <children>
-            <Button fx:id="buttonDraw3Open" mnemonicParsing="false" styleClass="significant" text="Open Draw Results">
+            <Button fx:id="buttonDraw3Open" mnemonicParsing="false" styleClass="significant" text="%draw3.button.open">
                <graphic>
                   <Glyph fontFamily="FontAwesome" icon="EXTERNAL_LINK" styleClass="fontAwesomeIcon" />
                </graphic>

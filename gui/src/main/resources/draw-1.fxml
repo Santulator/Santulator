@@ -12,7 +12,7 @@
    <children>
       <HBox alignment="TOP_CENTER" styleClass="title">
          <children>
-            <Label minWidth="-Infinity" styleClass="prompt" text="Draw: " />
+            <Label minWidth="-Infinity" styleClass="prompt" text="%draw1.title" />
             <Label fx:id="labelDraw1Name" text="Name of the draw" />
          </children>
       </HBox>
@@ -27,7 +27,7 @@
       </HBox>
       <HBox styleClass="actionLine">
          <children>
-            <Button fx:id="buttonDraw1RunDraw" mnemonicParsing="false" styleClass="buttonDraw1RunDraw, significant" text="Start the Draw">
+            <Button fx:id="buttonDraw1RunDraw" mnemonicParsing="false" styleClass="buttonDraw1RunDraw, significant" text="%draw1.start">
                <graphic>
                   <Glyph fontFamily="FontAwesome" icon="GIFT" styleClass="fontAwesomeIcon" />
                </graphic>
