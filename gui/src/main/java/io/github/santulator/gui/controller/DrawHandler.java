@@ -1,5 +1,6 @@
 package io.github.santulator.gui.controller;
 
+import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.DrawModel;
 import io.github.santulator.gui.model.DrawWizardPage;
 import io.github.santulator.gui.model.MainModel;
@@ -20,13 +21,16 @@ import static io.github.santulator.gui.view.CssTool.applyCss;
 public class DrawHandler {
     private final Provider<FXMLLoader> loaderProvider;
 
+    private final I18nManager i18nManager;
+
     private final StatusManager statusManager;
 
     private MainModel mainModel;
 
     @Inject
-    public DrawHandler(final Provider<FXMLLoader> loaderProvider, final StatusManager statusManager) {
+    public DrawHandler(final Provider<FXMLLoader> loaderProvider, final I18nManager i18nManager, final StatusManager statusManager) {
         this.loaderProvider = loaderProvider;
+        this.i18nManager = i18nManager;
         this.statusManager = statusManager;
     }
 
@@ -57,7 +61,7 @@ public class DrawHandler {
 
     private WizardPane buildWizardPane(final ViewFxml viewFxml, final DrawModel drawModel, final DrawWizardPage page) {
         FXMLLoader loader = loaderProvider.get();
-        Node wizardPaneContent = viewFxml.loadNode(loader);
+        Node wizardPaneContent = viewFxml.loadNode(loader, i18nManager);
         TrackedWizardPane wizardPane = new TrackedWizardPane(wizardPaneContent, () -> drawModel.setDrawWizardPage(page));
         DrawController controller = loader.getController();
 

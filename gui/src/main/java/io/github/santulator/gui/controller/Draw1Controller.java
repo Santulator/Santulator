@@ -3,6 +3,8 @@ package io.github.santulator.gui.controller;
 import io.github.santulator.core.SantaException;
 import io.github.santulator.engine.DrawService;
 import io.github.santulator.gui.common.GuiTaskHandler;
+import io.github.santulator.gui.i18n.I18nGuiKey;
+import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.DrawModel;
 import io.github.santulator.gui.model.MainModel;
 import io.github.santulator.gui.services.Progressometer;
@@ -22,11 +24,10 @@ import org.slf4j.LoggerFactory;
 import java.util.function.Supplier;
 import javax.inject.Inject;
 
+import static io.github.santulator.gui.i18n.I18nGuiKey.DRAW1_FAILURE;
+import static io.github.santulator.gui.i18n.I18nGuiKey.DRAW1_SUCCESS;
+
 public class Draw1Controller implements DrawController {
-    private static final String TEMPLATE_FAILURE = "Draw failed: %s";
-
-    private static final String TEMPLATE_SUCCESS = "Draw complete, %d gifts will be given";
-
     private static final Logger LOG = LoggerFactory.getLogger(Draw1Controller.class);
 
     @FXML
@@ -40,6 +41,8 @@ public class Draw1Controller implements DrawController {
 
     @FXML
     private ProgressBar barDraw1Progress;
+
+    private final I18nManager i18nManager;
 
     private final GuiTaskHandler guiTaskHandler;
 
@@ -56,8 +59,9 @@ public class Draw1Controller implements DrawController {
     private DrawModel drawModel;
 
     @Inject
-    public Draw1Controller(final GuiTaskHandler guiTaskHandler, final DrawService drawService, final SessionStateTranslator translator,
-        final SessionModelTool sessionModelTool, final Progressometer progressometer, final MainModel mainModel) {
+    public Draw1Controller(final I18nManager i18nManager, final GuiTaskHandler guiTaskHandler, final DrawService drawService,
+        final SessionStateTranslator translator, final SessionModelTool sessionModelTool, final Progressometer progressometer, final MainModel mainModel) {
+        this.i18nManager = i18nManager;
         this.guiTaskHandler = guiTaskHandler;
         this.drawService = drawService;
         this.translator = translator;
@@ -100,11 +104,17 @@ public class Draw1Controller implements DrawController {
 
     private void reportDrawSuccess(final DrawSelection selection) {
         drawModel.setDrawSelection(selection);
-        drawModel.setDrawResultDescription(String.format(TEMPLATE_SUCCESS, selection.getGivers().size()));
+        applyDescription(DRAW1_SUCCESS, selection.getGivers().size());
     }
 
     private void reportDrawFailure(final SantaException e) {
         drawModel.setDrawFailed(true);
-        drawModel.setDrawResultDescription(String.format(TEMPLATE_FAILURE, e.getMessage()));
+        applyDescription(DRAW1_FAILURE, e.getMessage());
+    }
+
+    private void applyDescription(final I18nGuiKey key, final Object argument) {
+        String text = i18nManager.guiText(key, argument);
+
+        drawModel.setDrawResultDescription(text);
     }
 }

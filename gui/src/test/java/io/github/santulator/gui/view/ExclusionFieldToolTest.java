@@ -7,7 +7,7 @@ import java.util.List;
 
 import static io.github.santulator.core.CoreTool.listOf;
 import static io.github.santulator.gui.view.ExclusionFieldTool.updateExclusions;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ExclusionFieldToolTest {
     @Test

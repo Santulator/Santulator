@@ -1,5 +1,7 @@
 package io.github.santulator.gui.view;
 
+import io.github.santulator.gui.i18n.I18nGuiKey;
+import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.model.ParticipantRole;
 import javafx.scene.Node;
 import javafx.scene.control.ListCell;
@@ -12,20 +14,15 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class RoleCell extends ListCell<ParticipantRole> {
-    private static final String GIVER_TEXT = "This person only gives a gift";
-
-    private static final String RECEIVER_TEXT = "This person only receives a gift";
-
-    private static final String BOTH_TEXT = "This person both gives and receives a gift";
-
     private final Map<ParticipantRole, Node> nodes = buildNodeMap();
 
-    private final Map<ParticipantRole, String> texts = buildTextMap();
+    private final Map<ParticipantRole, String> texts;
 
     private final boolean isLongForm;
 
-    public RoleCell(final boolean isLongForm) {
+    public RoleCell(final I18nManager i18nManager, final boolean isLongForm) {
         this.isLongForm = isLongForm;
+        this.texts = buildTextMap(i18nManager);
     }
 
     @Override
@@ -67,12 +64,12 @@ public class RoleCell extends ListCell<ParticipantRole> {
         return new HBox(glyphs);
     }
 
-    private Map<ParticipantRole, String> buildTextMap() {
+    private Map<ParticipantRole, String> buildTextMap(final I18nManager i18nManager) {
         Map<ParticipantRole, String> texts = new EnumMap<>(ParticipantRole.class);
 
-        texts.put(ParticipantRole.GIVER, GIVER_TEXT);
-        texts.put(ParticipantRole.RECEIVER, RECEIVER_TEXT);
-        texts.put(ParticipantRole.BOTH, BOTH_TEXT);
+        texts.put(ParticipantRole.GIVER, i18nManager.guiText(I18nGuiKey.SESSION_ROLE_GIVER));
+        texts.put(ParticipantRole.RECEIVER, i18nManager.guiText(I18nGuiKey.SESSION_ROLE_RECEIVER));
+        texts.put(ParticipantRole.BOTH, i18nManager.guiText(I18nGuiKey.SESSION_ROLE_BOTH));
 
         return texts;
     }

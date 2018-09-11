@@ -6,6 +6,7 @@ package io.github.santulator.gui.controller;
 
 import io.github.santulator.gui.common.GuiTaskHandler;
 import io.github.santulator.gui.dialogues.*;
+import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.MainModel;
 import io.github.santulator.gui.model.SessionModel;
 import io.github.santulator.gui.services.SessionModelTool;
@@ -40,11 +41,14 @@ public class GuiFileHandler {
 
     private final SessionModelTool sessionModelTool;
 
+    private final I18nManager i18nManager;
+
     private Stage stage;
 
     @Inject
     public GuiFileHandler(final FileDialogueFactory fileDialogueFactory, final SessionSerialiser sessionSerialiser, final StatusManager statusManager,
-        final MainModel model, final SessionStateHandler sessionStateHandler, final GuiTaskHandler guiTaskHandler, final SessionModelTool sessionModelTool) {
+        final MainModel model, final SessionStateHandler sessionStateHandler, final GuiTaskHandler guiTaskHandler, final SessionModelTool sessionModelTool,
+        final I18nManager i18nManager) {
         this.fileDialogueFactory = fileDialogueFactory;
         this.sessionSerialiser = sessionSerialiser;
         this.statusManager = statusManager;
@@ -52,6 +56,7 @@ public class GuiFileHandler {
         this.sessionStateHandler = sessionStateHandler;
         this.guiTaskHandler = guiTaskHandler;
         this.sessionModelTool = sessionModelTool;
+        this.i18nManager = i18nManager;
     }
 
     public void initialise(final Stage stage) {
@@ -88,7 +93,7 @@ public class GuiFileHandler {
                 statusManager,
                 () -> readSession(file),
                 this::finishOpen,
-                e -> FileErrorTool.open(file, e));
+                e -> FileErrorTool.open(i18nManager, file, e));
 
             guiTaskHandler.executeInBackground(task);
         }
@@ -169,7 +174,7 @@ public class GuiFileHandler {
             statusManager,
             () -> saveFile(file, sessionState),
             b -> model.setChangesSaved(true),
-            e -> FileErrorTool.save(file, e)
+            e -> FileErrorTool.save(i18nManager, file, e)
         );
 
         guiTaskHandler.executeInBackground(task);
@@ -204,7 +209,7 @@ public class GuiFileHandler {
         if (model.isChangesSaved()) {
             return true;
         } else {
-            UnsavedChangesDialogue dialogue = new UnsavedChangesDialogue(model.getSessionFile());
+            UnsavedChangesDialogue dialogue = new UnsavedChangesDialogue(model.getSessionFile(), i18nManager);
 
             dialogue.showDialogue();
 
@@ -253,7 +258,7 @@ public class GuiFileHandler {
 
             return true;
         } catch (final RuntimeException e) {
-            FileErrorTool.save(file, e);
+            FileErrorTool.save(i18nManager, file, e);
 
             return false;
         }

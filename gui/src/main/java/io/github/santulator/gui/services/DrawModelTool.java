@@ -7,7 +7,8 @@ import javafx.beans.binding.StringBinding;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
-import static javafx.beans.binding.Bindings.*;
+import static javafx.beans.binding.Bindings.equal;
+import static javafx.beans.binding.Bindings.when;
 
 public final class DrawModelTool {
     private DrawModelTool() {

@@ -4,6 +4,8 @@
 
 package io.github.santulator.gui.controller;
 
+import io.github.santulator.gui.i18n.I18nGuiKey;
+import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.MainModel;
 import javafx.beans.value.ChangeListener;
 import org.apache.commons.lang3.StringUtils;
@@ -11,17 +13,18 @@ import org.apache.commons.lang3.StringUtils;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import static io.github.santulator.gui.common.GuiConstants.UNTITLED;
-
 @Singleton
 public class TitleHandler {
     private static final int TITLE_BUFFER_SIZE = 100;
 
     private final MainModel model;
 
+    private final I18nManager i18nManager;
+
     @Inject
-    public TitleHandler(final MainModel model) {
+    public TitleHandler(final MainModel model, final I18nManager i18nManager) {
         this.model = model;
+        this.i18nManager = i18nManager;
     }
 
     public void initialise() {
@@ -42,7 +45,7 @@ public class TitleHandler {
         if (StringUtils.isNotBlank(drawName)) {
             title.append(drawName);
         } else {
-            title.append(UNTITLED);
+            title.append(i18nManager.guiText(I18nGuiKey.MAIN_WINDOW_UNTITLED));
         }
 
         if (model.hasSessionFile()) {
@@ -50,7 +53,7 @@ public class TitleHandler {
         }
 
         if (!model.isChangesSaved()) {
-            title.append(" - Unsaved Changes");
+            title.append(" - ").append(i18nManager.guiText(I18nGuiKey.MAIN_WINDOW_UNSAVED));
         }
 
         title.append(" - Santulator");

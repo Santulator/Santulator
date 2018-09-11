@@ -5,10 +5,10 @@
 package io.github.santulator.gui.view;
 
 import io.github.santulator.core.SantaException;
+import io.github.santulator.gui.i18n.I18nManager;
 import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
-import java.util.ResourceBundle;
 
 public enum ViewFxml {
     MAIN("main.fxml"),
@@ -26,10 +26,10 @@ public enum ViewFxml {
         this.name = name;
     }
 
-    public <T> T loadNode(final FXMLLoader loader) {
+    public <T> T loadNode(final FXMLLoader loader, final I18nManager i18nManager) {
         try {
             loader.setLocation(getClass().getResource("/" + name));
-            loader.setResources(ResourceBundle.getBundle(RESOURCE_BUNDLE));
+            loader.setResources(i18nManager.guiBundle());
 
             return loader.load();
         } catch (final IOException e) {

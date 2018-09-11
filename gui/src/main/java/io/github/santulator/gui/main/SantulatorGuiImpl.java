@@ -5,6 +5,7 @@ import io.github.santulator.gui.controller.ExitRequestHandler;
 import io.github.santulator.gui.controller.GuiFileHandler;
 import io.github.santulator.gui.controller.MainController;
 import io.github.santulator.gui.controller.TitleHandler;
+import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.MainModel;
 import io.github.santulator.gui.services.PlacementManager;
 import io.github.santulator.gui.view.ViewFxml;
@@ -24,6 +25,8 @@ public class SantulatorGuiImpl implements SantulatorGui {
 
     private final FXMLLoader mainLoader;
 
+    private final I18nManager i18nManager;
+
     private final PlacementManager placementManager;
 
     private final GuiFileHandler guiFileHandler;
@@ -37,9 +40,10 @@ public class SantulatorGuiImpl implements SantulatorGui {
     private final ExitRequestHandler exitRequestHandler;
 
     @Inject
-    public SantulatorGuiImpl(final FXMLLoader mainLoader, final PlacementManager placementManager, final GuiFileHandler guiFileHandler,
+    public SantulatorGuiImpl(final FXMLLoader mainLoader, final I18nManager i18nManager, final PlacementManager placementManager, final GuiFileHandler guiFileHandler,
         final MainController mainController, final TitleHandler titleHandler, final MainModel model, final ExitRequestHandler exitRequestHandler) {
         this.mainLoader = mainLoader;
+        this.i18nManager = i18nManager;
         this.placementManager = placementManager;
         this.guiFileHandler = guiFileHandler;
         this.mainController = mainController;
@@ -50,7 +54,7 @@ public class SantulatorGuiImpl implements SantulatorGui {
 
     @Override
     public void start(final Stage stage) {
-        Parent root = ViewFxml.MAIN.loadNode(mainLoader);
+        Parent root = ViewFxml.MAIN.loadNode(mainLoader, i18nManager);
 
         initialise(stage);
 

@@ -1,5 +1,6 @@
 package io.github.santulator.gui.model;
 
+import io.github.santulator.gui.i18n.I18nManager;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -9,18 +10,16 @@ import javafx.collections.ObservableList;
 import java.nio.file.Path;
 import java.util.List;
 
+import static io.github.santulator.gui.i18n.I18nGuiKey.SESSION_DEFAULT_DRAW;
+import static io.github.santulator.gui.i18n.I18nGuiKey.SESSION_DEFAULT_PASSWORD;
 import static java.util.Collections.singletonList;
 
 public class SessionModel {
-    public static final String DEFAULT_DRAW_NAME = "My Secret Santa Draw";
-
-    public static final String DEFAULT_PASSWORD = "christmas";
-
     private final SimpleBooleanProperty changesSaved = new SimpleBooleanProperty(true);
 
-    private final SimpleStringProperty drawName = new SimpleStringProperty(DEFAULT_DRAW_NAME);
+    private final SimpleStringProperty drawName;
 
-    private final SimpleStringProperty password = new SimpleStringProperty(DEFAULT_PASSWORD);
+    private final SimpleStringProperty password;
 
     private final SimpleStringProperty directory = new SimpleStringProperty();
 
@@ -28,13 +27,15 @@ public class SessionModel {
 
     private final SimpleObjectProperty<Path> sessionFile = new SimpleObjectProperty<>(null);
 
-    public SessionModel() {
-        this(singletonList(new ParticipantModel(false)));
+    public SessionModel(final I18nManager i18nManager) {
+        this(i18nManager, singletonList(new ParticipantModel(false)));
     }
 
-    public SessionModel(final List<ParticipantModel> participants) {
+    public SessionModel(final I18nManager i18nManager, final List<ParticipantModel> participants) {
         this.participants.addAll(participants);
         this.participants.add(new ParticipantModel());
+        this.drawName = new SimpleStringProperty(i18nManager.guiText(SESSION_DEFAULT_DRAW));
+        this.password = new SimpleStringProperty(i18nManager.guiText(SESSION_DEFAULT_PASSWORD));
     }
 
     public SimpleBooleanProperty changesSavedProperty() {

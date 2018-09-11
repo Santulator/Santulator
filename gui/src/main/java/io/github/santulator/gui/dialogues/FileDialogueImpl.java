@@ -4,6 +4,7 @@
 
 package io.github.santulator.gui.dialogues;
 
+import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.settings.SettingsManager;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -19,6 +20,8 @@ import java.util.function.Function;
 import static java.util.stream.Collectors.toList;
 
 public class FileDialogueImpl implements FileDialogue {
+    private final I18nManager i18nManager;
+
     private final FileDialogueType type;
 
     private final Window window;
@@ -35,13 +38,15 @@ public class FileDialogueImpl implements FileDialogue {
 
     private FileChoice selected;
 
-    public FileDialogueImpl(final FileDialogueType type, final Window window, final SettingsManager settingsManager, final List<FileFormatType> formats,
-        final BiFunction<FileChooser, Window, File> openFunction, final Function<SettingsManager, Path> pathGetter, final BiConsumer<SettingsManager, Path> pathSetter) {
+    public FileDialogueImpl(final I18nManager i18nManager, final FileDialogueType type, final Window window, final SettingsManager settingsManager,
+        final List<FileFormatType> formats, final BiFunction<FileChooser, Window, File> openFunction, final Function<SettingsManager, Path> pathGetter,
+        final BiConsumer<SettingsManager, Path> pathSetter) {
+        this.i18nManager = i18nManager;
         this.window = window;
         this.type = type;
         this.settingsManager = settingsManager;
         this.filters = formats.stream()
-            .map(FileFormatType::getFilter)
+            .map(f -> f.buildFilter(i18nManager))
             .collect(toList());
         this.openFunction = openFunction;
         this.pathGetter = pathGetter;
@@ -52,7 +57,7 @@ public class FileDialogueImpl implements FileDialogue {
     public void showChooser() {
         FileChooser chooser = new FileChooser();
 
-        chooser.setTitle(type.getTitle());
+        chooser.setTitle(i18nManager.guiText(type.getTitleKey()));
         chooser.getExtensionFilters().addAll(filters);
         File initialDirectory = pathGetter.apply(this.settingsManager).toFile();
         chooser.setInitialDirectory(initialDirectory);

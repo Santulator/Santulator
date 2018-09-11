@@ -5,6 +5,7 @@
 package io.github.santulator.gui.controller;
 
 import io.github.santulator.gui.common.ControllerAndView;
+import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.SessionModel;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
@@ -14,12 +15,15 @@ import javax.inject.Singleton;
 
 @Singleton
 public class SessionStateHandler {
+    private final I18nManager i18nManager;
+
     private final SessionProvider sessionProvider;
 
     private BorderPane mainBorderPane;
 
     @Inject
-    public SessionStateHandler(final SessionProvider sessionProvider) {
+    public SessionStateHandler(final I18nManager i18nManager, final SessionProvider sessionProvider) {
+        this.i18nManager = i18nManager;
         this.sessionProvider = sessionProvider;
     }
 
@@ -28,7 +32,7 @@ public class SessionStateHandler {
     }
 
     public SessionModel addSession() {
-        SessionModel model = new SessionModel();
+        SessionModel model = new SessionModel(i18nManager);
 
         addSession(model);
 

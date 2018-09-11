@@ -4,6 +4,7 @@
 
 package io.github.santulator.gui.dialogues;
 
+import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.settings.SettingsManager;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
@@ -14,6 +15,8 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 public class DirectoryDialogueImpl implements FileDialogue {
+    private final I18nManager i18nManager;
+
     private final FileDialogueType type;
 
     private final FileFormatType formatType;
@@ -28,8 +31,9 @@ public class DirectoryDialogueImpl implements FileDialogue {
 
     private FileChoice selected;
 
-    public DirectoryDialogueImpl(final FileDialogueType type, final FileFormatType formatType, final Window window, final SettingsManager settingsManager,
-        final Function<SettingsManager, Path> pathGetter, final BiConsumer<SettingsManager, Path> pathSetter) {
+    public DirectoryDialogueImpl(final I18nManager i18nManager, final FileDialogueType type, final FileFormatType formatType, final Window window,
+        final SettingsManager settingsManager, final Function<SettingsManager, Path> pathGetter, final BiConsumer<SettingsManager, Path> pathSetter) {
+        this.i18nManager = i18nManager;
         this.window = window;
         this.formatType = formatType;
         this.type = type;
@@ -42,7 +46,7 @@ public class DirectoryDialogueImpl implements FileDialogue {
     public void showChooser() {
         DirectoryChooser chooser = new DirectoryChooser();
 
-        chooser.setTitle(type.getTitle());
+        chooser.setTitle(i18nManager.guiText(type.getTitleKey()));
         File initialDirectory = pathGetter.apply(this.settingsManager).toFile();
         chooser.setInitialDirectory(initialDirectory);
 

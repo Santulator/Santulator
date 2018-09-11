@@ -5,6 +5,8 @@ import io.github.santulator.gui.dialogues.FileDialogue;
 import io.github.santulator.gui.dialogues.FileDialogueFactory;
 import io.github.santulator.gui.dialogues.FileDialogueType;
 import io.github.santulator.gui.dialogues.FileErrorTool;
+import io.github.santulator.gui.i18n.I18nGuiKey;
+import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.DrawModel;
 import io.github.santulator.gui.model.MainModel;
 import io.github.santulator.gui.services.Progressometer;
@@ -27,8 +29,6 @@ import javax.inject.Inject;
 import static io.github.santulator.session.FileNameTool.filename;
 
 public class Draw2Controller implements DrawController {
-    private static final String TEMPLATE_RESULTS_SAVED = "Results saved in directory '%s'";
-
     private static final Logger LOG = LoggerFactory.getLogger(Draw2Controller.class);
 
     @FXML
@@ -42,6 +42,8 @@ public class Draw2Controller implements DrawController {
 
     @FXML
     private ProgressBar barDraw2Progress;
+
+    private final I18nManager i18nManager;
 
     private final ThreadPoolTool threadPoolTool;
 
@@ -60,8 +62,9 @@ public class Draw2Controller implements DrawController {
     private Supplier<Window> windowSupplier;
 
     @Inject
-    public Draw2Controller(final ThreadPoolTool threadPoolTool, final FileDialogueFactory fileDialogueFactory, final StatusManager statusManager,
-        final DrawSelectionWriter writer, final Progressometer progressometer, final MainModel mainModel) {
+    public Draw2Controller(final I18nManager i18nManager, final ThreadPoolTool threadPoolTool, final FileDialogueFactory fileDialogueFactory,
+        final StatusManager statusManager, final DrawSelectionWriter writer, final Progressometer progressometer, final MainModel mainModel) {
+        this.i18nManager = i18nManager;
         this.threadPoolTool = threadPoolTool;
         this.fileDialogueFactory = fileDialogueFactory;
         this.statusManager = statusManager;
@@ -103,7 +106,7 @@ public class Draw2Controller implements DrawController {
             statusManager.markSuccess();
         } catch (RuntimeException e) {
             progressometer.reset();
-            Platform.runLater(() -> FileErrorTool.saveResults(directory, e));
+            Platform.runLater(() -> FileErrorTool.saveResults(i18nManager, directory, e));
         }
     }
 
@@ -121,6 +124,6 @@ public class Draw2Controller implements DrawController {
 
     private void markResultsSaved(final Path directory) {
         drawModel.setDirectory(directory);
-        drawModel.setSavedDrawDescription(String.format(TEMPLATE_RESULTS_SAVED, filename(directory)));
+        drawModel.setSavedDrawDescription(i18nManager.guiText(I18nGuiKey.DRAW2_RESULTS, filename(directory)));
     }
 }

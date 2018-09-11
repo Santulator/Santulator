@@ -4,6 +4,8 @@
 
 package io.github.santulator.gui.status;
 
+import io.github.santulator.gui.i18n.I18nGuiKey;
+import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.StatusModel;
 import io.github.santulator.session.FileNameTool;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -16,31 +18,27 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import static javafx.beans.binding.Bindings.*;
+import static io.github.santulator.gui.i18n.I18nGuiKey.*;
+import static javafx.beans.binding.Bindings.when;
 
 @Singleton
 public class StatusManagerImpl implements StatusManager {
     private static final Logger LOG = LoggerFactory.getLogger(StatusManagerImpl.class);
 
-    private static final String NAME_NEW_SESSION = "Start a new Santulator session";
+    private final I18nManager i18nManager;
 
-    private static final String NAME_OPEN_SESSION = "Open a saved Santulator session";
-
-    private static final String NAME_SAVE_SESSION = "Save the Santulator session";
-
-    private static final String NAME_RUN_DRAW = "Run the secret santa draw";
-
-    private static final String NAME_EXIT = "Exit Santulator";
-
-    private static final String NAME_ABOUT = "About Santulator";
-
-    private String name;
+    private I18nGuiKey currentAction;
 
     private final SimpleBooleanProperty busy = new SimpleBooleanProperty();
 
     private final SimpleStringProperty actionDescription = new SimpleStringProperty();
 
     private final AtomicBoolean gatekeeper = new AtomicBoolean();
+
+    @Inject
+    public StatusManagerImpl(final I18nManager i18nManager) {
+        this.i18nManager = i18nManager;
+    }
 
     @Inject
     public void setStatusModel(final StatusModel model) {
@@ -51,39 +49,39 @@ public class StatusManagerImpl implements StatusManager {
 
     @Override
     public boolean beginNewSession() {
-        return begin(NAME_NEW_SESSION);
+        return begin(ACTION_NEW);
     }
 
     @Override
     public boolean beginOpenSession() {
-        return begin(NAME_OPEN_SESSION);
+        return begin(ACTION_OPEN);
     }
 
     @Override
     public boolean beginSaveSession() {
-        return begin(NAME_SAVE_SESSION);
+        return begin(ACTION_SAVE);
     }
 
     @Override
     public boolean beginRunDraw() {
-        return begin(NAME_RUN_DRAW);
+        return begin(ACTION_RUN);
     }
 
     @Override
     public boolean beginExit() {
-        return begin(NAME_EXIT);
+        return begin(ACTION_EXIT);
     }
 
     @Override
     public boolean beginAbout() {
-        return begin(NAME_ABOUT);
+        return begin(ACTION_ABOUT);
     }
 
-    private boolean begin(final String name) {
+    private boolean begin(final I18nGuiKey key) {
         if (gatekeeper.compareAndSet(false, true)) {
-            this.name = name;
-            LOG.debug("Begin: {}", name);
-            actionDescription.setValue(name);
+            currentAction = key;
+            LOG.debug("Begin: {}", currentAction);
+            actionDescription.setValue(i18nManager.guiText(key));
             busy.setValue(true);
 
             return true;
@@ -94,18 +92,18 @@ public class StatusManagerImpl implements StatusManager {
 
     @Override
     public void performAction(final Path file) {
-        LOG.debug("Perform: {}", name);
-        actionDescription.setValue(String.format("%s: '%s'...", name, FileNameTool.filename(file)));
+        LOG.debug("Perform: {}", currentAction);
+        actionDescription.setValue(String.format("%s: '%s'...", i18nManager.guiText(currentAction), FileNameTool.filename(file)));
     }
 
     @Override
     public void markSuccess() {
-        LOG.debug("Success: {}", name);
+        LOG.debug("Success: {}", currentAction);
     }
 
     @Override
     public void completeAction() {
-        LOG.debug("Complete: {}", name);
+        LOG.debug("Complete: {}", currentAction);
         busy.setValue(false);
         gatekeeper.set(false);
     }

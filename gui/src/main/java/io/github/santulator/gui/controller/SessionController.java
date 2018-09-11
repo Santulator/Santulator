@@ -1,5 +1,6 @@
 package io.github.santulator.gui.controller;
 
+import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.ParticipantModel;
 import io.github.santulator.gui.model.SessionModel;
 import io.github.santulator.gui.services.UnsavedChangesTool;
@@ -11,7 +12,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
+import javax.inject.Inject;
+
 public class SessionController {
+    private final I18nManager i18nManager;
+
     @FXML
     private TextField fieldDrawName;
 
@@ -20,6 +25,11 @@ public class SessionController {
 
     @FXML
     private ListView<ParticipantModel> listParticipants;
+
+    @Inject
+    public SessionController(final I18nManager i18nManager) {
+        this.i18nManager = i18nManager;
+    }
 
     public void initialise(final SessionModel model) {
         ParticipantSelectionTool selectionTool = new ParticipantSelectionTool(listParticipants);
@@ -38,7 +48,7 @@ public class SessionController {
 
         listParticipants.setSelectionModel(new NoSelectionModel<>());
         listParticipants.setItems(participants);
-        listParticipants.setCellFactory(p -> new ParticipantCell(tableTool::onActionButton, tableTool::onEnterPress, selectionTool));
+        listParticipants.setCellFactory(p -> new ParticipantCell(i18nManager, tableTool::onActionButton, tableTool::onEnterPress, selectionTool));
 
         UnsavedChangesTool.createBindings(model);
     }

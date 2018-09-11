@@ -5,6 +5,7 @@
 package io.github.santulator.gui.main;
 
 import io.github.santulator.gui.dialogues.*;
+import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.settings.SettingsManager;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
@@ -21,12 +22,15 @@ import static java.util.Collections.unmodifiableMap;
 
 @Singleton
 public class FileDialogueFactoryImpl implements FileDialogueFactory {
+    private final I18nManager i18nManager;
+
     private final SettingsManager settingsManager;
 
     private final Map<FileDialogueType, Function<Window, FileDialogue>> creators = buildCreatorMap();
 
     @Inject
-    public FileDialogueFactoryImpl(final SettingsManager settingsManager) {
+    public FileDialogueFactoryImpl(final I18nManager i18nManager, final SettingsManager settingsManager) {
+        this.i18nManager = i18nManager;
         this.settingsManager = settingsManager;
     }
 
@@ -39,17 +43,17 @@ public class FileDialogueFactoryImpl implements FileDialogueFactory {
 
     private FileDialogue createOpenSessionDialogue(final Window window) {
         return new FileDialogueImpl(
-            OPEN_SESSION, window, settingsManager, FileFormatType.TYPES_SESSIONS, FileChooser::showOpenDialog, SettingsManager::getSessionsPath, SettingsManager::setSessionsPath);
+            i18nManager, OPEN_SESSION, window, settingsManager, FileFormatType.TYPES_SESSIONS, FileChooser::showOpenDialog, SettingsManager::getSessionsPath, SettingsManager::setSessionsPath);
     }
 
     private FileDialogue createSaveSessionDialogue(final Window window) {
         return new FileDialogueImpl(
-            SAVE_SESSION, window, settingsManager, FileFormatType.TYPES_SESSIONS, FileChooser::showSaveDialog, SettingsManager::getSessionsPath, SettingsManager::setSessionsPath);
+            i18nManager, SAVE_SESSION, window, settingsManager, FileFormatType.TYPES_SESSIONS, FileChooser::showSaveDialog, SettingsManager::getSessionsPath, SettingsManager::setSessionsPath);
     }
 
     private FileDialogue createRunDrawDialogue(final Window window) {
         return new DirectoryDialogueImpl(
-            RUN_DRAW, DRAW, window, settingsManager, SettingsManager::getDrawPath, SettingsManager::setDrawPath);
+            i18nManager, RUN_DRAW, DRAW, window, settingsManager, SettingsManager::getDrawPath, SettingsManager::setDrawPath);
     }
 
     private Map<FileDialogueType, Function<Window, FileDialogue>> buildCreatorMap() {

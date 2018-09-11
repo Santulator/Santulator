@@ -1,5 +1,7 @@
 package io.github.santulator.gui.controller;
 
+import io.github.santulator.gui.i18n.I18nManager;
+import io.github.santulator.gui.i18n.I18nManagerImpl;
 import io.github.santulator.gui.model.MainModel;
 import io.github.santulator.gui.model.SessionModel;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,19 +10,22 @@ import org.junit.jupiter.api.Test;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static io.github.santulator.gui.model.SessionModel.DEFAULT_DRAW_NAME;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TitleHandlerTest {
     private static final Path SESSION_FILE = Paths.get("root", "saved.file");
 
-    private static final String DRAW_NAME = "New Draw Name";
+    private static final String DEFAULT_DRAW_NAME = "My Secret Santa Draw";
 
-    private final SessionModel sessionModel = new SessionModel();
+    private static final String DRAW_NAME = "New Draw Name";
 
     private final MainModel mainModel = new MainModel();
 
-    private final TitleHandler target = new TitleHandler(mainModel);
+    private final I18nManager i18nManager = new I18nManagerImpl();
+
+    private final SessionModel sessionModel = new SessionModel(i18nManager);
+
+    private final TitleHandler target = new TitleHandler(mainModel, i18nManager);
 
     @BeforeEach
     public void setUp() {

@@ -5,8 +5,6 @@
 package io.github.santulator.gui.common;
 
 public final class GuiConstants {
-    public static final String UNTITLED = "Untitled";
-
     public static final String WEBSITE = "https://santulator.github.io/";
 
     public static final String WEBPAGE_HELP = WEBSITE + "help/";

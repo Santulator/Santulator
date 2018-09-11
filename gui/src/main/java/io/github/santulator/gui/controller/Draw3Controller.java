@@ -1,5 +1,6 @@
 package io.github.santulator.gui.controller;
 
+import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.DrawModel;
 import io.github.santulator.gui.services.DesktopResourceTool;
 import io.github.santulator.gui.view.IconTool;
@@ -13,9 +14,9 @@ import org.controlsfx.glyphfont.FontAwesome;
 import java.util.function.Supplier;
 import javax.inject.Inject;
 
-public class Draw3Controller implements DrawController {
-    private static final String PASSWORD_TEMPLATE = "Don’t forget that you will need to use the secret password ‘%s' to open the draw results files.";
+import static io.github.santulator.gui.i18n.I18nGuiKey.DRAW3_PASSWORD_SET;
 
+public class Draw3Controller implements DrawController {
     @FXML
     private Label labelDraw3Name;
 
@@ -25,12 +26,15 @@ public class Draw3Controller implements DrawController {
     @FXML
     private Label passwordNotice;
 
+    private final I18nManager i18nManager;
+
     private final DesktopResourceTool desktopResourceTool;
 
     private DrawModel drawModel;
 
     @Inject
-    public Draw3Controller(final DesktopResourceTool desktopResourceTool) {
+    public Draw3Controller(final I18nManager i18nManager, final DesktopResourceTool desktopResourceTool) {
+        this.i18nManager = i18nManager;
         this.desktopResourceTool = desktopResourceTool;
     }
 
@@ -41,7 +45,7 @@ public class Draw3Controller implements DrawController {
         buttonDraw3Open.setOnAction(e -> processOpenResults());
 
         if (StringUtils.isNotBlank(drawModel.getPassword())) {
-            String message = String.format(PASSWORD_TEMPLATE, drawModel.getPassword());
+            String message = i18nManager.guiText(DRAW3_PASSWORD_SET, drawModel.getPassword());
 
             passwordNotice.setText(message);
             passwordNotice.setGraphic(IconTool.icon(FontAwesome.Glyph.LOCK));

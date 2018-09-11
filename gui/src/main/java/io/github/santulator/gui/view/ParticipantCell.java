@@ -1,5 +1,6 @@
 package io.github.santulator.gui.view;
 
+import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.ParticipantModel;
 import io.github.santulator.model.ParticipantRole;
 import javafx.scene.Node;
@@ -42,7 +43,8 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
 
     private ParticipantModel lastItem;
 
-    public ParticipantCell(final Consumer<ParticipantModel> actionButtonHandler, final Consumer<ParticipantModel> enterPressHandler, final ParticipantSelectionTool tool) {
+    public ParticipantCell(final I18nManager i18nManager, final Consumer<ParticipantModel> actionButtonHandler, final Consumer<ParticipantModel> enterPressHandler,
+        final ParticipantSelectionTool tool) {
         this.tool = tool;
 
         choiceRole.getItems().setAll(ParticipantRole.values());
@@ -56,8 +58,8 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
 
         applyStyle(choiceRole, CLASS_CHOICE_ROLE);
         choiceRole.setOnAction(e -> lastItem.setRole(choiceRole.getValue()));
-        choiceRole.setCellFactory(p -> new RoleCell(true));
-        choiceRole.setButtonCell(new RoleCell(false));
+        choiceRole.setCellFactory(p -> new RoleCell(i18nManager, true));
+        choiceRole.setButtonCell(new RoleCell(i18nManager, false));
 
         applyStyle(buttonAction, CLASS_BUTTON_ACTION);
         buttonAction.setOnAction(e -> actionButtonHandler.accept(lastItem));

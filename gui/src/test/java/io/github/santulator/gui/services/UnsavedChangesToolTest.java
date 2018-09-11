@@ -1,5 +1,7 @@
 package io.github.santulator.gui.services;
 
+import io.github.santulator.gui.i18n.I18nManager;
+import io.github.santulator.gui.i18n.I18nManagerImpl;
 import io.github.santulator.gui.model.ParticipantModel;
 import io.github.santulator.gui.model.SessionModel;
 import io.github.santulator.model.ParticipantRole;
@@ -10,6 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UnsavedChangesToolTest {
+    private final I18nManager i18nManager = new I18nManagerImpl();
+
     private final ParticipantModel participant = new ParticipantModel();
 
     @Test
@@ -90,7 +94,7 @@ public class UnsavedChangesToolTest {
     }
 
     private SessionModel createEmptyBoundModel() {
-        SessionModel model = new SessionModel();
+        SessionModel model = new SessionModel(i18nManager);
 
         UnsavedChangesTool.createBindings(model);
 
@@ -98,7 +102,7 @@ public class UnsavedChangesToolTest {
     }
 
     private SessionModel createBoundModelWithParticipant() {
-        SessionModel model = new SessionModel(singletonList(participant));
+        SessionModel model = new SessionModel(i18nManager, singletonList(participant));
 
         UnsavedChangesTool.createBindings(model);
 

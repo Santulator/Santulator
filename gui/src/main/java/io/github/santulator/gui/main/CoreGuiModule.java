@@ -9,6 +9,8 @@ import io.github.santulator.core.ThreadPoolTool;
 import io.github.santulator.core.ThreadPoolToolImpl;
 import io.github.santulator.engine.DrawService;
 import io.github.santulator.engine.DrawServiceImpl;
+import io.github.santulator.gui.i18n.I18nManager;
+import io.github.santulator.gui.i18n.I18nManagerImpl;
 import io.github.santulator.gui.services.ProgressSequencer;
 import io.github.santulator.gui.services.ProgressSequencerImpl;
 import io.github.santulator.gui.status.StatusManager;
@@ -28,5 +30,6 @@ public class CoreGuiModule extends AbstractModule {
         bind(SessionStateTranslator.class).to(SessionStateTranslatorImpl.class);
         bind(DrawService.class).to(DrawServiceImpl.class);
         bind(ProgressSequencer.class).to(ProgressSequencerImpl.class);
+        bind(I18nManager.class).to(I18nManagerImpl.class);
     }
 }

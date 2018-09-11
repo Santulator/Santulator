@@ -7,7 +7,6 @@ package io.github.santulator.gui.main;
 import io.github.santulator.core.SantaException;
 import io.github.santulator.gui.dialogues.FileDialogueType;
 import io.github.santulator.gui.dialogues.FileFormatType;
-import io.github.santulator.gui.model.SessionModel;
 import io.github.santulator.test.TestFileManager;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableBooleanValue;
@@ -108,8 +107,8 @@ public class GuiTestSteps {
 
         step("Start new session", () -> {
             robot.clickOn("#buttonNew");
-            verifyThat("#fieldDrawName", hasText(SessionModel.DEFAULT_DRAW_NAME));
-            verifyThat("#fieldPassword", hasText(SessionModel.DEFAULT_PASSWORD));
+            verifyThat("#fieldDrawName", hasText("My Secret Santa Draw"));
+            verifyThat("#fieldPassword", hasText("christmas"));
         });
     }
 

@@ -4,18 +4,22 @@
 
 package io.github.santulator.gui.dialogues;
 
+import io.github.santulator.gui.i18n.I18nGuiKey;
+
+import static io.github.santulator.gui.i18n.I18nGuiKey.*;
+
 public enum FileDialogueType {
-    OPEN_SESSION("Open"),
-    SAVE_SESSION("Save"),
-    RUN_DRAW("Run draw");
+    OPEN_SESSION(FILE_OPEN),
+    SAVE_SESSION(FILE_SAVE),
+    RUN_DRAW(FILE_RUN);
 
-    private final String title;
+    private final I18nGuiKey titleKey;
 
-    FileDialogueType(final String title) {
-        this.title = title;
+    FileDialogueType(final I18nGuiKey titleKey) {
+        this.titleKey = titleKey;
     }
 
-    public String getTitle() {
-        return title;
+    public I18nGuiKey getTitleKey() {
+        return titleKey;
     }
 }

@@ -7,9 +7,7 @@ import java.util.stream.IntStream;
 
 import static io.github.santulator.core.CoreTool.listOf;
 import static java.util.stream.Collectors.toList;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ProgressSequencerTest {
     private final ProgressSequencer target = new ProgressSequencerImpl();

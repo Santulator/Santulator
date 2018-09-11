@@ -4,6 +4,7 @@
 
 package io.github.santulator.gui.services;
 
+import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.ParticipantModel;
 import io.github.santulator.gui.model.SessionModel;
 import io.github.santulator.session.ParticipantState;
@@ -11,17 +12,25 @@ import io.github.santulator.session.SessionState;
 
 import java.nio.file.Path;
 import java.util.List;
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import static java.util.stream.Collectors.toList;
 
 @Singleton
 public class SessionModelTool {
+    private final I18nManager i18nManager;
+
+    @Inject
+    public SessionModelTool(final I18nManager i18nManager) {
+        this.i18nManager = i18nManager;
+    }
+
     public SessionModel buildGuiModel(final SessionState state, final Path file) {
         List<ParticipantModel> participants = state.getParticipants().stream()
             .map(this::buildParticipantModel)
             .collect(toList());
-        SessionModel model = new SessionModel(participants);
+        SessionModel model = new SessionModel(i18nManager, participants);
 
         model.setDrawName(state.getDrawName());
         model.setPassword(state.getPassword());

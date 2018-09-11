@@ -1,5 +1,7 @@
 package io.github.santulator.gui.services;
 
+import io.github.santulator.gui.i18n.I18nManager;
+import io.github.santulator.gui.i18n.I18nManagerImpl;
 import io.github.santulator.gui.model.ParticipantModel;
 import io.github.santulator.gui.model.SessionModel;
 import io.github.santulator.model.ParticipantRole;
@@ -15,6 +17,8 @@ import static io.github.santulator.session.TestSessionStateTool.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SessionModelToolTest {
+    private final I18nManager i18nManager = new I18nManagerImpl();
+
     private static final Path FILE = Paths.get("FILE");
 
     private static final int INDEX_ALBERT = 0;
@@ -39,7 +43,7 @@ public class SessionModelToolTest {
 
     private static final int INDEX_KATE = 10;
 
-    private final SessionModelTool target = new SessionModelTool();
+    private final SessionModelTool target = new SessionModelTool(i18nManager);
 
     private final ParticipantModel albert = new ParticipantModel("Albert", ParticipantRole.GIVER, "Beryl", "Carla");
 
@@ -101,7 +105,7 @@ public class SessionModelToolTest {
     @Test
     public void testBuildFileModel() {
         List<ParticipantModel> participants = listOf(albert, beryl, carla, david, edith, fred, gina, harry, iris, john, kate);
-        SessionModel input = new SessionModel(participants);
+        SessionModel input = new SessionModel(i18nManager, participants);
 
         input.setDrawName(DRAW_NAME_1);
         input.setPassword(PASSWORD);

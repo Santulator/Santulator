@@ -26,7 +26,7 @@
                             <children>
                                 <Text styleClass="title" text="%about.title" />
                                 <Label text="%about.licence" />
-                                <Label fx:id="labelVersion" text="%about.version" />
+                                <Label fx:id="labelVersion" text="VERSION INFORMATION" />
                                 <Label text="%about.copyright" />
                             </children>
                         </VBox>
