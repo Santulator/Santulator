@@ -8,7 +8,6 @@ import io.github.santulator.gui.dialogues.FileErrorTool;
 import io.github.santulator.gui.i18n.I18nGuiKey;
 import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.DrawModel;
-import io.github.santulator.gui.model.MainModel;
 import io.github.santulator.gui.services.Progressometer;
 import io.github.santulator.gui.status.StatusManager;
 import io.github.santulator.model.DrawSelection;
@@ -55,22 +54,19 @@ public class Draw2Controller implements DrawController {
 
     private final Progressometer progressometer;
 
-    private final MainModel mainModel;
-
     private DrawModel drawModel;
 
     private Supplier<Window> windowSupplier;
 
     @Inject
     public Draw2Controller(final I18nManager i18nManager, final ThreadPoolTool threadPoolTool, final FileDialogueFactory fileDialogueFactory,
-        final StatusManager statusManager, final DrawSelectionWriter writer, final Progressometer progressometer, final MainModel mainModel) {
+        final StatusManager statusManager, final DrawSelectionWriter writer, final Progressometer progressometer) {
         this.i18nManager = i18nManager;
         this.threadPoolTool = threadPoolTool;
         this.fileDialogueFactory = fileDialogueFactory;
         this.statusManager = statusManager;
         this.writer = writer;
         this.progressometer = progressometer;
-        this.mainModel = mainModel;
     }
 
     @Override
@@ -98,7 +94,7 @@ public class Draw2Controller implements DrawController {
     private void saveResults(final Path directory) {
         try {
             DrawSelection selection = drawModel.getDrawSelection();
-            String password = mainModel.getSessionModel().getPassword();
+            String password = drawModel.getPassword();
 
             progressometer.start(selection.getGivers().size());
             writer.writeDrawSelection(selection, directory, password, progressometer::completeTask);
