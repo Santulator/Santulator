@@ -44,7 +44,8 @@ public enum I18nGuiKey {
     ACTION_RUN("action.run"),
     ACTION_EXIT("action.exit"),
     ACTION_ABOUT("action.about"),
-    ;
+
+    VALIDATION_COUNT("validation.count");
 
     private final String key;
 

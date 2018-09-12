@@ -8,7 +8,7 @@ import java.nio.charset.Charset;
 import java.util.Locale;
 
 public final class CoreConstants {
-    public static final Locale LOCALE = Locale.ENGLISH;
+    public static final Locale LOCALE = Locale.UK;
 
     public static final Charset CHARSET = Charset.forName("UTF-8");
 
