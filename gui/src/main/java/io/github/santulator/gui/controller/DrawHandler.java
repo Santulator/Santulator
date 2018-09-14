@@ -1,11 +1,14 @@
 package io.github.santulator.gui.controller;
 
+import io.github.santulator.gui.dialogues.ValidationErrorDialogue;
 import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.DrawModel;
 import io.github.santulator.gui.model.DrawWizardPage;
 import io.github.santulator.gui.model.MainModel;
 import io.github.santulator.gui.services.DrawModelTool;
 import io.github.santulator.gui.status.StatusManager;
+import io.github.santulator.gui.validator.ValidationError;
+import io.github.santulator.gui.validator.ValidationService;
 import io.github.santulator.gui.view.TrackedWizardPane;
 import io.github.santulator.gui.view.ViewFxml;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +16,7 @@ import javafx.scene.Node;
 import org.controlsfx.dialog.Wizard;
 import org.controlsfx.dialog.WizardPane;
 
+import java.util.Optional;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
@@ -25,13 +29,17 @@ public class DrawHandler {
 
     private final StatusManager statusManager;
 
+    private final ValidationService validationService;
+
     private MainModel mainModel;
 
     @Inject
-    public DrawHandler(final Provider<FXMLLoader> loaderProvider, final I18nManager i18nManager, final StatusManager statusManager) {
+    public DrawHandler(final Provider<FXMLLoader> loaderProvider, final I18nManager i18nManager, final StatusManager statusManager,
+        final ValidationService validationService) {
         this.loaderProvider = loaderProvider;
         this.i18nManager = i18nManager;
         this.statusManager = statusManager;
+        this.validationService = validationService;
     }
 
     public void initialise(final MainModel mainModel) {
@@ -40,9 +48,23 @@ public class DrawHandler {
 
     public void handleRunDraw() {
         if (statusManager.beginRunDraw()) {
-            runDrawWizard();
+            if (validate()) {
+                runDrawWizard();
+            }
             statusManager.completeAction();
         }
+    }
+
+    private boolean validate() {
+        Optional<ValidationError> validationResult = validationService.validate(mainModel.getSessionModel());
+
+        validationResult.ifPresent(error -> {
+            ValidationErrorDialogue dialogue = new ValidationErrorDialogue(error, i18nManager);
+
+            dialogue.showDialogue();
+        });
+
+        return !validationResult.isPresent();
     }
 
     private void runDrawWizard() {

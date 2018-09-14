@@ -15,6 +15,8 @@ import io.github.santulator.gui.services.ProgressSequencer;
 import io.github.santulator.gui.services.ProgressSequencerImpl;
 import io.github.santulator.gui.status.StatusManager;
 import io.github.santulator.gui.status.StatusManagerImpl;
+import io.github.santulator.gui.validator.ValidationService;
+import io.github.santulator.gui.validator.ValidationServiceImpl;
 import io.github.santulator.session.SessionSerialiser;
 import io.github.santulator.session.SessionSerialiserImpl;
 import io.github.santulator.session.SessionStateTranslator;
@@ -31,5 +33,6 @@ public class CoreGuiModule extends AbstractModule {
         bind(DrawService.class).to(DrawServiceImpl.class);
         bind(ProgressSequencer.class).to(ProgressSequencerImpl.class);
         bind(I18nManager.class).to(I18nManagerImpl.class);
+        bind(ValidationService.class).to(ValidationServiceImpl.class);
     }
 }
