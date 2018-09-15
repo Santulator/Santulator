@@ -42,6 +42,20 @@ public class ValidationServiceTest {
         validate("Your draw has only one participant.  You need at least two participants before you can run the draw.");
     }
 
+    @Test
+    public void testEmptyFirstParticipant() {
+        addParticipant("");
+        addParticipant("Albert");
+        validate("The person on line 1 has no name.  Make sure all of the participants are named or delete those you don't need.");
+    }
+
+    @Test
+    public void testEmptySecondParticipant() {
+        addParticipant("Albert");
+        addParticipant("");
+        validate("The person on line 2 has no name.  Make sure all of the participants are named or delete those you don't need.");
+    }
+
     private void addParticipant(final String name) {
         List<ParticipantModel> participants = model.getParticipants();
 

@@ -45,7 +45,8 @@ public enum I18nGuiKey {
     ACTION_EXIT("action.exit"),
     ACTION_ABOUT("action.about"),
 
-    VALIDATION_COUNT("validation.count");
+    VALIDATION_COUNT("validation.count"),
+    VALIDATION_NAME("validation.name");
 
     private final String key;
 
