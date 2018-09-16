@@ -3,6 +3,7 @@ package io.github.santulator.gui.controller;
 import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.ParticipantModel;
 import io.github.santulator.gui.model.SessionModel;
+import io.github.santulator.gui.services.ParticipantTableTool;
 import io.github.santulator.gui.services.UnsavedChangesTool;
 import io.github.santulator.gui.view.NoSelectionModel;
 import io.github.santulator.gui.view.ParticipantCell;

@@ -1,4 +1,4 @@
-package io.github.santulator.gui.controller;
+package io.github.santulator.gui.services;
 
 import io.github.santulator.gui.model.ParticipantModel;
 import org.slf4j.Logger;
@@ -14,6 +14,10 @@ public class ParticipantTableTool {
     private final List<ParticipantModel> participants;
 
     private final IntConsumer rowSelector;
+
+    public ParticipantTableTool(final List<ParticipantModel> participants) {
+        this(participants, ParticipantTableTool::logSelection);
+    }
 
     public ParticipantTableTool(final List<ParticipantModel> participants, final IntConsumer rowSelector) {
         this.participants = participants;
@@ -70,17 +74,24 @@ public class ParticipantTableTool {
         }
     }
 
-    private void addRow() {
+    public ParticipantModel addRow() {
         int index = participants.size() - 1;
+        ParticipantModel row = participants.get(index);
 
-        participants.get(index).setPlaceholder(false);
+        row.setPlaceholder(false);
         rowSelector.accept(index);
         participants.add(new ParticipantModel());
         renumberFrom(index + 1);
+
+        return row;
     }
 
     private void renumberFrom(final int startIndex) {
         IntStream.range(startIndex, participants.size())
             .forEach(i -> participants.get(i).setRowNumber(i + 1));
+    }
+
+    private static void logSelection(final int index) {
+        LOG.debug("Row selected: {}", index);
     }
 }

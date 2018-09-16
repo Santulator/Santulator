@@ -28,7 +28,7 @@ public class ValidationErrorDialogue {
         Alert alert = new Alert(AlertType.ERROR);
         String message = error.getMessage(i18nManager);
 
-        alert.setTitle(i18nManager.guiText(I18nGuiKey.FILE_UNSAVED));
+        alert.setTitle(i18nManager.guiText(I18nGuiKey.ERROR_DRAW));
         alert.setHeaderText(message);
         alert.getDialogPane().setId(ALERT_ID);
         applyCss(alert);

@@ -4,13 +4,15 @@ import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.i18n.I18nManagerImpl;
 import io.github.santulator.gui.model.ParticipantModel;
 import io.github.santulator.gui.model.SessionModel;
+import io.github.santulator.gui.services.ParticipantTableTool;
 import io.github.santulator.model.ParticipantRole;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
+import static io.github.santulator.model.ParticipantRole.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ValidationServiceTest {
@@ -18,7 +20,14 @@ public class ValidationServiceTest {
 
     private final SessionModel model = new SessionModel(i18nManager, Collections.emptyList());
 
+    private final ParticipantTableTool tool = new ParticipantTableTool(model.getParticipants());
+
     private final ValidationService target = new ValidationServiceImpl();
+
+    @BeforeEach
+    public void setUp() {
+        tool.initialise();
+    }
 
     @Test
     public void testOk() {
@@ -56,10 +65,47 @@ public class ValidationServiceTest {
         validate("The person on line 2 has no name.  Make sure all of the participants are named or delete those you don't need.");
     }
 
-    private void addParticipant(final String name) {
-        List<ParticipantModel> participants = model.getParticipants();
+    @Test
+    public void testDuplicateParticipant() {
+        addParticipant("Albert");
+        addParticipant("Beryl");
+        addParticipant("Albert");
+        validate("'Albert' is listed as a participant on line 1 but also on line 3.  Participant names must be unique.");
+    }
 
-        participants.add(participants.size() - 1, new ParticipantModel(name, ParticipantRole.BOTH));
+    @Test
+    public void testMoreGiversThanReceivers() {
+        addParticipant("Albert", GIVER);
+        addParticipant("Beryl", GIVER);
+        addParticipant("Carla", RECEIVER);
+        validate("2 participants will give a present but only 1 participant will receive a present. The number of present givers must be the same as the number of present receivers.");
+    }
+
+    @Test
+    public void testMoreReceiversThanGivers() {
+        addParticipant("Albert", RECEIVER);
+        addParticipant("Beryl", RECEIVER);
+        addParticipant("Carla", GIVER);
+        validate("2 participants will receive a present but only 1 participant will give a present. The number of present givers must be the same as the number of present receivers.");
+    }
+
+    @Test
+    public void testUnknownExclusion() {
+        addParticipant("Albert");
+        addParticipant("Beryl", "Carla");
+        validate("'Beryl' on line 2 excludes 'Carla' but 'Carla' isn't listed as a participant.");
+    }
+
+    private void addParticipant(final String name, final String... exclusions) {
+        addParticipant(name, BOTH, exclusions);
+    }
+
+    private void addParticipant(final String name, final ParticipantRole role, final String... exclusions) {
+        ParticipantModel participant = tool.addRow();
+
+        participant.setName(name);
+        participant.setRole(role);
+        participant.setExclusions(exclusions);
     }
 
     private void validate(final String expected) {

@@ -1,6 +1,7 @@
 package io.github.santulator.gui.controller;
 
 import io.github.santulator.gui.model.ParticipantModel;
+import io.github.santulator.gui.services.ParticipantTableTool;
 import io.github.santulator.model.ParticipantRole;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

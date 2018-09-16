@@ -84,6 +84,10 @@ public class ParticipantModel {
         return exclusions;
     }
 
+    public void setExclusions(final String... exclusions) {
+        this.exclusions.setAll(exclusions);
+    }
+
     public boolean isPlaceholder() {
         return isPlaceholder.get();
     }

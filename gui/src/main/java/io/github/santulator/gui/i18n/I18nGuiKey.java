@@ -20,6 +20,7 @@ public enum I18nGuiKey {
     ABOUT_TITLE("about.title"),
     ABOUT_VERSION("about.version"),
 
+    ERROR_DRAW("error.draw"),
     ERROR_DETAILS("error.details"),
     ERROR_SESSION_OPEN_DETAILS("error.session.open.details"),
     ERROR_SESSION_OPEN_TITLE("error.session.open.title"),
@@ -46,7 +47,11 @@ public enum I18nGuiKey {
     ACTION_ABOUT("action.about"),
 
     VALIDATION_COUNT("validation.count"),
-    VALIDATION_NAME("validation.name");
+    VALIDATION_NAME("validation.name"),
+    VALIDATION_DUPLICATE("validation.duplicate"),
+    VALIDATION_MORE_GIVERS("validation.more.givers"),
+    VALIDATION_MORE_RECEIVERS("validation.more.receivers"),
+    VALIDATION_EXCLUSION_UNKNOWN("validation.exclusion.unknown");
 
     private final String key;
 
