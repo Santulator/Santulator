@@ -27,6 +27,8 @@ public class ValidationServiceImpl implements ValidationService {
         ValidationServiceImpl::checkDuplicateParticipant,
         ValidationServiceImpl::checkRoleCounts,
         ValidationServiceImpl::checkUnknownExclusion,
+        ValidationServiceImpl::checkRepeatExclusion,
+        ValidationServiceImpl::checkSelfExclusion,
         ValidationServiceImpl::checkDrawPossible
     );
 
@@ -128,6 +130,34 @@ public class ValidationServiceImpl implements ValidationService {
             .filter(o -> !names.contains(o))
             .findFirst()
             .map(n -> new ValidationError(VALIDATION_EXCLUSION_UNKNOWN, participant.getName(), participant.getRowNumber(), n))
+            .orElse(null);
+    }
+
+    private static ValidationError checkRepeatExclusion(final List<ParticipantModel> participants) {
+        return participantsStream(participants)
+            .map(ValidationServiceImpl::checkRepeatExclusion)
+            .filter(Objects::nonNull)
+            .findFirst()
+            .orElse(null);
+    }
+
+    private static ValidationError checkRepeatExclusion(final ParticipantModel participant) {
+        Map<String, Long> counts = participant.getExclusions().stream()
+            .collect(groupingBy(identity(), counting()));
+
+        return counts.entrySet().stream()
+            .filter(e -> e.getValue() > 1)
+            .map(Map.Entry::getKey)
+            .findFirst()
+            .map(n -> new ValidationError(VALIDATION_EXCLUSION_REPEAT, participant.getRowNumber(), n))
+            .orElse(null);
+    }
+
+    private static ValidationError checkSelfExclusion(final List<ParticipantModel> participants) {
+        return participantsStream(participants)
+            .filter(p -> p.getExclusions().contains(p.getName()))
+            .findFirst()
+            .map(p -> new ValidationError(VALIDATION_EXCLUSION_SELF, p.getRowNumber(), p.getName()))
             .orElse(null);
     }
 

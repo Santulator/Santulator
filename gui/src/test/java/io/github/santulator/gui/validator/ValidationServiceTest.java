@@ -97,6 +97,21 @@ public class ValidationServiceTest {
     }
 
     @Test
+    public void testRepeatExclusion() {
+        addParticipant("Albert");
+        addParticipant("Beryl");
+        addParticipant("Carla", "Beryl", "Beryl");
+        validate("On line 3, 'Beryl' is excluded more than once.");
+    }
+
+    @Test
+    public void testSelfExclusion() {
+        addParticipant("Albert");
+        addParticipant("Beryl", "Beryl");
+        validate("On line 2, 'Beryl' is the name of the participant but is also listed as an exclusion.  A participant cannot exclude themself.");
+    }
+
+    @Test
     public void testDrawImpossible() {
         addParticipant("Albert");
         addParticipant("Beryl", "Albert");
