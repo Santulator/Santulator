@@ -51,7 +51,8 @@ public enum I18nGuiKey {
     VALIDATION_DUPLICATE("validation.duplicate"),
     VALIDATION_MORE_GIVERS("validation.more.givers"),
     VALIDATION_MORE_RECEIVERS("validation.more.receivers"),
-    VALIDATION_EXCLUSION_UNKNOWN("validation.exclusion.unknown");
+    VALIDATION_EXCLUSION_UNKNOWN("validation.exclusion.unknown"),
+    VALIDATION_DRAW_IMPOSSIBLE("validation.draw.impossible");
 
     private final String key;
 

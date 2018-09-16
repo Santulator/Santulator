@@ -96,6 +96,13 @@ public class ValidationServiceTest {
         validate("'Beryl' on line 2 excludes 'Carla' but 'Carla' isn't listed as a participant.");
     }
 
+    @Test
+    public void testDrawImpossible() {
+        addParticipant("Albert");
+        addParticipant("Beryl", "Albert");
+        validate("It isn't possible to run this draw as there are too many exclusions. You will need to remove some of the restrictions.");
+    }
+
     private void addParticipant(final String name, final String... exclusions) {
         addParticipant(name, BOTH, exclusions);
     }
