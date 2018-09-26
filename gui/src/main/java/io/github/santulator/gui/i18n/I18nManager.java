@@ -3,7 +3,7 @@ package io.github.santulator.gui.i18n;
 import java.util.ResourceBundle;
 
 public interface I18nManager {
-    ResourceBundle guiBundle();
+    ResourceBundle bundle();
 
-    String guiText(I18nGuiKey key, Object... arguments);
+    String text(I18nKey key, Object... arguments);
 }

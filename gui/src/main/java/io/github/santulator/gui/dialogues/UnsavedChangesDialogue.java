@@ -5,7 +5,7 @@
 package io.github.santulator.gui.dialogues;
 
 import io.github.santulator.gui.common.UnsavedResponse;
-import io.github.santulator.gui.i18n.I18nGuiKey;
+import io.github.santulator.gui.i18n.I18nKey;
 import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.session.FileNameTool;
 import javafx.scene.control.Alert;
@@ -39,9 +39,9 @@ public class UnsavedChangesDialogue {
 
     public void showDialogue() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        String message = i18nManager.guiText(I18nGuiKey.FILE_MODIFIED, filename());
+        String message = i18nManager.text(I18nKey.FILE_MODIFIED, filename());
 
-        alert.setTitle(i18nManager.guiText(I18nGuiKey.FILE_UNSAVED));
+        alert.setTitle(i18nManager.text(I18nKey.FILE_UNSAVED));
         alert.setHeaderText(message);
         alert.getButtonTypes().setAll(map.keySet());
         alert.getDialogPane().setId(ALERT_ID);
@@ -54,7 +54,7 @@ public class UnsavedChangesDialogue {
 
     private String filename() {
         if (file == null) {
-            return i18nManager.guiText(I18nGuiKey.MAIN_WINDOW_UNTITLED);
+            return i18nManager.text(I18nKey.MAIN_WINDOW_UNTITLED);
         } else {
             return FileNameTool.filename(file);
         }
@@ -65,6 +65,6 @@ public class UnsavedChangesDialogue {
     }
 
     private ButtonType buttonType(final UnsavedResponse r) {
-        return new ButtonType(i18nManager.guiText(r.getKey()));
+        return new ButtonType(i18nManager.text(r.getKey()));
     }
 }

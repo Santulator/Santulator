@@ -10,8 +10,8 @@ import javafx.collections.ObservableList;
 import java.nio.file.Path;
 import java.util.List;
 
-import static io.github.santulator.gui.i18n.I18nGuiKey.SESSION_DEFAULT_DRAW;
-import static io.github.santulator.gui.i18n.I18nGuiKey.SESSION_DEFAULT_PASSWORD;
+import static io.github.santulator.gui.i18n.I18nKey.SESSION_DEFAULT_DRAW;
+import static io.github.santulator.gui.i18n.I18nKey.SESSION_DEFAULT_PASSWORD;
 import static java.util.Collections.singletonList;
 
 public class SessionModel {
@@ -32,8 +32,8 @@ public class SessionModel {
     public SessionModel(final I18nManager i18nManager, final List<ParticipantModel> participants) {
         this.participants.addAll(participants);
         this.participants.add(new ParticipantModel());
-        this.drawName = new SimpleStringProperty(i18nManager.guiText(SESSION_DEFAULT_DRAW));
-        this.password = new SimpleStringProperty(i18nManager.guiText(SESSION_DEFAULT_PASSWORD));
+        this.drawName = new SimpleStringProperty(i18nManager.text(SESSION_DEFAULT_DRAW));
+        this.password = new SimpleStringProperty(i18nManager.text(SESSION_DEFAULT_PASSWORD));
     }
 
     public SimpleBooleanProperty changesSavedProperty() {

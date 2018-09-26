@@ -2,7 +2,7 @@ package io.github.santulator.gui.controller;
 
 import io.github.santulator.gui.common.BuildInfo;
 import io.github.santulator.gui.common.GuiConstants;
-import io.github.santulator.gui.i18n.I18nGuiKey;
+import io.github.santulator.gui.i18n.I18nKey;
 import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.services.DesktopResourceTool;
 import javafx.fxml.FXML;
@@ -49,6 +49,6 @@ public class AboutController {
         linkGithub.setOnAction(e -> desktopResourceTool.showWebPage(GuiConstants.GITHUB));
         linkGithubStar.setOnAction(e -> desktopResourceTool.showWebPage(GuiConstants.GITHUB));
 
-        labelVersion.setText(i18nManager.guiText(I18nGuiKey.ABOUT_VERSION, BuildInfo.version()));
+        labelVersion.setText(i18nManager.text(I18nKey.ABOUT_VERSION, BuildInfo.version()));
     }
 }

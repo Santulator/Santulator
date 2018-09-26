@@ -3,7 +3,7 @@ package io.github.santulator.gui.controller;
 import io.github.santulator.core.SantaException;
 import io.github.santulator.engine.DrawService;
 import io.github.santulator.gui.common.GuiTaskHandler;
-import io.github.santulator.gui.i18n.I18nGuiKey;
+import io.github.santulator.gui.i18n.I18nKey;
 import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.DrawModel;
 import io.github.santulator.gui.model.MainModel;
@@ -24,8 +24,8 @@ import org.slf4j.LoggerFactory;
 import java.util.function.Supplier;
 import javax.inject.Inject;
 
-import static io.github.santulator.gui.i18n.I18nGuiKey.DRAW1_FAILURE;
-import static io.github.santulator.gui.i18n.I18nGuiKey.DRAW1_SUCCESS;
+import static io.github.santulator.gui.i18n.I18nKey.DRAW1_FAILURE;
+import static io.github.santulator.gui.i18n.I18nKey.DRAW1_SUCCESS;
 
 public class Draw1Controller implements DrawController {
     private static final Logger LOG = LoggerFactory.getLogger(Draw1Controller.class);
@@ -112,8 +112,8 @@ public class Draw1Controller implements DrawController {
         applyDescription(DRAW1_FAILURE, e.getMessage());
     }
 
-    private void applyDescription(final I18nGuiKey key, final Object argument) {
-        String text = i18nManager.guiText(key, argument);
+    private void applyDescription(final I18nKey key, final Object argument) {
+        String text = i18nManager.text(key, argument);
 
         drawModel.setDrawResultDescription(text);
     }

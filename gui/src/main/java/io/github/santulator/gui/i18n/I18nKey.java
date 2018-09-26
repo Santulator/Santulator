@@ -1,6 +1,6 @@
 package io.github.santulator.gui.i18n;
 
-public enum I18nGuiKey {
+public enum I18nKey {
     MAIN_WINDOW_UNSAVED("main.window.unsaved"),
     MAIN_WINDOW_UNTITLED("main.window.untitled"),
 
@@ -60,7 +60,7 @@ public enum I18nGuiKey {
 
     private final String key;
 
-    I18nGuiKey(final String key) {
+    I18nKey(final String key) {
         this.key = key;
     }
 

@@ -4,7 +4,7 @@
 
 package io.github.santulator.gui.status;
 
-import io.github.santulator.gui.i18n.I18nGuiKey;
+import io.github.santulator.gui.i18n.I18nKey;
 import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.StatusModel;
 import io.github.santulator.session.FileNameTool;
@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import static io.github.santulator.gui.i18n.I18nGuiKey.*;
+import static io.github.santulator.gui.i18n.I18nKey.*;
 import static javafx.beans.binding.Bindings.when;
 
 @Singleton
@@ -27,7 +27,7 @@ public class StatusManagerImpl implements StatusManager {
 
     private final I18nManager i18nManager;
 
-    private I18nGuiKey currentAction;
+    private I18nKey currentAction;
 
     private final SimpleBooleanProperty busy = new SimpleBooleanProperty();
 
@@ -77,11 +77,11 @@ public class StatusManagerImpl implements StatusManager {
         return begin(ACTION_ABOUT);
     }
 
-    private boolean begin(final I18nGuiKey key) {
+    private boolean begin(final I18nKey key) {
         if (gatekeeper.compareAndSet(false, true)) {
             currentAction = key;
             LOG.debug("Begin: {}", currentAction);
-            actionDescription.setValue(i18nManager.guiText(key));
+            actionDescription.setValue(i18nManager.text(key));
             busy.setValue(true);
 
             return true;
@@ -93,7 +93,7 @@ public class StatusManagerImpl implements StatusManager {
     @Override
     public void performAction(final Path file) {
         LOG.debug("Perform: {}", currentAction);
-        actionDescription.setValue(String.format("%s: '%s'...", i18nManager.guiText(currentAction), FileNameTool.filename(file)));
+        actionDescription.setValue(String.format("%s: '%s'...", i18nManager.text(currentAction), FileNameTool.filename(file)));
     }
 
     @Override

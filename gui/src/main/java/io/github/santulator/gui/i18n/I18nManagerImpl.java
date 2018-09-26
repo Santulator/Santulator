@@ -6,18 +6,18 @@ import javax.inject.Singleton;
 
 @Singleton
 public class I18nManagerImpl implements I18nManager {
-    public static final String BUNDLE_GUI = "bundles/santulator-gui-messages";
+    public static final String BUNDLE = "bundles/SantulatorBundle";
 
-    private final ResourceBundle guiBundle = ResourceBundle.getBundle(BUNDLE_GUI);
+    private final ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE);
 
     @Override
-    public ResourceBundle guiBundle() {
-        return guiBundle;
+    public ResourceBundle bundle() {
+        return bundle;
     }
 
     @Override
-    public String guiText(final I18nGuiKey key, final Object... arguments) {
-        String template = guiBundle.getString(key.getKey());
+    public String text(final I18nKey key, final Object... arguments) {
+        String template = bundle.getString(key.getKey());
 
         return MessageFormat.format(template, arguments);
     }

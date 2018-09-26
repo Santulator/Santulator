@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import static io.github.santulator.gui.i18n.I18nGuiKey.ERROR_DETAILS;
+import static io.github.santulator.gui.i18n.I18nKey.ERROR_DETAILS;
 import static io.github.santulator.gui.view.CssTool.applyCss;
 
 public class ErrorDialogue {
@@ -33,7 +33,7 @@ public class ErrorDialogue {
         VBox expContent = new VBox();
         DialogPane dialoguePane = alert.getDialogPane();
 
-        expContent.getChildren().setAll(new Label(i18nManager.guiText(ERROR_DETAILS)), textArea);
+        expContent.getChildren().setAll(new Label(i18nManager.text(ERROR_DETAILS)), textArea);
         dialoguePane.setExpandableContent(expContent);
         dialoguePane.expandedProperty().addListener(p -> Platform.runLater(this::resizeAlert));
         dialoguePane.setId("errorDialogue");

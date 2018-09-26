@@ -14,7 +14,7 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 import javax.inject.Singleton;
 
-import static io.github.santulator.gui.i18n.I18nGuiKey.*;
+import static io.github.santulator.gui.i18n.I18nKey.*;
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.*;
 

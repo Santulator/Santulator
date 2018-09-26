@@ -1,6 +1,6 @@
 package io.github.santulator.gui.view;
 
-import io.github.santulator.gui.i18n.I18nGuiKey;
+import io.github.santulator.gui.i18n.I18nKey;
 import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.model.ParticipantRole;
 import javafx.scene.Node;
@@ -67,9 +67,9 @@ public class RoleCell extends ListCell<ParticipantRole> {
     private Map<ParticipantRole, String> buildTextMap(final I18nManager i18nManager) {
         Map<ParticipantRole, String> texts = new EnumMap<>(ParticipantRole.class);
 
-        texts.put(ParticipantRole.GIVER, i18nManager.guiText(I18nGuiKey.SESSION_ROLE_GIVER));
-        texts.put(ParticipantRole.RECEIVER, i18nManager.guiText(I18nGuiKey.SESSION_ROLE_RECEIVER));
-        texts.put(ParticipantRole.BOTH, i18nManager.guiText(I18nGuiKey.SESSION_ROLE_BOTH));
+        texts.put(ParticipantRole.GIVER, i18nManager.text(I18nKey.SESSION_ROLE_GIVER));
+        texts.put(ParticipantRole.RECEIVER, i18nManager.text(I18nKey.SESSION_ROLE_RECEIVER));
+        texts.put(ParticipantRole.BOTH, i18nManager.text(I18nKey.SESSION_ROLE_BOTH));
 
         return texts;
     }

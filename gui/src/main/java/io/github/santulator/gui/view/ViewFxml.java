@@ -18,8 +18,6 @@ public enum ViewFxml {
     DRAW_3("draw-3.fxml"),
     ABOUT("about.fxml");
 
-    private static final String RESOURCE_BUNDLE = "bundles/santulator-gui-messages";
-
     private final String name;
 
     ViewFxml(final String name) {
@@ -29,7 +27,7 @@ public enum ViewFxml {
     public <T> T loadNode(final FXMLLoader loader, final I18nManager i18nManager) {
         try {
             loader.setLocation(getClass().getResource("/" + name));
-            loader.setResources(i18nManager.guiBundle());
+            loader.setResources(i18nManager.bundle());
 
             return loader.load();
         } catch (final IOException e) {

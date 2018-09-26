@@ -4,14 +4,14 @@
 
 package io.github.santulator.gui.dialogues;
 
-import io.github.santulator.gui.i18n.I18nGuiKey;
+import io.github.santulator.gui.i18n.I18nKey;
 import io.github.santulator.gui.i18n.I18nManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.nio.file.Path;
 
-import static io.github.santulator.gui.i18n.I18nGuiKey.*;
+import static io.github.santulator.gui.i18n.I18nKey.*;
 
 public final class FileErrorTool {
     private static final Logger LOG = LoggerFactory.getLogger(FileErrorTool.class);
@@ -32,11 +32,11 @@ public final class FileErrorTool {
         handleFileError(i18nManager, directory, e, ERROR_RESULTS_SAVE_TITLE, ERROR_RESULTS_SAVE_DETAILS, "Unable to save draw results '{}'");
     }
 
-    private static void handleFileError(final I18nManager i18nManager, final Path file, final RuntimeException e, final I18nGuiKey titleKey, final I18nGuiKey detailKey, final String log) {
+    private static void handleFileError(final I18nManager i18nManager, final Path file, final RuntimeException e, final I18nKey titleKey, final I18nKey detailKey, final String log) {
         LOG.info(log, file, e);
 
-        String title = i18nManager.guiText(titleKey);
-        String message = i18nManager.guiText(detailKey, file.getFileName());
+        String title = i18nManager.text(titleKey);
+        String message = i18nManager.text(detailKey, file.getFileName());
         ErrorDialogue dialogue = new ErrorDialogue(i18nManager, title, e, message);
 
         dialogue.showError();

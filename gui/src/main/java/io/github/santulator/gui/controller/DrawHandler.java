@@ -1,7 +1,7 @@
 package io.github.santulator.gui.controller;
 
 import io.github.santulator.gui.dialogues.ValidationErrorDialogue;
-import io.github.santulator.gui.i18n.I18nGuiKey;
+import io.github.santulator.gui.i18n.I18nKey;
 import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.DrawModel;
 import io.github.santulator.gui.model.DrawWizardPage;
@@ -73,7 +73,7 @@ public class DrawHandler {
         WizardPane wizardPane1 = buildWizardPane(ViewFxml.DRAW_1, drawModel, DrawWizardPage.RUN_DRAW);
         WizardPane wizardPane2 = buildWizardPane(ViewFxml.DRAW_2, drawModel, DrawWizardPage.SAVE_RESULTS);
         WizardPane wizardPane3 = buildWizardPane(ViewFxml.DRAW_3, drawModel, DrawWizardPage.OPEN_RESULTS);
-        Wizard wizard = new Wizard(null, i18nManager.guiText(I18nGuiKey.DRAW_TITLE_BAR));
+        Wizard wizard = new Wizard(null, i18nManager.text(I18nKey.DRAW_TITLE_BAR));
 
         DrawModelTool.createBindings(drawModel);
         wizard.invalidProperty().bind(drawModel.blockNextProperty());

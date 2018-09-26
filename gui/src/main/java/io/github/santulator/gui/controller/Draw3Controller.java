@@ -14,7 +14,7 @@ import org.controlsfx.glyphfont.FontAwesome;
 import java.util.function.Supplier;
 import javax.inject.Inject;
 
-import static io.github.santulator.gui.i18n.I18nGuiKey.DRAW3_PASSWORD_SET;
+import static io.github.santulator.gui.i18n.I18nKey.DRAW3_PASSWORD_SET;
 
 public class Draw3Controller implements DrawController {
     @FXML
@@ -45,7 +45,7 @@ public class Draw3Controller implements DrawController {
         buttonDraw3Open.setOnAction(e -> processOpenResults());
 
         if (StringUtils.isNotBlank(drawModel.getPassword())) {
-            String message = i18nManager.guiText(DRAW3_PASSWORD_SET, drawModel.getPassword());
+            String message = i18nManager.text(DRAW3_PASSWORD_SET, drawModel.getPassword());
 
             passwordNotice.setText(message);
             passwordNotice.setGraphic(IconTool.icon(FontAwesome.Glyph.LOCK));

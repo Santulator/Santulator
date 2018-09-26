@@ -4,7 +4,7 @@
 
 package io.github.santulator.gui.dialogues;
 
-import io.github.santulator.gui.i18n.I18nGuiKey;
+import io.github.santulator.gui.i18n.I18nKey;
 import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.validator.ValidationError;
 import javafx.scene.control.Alert;
@@ -28,7 +28,7 @@ public class ValidationErrorDialogue {
         Alert alert = new Alert(AlertType.ERROR);
         String message = error.getMessage(i18nManager);
 
-        alert.setTitle(i18nManager.guiText(I18nGuiKey.ERROR_DRAW));
+        alert.setTitle(i18nManager.text(I18nKey.ERROR_DRAW));
         alert.setHeaderText(message);
         alert.getDialogPane().setId(ALERT_ID);
         applyCss(alert);

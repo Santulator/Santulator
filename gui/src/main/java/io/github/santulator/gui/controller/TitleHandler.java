@@ -4,7 +4,7 @@
 
 package io.github.santulator.gui.controller;
 
-import io.github.santulator.gui.i18n.I18nGuiKey;
+import io.github.santulator.gui.i18n.I18nKey;
 import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.MainModel;
 import javafx.beans.value.ChangeListener;
@@ -45,7 +45,7 @@ public class TitleHandler {
         if (StringUtils.isNotBlank(drawName)) {
             title.append(drawName);
         } else {
-            title.append(i18nManager.guiText(I18nGuiKey.MAIN_WINDOW_UNTITLED));
+            title.append(i18nManager.text(I18nKey.MAIN_WINDOW_UNTITLED));
         }
 
         if (model.hasSessionFile()) {
@@ -53,7 +53,7 @@ public class TitleHandler {
         }
 
         if (!model.isChangesSaved()) {
-            title.append(" - ").append(i18nManager.guiText(I18nGuiKey.MAIN_WINDOW_UNSAVED));
+            title.append(" - ").append(i18nManager.text(I18nKey.MAIN_WINDOW_UNSAVED));
         }
 
         title.append(" - Santulator");

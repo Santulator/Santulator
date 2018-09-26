@@ -5,7 +5,7 @@
 package io.github.santulator.gui.dialogues;
 
 import io.github.santulator.core.SantaException;
-import io.github.santulator.gui.i18n.I18nGuiKey;
+import io.github.santulator.gui.i18n.I18nKey;
 import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.session.FileNameTool;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -21,19 +21,19 @@ import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toMap;
 
 public enum FileFormatType {
-    SESSION(I18nGuiKey.FILE_TYPE_SESSION, "*" + FileNameTool.SESSION_SUFFIX),
-    DRAW(I18nGuiKey.FILE_TYPE_DRAW, "*");
+    SESSION(I18nKey.FILE_TYPE_SESSION, "*" + FileNameTool.SESSION_SUFFIX),
+    DRAW(I18nKey.FILE_TYPE_DRAW, "*");
 
     public static final List<FileFormatType> TYPES_SESSIONS = listOf(SESSION);
 
     private static final Map<List<String>, FileFormatType> TYPES = Stream.of(FileFormatType.values())
         .collect(toMap(FileFormatType::getExtensions, identity()));
 
-    private final I18nGuiKey descriptionKey;
+    private final I18nKey descriptionKey;
 
     private final List<String> extensions;
 
-    FileFormatType(final I18nGuiKey descriptionKey, final String... extensions) {
+    FileFormatType(final I18nKey descriptionKey, final String... extensions) {
         this.descriptionKey = descriptionKey;
         this.extensions = Arrays.asList(extensions);
     }
@@ -43,7 +43,7 @@ public enum FileFormatType {
     }
 
     public ExtensionFilter buildFilter(final I18nManager i18nManager) {
-        return new ExtensionFilter(i18nManager.guiText(descriptionKey), extensions);
+        return new ExtensionFilter(i18nManager.text(descriptionKey), extensions);
     }
 
     public static FileFormatType getByFilter(final ExtensionFilter filter) {

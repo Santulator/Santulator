@@ -46,7 +46,7 @@ public class DirectoryDialogueImpl implements FileDialogue {
     public void showChooser() {
         DirectoryChooser chooser = new DirectoryChooser();
 
-        chooser.setTitle(i18nManager.guiText(type.getTitleKey()));
+        chooser.setTitle(i18nManager.text(type.getTitleKey()));
         File initialDirectory = pathGetter.apply(this.settingsManager).toFile();
         chooser.setInitialDirectory(initialDirectory);
 

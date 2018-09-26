@@ -5,7 +5,7 @@ import io.github.santulator.gui.dialogues.FileDialogue;
 import io.github.santulator.gui.dialogues.FileDialogueFactory;
 import io.github.santulator.gui.dialogues.FileDialogueType;
 import io.github.santulator.gui.dialogues.FileErrorTool;
-import io.github.santulator.gui.i18n.I18nGuiKey;
+import io.github.santulator.gui.i18n.I18nKey;
 import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.DrawModel;
 import io.github.santulator.gui.services.Progressometer;
@@ -120,6 +120,6 @@ public class Draw2Controller implements DrawController {
 
     private void markResultsSaved(final Path directory) {
         drawModel.setDirectory(directory);
-        drawModel.setSavedDrawDescription(i18nManager.guiText(I18nGuiKey.DRAW2_RESULTS, filename(directory)));
+        drawModel.setSavedDrawDescription(i18nManager.text(I18nKey.DRAW2_RESULTS, filename(directory)));
     }
 }

@@ -1,6 +1,6 @@
 package io.github.santulator.gui.validator;
 
-import io.github.santulator.gui.i18n.I18nGuiKey;
+import io.github.santulator.gui.i18n.I18nKey;
 import io.github.santulator.gui.i18n.I18nManager;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -9,17 +9,17 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.util.Arrays;
 
 public final class ValidationError {
-    private final I18nGuiKey key;
+    private final I18nKey key;
 
     private final Object[] arguments;
 
-    public ValidationError(final I18nGuiKey key, final Object... arguments) {
+    public ValidationError(final I18nKey key, final Object... arguments) {
         this.key = key;
         this.arguments = Arrays.copyOf(arguments, arguments.length);
     }
 
     public String getMessage(final I18nManager i18nManager) {
-        return i18nManager.guiText(key, arguments);
+        return i18nManager.text(key, arguments);
     }
 
     @Override

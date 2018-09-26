@@ -4,7 +4,7 @@ import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.i18n.I18nManagerImpl;
 import org.junit.jupiter.api.Test;
 
-import static io.github.santulator.gui.i18n.I18nGuiKey.ABOUT_TITLE;
+import static io.github.santulator.gui.i18n.I18nKey.ABOUT_TITLE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class I18nManagerTest {
@@ -12,14 +12,14 @@ public class I18nManagerTest {
 
     @Test
     public void testGuiBundle() {
-        String value = target.guiBundle().getString(ABOUT_TITLE.getKey());
+        String value = target.bundle().getString(ABOUT_TITLE.getKey());
 
         validateGuiValue(value);
     }
 
     @Test
     public void testGuiText() {
-        String value = target.guiText(ABOUT_TITLE);
+        String value = target.text(ABOUT_TITLE);
 
         validateGuiValue(value);
     }
