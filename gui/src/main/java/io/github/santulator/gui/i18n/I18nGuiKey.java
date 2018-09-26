@@ -10,6 +10,8 @@ public enum I18nGuiKey {
     SESSION_ROLE_RECEIVER("session.role.receiver"),
     SESSION_ROLE_BOTH("session.role.both"),
 
+    DRAW_TITLE_BAR("draw.title.bar"),
+
     DRAW1_FAILURE("draw1.failure"),
     DRAW1_SUCCESS("draw1.success"),
 

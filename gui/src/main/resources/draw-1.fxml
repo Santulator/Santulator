@@ -12,7 +12,7 @@
    <children>
       <HBox alignment="TOP_CENTER" styleClass="title">
          <children>
-            <Label minWidth="-Infinity" styleClass="prompt" text="%draw1.title" />
+            <Label minWidth="-Infinity" styleClass="prompt" text="%draw.title" />
             <Label fx:id="labelDraw1Name" text="Name of the draw" />
          </children>
       </HBox>
