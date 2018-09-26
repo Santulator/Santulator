@@ -21,8 +21,6 @@ public class SessionModel {
 
     private final SimpleStringProperty password;
 
-    private final SimpleStringProperty directory = new SimpleStringProperty();
-
     private final ObservableList<ParticipantModel> participants = FXCollections.observableArrayList(ParticipantModel.PROPERTY_EXTRACTOR);
 
     private final SimpleObjectProperty<Path> sessionFile = new SimpleObjectProperty<>(null);
@@ -72,14 +70,6 @@ public class SessionModel {
 
     public void setPassword(final String password) {
         this.password.set(password);
-    }
-
-    public String getDirectory() {
-        return directory.get();
-    }
-
-    public void setDirectory(final String directory) {
-        this.directory.set(directory);
     }
 
     public ObservableList<ParticipantModel> getParticipants() {

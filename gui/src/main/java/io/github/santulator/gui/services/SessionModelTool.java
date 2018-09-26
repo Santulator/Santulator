@@ -34,7 +34,6 @@ public class SessionModelTool {
 
         model.setDrawName(state.getDrawName());
         model.setPassword(state.getPassword());
-        model.setDirectory(state.getDirectory());
         model.setSessionFile(file);
 
         return model;
@@ -54,7 +53,6 @@ public class SessionModelTool {
         state.setParticipants(participants);
         state.setDrawName(model.getDrawName());
         state.setPassword(model.getPassword());
-        state.setDirectory(model.getDirectory());
 
         return state;
     }

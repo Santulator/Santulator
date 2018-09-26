@@ -3,7 +3,6 @@
   "formatVersion": 1,
   "drawName": "Secret Santa Draw",
   "password": "TopSecret",
-  "directory": "TEST-DIRECTORY",
   "participants": [
     {
       "name": "Albert",

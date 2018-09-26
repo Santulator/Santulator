@@ -21,8 +21,6 @@ public class SessionState {
 
     private String password;
 
-    private String directory;
-
     private List<ParticipantState> participants = Collections.emptyList();
 
     public String getFormatName() {
@@ -57,14 +55,6 @@ public class SessionState {
         this.password = password;
     }
 
-    public String getDirectory() {
-        return directory;
-    }
-
-    public void setDirectory(final String directory) {
-        this.directory = directory;
-    }
-
     public List<ParticipantState> getParticipants() {
         return Collections.unmodifiableList(participants);
     }
@@ -90,7 +80,6 @@ public class SessionState {
             .append(formatName, that.formatName)
             .append(drawName, that.drawName)
             .append(password, that.password)
-            .append(directory, that.directory)
             .append(participants, that.participants)
             .isEquals();
     }
@@ -102,7 +91,6 @@ public class SessionState {
             .append(formatVersion)
             .append(drawName)
             .append(password)
-            .append(directory)
             .append(participants)
             .toHashCode();
     }
@@ -114,7 +102,6 @@ public class SessionState {
             .append("formatVersion", formatVersion)
             .append("drawName", drawName)
             .append("password", password)
-            .append("directory", directory)
             .append("participants", participants)
             .toString();
     }

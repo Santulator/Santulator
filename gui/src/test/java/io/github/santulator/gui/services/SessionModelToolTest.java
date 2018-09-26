@@ -78,7 +78,6 @@ public class SessionModelToolTest {
             () -> assertTrue(result.isChangesSaved()),
             () -> assertEquals(DRAW_NAME_1, result.getDrawName()),
             () -> assertEquals(PASSWORD, result.getPassword()),
-            () -> assertEquals(DIRECTORY, result.getDirectory()),
             () -> assertEquals(FILE, result.getSessionFile()),
             () -> {
                 List<ParticipantModel> participants = result.getParticipants();
@@ -109,7 +108,6 @@ public class SessionModelToolTest {
 
         input.setDrawName(DRAW_NAME_1);
         input.setPassword(PASSWORD);
-        input.setDirectory(DIRECTORY);
 
         SessionState result = target.buildFileModel(input);
 

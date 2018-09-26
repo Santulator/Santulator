@@ -14,8 +14,6 @@ public final class TestSessionStateTool {
 
     public static final String PASSWORD = "TopSecret";
 
-    public static final String DIRECTORY = "TEST-DIRECTORY";
-
     private TestSessionStateTool() {
         // Prevent instantiation - all methods are static
     }
@@ -25,11 +23,7 @@ public final class TestSessionStateTool {
     }
 
     public static SessionState buildFullState(final String drawName) {
-        SessionState bean = buildState(drawName, buildFullParticipants());
-
-        bean.setDirectory(DIRECTORY);
-
-        return bean;
+        return buildState(drawName, buildFullParticipants());
     }
 
     public static SessionState buildSimpleState() {
