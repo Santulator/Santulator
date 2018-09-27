@@ -13,7 +13,6 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 @Singleton
@@ -24,19 +23,9 @@ public class DrawSelectionWriterImpl implements DrawSelectionWriter {
 
     private final GiverAssignmentWriter writer;
 
-    private final String presetPassword;
-
     @Inject
-    public DrawSelectionWriterImpl(
-        final GiverAssignmentWriter writer,
-        @Named("password") final String presetPassword) {
+    public DrawSelectionWriterImpl(final GiverAssignmentWriter writer) {
         this.writer = writer;
-        this.presetPassword = presetPassword;
-    }
-
-    @Override
-    public void writeDrawSelection(final DrawSelection selection, final Path dir) {
-        writeDrawSelection(selection, dir, presetPassword, this::emptyOnWriteComplete);
     }
 
     @Override
@@ -64,9 +53,5 @@ public class DrawSelectionWriterImpl implements DrawSelectionWriter {
         } catch (IOException e) {
             throw new SantaException(String.format(ERROR_DIR, dir), e);
         }
-    }
-
-    private void emptyOnWriteComplete() {
-        // No work required
     }
 }

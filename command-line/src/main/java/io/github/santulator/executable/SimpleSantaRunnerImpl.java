@@ -4,6 +4,8 @@
 
 package io.github.santulator.executable;
 
+import io.github.santulator.core.I18nBundleProvider;
+import io.github.santulator.core.NoOperation;
 import io.github.santulator.core.SantaException;
 import io.github.santulator.engine.DrawOutputTool;
 import io.github.santulator.engine.DrawService;
@@ -26,17 +28,22 @@ import javax.inject.Singleton;
 public class SimpleSantaRunnerImpl implements SimpleSantaRunner {
     private static final Logger LOG = LoggerFactory.getLogger(SimpleSantaRunnerImpl.class);
 
+    private static final String KEY_PASSWORD = "session.default.password";
+
     private final RequirementsReader reader;
 
     private final DrawService drawService;
 
     private final DrawSelectionWriter writer;
 
+    private final String password;
+
     @Inject
-    public SimpleSantaRunnerImpl(final RequirementsReader reader, final DrawService drawService, final DrawSelectionWriter writer) {
+    public SimpleSantaRunnerImpl(final RequirementsReader reader, final DrawService drawService, final DrawSelectionWriter writer, final I18nBundleProvider provider) {
         this.reader = reader;
         this.drawService = drawService;
         this.writer = writer;
+        this.password = provider.bundle().getString(KEY_PASSWORD);
     }
 
     @Override
@@ -46,7 +53,7 @@ public class SimpleSantaRunnerImpl implements SimpleSantaRunner {
             DrawSelection selection = drawService.draw(requirements);
             DrawOutputTool tool = new DrawOutputTool(requirements);
 
-            writer.writeDrawSelection(selection, output);
+            writer.writeDrawSelection(selection, output, password, NoOperation::doNothing);
             tool.showSelection(selection);
             LOG.info("Selection complete");
         } catch (IOException e) {

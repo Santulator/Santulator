@@ -5,6 +5,7 @@
 package io.github.santulator.gui.main;
 
 import com.google.inject.AbstractModule;
+import io.github.santulator.core.I18nBundleProvider;
 import io.github.santulator.core.ThreadPoolTool;
 import io.github.santulator.core.ThreadPoolToolImpl;
 import io.github.santulator.engine.DrawService;
@@ -33,6 +34,7 @@ public class CoreGuiModule extends AbstractModule {
         bind(DrawService.class).to(DrawServiceImpl.class);
         bind(ProgressSequencer.class).to(ProgressSequencerImpl.class);
         bind(I18nManager.class).to(I18nManagerImpl.class);
+        bind(I18nBundleProvider.class).to(I18nManagerImpl.class);
         bind(ValidationService.class).to(ValidationServiceImpl.class);
     }
 }

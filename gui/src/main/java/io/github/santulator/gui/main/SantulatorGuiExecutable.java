@@ -16,7 +16,6 @@ import java.util.Collection;
 import java.util.function.Consumer;
 import javax.inject.Inject;
 
-import static io.github.santulator.core.Language.ENGLISH;
 import static io.github.santulator.gui.main.ExecutableLogTool.*;
 
 public class SantulatorGuiExecutable extends Application {
@@ -48,7 +47,7 @@ public class SantulatorGuiExecutable extends Application {
     }
 
     public static void main(final String... args) {
-        runApp(args, Application::launch, new CoreGuiModule(), new WriterModule(ENGLISH), new LiveGuiModule(), new StandardEventSourceModule(args));
+        runApp(args, Application::launch, new CoreGuiModule(), new WriterModule(), new LiveGuiModule(), new StandardEventSourceModule(args));
     }
 
     protected static void runApp(final String[] args, final Consumer<String[]> launcher, final Module... modules) {

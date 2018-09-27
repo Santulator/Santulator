@@ -6,10 +6,10 @@ package io.github.santulator.executable;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import io.github.santulator.core.Language;
 import io.github.santulator.writer.WriterModule;
 
 import java.nio.file.Paths;
+import java.util.Locale;
 
 public final class EnglishConsoleExecutable {
     private EnglishConsoleExecutable() {
@@ -17,7 +17,7 @@ public final class EnglishConsoleExecutable {
     }
 
     public static void main(final String[] args) {
-        Injector injector = Guice.createInjector(new SantaModule(), new WriterModule(Language.ENGLISH));
+        Injector injector = Guice.createInjector(new SantaModule(Locale.UK), new WriterModule());
         SimpleSantaRunner runner = injector.getInstance(SimpleSantaRunner.class);
 
         runner.run(Paths.get(args[0]), Paths.get(args[1]));

@@ -1,9 +1,7 @@
 package io.github.santulator.gui.i18n;
 
-import java.util.ResourceBundle;
+import io.github.santulator.core.I18nBundleProvider;
 
-public interface I18nManager {
-    ResourceBundle bundle();
-
+public interface I18nManager extends I18nBundleProvider {
     String text(I18nKey key, Object... arguments);
 }

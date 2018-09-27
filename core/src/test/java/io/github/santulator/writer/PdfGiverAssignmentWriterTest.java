@@ -6,7 +6,6 @@ package io.github.santulator.writer;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import io.github.santulator.core.Language;
 import io.github.santulator.model.GiverAssignment;
 import io.github.santulator.test.TestFileManager;
 import org.apache.commons.io.FileUtils;
@@ -34,7 +33,7 @@ public class PdfGiverAssignmentWriterTest {
         if (Files.exists(file)) {
             FileUtils.forceDelete(file.toFile());
         }
-        Injector injector = Guice.createInjector(new WriterModule(Language.ENGLISH));
+        Injector injector = Guice.createInjector(new WriterModule(), new TestResourcesModule());
         target = injector.getInstance(GiverAssignmentWriter.class);
     }
 

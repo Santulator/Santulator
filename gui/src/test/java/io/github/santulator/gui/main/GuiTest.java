@@ -44,7 +44,6 @@ import java.nio.file.Path;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import static io.github.santulator.core.Language.ENGLISH;
 import static io.github.santulator.gui.main.GuiTestConstants.WINDOW_HEIGHT;
 import static io.github.santulator.gui.main.GuiTestConstants.WINDOW_WIDTH;
 import static java.util.stream.Collectors.toSet;
@@ -116,7 +115,7 @@ public class GuiTest extends FxRobot implements GuiTestValidator {
                 bind(GuiTaskHandler.class).to(GuiTaskHandlerForTesting.class);
             }
         };
-        SantulatorGuiExecutable.setModules(coreModule, testModule, new WriterModule(ENGLISH), new StandardEventSourceModule());
+        SantulatorGuiExecutable.setModules(coreModule, testModule, new WriterModule(), new StandardEventSourceModule());
 
         executable = (SantulatorGuiExecutable) setupApplication(SantulatorGuiExecutable.class);
     }

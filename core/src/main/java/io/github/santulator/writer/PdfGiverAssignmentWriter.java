@@ -9,6 +9,7 @@ import com.lowagie.text.Font;
 import com.lowagie.text.Image;
 import com.lowagie.text.pdf.PdfWriter;
 import io.github.santulator.core.CoreConstants;
+import io.github.santulator.core.I18nBundleProvider;
 import io.github.santulator.core.SantaException;
 import io.github.santulator.model.GiverAssignment;
 import org.apache.commons.lang3.StringUtils;
@@ -17,12 +18,15 @@ import java.awt.*;
 import java.io.OutputStream;
 import java.net.URL;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 @Singleton
 public class PdfGiverAssignmentWriter implements GiverAssignmentWriter {
     public static final String FORMAT_SUFFIX = ".pdf";
+
+    private static final String KEY_PHRASE = "results.phrase";
+
+    private static final String HEADER_IMAGE = "/images/header.png";
 
     private static final String FONT_NAME = "Times-Roman";
 
@@ -37,11 +41,10 @@ public class PdfGiverAssignmentWriter implements GiverAssignmentWriter {
     private final String phrase;
 
     @Inject
-    public PdfGiverAssignmentWriter(
-        @Named("header.image") final String headerImage,
-        @Named("phrase") final String phrase) {
-        this.headerImage = PdfGiverAssignmentWriter.class.getResource(headerImage);
-        this.phrase = phrase;
+    public PdfGiverAssignmentWriter(final I18nBundleProvider provider) {
+        this.headerImage = PdfGiverAssignmentWriter.class.getResource(HEADER_IMAGE);
+
+        this.phrase = provider.bundle().getString(KEY_PHRASE);
     }
 
     @Override
