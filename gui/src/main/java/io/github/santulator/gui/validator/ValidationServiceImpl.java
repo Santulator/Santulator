@@ -1,5 +1,6 @@
 package io.github.santulator.gui.validator;
 
+import io.github.santulator.core.CoreConstants;
 import io.github.santulator.gui.model.ParticipantModel;
 import io.github.santulator.gui.model.SessionModel;
 import io.github.santulator.matcher.MatchExtender;
@@ -75,22 +76,20 @@ public class ValidationServiceImpl implements ValidationService {
 
     private static ValidationError checkDuplicateParticipant(final List<ParticipantModel> participants) {
         Map<String, List<ParticipantModel>> map = participants.stream()
-            .collect(groupingBy(ParticipantModel::getName));
+            .collect(groupingBy(participantModel -> participantModel.getName().toLowerCase(CoreConstants.LOCALE)));
 
-        return map.entrySet().stream()
-            .filter(e -> e.getValue().size() >= 2)
+        return map.values().stream()
+            .filter(v -> v.size() >= 2)
             .map(ValidationServiceImpl::duplicateError)
             .findFirst()
             .orElse(null);
     }
 
-    private static ValidationError duplicateError(final Map.Entry<String, List<ParticipantModel>> e) {
-        String name = e.getKey();
-        List<ParticipantModel> duplicates = e.getValue();
+    private static ValidationError duplicateError(final List<ParticipantModel> duplicates) {
         ParticipantModel first = duplicates.get(0);
         ParticipantModel second = duplicates.get(1);
 
-        return new ValidationError(VALIDATION_DUPLICATE, name, first.getRowNumber(), second.getRowNumber());
+        return new ValidationError(VALIDATION_DUPLICATE, first.getName(), first.getRowNumber(), second.getRowNumber());
     }
 
     private static ValidationError checkRoleCounts(final List<ParticipantModel> participants) {

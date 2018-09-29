@@ -74,6 +74,14 @@ public class ValidationServiceTest {
     }
 
     @Test
+    public void testDuplicateParticipantDifferentCase() {
+        addParticipant("Albert");
+        addParticipant("Beryl");
+        addParticipant("beryl");
+        validate("'Beryl' is listed as a participant on line 2 but also on line 3.  Participant names must be unique.");
+    }
+
+    @Test
     public void testMoreGiversThanReceivers() {
         addParticipant("Albert", GIVER);
         addParticipant("Beryl", GIVER);
