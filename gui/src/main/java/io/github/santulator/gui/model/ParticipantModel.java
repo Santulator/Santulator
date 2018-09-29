@@ -21,7 +21,7 @@ public class ParticipantModel {
     private static final ParticipantRole DEFAULT_ROLE = ParticipantRole.BOTH;
 
     public static final Callback<ParticipantModel, Observable[]> PROPERTY_EXTRACTOR
-        = m -> new Observable[] {m.name, m.rowNumber, m.role, m.exclusions, m.isPlaceholder};
+        = m -> new Observable[] {m.name, m.rowNumber, m.role, m.exclusions, m.placeholder};
 
     private final SimpleStringProperty name;
 
@@ -31,7 +31,7 @@ public class ParticipantModel {
 
     private final ObservableList<String> exclusions;
 
-    private final SimpleBooleanProperty isPlaceholder;
+    private final SimpleBooleanProperty placeholder;
 
     public ParticipantModel(final String name, final ParticipantRole role, final String... exclusions) {
         this(name, role, listOf(exclusions));
@@ -50,7 +50,7 @@ public class ParticipantModel {
     }
 
     private ParticipantModel(final boolean isPlaceholder, final String name, final ParticipantRole role, final List<String> exclusions) {
-        this.isPlaceholder = new SimpleBooleanProperty(isPlaceholder);
+        this.placeholder = new SimpleBooleanProperty(isPlaceholder);
         this.name = new SimpleStringProperty(name);
         this.role = new SimpleObjectProperty<>(role);
         this.exclusions = FXCollections.observableArrayList(exclusions);
@@ -89,11 +89,11 @@ public class ParticipantModel {
     }
 
     public boolean isPlaceholder() {
-        return isPlaceholder.get();
+        return placeholder.get();
     }
 
     public void setPlaceholder(final boolean isPlaceholder) {
-        this.isPlaceholder.set(isPlaceholder);
+        placeholder.set(isPlaceholder);
     }
 
     public void clear() {

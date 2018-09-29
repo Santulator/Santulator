@@ -5,8 +5,6 @@
 package io.github.santulator.core;
 
 public class SantaException extends RuntimeException {
-    private static final long serialVersionUID = 1L;
-
     public SantaException(final String message) {
         super(message);
     }
