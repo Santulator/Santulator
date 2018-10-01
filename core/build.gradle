@@ -16,11 +16,11 @@ artifacts {
 }
 
 dependencies {
-    compile 'org.apache.commons:commons-lang3:3.8'
+    compile 'org.apache.commons:commons-lang3:3.8.1'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.7'
     compile 'com.github.librepdf:openpdf:1.2.4'
     compile 'org.slf4j:slf4j-api:1.7.25'
     compile 'com.google.inject:guice:4.2.0'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.6'
 
     testCompile 'com.github.spotbugs:spotbugs-annotations:3.1.7'
     testCompile 'commons-io:commons-io:2.6'
