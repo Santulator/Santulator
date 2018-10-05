@@ -52,7 +52,7 @@ subprojects {
         testCompile 'org.junit.jupiter:junit-jupiter-api:5.3.1'
         testCompile 'org.junit.jupiter:junit-jupiter-params:5.3.1'
         testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
-        testCompile 'org.mockito:mockito-junit-jupiter:2.22.0'
+        testCompile 'org.mockito:mockito-junit-jupiter:2.23.0'
         runtime 'ch.qos.logback:logback-classic:1.2.3'
     }
 
@@ -61,13 +61,13 @@ subprojects {
     }
 
     pmd {
-        toolVersion = '6.7.0'
+        toolVersion = '6.8.0'
         ruleSetFiles = files("$rootProject.projectDir/config/pmd/ruleset.xml")
         ruleSets = []
     }
 
     checkstyle {
-        toolVersion = '8.12'
+        toolVersion = '8.13'
         configFile = file("$rootProject.projectDir/config/checkstyle/checkstyle.xml")
     }
 
