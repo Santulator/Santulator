@@ -22,7 +22,7 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.7.25'
     compile 'com.google.inject:guice:4.2.0'
 
-    testCompile 'com.github.spotbugs:spotbugs-annotations:3.1.7'
+    testCompile 'com.github.spotbugs:spotbugs-annotations:3.1.8'
     testCompile 'commons-io:commons-io:2.6'
 
     runtime 'ch.qos.logback:logback-classic:1.2.3'

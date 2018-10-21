@@ -37,17 +37,14 @@ dependencies {
 
     testRuntime 'commons-io:commons-io:2.6'
 
+    testCompile 'org.testfx:testfx-core:4.0.15-alpha'
     if (JavaVersion.current() == JavaVersion.VERSION_1_8) {
         compile 'org.controlsfx:controlsfx:8.40.14'
 
-        testCompile 'org.testfx:testfx-core:4.0.14-alpha'
         testRuntime 'org.testfx:openjfx-monocle:8u76-b04'
     } else {
         compile 'org.controlsfx:controlsfx:9.0.0'
 
-        testCompile('org.testfx:testfx-core:4.0.12-alpha') {
-            exclude group: 'org.testfx', module: 'testfx-internal-java8'
-        }
         testRuntime 'org.testfx:testfx-internal-java9:4.0.12-alpha'
         testRuntime 'org.testfx:openjfx-monocle:jdk-9+181'
     }
