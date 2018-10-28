@@ -7,7 +7,7 @@ set JAR=%6
 set VERSION=%7
 
 call %PACKAGER% ^
-  create-installer %INSTALLER_TYPE% ^
+  create-image ^
   --module-path %MODULE_PATH% ^
   --verbose ^
   --echo-mode ^
