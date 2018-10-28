@@ -1,0 +1,51 @@
+/*
+ * Open Source Software published under the Apache Licence, Version 2.0.
+ */
+
+ext {
+    publishedVersion = project.version
+    bundlerScript = file('bin/build-package.sh')
+    commandLinePrefix = ['sh']
+    if (operatingSystem.isMacOsX()) {
+        packageType = 'dmg'
+        appIcon = file('icons/mac/Santulator.icns')
+        sessionIcon = file('icons/mac/Santulator.icns')
+    } else if (operatingSystem.isLinux()) {
+        packageType = 'deb'
+        appIcon = file('icons/App1024.png')
+        sessionIcon = file('icons/Doc1024.png')
+    } else if (operatingSystem.isWindows()) {
+        packageType = 'exe'
+        appIcon = file('icons/windows/Santulator.ico')
+        sessionIcon = file('icons/windows/Santulator.ico')
+        bundlerScript = file('bin/build-package.bat')
+        commandLinePrefix = ['cmd', '/c']
+    }
+    if (publishedVersion.endsWith('-SNAPSHOT')) {
+        publishedVersion = '1.0.0'
+    }
+}
+
+dependencies {
+    compile project(':gui')
+}
+
+task copyDependencies(type: Copy) {
+    from configurations.runtime
+    into "${buildDir}/libraries"
+}
+
+task createBundle(type: Exec, dependsOn: copyDependencies) {
+    description 'Build the installable bundle'
+    commandLine = [
+        *commandLinePrefix,
+        bundlerScript,
+        java_packager_path,
+        packageType,
+        javafx_jmods_path,
+        file("${buildDir}/libraries"),
+        file("${buildDir}/bundle"),
+        project(':gui').jar.outputs.files[0].name,
+        publishedVersion
+    ]
+}
