@@ -17,5 +17,5 @@ call %PACKAGER% ^
   --name Santulator ^
   --main-jar %JAR% ^
   --version %VERSION% ^
-  --jvm-args '--add-opens javafx.base/com.sun.javafx.reflect=ALL-UNNAMED' ^
+  --jvm-args "--add-opens javafx.base/com.sun.javafx.reflect=ALL-UNNAMED" ^
   --class io.github.santulator.gui.main.SantulatorGuiExecutable
