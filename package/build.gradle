@@ -39,6 +39,7 @@ task createBundle(type: Exec, dependsOn: copyDependencies) {
     description 'Build the installable bundle'
     if (operatingSystem.isWindows()) {
         commandLine 'cmd', '/c',
+            bundlerScript,
             javafx_jmods_path,
             santulatorLibraryPath,
             bundlePath,
