@@ -1,3 +1,5 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
 /*
  * Open Source Software published under the Apache Licence, Version 2.0.
  */
@@ -20,6 +22,9 @@ ext {
         appIcon = file('icons/windows/Santulator.ico')
         sessionIcon = file('icons/windows/Santulator.ico')
         bundlerScript = file('bin/build-package.bat')
+        generatedInnoSetupFile = file("${buildDir}/resources/main/santulator.iss")
+        windowsExecutable = file("${bundlePath}/Santulator/Santulator.exe")
+        bundleContent = file("${bundlePath}/Santulator/*")
     }
     if (publishedVersion.endsWith('-SNAPSHOT')) {
         publishedVersion = '1.0.0'
@@ -56,4 +61,24 @@ task createBundle(type: Exec, dependsOn: copyDependencies) {
             mainJar,
             publishedVersion
     }
+}
+
+if (operatingSystem.isWindows()) {
+    processResources {
+        filesMatching('santulator.iss') {
+            filter ReplaceTokens, tokens: [
+                'bundle.version': publishedVersion,
+                'executable.location': windowsExecutable.toString(),
+                'bundle.content': bundleContent.toString()
+            ]
+        }
+    }
+
+    task reportInnoSetup(dependsOn: processResources) {
+        doLast {
+            println("Inno Setup file: ${generatedInnoSetupFile}")
+        }
+    }
+
+    createBundle.finalizedBy reportInnoSetup
 }
