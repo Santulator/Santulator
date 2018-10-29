@@ -9,6 +9,7 @@ INPUT=$4
 OUTPUT=$5
 JAR=$6
 VERSION=$7
+FILE_ASSOCIATIONS=$8
 
 ${PACKAGER} \
   create-installer ${INSTALLER_TYPE} \
@@ -22,4 +23,5 @@ ${PACKAGER} \
   --main-jar ${JAR} \
   --version ${VERSION} \
   --jvm-args '--add-opens javafx.base/com.sun.javafx.reflect=ALL-UNNAMED' \
+  --file-associations ${FILE_ASSOCIATIONS} \
   --class io.github.santulator.gui.main.SantulatorGuiExecutable
