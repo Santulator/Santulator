@@ -11,10 +11,12 @@ ext {
     mainJar = project(':gui').jar.outputs.files[0].name
     bundlePath = file("${buildDir}/bundle")
     fileAssociations = file("${buildDir}/resources/main/file-associations.properties")
+    extraBundlerArguments = []
     if (operatingSystem.isMacOsX()) {
         packageType = 'pkg'
         appIcon = file('icons/mac/Santulator.icns')
         sessionIcon = file('icons/mac/Santulator.icns')
+        extraBundlerArguments = ['--mac-sign']
     } else if (operatingSystem.isLinux()) {
         packageType = 'deb'
         appIcon = file('icons/App1024.png')
@@ -61,7 +63,7 @@ task createBundle(type: Exec, dependsOn: [copyDependencies, processResources]) {
             publishedVersion,
             fileAssociations
     } else {
-        commandLine 'sh',
+        commandLine = ['sh',
             bundlerScript,
             java_packager_path,
             packageType,
@@ -70,7 +72,8 @@ task createBundle(type: Exec, dependsOn: [copyDependencies, processResources]) {
             bundlePath,
             mainJar,
             publishedVersion,
-            fileAssociations
+            fileAssociations,
+            *extraBundlerArguments]
     }
 }
 
