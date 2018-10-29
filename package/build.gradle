@@ -5,9 +5,11 @@
 ext {
     publishedVersion = project.version
     bundlerScript = file('bin/build-package.sh')
-    commandLinePrefix = ['sh']
+    santulatorLibraryPath = file("${buildDir}/libraries")
+    mainJar = project(':gui').jar.outputs.files[0].name
+    bundlePath = file("${buildDir}/bundle")
     if (operatingSystem.isMacOsX()) {
-        packageType = 'dmg'
+        packageType = 'pkg'
         appIcon = file('icons/mac/Santulator.icns')
         sessionIcon = file('icons/mac/Santulator.icns')
     } else if (operatingSystem.isLinux()) {
@@ -15,11 +17,9 @@ ext {
         appIcon = file('icons/App1024.png')
         sessionIcon = file('icons/Doc1024.png')
     } else if (operatingSystem.isWindows()) {
-        packageType = 'exe'
         appIcon = file('icons/windows/Santulator.ico')
         sessionIcon = file('icons/windows/Santulator.ico')
         bundlerScript = file('bin/build-package.bat')
-        commandLinePrefix = ['cmd', '/c']
     }
     if (publishedVersion.endsWith('-SNAPSHOT')) {
         publishedVersion = '1.0.0'
@@ -37,15 +37,22 @@ task copyDependencies(type: Copy) {
 
 task createBundle(type: Exec, dependsOn: copyDependencies) {
     description 'Build the installable bundle'
-    commandLine = [
-        *commandLinePrefix,
-        bundlerScript,
-        java_packager_path,
-        packageType,
-        javafx_jmods_path,
-        file("${buildDir}/libraries"),
-        file("${buildDir}/bundle"),
-        project(':gui').jar.outputs.files[0].name,
-        publishedVersion
-    ]
+    if (operatingSystem.isWindows()) {
+        commandLine 'cmd', '/c',
+            javafx_jmods_path,
+            santulatorLibraryPath,
+            bundlePath,
+            mainJar,
+            publishedVersion
+    } else {
+        commandLine 'sh',
+            bundlerScript,
+            java_packager_path,
+            packageType,
+            javafx_jmods_path,
+            santulatorLibraryPath,
+            bundlePath,
+            mainJar,
+            publishedVersion
+    }
 }

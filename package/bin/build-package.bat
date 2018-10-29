@@ -1,10 +1,8 @@
-set PACKAGER=%1
-set INSTALLER_TYPE=%2
-set MODULE_PATH=%3
-set INPUT=%4
-set OUTPUT=%5
-set JAR=%6
-set VERSION=%7
+set MODULE_PATH=%1
+set INPUT=%2
+set OUTPUT=%3
+set JAR=%4
+set VERSION=%5
 
 call "%JAVA_HOME%\bin\java.exe" ^
     -Xmx512M ^
