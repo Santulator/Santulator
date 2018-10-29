@@ -51,12 +51,65 @@ processResources {
     }
 }
 
-task createBundle(type: Exec, dependsOn: [copyDependencies, processResources]) {
+task checkBundlingEnvironment {
+    description 'Check the environment for building the installable bundle'
+    doLast {
+        if (JavaVersion.current() != JavaVersion.VERSION_11) {
+            throw new GradleException("You need JDK 11 to build the Santulator installable bundle")
+        }
+        if (project.hasProperty('javafxJmodsPath')) {
+            def modsPath = file("${javafxJmodsPath}")
+
+            if (modsPath.exists() && modsPath.isDirectory()) {
+                if (!modsPath.list({ d, f -> f ==~ /.*.jmod/ } as FilenameFilter)) {
+                    throw new GradleException("JavaFX modules directory '$modsPath' does not contain any '*.jmod' files")
+                }
+            } else {
+                throw new GradleException("JavaFX modules directory '$modsPath' not found")
+            }
+        } else {
+            throw new GradleException("Use -PjavafxJmodsPath=... to specify the directory containing the OpenJFX 11 JMod files")
+        }
+        if (operatingSystem.isWindows()) {
+            def javaHome = System.env.JAVA_HOME
+
+            if (javaHome) {
+                def javaExecutable = file("${javaHome}/bin/java.exe")
+                def packagerFile = file("${javaHome}/bin/jpackager.exe")
+                def jmodFile = file("${javaHome}/jmods/jdk.packager.jar")
+
+                if (!javaExecutable.exists()) {
+                    throw new GradleException("Unable to find Java executable '${javaExecutable}'")
+                }
+                if (!packagerFile.exists()) {
+                    throw new GradleException("Unable to find Java packager executable at '${packagerFile}'")
+                }
+                if (!jmodFile.exists()) {
+                    throw new GradleException("Unable to find Java packager module at '${jmodFile}'")
+                }
+            } else {
+                throw new GradleException("JAVA_HOME must be set")
+            }
+        } else {
+            if (project.hasProperty('javaPackagerPath')) {
+                def packagerFile = file("${javaPackagerPath}/jpackager")
+
+                if (!packagerFile.exists() || !packagerFile.isFile()) {
+                    throw new GradleException("The Java Packager '$packagerFile' is missing")
+                }
+            } else {
+                throw new GradleException("Use -PjavaPackagerPath=... to specify the directory containing the Java Packager")
+            }
+        }
+    }
+}
+
+task createBundle(type: Exec, dependsOn: [copyDependencies, processResources, checkBundlingEnvironment]) {
     description 'Build the installable bundle'
     if (operatingSystem.isWindows()) {
         commandLine 'cmd', '/c',
             bundlerScript,
-            javafx_jmods_path,
+            "${-> javafxJmodsPath}",
             santulatorLibraryPath,
             bundlePath,
             mainJar,
@@ -65,9 +118,9 @@ task createBundle(type: Exec, dependsOn: [copyDependencies, processResources]) {
     } else {
         commandLine = ['sh',
             bundlerScript,
-            java_packager_path,
+           "${-> file("${javaPackagerPath}/jpackager")}",
             packageType,
-            javafx_jmods_path,
+           "${-> file("${javafxJmodsPath}")}",
             santulatorLibraryPath,
             bundlePath,
             mainJar,
