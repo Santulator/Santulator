@@ -7,17 +7,11 @@ Santulator helps you run your Secret Santa draw simply and flexibly.  You can en
 
 [![Santulator](/assets/Santulator-in-use-1.png)](https://santulator.github.io/)
 
-# Important Note
+# How To Use Santulator
 
-Santulator isn't yet ready for release.  Feel free to take a look around and try it out while development continues towards the first release.
+Santulator is available for free from the [download page](https://santulator.github.io/download/) of the project website.  You can find a complete tutorial explaining how to use the system on the [help page](https://santulator.github.io/help/).
 
-# Prerequisites
-
-You will need Java 8 to build and run Santulator.  You can download it from the [Oracle Website](http://www.oracle.com/technetwork/java/javase/downloads/index.html).  Everything else, including Gradle, will be downloaded by the build process.
-
-# How To Run Santulator
-
-Santulator is still being developed and isn't ready yet for release.  You can try out the latest development version from the command line as follows:
+If you're a programmer and would like to try the development version, clone this repository and run the following to start Santulator:
 ~~~
 $ ./gradlew :gui:run
 ~~~
