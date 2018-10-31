@@ -45,8 +45,7 @@ dependencies {
     } else {
         compile 'org.controlsfx:controlsfx:9.0.0'
 
-        testRuntime 'org.testfx:testfx-internal-java9:4.0.12-alpha'
-        testRuntime 'org.testfx:openjfx-monocle:jdk-9+181'
+        testRuntime 'org.testfx:openjfx-monocle:jdk-11+26'
     }
 }
 
@@ -106,4 +105,8 @@ if (JavaVersion.current() == JavaVersion.VERSION_11) {
             '--add-exports', 'javafx.graphics/com.sun.javafx.application=ALL-UNNAMED'
         ]
     }
+
+    pmdTest.enabled = false
+    spotbugsMain.enabled = false
+    spotbugsTest.enabled = false
 }
