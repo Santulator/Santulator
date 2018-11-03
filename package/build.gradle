@@ -34,6 +34,30 @@ ext {
     }
 }
 
+task recreateIconMacApp(type: Exec) {
+    description 'Regenerate the Mac application icon'
+    commandLine 'sh', file('bin/mac-icon.sh'), file('icons/App1024.png'), file('icons/mac'), 'Santulator'
+}
+
+task recreateIconMacSession(type: Exec) {
+    description 'Regenerate the Mac session file icon'
+    commandLine 'sh', file('bin/mac-icon.sh'), file('icons/Doc1024.png'), file('icons/mac'), 'SantulatorSession'
+}
+
+task recreateIconWindowsApp(type: Exec) {
+    description 'Regenerate the Windows application icon'
+    commandLine 'sh', file('bin/windows-icon.sh'), file('icons/App1024.png'), file('icons/windows'), 'Santulator'
+}
+
+task recreateIconWindowsSession(type: Exec) {
+    description 'Regenerate the Windows session file icon'
+    commandLine 'sh', file('bin/windows-icon.sh'), file('icons/Doc1024.png'), file('icons/windows'), 'SantulatorSession'
+}
+
+task recreateIcons(dependsOn: [recreateIconMacApp, recreateIconMacSession, recreateIconWindowsApp, recreateIconWindowsSession]) {
+    description 'Regenerate all the application bundle icons'
+}
+
 dependencies {
     compile project(':gui')
 }
