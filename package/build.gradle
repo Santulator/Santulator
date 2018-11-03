@@ -150,6 +150,7 @@ task createBundle(type: Exec, dependsOn: [copyDependencies, processResources, ch
             mainJar,
             publishedVersion,
             fileAssociations,
+            appIcon,
             *extraBundlerArguments]
     }
 }
