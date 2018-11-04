@@ -138,7 +138,8 @@ task createBundle(type: Exec, dependsOn: [copyDependencies, processResources, ch
             bundlePath,
             mainJar,
             publishedVersion,
-            fileAssociations
+            fileAssociations,
+            appIcon
     } else {
         commandLine = ['sh',
             bundlerScript,
