@@ -106,7 +106,10 @@ if (JavaVersion.current() == JavaVersion.VERSION_11) {
         ]
     }
 
+    // TODO Fix PMD problem (https://github.com/Santulator/Santulator/issues/2)
     pmdTest.enabled = false
+
+    // TODO Fix SpotBugs problem (https://github.com/Santulator/Santulator/issues/3)
     spotbugsMain.enabled = false
     spotbugsTest.enabled = false
 }
