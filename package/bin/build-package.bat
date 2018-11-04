@@ -3,8 +3,8 @@ set INPUT=%2
 set OUTPUT=%3
 set JAR=%4
 set VERSION=%5
-set FILE_ASSOCIATIONS=%8
-set APP_ICON=%9
+set FILE_ASSOCIATIONS=%6
+set APP_ICON=%7
 
 call "%JAVA_HOME%\bin\java.exe" ^
     -Xmx512M ^
