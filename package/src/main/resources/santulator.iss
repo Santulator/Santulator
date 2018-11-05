@@ -25,6 +25,7 @@ DisableDirPage=no
 OutputBaseFilename=Santulator-@bundle.version@
 Compression=lzma
 SolidCompression=yes
+ChangesAssociations=yes
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -44,3 +45,8 @@ Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
 
+[Registry]
+Root: HKLM; Subkey: "Software\Classes\.santa"; ValueType: string; ValueName: ""; ValueData: "SantulatorSession"; Flags: uninsdeletevalue
+Root: HKLM; Subkey: "Software\Classes\SantulatorSession"; ValueType: string; ValueName: ""; ValueData: "Santulator Session"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "Software\Classes\SantulatorSession\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Santulator.exe,0"
+Root: HKLM; Subkey: "Software\Classes\SantulatorSession\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\Santulator.exe"" ""%1"""
