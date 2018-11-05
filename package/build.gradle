@@ -30,7 +30,7 @@ ext {
         bundleContent = file("${bundlePath}/Santulator/*")
     }
     if (publishedVersion.endsWith('-SNAPSHOT')) {
-        publishedVersion = '1.0.0'
+        publishedVersion = '0.0.1'
     }
 }
 
