@@ -21,6 +21,7 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DisableProgramGroupPage=yes
+DisableDirPage=no
 OutputBaseFilename=Santulator-@bundle.version@
 Compression=lzma
 SolidCompression=yes
