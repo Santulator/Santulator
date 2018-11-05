@@ -15,7 +15,7 @@ ext {
     if (operatingSystem.isMacOsX()) {
         packageType = 'pkg'
         appIcon = file('icons/mac/Santulator.icns')
-        sessionIcon = file('icons/mac/Santulator.icns')
+        sessionIcon = file('icons/mac/SantulatorSession.icns')
         extraBundlerArguments = ['--mac-sign']
     } else if (operatingSystem.isLinux()) {
         packageType = 'deb'
@@ -23,7 +23,7 @@ ext {
         sessionIcon = file('icons/Doc1024.png')
     } else if (operatingSystem.isWindows()) {
         appIcon = file('icons/windows/Santulator.ico')
-        sessionIcon = file('icons/windows/Santulator.ico')
+        sessionIcon = file('icons/windows/SantulatorSession.ico')
         bundlerScript = file('bin/build-package.bat')
         generatedInnoSetupFile = file("${buildDir}/resources/main/santulator.iss")
         windowsExecutable = file("${bundlePath}/Santulator/Santulator.exe")
