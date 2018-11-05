@@ -3,8 +3,7 @@ set INPUT=%2
 set OUTPUT=%3
 set JAR=%4
 set VERSION=%5
-set FILE_ASSOCIATIONS=%6
-set APP_ICON=%7
+set APP_ICON=%6
 
 call "%JAVA_HOME%\bin\java.exe" ^
     -Xmx512M ^
@@ -22,7 +21,5 @@ call "%JAVA_HOME%\bin\java.exe" ^
     --main-jar "%JAR%" ^
     --version "%VERSION%" ^
     --jvm-args "--add-opens javafx.base/com.sun.javafx.reflect=ALL-UNNAMED" ^
-    --file-associations "%FILE_ASSOCIATIONS%" ^
     --icon "%APP_ICON%" ^
-    --win-dir-chooser ^
     --class "io.github.santulator.gui.main.SantulatorGuiExecutable"
