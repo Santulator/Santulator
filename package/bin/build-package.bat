@@ -24,4 +24,5 @@ call "%JAVA_HOME%\bin\java.exe" ^
     --jvm-args "--add-opens javafx.base/com.sun.javafx.reflect=ALL-UNNAMED" ^
     --file-associations "%FILE_ASSOCIATIONS%" ^
     --icon "%APP_ICON%" ^
+    --win-dir-chooser ^
     --class "io.github.santulator.gui.main.SantulatorGuiExecutable"
