@@ -170,7 +170,7 @@ if (operatingSystem.isWindows()) {
         doLast {
             copy {
                 from 'icons/windows'
-                into bundlePath
+                into "${bundlePath}/Santulator"
                 include 'SantulatorSession.ico'
             }
             println("Inno Setup file: ${generatedInnoSetupFile}")
