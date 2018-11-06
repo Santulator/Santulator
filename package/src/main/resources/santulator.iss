@@ -48,5 +48,5 @@ Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChang
 [Registry]
 Root: HKLM; Subkey: "Software\Classes\.santa"; ValueType: string; ValueName: ""; ValueData: "SantulatorSession"; Flags: uninsdeletevalue
 Root: HKLM; Subkey: "Software\Classes\SantulatorSession"; ValueType: string; ValueName: ""; ValueData: "Santulator Session"; Flags: uninsdeletekey
-Root: HKLM; Subkey: "Software\Classes\SantulatorSession\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Santulator.exe,0"
+Root: HKLM; Subkey: "Software\Classes\SantulatorSession\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\SantulatorSession.ico"
 Root: HKLM; Subkey: "Software\Classes\SantulatorSession\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\Santulator.exe"" ""%1"""
