@@ -166,11 +166,16 @@ if (operatingSystem.isWindows()) {
         }
     }
 
-    task reportInnoSetup(dependsOn: processResources) {
+    task completeInnoSetup(dependsOn: processResources) {
         doLast {
+            copy {
+                from 'icons/windows'
+                into bundlePath
+                include 'SantulatorSession.ico'
+            }
             println("Inno Setup file: ${generatedInnoSetupFile}")
         }
     }
 
-    createBundle.finalizedBy reportInnoSetup
+    createBundle.finalizedBy completeInnoSetup
 }
