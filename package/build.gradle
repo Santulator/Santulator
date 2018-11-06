@@ -138,7 +138,6 @@ task createBundle(type: Exec, dependsOn: [copyDependencies, processResources, ch
             bundlePath,
             mainJar,
             publishedVersion,
-            fileAssociations,
             appIcon
     } else {
         commandLine = ['sh',
@@ -167,11 +166,16 @@ if (operatingSystem.isWindows()) {
         }
     }
 
-    task reportInnoSetup(dependsOn: processResources) {
+    task completeInnoSetup(dependsOn: processResources) {
         doLast {
+            copy {
+                from 'icons/windows'
+                into "${bundlePath}/Santulator"
+                include 'SantulatorSession.ico'
+            }
             println("Inno Setup file: ${generatedInnoSetupFile}")
         }
     }
 
-    createBundle.finalizedBy reportInnoSetup
+    createBundle.finalizedBy completeInnoSetup
 }
