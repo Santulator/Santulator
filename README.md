@@ -11,7 +11,11 @@ Santulator helps you run your Secret Santa draw simply and flexibly.  You can en
 
 Santulator is available for free from the [download page](https://santulator.github.io/download/) of the project website.  You can find a complete tutorial explaining how to use the system on the [help page](https://santulator.github.io/help/).
 
-If you're a programmer and would like to try the development version, clone this repository and run the following to start Santulator:
+# Running The Development Version of Santulator
+
+You will need JDK 11.  The version used for building Santulator releases is OpenJDK 11 with Hotspot, from [AdoptOpenJDK](https://adoptopenjdk.net/).
+
+With your JDK installed you can then clone this repository and run the following to start Santulator:
 ~~~
 $ ./gradlew :gui:run
 ~~~
