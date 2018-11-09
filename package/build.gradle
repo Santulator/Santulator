@@ -181,6 +181,12 @@ if (operatingSystem.isWindows()) {
                 into "${bundlePath}/Santulator"
                 include 'SantulatorSession.ico'
             }
+            // Copy files for DLL workaround (see https://github.com/Santulator/Santulator/issues/5)
+            copy {
+                from windowsDllMSVCP140
+                from windowsDllVCRUNTIME140
+                into "${bundlePath}/Santulator"
+            }
             println("Inno Setup file: ${generatedInnoSetupFile}")
         }
     }
