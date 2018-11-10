@@ -20,7 +20,7 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.9.7'
     compile 'com.github.librepdf:openpdf:1.2.5'
     compile 'org.slf4j:slf4j-api:1.7.25'
-    compile 'com.google.inject:guice:4.2.1'
+    compile 'com.google.inject:guice:4.2.2'
 
     testCompile 'com.github.spotbugs:spotbugs-annotations:3.1.8'
     testCompile 'commons-io:commons-io:2.6'
