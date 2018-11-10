@@ -23,3 +23,6 @@
 Button, StatusBar, MenuBar {
     -fx-font-weight: bold;
 }
+.masker {
+    -fx-opacity: 0.3;
+}

@@ -38,6 +38,9 @@ Button Glyph * {
 MenuBar {
     -fx-base: derive(-colour-principal, -80%);
 }
+.masker {
+    -fx-background-color: black;
+}
 
 /*
  * Dialogue pane.
