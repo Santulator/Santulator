@@ -54,6 +54,8 @@ public class SantulatorGuiImpl implements SantulatorGui {
 
     @Override
     public void start(final Stage stage) {
+        i18nManager.initialise();
+
         Parent root = ViewFxml.MAIN.loadNode(mainLoader, i18nManager);
 
         initialise(stage);

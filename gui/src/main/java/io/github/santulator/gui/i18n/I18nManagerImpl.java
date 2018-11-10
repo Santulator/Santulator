@@ -1,6 +1,9 @@
 package io.github.santulator.gui.i18n;
 
+import io.github.santulator.core.CoreConstants;
+
 import java.text.MessageFormat;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.inject.Singleton;
 
@@ -13,6 +16,11 @@ public class I18nManagerImpl implements I18nManager {
     @Override
     public ResourceBundle bundle() {
         return bundle;
+    }
+
+    @Override
+    public void initialise() {
+        Locale.setDefault(CoreConstants.LOCALE);
     }
 
     @Override
