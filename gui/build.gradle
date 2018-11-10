@@ -73,10 +73,10 @@ if (JavaVersion.current() == JavaVersion.VERSION_11) {
     }
 
     dependencies {
-        javafxCompile "org.openjfx:javafx-base:11:${platform}"
-        javafxCompile "org.openjfx:javafx-graphics:11:${platform}"
-        javafxCompile "org.openjfx:javafx-controls:11:${platform}"
-        javafxCompile "org.openjfx:javafx-fxml:11:${platform}"
+        javafxCompile "org.openjfx:javafx-base:11.0.1:${platform}"
+        javafxCompile "org.openjfx:javafx-graphics:11.0.1:${platform}"
+        javafxCompile "org.openjfx:javafx-controls:11.0.1:${platform}"
+        javafxCompile "org.openjfx:javafx-fxml:11.0.1:${platform}"
 
         compileOnly configurations.javafxCompile
     }
