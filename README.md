@@ -33,3 +33,7 @@ By default the GUI test runs as part of the standard Gradle build, in headless m
 ~~~
 $ ./gradlew :gui:test --tests io.github.santulator.gui.main.GuiTest --rerun-tasks -PnoHeadless
 ~~~
+
+# How to Build The Installable Bundle
+
+Instructions for building the installable bundle for Mac, Windows or Linux can be found in [PACKAGING.md](package/PACKAGING.md).  These instructions show how to create the self-contained installers for Santulator that don't require the user to first install Java.
