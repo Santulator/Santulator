@@ -46,7 +46,7 @@ You will find the created installable bundle in the directory `package/build/bun
 
 #### Windows: Running the Java Packager
 
-Assuming that you have installed the JMOD files you downloaded in [JDK 11](#jdk-11) into `C:\javafx-jmods-11`, you can run the following command to create the installable bundle:
+Assuming that you have installed the JMOD files you downloaded in the above section "[OpenJFX 11](#openjfx-11)" into `C:\javafx-jmods-11`, you can run the following command to create the installable bundle:
 
 ~~~
 gradlew clean -PjavafxJmodsPath=C:\javafx-jmods-11 createBundle
