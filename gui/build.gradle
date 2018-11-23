@@ -79,6 +79,7 @@ if (JavaVersion.current() == JavaVersion.VERSION_11) {
         javafxCompile "org.openjfx:javafx-fxml:11.0.1:${platform}"
 
         compileOnly configurations.javafxCompile
+        pmd configurations.javafxCompile
     }
 
     tasks.withType(JavaCompile) {
@@ -105,9 +106,6 @@ if (JavaVersion.current() == JavaVersion.VERSION_11) {
             '--add-exports', 'javafx.graphics/com.sun.javafx.application=ALL-UNNAMED'
         ]
     }
-
-    // TODO Fix PMD problem (https://github.com/Santulator/Santulator/issues/2)
-    pmdTest.enabled = false
 
     // TODO Fix SpotBugs problem (https://github.com/Santulator/Santulator/issues/3)
     spotbugsMain.enabled = false
