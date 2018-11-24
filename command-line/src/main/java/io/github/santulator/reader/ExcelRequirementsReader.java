@@ -4,25 +4,20 @@
 
 package io.github.santulator.reader;
 
-import io.github.santulator.core.CoreTool;
+import io.github.santulator.core.ExcelTool;
 import io.github.santulator.core.SantaException;
 import io.github.santulator.model.DrawRequirements;
 import io.github.santulator.model.ParticipantRole;
 import io.github.santulator.model.Person;
 import io.github.santulator.model.Restriction;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.ss.usermodel.Row.MissingCellPolicy;
 
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.OptionalInt;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 import javax.inject.Singleton;
 
 import static io.github.santulator.core.CoreConstants.LOCALE;
@@ -31,8 +26,6 @@ import static java.util.stream.Collectors.toMap;
 
 @Singleton
 public class ExcelRequirementsReader implements RequirementsReader {
-    private static final String ERROR_READ = "Unable to read spreadsheet '%s'";
-
     private static final String ERROR_DUPLICATE = "Duplicate person %s in spreadsheet '%s'";
 
     private static final String ERROR_UNKNOWN = "Unknown person %s in spreadsheet '%s'";
@@ -100,12 +93,7 @@ public class ExcelRequirementsReader implements RequirementsReader {
     }
 
     private List<List<String>> readContent(final String name, final InputStream stream) {
-        Workbook wb = readWorkbook(name, stream);
-        Sheet sheet = wb.getSheetAt(0);
-        List<List<String>> content = StreamSupport.stream(sheet.spliterator(), false)
-            .map(this::row)
-            .filter(l -> !l.isEmpty())
-            .collect(toList());
+        List<List<String>> content = ExcelTool.readContent(name, stream);
 
         rejectBlanks(name, content);
 
@@ -120,32 +108,5 @@ public class ExcelRequirementsReader implements RequirementsReader {
         result.ifPresent(i -> {
             throw new SantaException(String.format(ERROR_BLANK, i + 1, name));
         });
-    }
-
-    private List<String> row(final Row row) {
-        List<String> result = IntStream.range(0, row.getLastCellNum())
-            .mapToObj(i -> row.getCell(i, MissingCellPolicy.RETURN_BLANK_AS_NULL))
-            .map(this::cellValue)
-            .map(StringUtils::trimToNull)
-            .collect(toList());
-        int last = CoreTool.findLast(result, Objects::nonNull).orElse(-1);
-
-        return result.subList(0, last + 1);
-    }
-
-    private String cellValue(final Cell cell) {
-        if (cell == null) {
-            return null;
-        } else {
-            return cell.getStringCellValue();
-        }
-    }
-
-    private Workbook readWorkbook(final String name, final InputStream stream) {
-        try {
-            return WorkbookFactory.create(stream);
-        } catch (Exception e) {
-            throw new SantaException(String.format(ERROR_READ, name), e);
-        }
     }
 }
