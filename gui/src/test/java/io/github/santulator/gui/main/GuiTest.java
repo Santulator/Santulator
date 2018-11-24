@@ -147,7 +147,7 @@ public class GuiTest extends FxRobot implements GuiTestValidator {
         GuiTestSteps steps = new GuiTestSteps(this, this, manager);
 
         steps.part1SetupDraw();
-        steps.part2StartNewSession();
+        steps.part2ChangeSessions();
         steps.part3RunDraw();
         steps.part4AboutDialogue();
         steps.part5WebLinks();

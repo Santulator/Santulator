@@ -17,7 +17,7 @@
 .fontAwesomeIcon * {
     -fx-font-family: "FontAwesome";
 }
-.buttonNew Glyph *, .buttonOpen Glyph *, .buttonSave Glyph *, .buttonRunDraw Glyph * {
+.buttonNew Glyph *, .buttonOpen Glyph *, .buttonImport Glyph *, .buttonSave Glyph *, .buttonRunDraw Glyph * {
     -fx-font-size: 24;
 }
 Button, StatusBar, MenuBar {

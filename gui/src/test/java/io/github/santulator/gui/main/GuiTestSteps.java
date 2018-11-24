@@ -50,7 +50,7 @@ public class GuiTestSteps {
         this.robot = robot;
         this.validator = validator;
 
-        sessionFile = manager.addFile("session.santa");
+        sessionFile = manager.addFile(GuiTestConstants.SESSION_1);
         drawDirectory = manager.addFile("draw");
     }
 
@@ -104,18 +104,24 @@ public class GuiTestSteps {
             robot.clickOn("#buttonSave");
             validator.validateSavedSession(sessionFile, buildSimpleState());
         });
-
-        step("Start new session", () -> {
-            robot.clickOn("#buttonNew");
-            verifyThat("#fieldDrawName", hasText("My Secret Santa Draw"));
-            verifyThat("#fieldPassword", hasText("christmas"));
-        });
     }
 
-    public void part2StartNewSession() {
+    public void part2ChangeSessions() {
         step("Start new session", () -> {
             robot.clickOn("#buttonNew");
             verifyThat("#listParticipants", hasItems(2));
+            verifyThat("#fieldDrawName", hasText("My Secret Santa Draw"));
+            verifyThat("#fieldPassword", hasText("christmas"));
+        });
+
+        step("Import from spreadsheet", () -> {
+            validator.setUpFileDialogue(FileDialogueType.IMPORT_SESSION, FileFormatType.SPREADSHEET, GuiTestConstants.SPREADSHEET);
+            robot.clickOn("#buttonImport");
+            verifyThat("#listParticipants", hasItems(5));
+            verifyThat(participantNodeQuery(CLASS_FIELD_NAME, 0), hasText("Abigail"));
+            verifyThat(participantNodeQuery(CLASS_FIELD_NAME, 1), hasText("Bill"));
+            verifyThat(participantNodeQuery(CLASS_FIELD_NAME, 2), hasText("Carol"));
+            verifyThat(participantNodeQuery(CLASS_FIELD_NAME, 3), hasText("Dean"));
         });
     }
 
@@ -245,7 +251,11 @@ public class GuiTestSteps {
     }
 
     private Node participantNode(final String style, final int row) {
-        return robot.lookup("." + style).nth(row).query();
+        return participantNodeQuery(style, row).query();
+    }
+
+    private NodeQuery participantNodeQuery(final String style, final int row) {
+        return robot.lookup("." + style).nth(row);
     }
 
     private void waitUntilEnabled(final String query) {

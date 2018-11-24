@@ -46,6 +46,11 @@ public class FileDialogueFactoryImpl implements FileDialogueFactory {
             i18nManager, OPEN_SESSION, window, settingsManager, FileFormatType.TYPES_SESSIONS, FileChooser::showOpenDialog, SettingsManager::getSessionsPath, SettingsManager::setSessionsPath);
     }
 
+    private FileDialogue createImportSessionDialogue(final Window window) {
+        return new FileDialogueImpl(
+            i18nManager, IMPORT_SESSION, window, settingsManager, FileFormatType.TYPES_IMPORTS, FileChooser::showOpenDialog, SettingsManager::getImportPath, SettingsManager::setImportPath);
+    }
+
     private FileDialogue createSaveSessionDialogue(final Window window) {
         return new FileDialogueImpl(
             i18nManager, SAVE_SESSION, window, settingsManager, FileFormatType.TYPES_SESSIONS, FileChooser::showSaveDialog, SettingsManager::getSessionsPath, SettingsManager::setSessionsPath);
@@ -60,6 +65,7 @@ public class FileDialogueFactoryImpl implements FileDialogueFactory {
         Map<FileDialogueType, Function<Window, FileDialogue>> map = new EnumMap<>(FileDialogueType.class);
 
         map.put(OPEN_SESSION, this::createOpenSessionDialogue);
+        map.put(IMPORT_SESSION, this::createImportSessionDialogue);
         map.put(SAVE_SESSION, this::createSaveSessionDialogue);
         map.put(RUN_DRAW, this::createRunDrawDialogue);
 

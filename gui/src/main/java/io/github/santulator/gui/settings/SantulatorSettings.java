@@ -12,6 +12,8 @@ import java.nio.file.Path;
 public class SantulatorSettings {
     private Path sessionsPath;
 
+    private Path importPath;
+
     private Path drawPath;
 
     private WindowSettings windowSettings;
@@ -22,6 +24,14 @@ public class SantulatorSettings {
 
     public void setSessionsPath(final Path sessionsPath) {
         this.sessionsPath = sessionsPath;
+    }
+
+    public Path getImportPath() {
+        return importPath;
+    }
+
+    public void setImportPath(final Path importPath) {
+        this.importPath = importPath;
     }
 
     public Path getDrawPath() {

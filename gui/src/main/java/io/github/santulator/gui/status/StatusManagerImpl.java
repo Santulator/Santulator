@@ -58,6 +58,11 @@ public class StatusManagerImpl implements StatusManager {
     }
 
     @Override
+    public boolean beginImportSession() {
+        return begin(ACTION_IMPORT);
+    }
+
+    @Override
     public boolean beginSaveSession() {
         return begin(ACTION_SAVE);
     }

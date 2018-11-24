@@ -22,9 +22,12 @@ import static java.util.stream.Collectors.toMap;
 
 public enum FileFormatType {
     SESSION(I18nKey.FILE_TYPE_SESSION, "*" + FileNameTool.SESSION_SUFFIX),
-    DRAW(I18nKey.FILE_TYPE_DRAW, "*");
+    DRAW(I18nKey.FILE_TYPE_DRAW, "*"),
+    SPREADSHEET(I18nKey.FILE_TYPE_SPREADSHEET, "*.xls", "*.xlsx");
 
     public static final List<FileFormatType> TYPES_SESSIONS = listOf(SESSION);
+
+    public static final List<FileFormatType> TYPES_IMPORTS = listOf(SPREADSHEET);
 
     private static final Map<List<String>, FileFormatType> TYPES = Stream.of(FileFormatType.values())
         .collect(toMap(FileFormatType::getExtensions, identity()));

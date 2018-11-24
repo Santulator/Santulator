@@ -18,10 +18,7 @@ import io.github.santulator.gui.status.StatusManager;
 import io.github.santulator.gui.status.StatusManagerImpl;
 import io.github.santulator.gui.validator.ValidationService;
 import io.github.santulator.gui.validator.ValidationServiceImpl;
-import io.github.santulator.session.SessionSerialiser;
-import io.github.santulator.session.SessionSerialiserImpl;
-import io.github.santulator.session.SessionStateTranslator;
-import io.github.santulator.session.SessionStateTranslatorImpl;
+import io.github.santulator.session.*;
 
 public class CoreGuiModule extends AbstractModule {
     @Override
@@ -30,6 +27,7 @@ public class CoreGuiModule extends AbstractModule {
         bind(SantulatorGui.class).to(SantulatorGuiImpl.class);
         bind(StatusManager.class).to(StatusManagerImpl.class);
         bind(SessionSerialiser.class).to(SessionSerialiserImpl.class);
+        bind(SessionImporter.class).to(SessionImporterImpl.class);
         bind(SessionStateTranslator.class).to(SessionStateTranslatorImpl.class);
         bind(DrawService.class).to(DrawServiceImpl.class);
         bind(ProgressSequencer.class).to(ProgressSequencerImpl.class);

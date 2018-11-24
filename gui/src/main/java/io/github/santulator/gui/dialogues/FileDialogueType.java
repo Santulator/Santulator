@@ -10,6 +10,7 @@ import static io.github.santulator.gui.i18n.I18nKey.*;
 
 public enum FileDialogueType {
     OPEN_SESSION(FILE_OPEN),
+    IMPORT_SESSION(FILE_IMPORT),
     SAVE_SESSION(FILE_SAVE),
     RUN_DRAW(FILE_RUN);
 

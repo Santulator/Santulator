@@ -27,16 +27,21 @@ public class SessionModelTool {
     }
 
     public SessionModel buildGuiModel(final SessionState state, final Path file) {
-        List<ParticipantModel> participants = state.getParticipants().stream()
-            .map(this::buildParticipantModel)
-            .collect(toList());
-        SessionModel model = new SessionModel(i18nManager, participants);
+        SessionModel model = buildGuiModel(state.getParticipants());
 
         model.setDrawName(state.getDrawName());
         model.setPassword(state.getPassword());
         model.setSessionFile(file);
 
         return model;
+    }
+
+    public SessionModel buildGuiModel(final List<ParticipantState> participants) {
+        List<ParticipantModel> participantModels = participants.stream()
+            .map(this::buildParticipantModel)
+            .collect(toList());
+
+        return new SessionModel(i18nManager, participantModels);
     }
 
     private ParticipantModel buildParticipantModel(final ParticipantState state) {

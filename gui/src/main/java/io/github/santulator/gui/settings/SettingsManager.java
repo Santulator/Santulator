@@ -12,6 +12,10 @@ public interface SettingsManager {
 
     void setSessionsPath(Path path);
 
+    Path getImportPath();
+
+    void setImportPath(Path path);
+
     Path getDrawPath();
 
     void setDrawPath(Path path);

@@ -11,6 +11,8 @@ public interface StatusManager {
 
     boolean beginOpenSession();
 
+    boolean beginImportSession();
+
     boolean beginSaveSession();
 
     boolean beginRunDraw();

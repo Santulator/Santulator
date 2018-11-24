@@ -31,6 +31,9 @@ public class MainController {
     private MenuItem menuOpen;
 
     @FXML
+    private MenuItem menuImport;
+
+    @FXML
     private MenuItem menuSave;
 
     @FXML
@@ -56,6 +59,9 @@ public class MainController {
 
     @FXML
     private Button buttonOpen;
+
+    @FXML
+    private Button buttonImport;
 
     @FXML
     private Button buttonSave;
@@ -123,6 +129,7 @@ public class MainController {
         drawHandler.initialise(model);
 
         handler(buttonOpen, menuOpen, guiFileHandler::handleOpenSession);
+        handler(buttonImport, menuImport, guiFileHandler::handleImportSession);
         handler(buttonNew, menuNew, guiFileHandler::handleNewSession);
         handler(buttonSave, menuSave, guiFileHandler::handleSave);
         handler(menuSaveAs, guiFileHandler::handleSaveAs);

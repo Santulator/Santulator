@@ -33,6 +33,7 @@
                                         <items>
                                             <MenuItem fx:id="menuNew" accelerator="Shortcut+N" mnemonicParsing="false" text="%main.menu.file.new" />
                                             <MenuItem fx:id="menuOpen" accelerator="Shortcut+O" mnemonicParsing="false" text="%main.menu.file.open" />
+                                            <MenuItem fx:id="menuImport" accelerator="Shortcut+I" mnemonicParsing="false" text="%main.menu.file.import" />
                                             <MenuItem fx:id="menuSave" accelerator="Shortcut+S" mnemonicParsing="false" text="%main.menu.file.save" />
                                             <MenuItem fx:id="menuSaveAs" accelerator="Shift+Shortcut+S" mnemonicParsing="false" text="%main.menu.file.save_as" />
                                             <SeparatorMenuItem mnemonicParsing="false" />
@@ -70,6 +71,14 @@
                                         </tooltip>
                                         <graphic>
                                             <Glyph fontFamily="FontAwesome" icon="FOLDER_OPEN_ALT" styleClass="fontAwesomeIcon" />
+                                        </graphic>
+                                    </Button>
+                                    <Button fx:id="buttonImport" mnemonicParsing="false" styleClass="buttonImport" text="%main.button.import">
+                                        <tooltip>
+                                            <Tooltip text="%main.button.import.tip" />
+                                        </tooltip>
+                                        <graphic>
+                                            <Glyph fontFamily="FontAwesome" icon="DOWNLOAD" styleClass="fontAwesomeIcon" />
                                         </graphic>
                                     </Button>
                                     <Button fx:id="buttonSave" mnemonicParsing="false" styleClass="buttonSave" text="%main.button.save">

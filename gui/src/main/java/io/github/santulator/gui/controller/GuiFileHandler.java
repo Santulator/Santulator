@@ -12,14 +12,13 @@ import io.github.santulator.gui.model.SessionModel;
 import io.github.santulator.gui.services.SessionModelTool;
 import io.github.santulator.gui.status.GuiTask;
 import io.github.santulator.gui.status.StatusManager;
-import io.github.santulator.session.FileNameTool;
-import io.github.santulator.session.SessionSerialiser;
-import io.github.santulator.session.SessionState;
+import io.github.santulator.session.*;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.nio.file.Path;
+import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -30,6 +29,8 @@ public class GuiFileHandler {
     private final FileDialogueFactory fileDialogueFactory;
 
     private final SessionSerialiser sessionSerialiser;
+
+    private final SessionImporter sessionImporter;
 
     private final StatusManager statusManager;
 
@@ -46,11 +47,12 @@ public class GuiFileHandler {
     private Stage stage;
 
     @Inject
-    public GuiFileHandler(final FileDialogueFactory fileDialogueFactory, final SessionSerialiser sessionSerialiser, final StatusManager statusManager,
-        final MainModel model, final SessionStateHandler sessionStateHandler, final GuiTaskHandler guiTaskHandler, final SessionModelTool sessionModelTool,
-        final I18nManager i18nManager) {
+    public GuiFileHandler(final FileDialogueFactory fileDialogueFactory, final SessionSerialiser sessionSerialiser, final SessionImporter sessionImporter,
+        final StatusManager statusManager, final MainModel model, final SessionStateHandler sessionStateHandler, final GuiTaskHandler guiTaskHandler,
+        final SessionModelTool sessionModelTool, final I18nManager i18nManager) {
         this.fileDialogueFactory = fileDialogueFactory;
         this.sessionSerialiser = sessionSerialiser;
+        this.sessionImporter = sessionImporter;
         this.statusManager = statusManager;
         this.model = model;
         this.sessionStateHandler = sessionStateHandler;
@@ -108,6 +110,42 @@ public class GuiFileHandler {
     private void finishOpen(final SessionModel sessionModel) {
         sessionStateHandler.addSession(sessionModel);
         model.replaceSessionModel(sessionModel);
+    }
+
+    public void handleImportSession() {
+        if (statusManager.beginImportSession()) {
+            guiTaskHandler.pauseThenExecuteOnGuiThread(this::processImportSession);
+        }
+    }
+
+    private void processImportSession() {
+        Path file = checkUnsavedChangesAndChooseFile(FileDialogueType.IMPORT_SESSION);
+
+        processImportSession(file);
+    }
+
+    private void processImportSession(final Path file) {
+        if (file == null) {
+            statusManager.completeAction();
+        } else {
+            statusManager.performAction(file);
+            LOG.info("Importing session from file '{}'", file);
+
+            GuiTask<SessionModel> task = new GuiTask<>(
+                guiTaskHandler,
+                statusManager,
+                () -> importSession(file),
+                this::finishOpen,
+                e -> FileErrorTool.importSession(i18nManager, file, e));
+
+            guiTaskHandler.executeInBackground(task);
+        }
+    }
+
+    private SessionModel importSession(final Path file) {
+        List<ParticipantState> participants = sessionImporter.importParticipants(file);
+
+        return sessionModelTool.buildGuiModel(participants);
     }
 
     public void handleNewSession() {

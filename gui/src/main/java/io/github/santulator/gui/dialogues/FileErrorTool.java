@@ -24,6 +24,10 @@ public final class FileErrorTool {
         handleFileError(i18nManager, file, e, ERROR_SESSION_OPEN_TITLE, ERROR_SESSION_OPEN_DETAILS, "Unable to open file '{}'");
     }
 
+    public static void importSession(final I18nManager i18nManager, final Path file, final RuntimeException e) {
+        handleFileError(i18nManager, file, e, ERROR_SESSION_IMPORT_TITLE, ERROR_SESSION_IMPORT_DETAILS, "Unable to import file '{}'");
+    }
+
     public static void save(final I18nManager i18nManager, final Path file, final RuntimeException e) {
         handleFileError(i18nManager, file, e, ERROR_SESSION_SAVE_TITLE, ERROR_SESSION_SAVE_DETAILS, "Unable to save session file '{}'");
     }

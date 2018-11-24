@@ -56,6 +56,21 @@ public class SettingsManagerTest {
     }
 
     @Test
+    public void testGetDefaultImportPath() {
+        validateGetDefaultPath(target::getImportPath);
+    }
+
+    @Test
+    public void testUpdateImportPath() throws Exception {
+        validateUpdatePath(target::getImportPath, target::setImportPath);
+    }
+
+    @Test
+    public void testMissingImportPath() {
+        validateMissingPath(target::getImportPath, target::setImportPath);
+    }
+
+    @Test
     public void testGetDefaultDrawPath() {
         validateGetDefaultPath(target::getDrawPath);
     }

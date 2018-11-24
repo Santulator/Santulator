@@ -31,6 +31,16 @@ public class SettingsManagerImpl extends BaseSettingsManager<SantulatorSettings>
     }
 
     @Override
+    public Path getImportPath() {
+        return getPath(SantulatorSettings::getImportPath);
+    }
+
+    @Override
+    public void setImportPath(final Path path) {
+        setPath(SantulatorSettings::setImportPath, path);
+    }
+
+    @Override
     public Path getDrawPath() {
         return getPath(SantulatorSettings::getDrawPath);
     }
