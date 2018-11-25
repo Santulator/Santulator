@@ -12,9 +12,12 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
 
+import javax.inject.Singleton;
+
 import static io.github.santulator.session.FileNameTool.filename;
 import static java.util.stream.Collectors.toList;
 
+@Singleton
 public class SessionImporterImpl implements SessionImporter {
     @Override
     public List<ParticipantState> importParticipants(final Path file) {
