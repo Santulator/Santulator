@@ -14,7 +14,7 @@ call "%JAVA_HOME%\bin\java.exe" ^
     --module-path "%MODULE_PATH%" ^
     --verbose ^
     --echo-mode ^
-    --add-modules "java.base,java.datatransfer,java.desktop,java.scripting,java.xml,jdk.jsobject,jdk.unsupported,jdk.unsupported.desktop,jdk.xml.dom,javafx.controls,javafx.fxml,java.naming,java.sql" ^
+    --add-modules "java.base,java.datatransfer,java.desktop,java.scripting,java.xml,jdk.jsobject,jdk.unsupported,jdk.unsupported.desktop,jdk.xml.dom,javafx.controls,javafx.fxml,java.naming,java.sql,jdk.charsets" ^
     --input "%INPUT%" ^
     --output "%OUTPUT%" ^
     --name "Santulator" ^
