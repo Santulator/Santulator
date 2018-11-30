@@ -18,8 +18,8 @@ Download the Java Packager.  Choose the right link for your platform from those 
 
 | File               | Destination Directory |
 |--------------------|-----------------------|
-| `jpackager.exe`    | `%JAVA_HOME\bin`      |
-| `jdk.packager.jar` | `%JAVA_HOME\jmods`    |
+| `jpackager.exe`    | `%JAVA_HOME%\bin`      |
+| `jdk.packager.jar` | `%JAVA_HOME%\jmods`    |
 
 ### Windows: Inno Setup
 
