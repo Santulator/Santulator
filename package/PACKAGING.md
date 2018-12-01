@@ -14,7 +14,7 @@ Get the JavaFX 11 JMOD files from [the Gluon download page](https://gluonhq.com/
 
 ### Java Packager
 
-Download the Java Packager.  Choose the right link for your platform from those listed [on this page](http://mail.openjdk.java.net/pipermail/openjfx-dev/2018-September/022500.html).  For Mac and Linux, unpack the zip file store the directory somewhere on your system.  For Windows, copy the two files into the following directories:
+Download the Java Packager.  Choose the right link for your platform from those listed [on this page](https://mail.openjdk.java.net/pipermail/openjfx-dev/2018-September/022500.html).  For Mac and Linux, unpack the zip file store the directory somewhere on your system.  For Windows, copy the two files into the following directories:
 
 | File               | Destination Directory |
 |--------------------|-----------------------|
