@@ -62,6 +62,14 @@ Inno Setup file: C:\repositories\Santulator\package\build\resources\main\santula
 
 Open this file in Inno Setup.  Go to the "Build" menu and select "Compile".  Once this has completed you will find a directory `Output` at the same level as the `santulator.iss` file containing the Windows Installation bundle.
 
+## Using the Java Packager with JDK 11
+
+[![Using the Java Packager with JDK 11](/assets/Using-The-Java-Packager-With-JDK-11.png)][Using the Java Packager with JDK 11]
+
+For more general information about the approach taken to building the installable bundles for Mac, Linux and Windows and how you could apply this in your own project, see the article [Using the Java Packager with JDK 11].
+
 ## Return to Santulator README
 
 [Click here](../README.md) to return to the main Santulator README file for more information about the project.
+
+[Using the Java Packager with JDK 11]:https://medium.com/@adam_carroll/java-packager-with-jdk11-31b3d620f4a8
