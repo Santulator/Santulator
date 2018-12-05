@@ -82,6 +82,7 @@ subprojects {
         toolVersion = '3.1.9'
         effort = 'max'
         reportLevel = 'medium'
+        excludeFilter = file("$rootProject.projectDir/config/spotbugs/excludeFilter.xml")
     }
 
     tasks.withType(com.github.spotbugs.SpotBugsTask) {

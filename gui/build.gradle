@@ -106,8 +106,4 @@ if (JavaVersion.current() == JavaVersion.VERSION_11) {
             '--add-exports', 'javafx.graphics/com.sun.javafx.application=ALL-UNNAMED'
         ]
     }
-
-    // TODO Fix SpotBugs problem (https://github.com/Santulator/Santulator/issues/3)
-    spotbugsMain.enabled = false
-    spotbugsTest.enabled = false
 }
