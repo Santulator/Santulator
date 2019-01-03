@@ -24,7 +24,7 @@ dependencies {
     compile 'org.apache.poi:poi:4.0.1'
     compile 'org.apache.poi:poi-ooxml:4.0.1'
 
-    testCompile 'com.github.spotbugs:spotbugs-annotations:3.1.9'
+    testCompile 'com.github.spotbugs:spotbugs-annotations:3.1.10'
     testCompile 'commons-io:commons-io:2.6'
 
     runtime 'ch.qos.logback:logback-classic:1.2.3'
