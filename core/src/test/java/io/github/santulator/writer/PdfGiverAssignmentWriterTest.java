@@ -7,7 +7,7 @@ package io.github.santulator.writer;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import io.github.santulator.model.GiverAssignment;
-import io.github.santulator.test.TestFileManager;
+import io.github.santulator.test.core.TestFileManager;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

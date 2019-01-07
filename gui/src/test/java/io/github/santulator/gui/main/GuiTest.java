@@ -21,7 +21,7 @@ import io.github.santulator.gui.settings.SettingsManager;
 import io.github.santulator.gui.settings.SettingsManagerImpl;
 import io.github.santulator.session.SessionSerialiser;
 import io.github.santulator.session.SessionState;
-import io.github.santulator.test.TestFileManager;
+import io.github.santulator.test.core.TestFileManager;
 import io.github.santulator.writer.WriterModule;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;

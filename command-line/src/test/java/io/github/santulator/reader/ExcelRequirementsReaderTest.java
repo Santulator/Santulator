@@ -5,7 +5,7 @@
 package io.github.santulator.reader;
 
 import io.github.santulator.model.DrawRequirements;
-import io.github.santulator.model.TestRequirementsTool;
+import io.github.santulator.test.model.TestRequirementsTool;
 import org.junit.jupiter.api.Test;
 
 import java.io.InputStream;

@@ -1,6 +1,6 @@
 package io.github.santulator.gui.settings;
 
-import io.github.santulator.test.TestFileManager;
+import io.github.santulator.test.core.TestFileManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

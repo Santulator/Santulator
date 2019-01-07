@@ -6,6 +6,7 @@ package io.github.santulator.engine;
 
 import io.github.santulator.core.SantaException;
 import io.github.santulator.model.*;
+import io.github.santulator.test.model.RequirementsBuilder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
@@ -14,8 +15,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import static io.github.santulator.model.TestRequirementsTool.REQUIREMENTS;
-import static io.github.santulator.model.TestRequirementsTool.person;
+import static io.github.santulator.test.model.TestRequirementsTool.REQUIREMENTS;
+import static io.github.santulator.test.model.TestRequirementsTool.person;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toSet;
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,6 +1,6 @@
 package io.github.santulator.gui.validator;
 
-import io.github.santulator.test.AbstractBeanTest;
+import io.github.santulator.test.core.AbstractBeanTest;
 
 import static io.github.santulator.gui.i18n.I18nKey.VALIDATION_COUNT;
 

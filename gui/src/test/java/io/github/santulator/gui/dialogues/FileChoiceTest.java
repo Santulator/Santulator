@@ -1,6 +1,6 @@
 package io.github.santulator.gui.dialogues;
 
-import io.github.santulator.test.AbstractBeanTest;
+import io.github.santulator.test.core.AbstractBeanTest;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;

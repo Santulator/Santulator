@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import static io.github.santulator.core.CoreTool.listOf;
-import static io.github.santulator.session.TestSessionStateTool.*;
+import static io.github.santulator.test.session.TestSessionStateTool.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SessionModelToolTest {

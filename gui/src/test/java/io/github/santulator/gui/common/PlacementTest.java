@@ -1,6 +1,6 @@
 package io.github.santulator.gui.common;
 
-import io.github.santulator.test.AbstractBeanTest;
+import io.github.santulator.test.core.AbstractBeanTest;
 
 public class PlacementTest extends AbstractBeanTest<Placement> {
     @Override

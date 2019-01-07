@@ -7,7 +7,7 @@ package io.github.santulator.gui.main;
 import io.github.santulator.core.SantaException;
 import io.github.santulator.gui.dialogues.FileDialogueType;
 import io.github.santulator.gui.dialogues.FileFormatType;
-import io.github.santulator.test.TestFileManager;
+import io.github.santulator.test.core.TestFileManager;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.scene.Node;
@@ -24,7 +24,7 @@ import java.util.concurrent.TimeoutException;
 
 import static io.github.santulator.gui.common.GuiConstants.*;
 import static io.github.santulator.gui.view.ParticipantCell.*;
-import static io.github.santulator.session.TestSessionStateTool.*;
+import static io.github.santulator.test.session.TestSessionStateTool.*;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
 import static org.testfx.matcher.control.ListViewMatchers.hasItems;

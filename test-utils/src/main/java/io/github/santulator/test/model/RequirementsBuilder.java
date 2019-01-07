@@ -1,4 +1,9 @@
-package io.github.santulator.model;
+package io.github.santulator.test.model;
+
+import io.github.santulator.model.DrawRequirements;
+import io.github.santulator.model.ParticipantRole;
+import io.github.santulator.model.Person;
+import io.github.santulator.model.Restriction;
 
 import java.util.HashMap;
 import java.util.HashSet;

@@ -8,7 +8,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import io.github.santulator.model.DrawSelection;
 import io.github.santulator.model.GiverAssignment;
-import io.github.santulator.test.TestFileManager;
+import io.github.santulator.test.core.TestFileManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

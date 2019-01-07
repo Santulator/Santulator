@@ -1,6 +1,7 @@
 package io.github.santulator.model;
 
-import io.github.santulator.test.AbstractBeanTest;
+import io.github.santulator.test.core.AbstractBeanTest;
+import io.github.santulator.test.model.TestRequirementsTool;
 
 public class PersonTest extends AbstractBeanTest<Person> {
 

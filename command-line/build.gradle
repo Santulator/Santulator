@@ -4,5 +4,5 @@
 
 dependencies {
     compile project(':core')
-    testCompile project(path: ':core', configuration: 'tests')
+    testCompile project(':test-utils')
 }

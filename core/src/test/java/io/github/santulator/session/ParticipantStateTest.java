@@ -1,7 +1,7 @@
 package io.github.santulator.session;
 
 import io.github.santulator.model.ParticipantRole;
-import io.github.santulator.test.AbstractBeanTest;
+import io.github.santulator.test.core.AbstractBeanTest;
 
 public class ParticipantStateTest extends AbstractBeanTest<ParticipantState> {
     @Override

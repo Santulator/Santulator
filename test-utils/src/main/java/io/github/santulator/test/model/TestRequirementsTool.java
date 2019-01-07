@@ -2,9 +2,11 @@
  * Open Source Software published under the Apache Licence, Version 2.0.
  */
 
-package io.github.santulator.model;
+package io.github.santulator.test.model;
 
 import io.github.santulator.core.SantaException;
+import io.github.santulator.model.DrawRequirements;
+import io.github.santulator.model.Person;
 
 import static io.github.santulator.model.ParticipantRole.*;
 

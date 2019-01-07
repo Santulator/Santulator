@@ -1,7 +1,8 @@
 package io.github.santulator.session;
 
 import io.github.santulator.core.SantaException;
-import io.github.santulator.test.TestFileManager;
+import io.github.santulator.test.core.TestFileManager;
+import io.github.santulator.test.session.TestSessionStateTool;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

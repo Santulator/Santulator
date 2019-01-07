@@ -4,7 +4,7 @@
 
 package io.github.santulator.gui.settings;
 
-import io.github.santulator.test.AbstractBeanTest;
+import io.github.santulator.test.core.AbstractBeanTest;
 
 public class WindowSettingsTest extends AbstractBeanTest<WindowSettings> {
     @Override

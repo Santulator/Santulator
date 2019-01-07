@@ -1,6 +1,7 @@
 package io.github.santulator.session;
 
-import io.github.santulator.test.AbstractBeanTest;
+import io.github.santulator.test.core.AbstractBeanTest;
+import io.github.santulator.test.session.TestSessionStateTool;
 
 public class SessionStateTest extends AbstractBeanTest<SessionState> {
     @Override
