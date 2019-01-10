@@ -18,3 +18,9 @@ dependencies {
     // This is required by OpenPDF for password protection
     runtime 'org.bouncycastle:bcprov-jdk15on:1.60'
 }
+
+test {
+    jvmArgs += [
+        '--add-opens', 'java.base/java.lang=com.google.guice'
+    ]
+}

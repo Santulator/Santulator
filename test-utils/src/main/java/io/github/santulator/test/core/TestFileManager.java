@@ -22,8 +22,8 @@ public class TestFileManager {
         directory.toFile().deleteOnExit();
     }
 
-    public Path addCopy(final String name) throws URISyntaxException, IOException {
-        URL resource = TestFileManager.class.getResource("/" + name);
+    public Path addCopy(final Class<?> ownerClass, final String name) throws URISyntaxException, IOException {
+        URL resource = ownerClass.getResource("/" + name);
         Path original = Paths.get(resource.toURI());
         Path copy = addFile(name);
 

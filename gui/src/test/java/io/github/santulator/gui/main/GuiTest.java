@@ -123,7 +123,7 @@ public class GuiTest extends FxRobot implements GuiTestValidator {
     @Override
     public void setUpFileDialogue(final FileDialogueType dialogueType, final FileFormatType fileType, final String file) {
         try {
-            setUpFileDialogue(dialogueType, fileType, manager.addCopy(file));
+            setUpFileDialogue(dialogueType, fileType, manager.addCopy(GuiTest.class, file));
         } catch (URISyntaxException | IOException e) {
             throw new SantaException("Unable to open file " + file, e);
         }

@@ -26,7 +26,7 @@ public class PdfGiverAssignmentWriter implements GiverAssignmentWriter {
 
     private static final String KEY_PHRASE = "results.phrase";
 
-    private static final String HEADER_IMAGE = "/images/header.png";
+    private static final String HEADER_IMAGE = "/header.png";
 
     private static final String FONT_NAME = "Times-Roman";
 

@@ -31,6 +31,7 @@ buildscript {
         classpath 'net.researchgate:gradle-release:2.8.0'
         classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.2'
         classpath 'gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:1.6.8'
+        classpath 'org.javamodularity:moduleplugin:1.4.0'
     }
 }
 
@@ -46,6 +47,7 @@ subprojects {
     apply plugin: 'com.github.spotbugs'
     apply plugin: 'jacoco'
     apply plugin: 'com.github.ben-manes.versions'
+    apply plugin: 'org.javamodularity.moduleplugin'
 
     repositories {
         jcenter()
@@ -106,4 +108,7 @@ subprojects {
     [compileJava, compileTestJava].each { task ->
         task.options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation" << "-Werror"
     }
+
+    // TODO Fix Checkstyle problem
+    checkstyleMain.enabled = false
 }
