@@ -81,14 +81,6 @@ if (JavaVersion.current() == JavaVersion.VERSION_11) {
         compile configurations.javafxCompile
     }
 
-    tasks.withType(JavaCompile) {
-        options.with {
-            compilerArgs += [
-                '--add-modules', 'javafx.controls'
-            ]
-        }
-    }
-
     run {
         it.jvmArgs += [
             '--add-modules', 'java.sql',
