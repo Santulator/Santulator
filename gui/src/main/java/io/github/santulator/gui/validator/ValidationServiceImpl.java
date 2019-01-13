@@ -21,7 +21,7 @@ import static java.util.stream.Collectors.*;
 
 @Singleton
 public class ValidationServiceImpl implements ValidationService {
-    private static final List<Function<List<ParticipantModel>, ValidationError>> VALIDATORS = Arrays.asList(
+    private static final List<Function<List<ParticipantModel>, ValidationError>> VALIDATORS = List.of(
         ValidationServiceImpl::checkInitialState,
         ValidationServiceImpl::checkParticipantCount,
         ValidationServiceImpl::checkEmptyName,

@@ -8,8 +8,6 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 
 public final class DrawSelection {
@@ -18,11 +16,11 @@ public final class DrawSelection {
     private final Set<GiverAssignment> givers;
 
     public DrawSelection(final Collection<GiverAssignment> givers) {
-        this.givers = new HashSet<>(givers);
+        this.givers = Set.copyOf(givers);
     }
 
     public Set<GiverAssignment> getGivers() {
-        return Collections.unmodifiableSet(givers);
+        return givers;
     }
 
     @Override

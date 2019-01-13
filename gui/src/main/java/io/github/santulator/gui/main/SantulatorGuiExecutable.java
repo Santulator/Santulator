@@ -11,8 +11,8 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Consumer;
 import javax.inject.Inject;
 
@@ -27,7 +27,7 @@ public class SantulatorGuiExecutable extends Application {
     private SantulatorGui santulatorGui;
 
     public static void setModules(final Module... m) {
-        modules = Arrays.asList(m);
+        modules = List.of(m);
     }
 
     public <T> T getInstance(final Class<T> c) {

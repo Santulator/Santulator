@@ -12,7 +12,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import static io.github.santulator.core.CoreTool.listOf;
 import static io.github.santulator.test.session.TestSessionStateTool.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -103,7 +102,7 @@ public class SessionModelToolTest {
 
     @Test
     public void testBuildFileModel() {
-        List<ParticipantModel> participants = listOf(albert, beryl, carla, david, edith, fred, gina, harry, iris, john, kate);
+        List<ParticipantModel> participants = List.of(albert, beryl, carla, david, edith, fred, gina, harry, iris, john, kate);
         SessionModel input = new SessionModel(i18nManager, participants);
 
         input.setDrawName(DRAW_NAME_1);

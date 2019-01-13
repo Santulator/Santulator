@@ -10,13 +10,10 @@ import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.session.FileNameTool;
 import javafx.stage.FileChooser.ExtensionFilter;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import static io.github.santulator.core.CoreTool.listOf;
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toMap;
 
@@ -25,9 +22,9 @@ public enum FileFormatType {
     DRAW(I18nKey.FILE_TYPE_DRAW, "*"),
     SPREADSHEET(I18nKey.FILE_TYPE_SPREADSHEET, "*.xls", "*.xlsx");
 
-    public static final List<FileFormatType> TYPES_SESSIONS = listOf(SESSION);
+    public static final List<FileFormatType> TYPES_SESSIONS = List.of(SESSION);
 
-    public static final List<FileFormatType> TYPES_IMPORTS = listOf(SPREADSHEET);
+    public static final List<FileFormatType> TYPES_IMPORTS = List.of(SPREADSHEET);
 
     private static final Map<List<String>, FileFormatType> TYPES = Stream.of(FileFormatType.values())
         .collect(toMap(FileFormatType::getExtensions, identity()));
@@ -38,11 +35,11 @@ public enum FileFormatType {
 
     FileFormatType(final I18nKey descriptionKey, final String... extensions) {
         this.descriptionKey = descriptionKey;
-        this.extensions = Arrays.asList(extensions);
+        this.extensions = List.of(extensions);
     }
 
     private List<String> getExtensions() {
-        return Collections.unmodifiableList(extensions);
+        return extensions;
     }
 
     public ExtensionFilter buildFilter(final I18nManager i18nManager) {

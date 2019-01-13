@@ -10,8 +10,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 
 public final class DrawRequirements {
@@ -20,16 +18,16 @@ public final class DrawRequirements {
     private final Set<Restriction> restrictions;
 
     public DrawRequirements(final Collection<Person> participants, final Collection<Restriction> restrictions) {
-        this.participants = new HashSet<>(participants);
-        this.restrictions = new HashSet<>(restrictions);
+        this.participants = Set.copyOf(participants);
+        this.restrictions = Set.copyOf(restrictions);
     }
 
     public Set<Person> getParticipants() {
-        return Collections.unmodifiableSet(participants);
+        return participants;
     }
 
     public Set<Restriction> getRestrictions() {
-        return Collections.unmodifiableSet(restrictions);
+        return restrictions;
     }
 
     @Override

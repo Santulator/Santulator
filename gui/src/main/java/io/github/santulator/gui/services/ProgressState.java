@@ -1,10 +1,7 @@
 package io.github.santulator.gui.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import static io.github.santulator.core.CoreTool.listOf;
 
 public class ProgressState {
     private static final int MAX_PERCENT = 100;
@@ -14,11 +11,11 @@ public class ProgressState {
     private final List<ProgressPoint> sequence;
 
     public ProgressState(final ProgressPoint... sequence) {
-        this(listOf(sequence));
+        this(List.of(sequence));
     }
 
     public ProgressState(final List<ProgressPoint> sequence) {
-        this.sequence = new ArrayList<>(sequence);
+        this.sequence = List.copyOf(sequence);
     }
 
     public int tick(final int size) {

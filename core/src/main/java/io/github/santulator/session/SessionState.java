@@ -5,8 +5,6 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -21,7 +19,7 @@ public class SessionState {
 
     private String password;
 
-    private List<ParticipantState> participants = Collections.emptyList();
+    private List<ParticipantState> participants = List.of();
 
     public String getFormatName() {
         return formatName;
@@ -56,11 +54,11 @@ public class SessionState {
     }
 
     public List<ParticipantState> getParticipants() {
-        return Collections.unmodifiableList(participants);
+        return participants;
     }
 
     public void setParticipants(final List<ParticipantState> participants) {
-        this.participants = new ArrayList<>(participants);
+        this.participants = List.copyOf(participants);
     }
 
     @Override

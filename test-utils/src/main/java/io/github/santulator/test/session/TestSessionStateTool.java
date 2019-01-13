@@ -1,6 +1,5 @@
 package io.github.santulator.test.session;
 
-import io.github.santulator.core.CoreTool;
 import io.github.santulator.model.ParticipantRole;
 import io.github.santulator.session.ParticipantState;
 import io.github.santulator.session.SessionState;
@@ -47,7 +46,7 @@ public final class TestSessionStateTool {
     }
 
     private static List<ParticipantState> buildFullParticipants() {
-        return CoreTool.listOf(
+        return List.of(
             new ParticipantState("Albert", ParticipantRole.GIVER, "Beryl", "Carla"),
             new ParticipantState("Beryl",  ParticipantRole.BOTH,  "Albert"),
             new ParticipantState("Carla",  ParticipantRole.BOTH,  "David"),
@@ -63,7 +62,7 @@ public final class TestSessionStateTool {
     }
 
     private static List<ParticipantState> buildSimpleParticipants() {
-        return CoreTool.listOf(
+        return List.of(
             new ParticipantState("Albert", ParticipantRole.GIVER,    "Beryl", "Carla"),
             new ParticipantState("Beryl",  ParticipantRole.BOTH,     "David"),
             new ParticipantState("Carla",  ParticipantRole.BOTH),

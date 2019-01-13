@@ -12,12 +12,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
 import static io.github.santulator.test.model.TestRequirementsTool.REQUIREMENTS;
 import static io.github.santulator.test.model.TestRequirementsTool.person;
-import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toSet;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -117,7 +117,7 @@ public class DrawServiceTest {
     }
 
     private void validateDeterministic(final DrawRequirements requirements, final GiverAssignment... assignments) {
-        DrawSelection expected = new DrawSelection(asList(assignments));
+        DrawSelection expected = new DrawSelection(List.of(assignments));
         DrawSelection actual = target.draw(requirements);
 
         assertEquals(expected, actual, "Draw Selection");

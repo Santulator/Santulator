@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collections;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -50,7 +50,7 @@ public class SessionSerialiserTest {
 
     @Test
     public void testInvalidFile() throws Exception {
-        Files.write(file, Collections.singletonList("unreadable"));
+        Files.write(file, List.of("unreadable"));
 
         assertThrows(SantaException.class, () -> target.read(file));
     }
