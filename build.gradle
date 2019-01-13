@@ -49,6 +49,9 @@ subprojects {
     apply plugin: 'com.github.ben-manes.versions'
     apply plugin: 'org.javamodularity.moduleplugin'
 
+    sourceCompatibility = 11
+    targetCompatibility = 11
+
     repositories {
         jcenter()
     }

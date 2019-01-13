@@ -73,9 +73,6 @@ processResources {
 task checkBundlingEnvironment {
     description 'Check the environment for building the installable bundle'
     doLast {
-        if (JavaVersion.current() != JavaVersion.VERSION_11) {
-            throw new GradleException("You need JDK 11 to build the Santulator installable bundle")
-        }
         if (project.hasProperty('javafxJmodsPath')) {
             def modsPath = file("${javafxJmodsPath}")
 

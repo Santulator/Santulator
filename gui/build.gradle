@@ -29,24 +29,16 @@ jar {
 dependencies {
     compile project(':core')
     compile 'com.gluonhq:ignite-guice:1.0.2'
+    compile 'org.controlsfx:controlsfx:9.0.0'
 
     // This is required for the conditional logic in the logback setup
     runtime 'org.codehaus.janino:janino:3.0.11'
 
     testCompile project(':test-utils')
+    testCompile 'org.testfx:testfx-core:4.0.15-alpha'
 
     testRuntime 'commons-io:commons-io:2.6'
-
-    testCompile 'org.testfx:testfx-core:4.0.15-alpha'
-    if (JavaVersion.current() == JavaVersion.VERSION_1_8) {
-        compile 'org.controlsfx:controlsfx:8.40.14'
-
-        testRuntime 'org.testfx:openjfx-monocle:8u76-b04'
-    } else {
-        compile 'org.controlsfx:controlsfx:9.0.0'
-
-        testRuntime 'org.testfx:openjfx-monocle:jdk-11+26'
-    }
+    testRuntime 'org.testfx:openjfx-monocle:jdk-11+26'
 }
 
 test {
@@ -58,28 +50,27 @@ test {
     }
 }
 
-if (JavaVersion.current() == JavaVersion.VERSION_11) {
-    def platform
-    if (operatingSystem.isWindows()) {
-        platform = 'win'
-    } else if (operatingSystem.isLinux()) {
-        platform = 'linux'
-    } else if (operatingSystem.isMacOsX()) {
-        platform = 'mac'
-    }
+def platform
+if (operatingSystem.isWindows()) {
+    platform = 'win'
+} else if (operatingSystem.isLinux()) {
+    platform = 'linux'
+} else if (operatingSystem.isMacOsX()) {
+    platform = 'mac'
+}
 
-    configurations {
-        javafxCompile
-    }
+configurations {
+    javafxCompile
+}
 
-    dependencies {
-        javafxCompile "org.openjfx:javafx-base:11.0.1:${platform}"
-        javafxCompile "org.openjfx:javafx-graphics:11.0.1:${platform}"
-        javafxCompile "org.openjfx:javafx-controls:11.0.1:${platform}"
-        javafxCompile "org.openjfx:javafx-fxml:11.0.1:${platform}"
+dependencies {
+    javafxCompile "org.openjfx:javafx-base:11.0.1:${platform}"
+    javafxCompile "org.openjfx:javafx-graphics:11.0.1:${platform}"
+    javafxCompile "org.openjfx:javafx-controls:11.0.1:${platform}"
+    javafxCompile "org.openjfx:javafx-fxml:11.0.1:${platform}"
 
-        compile configurations.javafxCompile
-    }
+    compile configurations.javafxCompile
+}
 
     run {
         it.jvmArgs += [
@@ -106,9 +97,8 @@ if (JavaVersion.current() == JavaVersion.VERSION_11) {
         ]
     }
 
-    task copyDependencies(type: Copy) {
-        from configurations.runtime - configurations.javafxCompile
-        from jar
-        into "${buildDir}/libraries"
-    }
+task copyDependencies(type: Copy) {
+    from configurations.runtime - configurations.javafxCompile
+    from jar
+    into "${buildDir}/libraries"
 }
