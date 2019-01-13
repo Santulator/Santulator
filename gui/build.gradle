@@ -105,4 +105,10 @@ if (JavaVersion.current() == JavaVersion.VERSION_11) {
             '--add-exports', 'javafx.graphics/com.sun.javafx.css=controlsfx'
         ]
     }
+
+    task copyDependencies(type: Copy) {
+        from configurations.runtime - configurations.javafxCompile
+        from jar
+        into "${buildDir}/libraries"
+    }
 }

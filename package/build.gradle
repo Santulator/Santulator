@@ -7,7 +7,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 ext {
     publishedVersion = project.version
     bundlerScript = file('bin/build-package.sh')
-    santulatorLibraryPath = file("${buildDir}/libraries")
+    santulatorLibraryPath = new File(project(':gui').buildDir, 'libraries')
     mainJar = project(':gui').jar.outputs.files[0].name
     bundlePath = file("${buildDir}/bundle")
     fileAssociations = file("${buildDir}/resources/main/file-associations.properties")
@@ -60,15 +60,6 @@ task recreateIconWindowsSession(type: Exec) {
 
 task recreateIcons(dependsOn: [recreateIconMacApp, recreateIconMacSession, recreateIconWindowsApp, recreateIconWindowsSession]) {
     description 'Regenerate all the application bundle icons'
-}
-
-dependencies {
-    compile project(':gui')
-}
-
-task copyDependencies(type: Copy) {
-    from configurations.runtime
-    into "${buildDir}/libraries"
 }
 
 processResources {
@@ -136,7 +127,7 @@ task checkBundlingEnvironment {
     }
 }
 
-task createBundle(type: Exec, dependsOn: [copyDependencies, processResources, checkBundlingEnvironment]) {
+task createBundle(type: Exec, dependsOn: [processResources, checkBundlingEnvironment]) {
     description 'Build the installable bundle'
     if (operatingSystem.isWindows()) {
         commandLine 'cmd', '/c',
@@ -162,6 +153,8 @@ task createBundle(type: Exec, dependsOn: [copyDependencies, processResources, ch
             *extraBundlerArguments]
     }
 }
+
+createBundle.dependsOn ':gui:copyDependencies'
 
 if (operatingSystem.isWindows()) {
     processResources {
