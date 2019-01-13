@@ -26,30 +26,6 @@ jar {
     }
 }
 
-dependencies {
-    compile project(':core')
-    compile 'com.gluonhq:ignite-guice:1.0.2'
-    compile 'org.controlsfx:controlsfx:9.0.0'
-
-    // This is required for the conditional logic in the logback setup
-    runtime 'org.codehaus.janino:janino:3.0.11'
-
-    testCompile project(':test-utils')
-    testCompile 'org.testfx:testfx-core:4.0.15-alpha'
-
-    testRuntime 'commons-io:commons-io:2.6'
-    testRuntime 'org.testfx:openjfx-monocle:jdk-11+26'
-}
-
-test {
-    if (project.hasProperty("skipGuiTests")) {
-        exclude 'io/github/santulator/gui/main/GuiTest*'
-    }
-    if (!project.hasProperty("noHeadless")) {
-        jvmArgs "-Dheadless=true"
-    }
-}
-
 def platform
 if (operatingSystem.isWindows()) {
     platform = 'win'
@@ -64,6 +40,19 @@ configurations {
 }
 
 dependencies {
+    compile project(':core')
+    compile 'com.gluonhq:ignite-guice:1.0.2'
+    compile 'org.controlsfx:controlsfx:9.0.0'
+
+    // This is required for the conditional logic in the logback setup
+    runtime 'org.codehaus.janino:janino:3.0.11'
+
+    testCompile project(':test-utils')
+    testCompile 'org.testfx:testfx-core:4.0.15-alpha'
+
+    testRuntime 'commons-io:commons-io:2.6'
+    testRuntime 'org.testfx:openjfx-monocle:jdk-11+26'
+
     javafxCompile "org.openjfx:javafx-base:11.0.1:${platform}"
     javafxCompile "org.openjfx:javafx-graphics:11.0.1:${platform}"
     javafxCompile "org.openjfx:javafx-controls:11.0.1:${platform}"
@@ -72,30 +61,39 @@ dependencies {
     compile configurations.javafxCompile
 }
 
-    run {
-        it.jvmArgs += [
-            '--add-modules', 'java.sql',
-            '--add-opens', 'java.base/java.lang=com.google.guice',
-            '--add-exports', 'javafx.base/com.sun.javafx.runtime=controlsfx',
-            '--add-exports', 'javafx.graphics/com.sun.javafx.css=controlsfx'
-        ]
+test {
+    if (project.hasProperty("skipGuiTests")) {
+        exclude 'io/github/santulator/gui/main/GuiTest*'
     }
+    if (!project.hasProperty("noHeadless")) {
+        jvmArgs "-Dheadless=true"
+    }
+}
 
-    test {
-        jvmArgs += [
-            '--add-opens', 'java.base/java.lang=com.google.guice',
-            '--add-opens', 'io.github.santulator.gui/io.github.santulator.gui.main=org.mockito,org.testfx',
-            '--add-opens', 'io.github.santulator.gui/io.github.santulator.gui.services=org.mockito',
-            '--add-opens', 'io.github.santulator.gui/io.github.santulator.gui.common=org.mockito',
-            '--add-opens', 'io.github.santulator.gui/io.github.santulator.gui.settings=org.mockito',
-            '--add-opens', 'io.github.santulator.gui/io.github.santulator.gui.controller=org.mockito',
-            '--add-opens', 'io.github.santulator.gui/io.github.santulator.gui.dialogues=org.mockito',
-            '--add-opens', 'javafx.graphics/com.sun.glass.ui=org.testfx,org.testfx.monocle',
-            '--add-exports', 'javafx.graphics/com.sun.javafx.application=org.testfx',
-            '--add-exports', 'javafx.base/com.sun.javafx.runtime=controlsfx',
-            '--add-exports', 'javafx.graphics/com.sun.javafx.css=controlsfx'
-        ]
-    }
+run {
+    it.jvmArgs += [
+        '--add-modules', 'java.sql',
+        '--add-opens', 'java.base/java.lang=com.google.guice',
+        '--add-exports', 'javafx.base/com.sun.javafx.runtime=controlsfx',
+        '--add-exports', 'javafx.graphics/com.sun.javafx.css=controlsfx'
+    ]
+}
+
+test {
+    jvmArgs += [
+        '--add-opens', 'java.base/java.lang=com.google.guice',
+        '--add-opens', 'io.github.santulator.gui/io.github.santulator.gui.main=org.mockito,org.testfx',
+        '--add-opens', 'io.github.santulator.gui/io.github.santulator.gui.services=org.mockito',
+        '--add-opens', 'io.github.santulator.gui/io.github.santulator.gui.common=org.mockito',
+        '--add-opens', 'io.github.santulator.gui/io.github.santulator.gui.settings=org.mockito',
+        '--add-opens', 'io.github.santulator.gui/io.github.santulator.gui.controller=org.mockito',
+        '--add-opens', 'io.github.santulator.gui/io.github.santulator.gui.dialogues=org.mockito',
+        '--add-opens', 'javafx.graphics/com.sun.glass.ui=org.testfx,org.testfx.monocle',
+        '--add-exports', 'javafx.graphics/com.sun.javafx.application=org.testfx',
+        '--add-exports', 'javafx.base/com.sun.javafx.runtime=controlsfx',
+        '--add-exports', 'javafx.graphics/com.sun.javafx.css=controlsfx'
+    ]
+}
 
 task copyDependencies(type: Copy) {
     from configurations.runtime - configurations.javafxCompile
