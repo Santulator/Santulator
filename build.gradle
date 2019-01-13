@@ -47,6 +47,9 @@ subprojects {
     apply plugin: 'jacoco'
     apply plugin: 'com.github.ben-manes.versions'
 
+    sourceCompatibility = 11
+    targetCompatibility = 11
+
     repositories {
         jcenter()
     }
