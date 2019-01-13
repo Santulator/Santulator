@@ -78,32 +78,25 @@ if (JavaVersion.current() == JavaVersion.VERSION_11) {
         javafxCompile "org.openjfx:javafx-controls:11.0.1:${platform}"
         javafxCompile "org.openjfx:javafx-fxml:11.0.1:${platform}"
 
-        compileOnly configurations.javafxCompile
-        pmd configurations.javafxCompile
+        compile configurations.javafxCompile
     }
 
-    tasks.withType(JavaCompile) {
-        options.with {
-            compilerArgs += [
-                '--module-path', configurations.javafxCompile.asPath,
-                '--add-modules', 'javafx.controls'
-            ]
-        }
-    }
-
-    [run, test].each {
-        it.jvmArgs += [
-            '--module-path', configurations.javafxCompile.asPath,
-            '--add-modules', 'javafx.controls,javafx.fxml',
-            '--add-exports', 'javafx.base/com.sun.javafx.runtime=ALL-UNNAMED',
-            '--add-exports', 'javafx.graphics/com.sun.javafx.css=ALL-UNNAMED'
-        ]
-    }
-
-    test {
+    run {
         jvmArgs += [
-            '--add-opens', 'javafx.graphics/com.sun.glass.ui=ALL-UNNAMED',
-            '--add-exports', 'javafx.graphics/com.sun.javafx.application=ALL-UNNAMED'
+            '--module-path', classpath.asPath,
+            '--add-modules', 'javafx.controls',
+            '--add-opens', 'java.base/java.lang=com.google.guice',
+            '--add-exports', 'javafx.base/com.sun.javafx.runtime=controlsfx',
+            '--add-exports', 'javafx.graphics/com.sun.javafx.css=controlsfx',
+            '--add-exports', 'javafx.base/com.sun.javafx.reflect=ALL-UNNAMED',
+            '--add-exports', 'javafx.base/com.sun.javafx.beans=ALL-UNNAMED',
+            '--add-exports', 'javafx.graphics/com.sun.javafx.util=ALL-UNNAMED'
         ]
+    }
+
+    task copyDependencies(type: Copy) {
+        from configurations.runtime - configurations.javafxCompile
+        from jar
+        into "${buildDir}/libraries"
     }
 }
