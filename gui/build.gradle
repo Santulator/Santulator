@@ -71,7 +71,7 @@ test {
 }
 
 run {
-    it.jvmArgs += [
+    jvmArgs += [
         '--add-modules', 'java.sql',
         '--add-opens', 'java.base/java.lang=com.google.guice',
         '--add-exports', 'javafx.base/com.sun.javafx.runtime=controlsfx',
