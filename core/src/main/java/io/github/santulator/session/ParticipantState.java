@@ -5,11 +5,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-
-import static io.github.santulator.core.CoreTool.listOf;
 
 public class ParticipantState {
     private String name;
@@ -23,13 +19,13 @@ public class ParticipantState {
     }
 
     public ParticipantState(final String name, final ParticipantRole role, final String... exclusions) {
-        this(name, role, listOf(exclusions));
+        this(name, role, List.of(exclusions));
     }
 
     public ParticipantState(final String name, final ParticipantRole role, final List<String> exclusions) {
         this.name = name;
         this.role = role;
-        this.exclusions = new ArrayList<>(exclusions);
+        this.exclusions = List.copyOf(exclusions);
     }
 
     public String getName() {
@@ -49,11 +45,11 @@ public class ParticipantState {
     }
 
     public List<String> getExclusions() {
-        return Collections.unmodifiableList(exclusions);
+        return exclusions;
     }
 
     public void setExclusions(final List<String> exclusions) {
-        this.exclusions = new ArrayList<>(exclusions);
+        this.exclusions = List.copyOf(exclusions);
     }
 
     @Override

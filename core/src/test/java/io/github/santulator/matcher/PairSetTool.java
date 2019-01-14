@@ -16,6 +16,6 @@ public class PairSetTool {
     }
 
     public Set<GiverAssignment> toSet() {
-        return new HashSet<>(set);
+        return Set.copyOf(set);
     }
 }

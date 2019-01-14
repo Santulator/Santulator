@@ -7,7 +7,8 @@ import io.github.santulator.gui.model.SessionModel;
 import io.github.santulator.model.ParticipantRole;
 import org.junit.jupiter.api.Test;
 
-import static java.util.Collections.singletonList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -102,7 +103,7 @@ public class UnsavedChangesToolTest {
     }
 
     private SessionModel createBoundModelWithParticipant() {
-        SessionModel model = new SessionModel(i18nManager, singletonList(participant));
+        SessionModel model = new SessionModel(i18nManager, List.of(participant));
 
         UnsavedChangesTool.createBindings(model);
 

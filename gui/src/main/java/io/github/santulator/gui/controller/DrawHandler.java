@@ -65,7 +65,7 @@ public class DrawHandler {
             dialogue.showDialogue();
         });
 
-        return !validationResult.isPresent();
+        return validationResult.isEmpty();
     }
 
     private void runDrawWizard() {

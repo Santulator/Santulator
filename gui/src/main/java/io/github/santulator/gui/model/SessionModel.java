@@ -12,7 +12,6 @@ import java.util.List;
 
 import static io.github.santulator.gui.i18n.I18nKey.SESSION_DEFAULT_DRAW;
 import static io.github.santulator.gui.i18n.I18nKey.SESSION_DEFAULT_PASSWORD;
-import static java.util.Collections.singletonList;
 
 public class SessionModel {
     private final SimpleBooleanProperty changesSaved = new SimpleBooleanProperty(true);
@@ -26,7 +25,7 @@ public class SessionModel {
     private final SimpleObjectProperty<Path> sessionFile = new SimpleObjectProperty<>(null);
 
     public SessionModel(final I18nManager i18nManager) {
-        this(i18nManager, singletonList(new ParticipantModel(false)));
+        this(i18nManager, List.of(new ParticipantModel(false)));
     }
 
     public SessionModel(final I18nManager i18nManager, final List<ParticipantModel> participants) {

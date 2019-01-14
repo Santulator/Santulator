@@ -10,10 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Callback;
 
-import java.util.Collections;
 import java.util.List;
-
-import static io.github.santulator.core.CoreTool.listOf;
 
 public class ParticipantModel {
     private static final int UNDEFINED_ROW_NUMBER = -1;
@@ -34,7 +31,7 @@ public class ParticipantModel {
     private final SimpleBooleanProperty placeholder;
 
     public ParticipantModel(final String name, final ParticipantRole role, final String... exclusions) {
-        this(name, role, listOf(exclusions));
+        this(name, role, List.of(exclusions));
     }
 
     public ParticipantModel(final String name, final ParticipantRole role, final List<String> exclusions) {
@@ -46,7 +43,7 @@ public class ParticipantModel {
     }
 
     public ParticipantModel(final boolean isPlaceholder) {
-        this(isPlaceholder, "", DEFAULT_ROLE, Collections.emptyList());
+        this(isPlaceholder, "", DEFAULT_ROLE, List.of());
     }
 
     private ParticipantModel(final boolean isPlaceholder, final String name, final ParticipantRole role, final List<String> exclusions) {

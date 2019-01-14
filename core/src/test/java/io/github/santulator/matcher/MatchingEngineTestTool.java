@@ -9,7 +9,6 @@ import io.github.santulator.model.Person;
 
 import java.util.*;
 
-import static io.github.santulator.core.CoreTool.listOf;
 import static java.util.stream.Collectors.toSet;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,7 +20,7 @@ public class MatchingEngineTestTool {
     private final Set<Set<GiverAssignment>> expectations = new HashSet<>();
 
     public void setParticipants(final Person... participants) {
-        this.participants = listOf(participants);
+        this.participants = List.of(participants);
     }
 
     public void setRestrictions(final PairSetTool restrictions) {

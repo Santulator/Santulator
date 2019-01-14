@@ -9,10 +9,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import static io.github.santulator.core.CoreTool.listOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -29,13 +28,13 @@ public class SessionStateTranslatorTest {
 
     @Test
     public void testEmpty() {
-        validate(listOf(), listOf());
+        validate(List.of(), List.of());
     }
 
     @Test
     public void testSinglePerson() {
         participant(ALBERT);
-        validate(listOf(ALBERT), listOf());
+        validate(List.of(ALBERT), List.of());
     }
 
     @Test
@@ -43,7 +42,7 @@ public class SessionStateTranslatorTest {
         participant(ALBERT, "Beryl", "Carla");
         participant(BERYL, "Carla");
         participant(CARLA);
-        validate(listOf(ALBERT, BERYL, CARLA), listOf(new Restriction(ALBERT, BERYL), new Restriction(ALBERT, CARLA), new Restriction(BERYL, CARLA)));
+        validate(List.of(ALBERT, BERYL, CARLA), List.of(new Restriction(ALBERT, BERYL), new Restriction(ALBERT, CARLA), new Restriction(BERYL, CARLA)));
     }
 
     @Test
@@ -82,8 +81,8 @@ public class SessionStateTranslatorTest {
     private void validate(final Collection<Person> participants, final Collection<Restriction> restrictions) {
         DrawRequirements result = runTranslation();
 
-        assertEquals(new HashSet<>(participants), result.getParticipants());
-        assertEquals(new HashSet<>(restrictions), result.getRestrictions());
+        assertEquals(Set.copyOf(participants), result.getParticipants());
+        assertEquals(Set.copyOf(restrictions), result.getRestrictions());
     }
 
     private DrawRequirements runTranslation() {

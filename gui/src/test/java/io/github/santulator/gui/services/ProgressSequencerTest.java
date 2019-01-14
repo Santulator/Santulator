@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static io.github.santulator.core.CoreTool.listOf;
 import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -42,7 +41,7 @@ public class ProgressSequencerTest {
     }
 
     private void validate(final int size, final ProgressPoint... expected) {
-        validate(size, listOf(expected));
+        validate(size, List.of(expected));
     }
 
     private void validate(final int size, final List<ProgressPoint> expected) {

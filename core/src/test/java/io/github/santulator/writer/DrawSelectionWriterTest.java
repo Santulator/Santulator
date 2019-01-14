@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -60,10 +59,10 @@ public class DrawSelectionWriterTest {
     }
 
     private DrawSelection selection() {
-        List<GiverAssignment> givers = new ArrayList<>();
-
-        givers.add(WriterTestTool.assignment(PERSON_ALBERT, "Carla"));
-        givers.add(WriterTestTool.assignment(PERSON_BERYL, "David"));
+        List<GiverAssignment> givers = List.of(
+            WriterTestTool.assignment(PERSON_ALBERT, "Carla"),
+            WriterTestTool.assignment(PERSON_BERYL, "David")
+        );
 
         return new DrawSelection(givers);
     }

@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
 
 import static io.github.santulator.core.ExcelToolTest.*;
@@ -14,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SessionImporterTest {
-    private final List<ParticipantState> expectedContent = Arrays.asList(
+    private final List<ParticipantState> expectedContent = List.of(
         new ParticipantState("A1", ParticipantRole.BOTH),
         new ParticipantState("A4", ParticipantRole.BOTH)
     );

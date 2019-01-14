@@ -8,11 +8,8 @@ import io.github.santulator.core.SantaException;
 import io.github.santulator.model.*;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collections;
 import java.util.List;
 
-import static io.github.santulator.core.CoreTool.listOf;
-import static java.util.Collections.emptyList;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DrawValidationToolTest {
@@ -32,7 +29,7 @@ public class DrawValidationToolTest {
 
     private static final Restriction RESTRICTION_1 = new Restriction(PERSON_1, PERSON_2);
 
-    private static final List<Restriction> RESTRICTIONS = Collections.singletonList(RESTRICTION_1);
+    private static final List<Restriction> RESTRICTIONS = List.of(RESTRICTION_1);
 
     private static final DrawRequirements REQUIREMENTS = requirements(RESTRICTIONS, PERSON_1, PERSON_2, PERSON_3);
 
@@ -108,15 +105,15 @@ public class DrawValidationToolTest {
     }
 
     private static DrawRequirements requirements(final Person... participants) {
-        return new DrawRequirements(listOf(participants), emptyList());
+        return new DrawRequirements(List.of(participants), List.of());
     }
 
     private static DrawRequirements requirements(final List<Restriction> restrictions, final Person... participants) {
-        return new DrawRequirements(listOf(participants), restrictions);
+        return new DrawRequirements(List.of(participants), restrictions);
     }
 
     private DrawSelection selection(final GiverAssignment... givers) {
-        return new DrawSelection(listOf(givers));
+        return new DrawSelection(List.of(givers));
     }
 
     private GiverAssignment giver(final Person from, final Person to) {

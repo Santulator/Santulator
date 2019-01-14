@@ -9,7 +9,7 @@ import io.github.santulator.model.ParticipantRole;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static io.github.santulator.model.ParticipantRole.*;
@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ValidationServiceTest {
     private final I18nManager i18nManager = new I18nManagerImpl();
 
-    private final SessionModel model = new SessionModel(i18nManager, Collections.emptyList());
+    private final SessionModel model = new SessionModel(i18nManager, List.of());
 
     private final ParticipantTableTool tool = new ParticipantTableTool(model.getParticipants());
 
