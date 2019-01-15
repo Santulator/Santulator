@@ -2,7 +2,7 @@
  * Open Source Software published under the Apache Licence, Version 2.0.
  */
 
-package io.github.santulator.session;
+package io.github.santulator.model;
 
 public final class SessionFormatVersion {
     /**

@@ -7,8 +7,8 @@ package io.github.santulator.gui.services;
 import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.ParticipantModel;
 import io.github.santulator.gui.model.SessionModel;
-import io.github.santulator.session.ParticipantState;
-import io.github.santulator.session.SessionState;
+import io.github.santulator.model.ParticipantState;
+import io.github.santulator.model.SessionState;
 
 import java.nio.file.Path;
 import java.util.List;

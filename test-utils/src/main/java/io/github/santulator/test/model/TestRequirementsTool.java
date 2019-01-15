@@ -30,10 +30,6 @@ public final class TestRequirementsTool {
         .mutualRestriction("Iris",   "John")
         .build();
 
-    public static final Person EDITH = person(REQUIREMENTS, "Edith");
-
-    public static final Person FRED = person(REQUIREMENTS, "Fred");
-
     private TestRequirementsTool() {
         // Prevent instantiation - all members are static
     }

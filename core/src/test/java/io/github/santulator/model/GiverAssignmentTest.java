@@ -2,8 +2,8 @@ package io.github.santulator.model;
 
 import io.github.santulator.test.core.AbstractBeanTest;
 
-import static io.github.santulator.test.model.TestRequirementsTool.EDITH;
-import static io.github.santulator.test.model.TestRequirementsTool.FRED;
+import static io.github.santulator.model.ModelTestConstants.EDITH;
+import static io.github.santulator.model.ModelTestConstants.FRED;
 
 public class GiverAssignmentTest extends AbstractBeanTest<GiverAssignment> {
     @Override

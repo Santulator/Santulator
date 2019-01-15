@@ -6,7 +6,7 @@ package io.github.santulator.gui.main;
 
 import io.github.santulator.gui.dialogues.FileDialogueType;
 import io.github.santulator.gui.dialogues.FileFormatType;
-import io.github.santulator.session.SessionState;
+import io.github.santulator.model.SessionState;
 
 import java.nio.file.Path;
 

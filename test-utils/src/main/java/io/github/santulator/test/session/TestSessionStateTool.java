@@ -1,8 +1,8 @@
 package io.github.santulator.test.session;
 
 import io.github.santulator.model.ParticipantRole;
-import io.github.santulator.session.ParticipantState;
-import io.github.santulator.session.SessionState;
+import io.github.santulator.model.ParticipantState;
+import io.github.santulator.model.SessionState;
 
 import java.util.List;
 

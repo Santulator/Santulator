@@ -1,6 +1,7 @@
 package io.github.santulator.session;
 
 import io.github.santulator.core.SantaException;
+import io.github.santulator.model.SessionState;
 import io.github.santulator.test.session.TestSessionStateTool;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

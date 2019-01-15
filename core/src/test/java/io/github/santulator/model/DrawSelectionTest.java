@@ -4,8 +4,8 @@ import io.github.santulator.test.core.AbstractBeanTest;
 
 import java.util.List;
 
-import static io.github.santulator.test.model.TestRequirementsTool.EDITH;
-import static io.github.santulator.test.model.TestRequirementsTool.FRED;
+import static io.github.santulator.model.ModelTestConstants.EDITH;
+import static io.github.santulator.model.ModelTestConstants.FRED;
 
 public class DrawSelectionTest extends AbstractBeanTest<DrawSelection> {
     private static final GiverAssignment GIVER_ASSIGNMENT_1 = new GiverAssignment(EDITH, FRED);

@@ -12,6 +12,8 @@ import io.github.santulator.gui.model.SessionModel;
 import io.github.santulator.gui.services.SessionModelTool;
 import io.github.santulator.gui.status.GuiTask;
 import io.github.santulator.gui.status.StatusManager;
+import io.github.santulator.model.ParticipantState;
+import io.github.santulator.model.SessionState;
 import io.github.santulator.session.*;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
