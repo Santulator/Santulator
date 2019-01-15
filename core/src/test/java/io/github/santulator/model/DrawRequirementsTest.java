@@ -1,20 +1,20 @@
 package io.github.santulator.model;
 
 import io.github.santulator.test.core.AbstractBeanTest;
-import io.github.santulator.test.model.RequirementsBuilder;
+
+import java.util.List;
+
+import static io.github.santulator.model.ModelTestConstants.EDITH;
+import static io.github.santulator.model.ModelTestConstants.FRED;
 
 public class DrawRequirementsTest extends AbstractBeanTest<DrawRequirements> {
     @Override
     protected DrawRequirements buildPrimary() {
-        return new RequirementsBuilder()
-            .build();
+        return new DrawRequirements(List.of(), List.of());
     }
 
     @Override
     protected DrawRequirements buildSecondary() {
-        return new RequirementsBuilder()
-            .person("Edith", ParticipantRole.BOTH)
-            .person("Fred", ParticipantRole.BOTH)
-            .build();
+        return new DrawRequirements(List.of(EDITH, FRED), List.of());
     }
 }

@@ -3,6 +3,7 @@ package io.github.santulator.session;
 import io.github.santulator.core.ExcelTool;
 import io.github.santulator.core.SantaException;
 import io.github.santulator.model.ParticipantRole;
+import io.github.santulator.model.ParticipantState;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;

@@ -11,7 +11,7 @@ import io.github.santulator.gui.services.Progressometer;
 import io.github.santulator.gui.services.SessionModelTool;
 import io.github.santulator.model.DrawRequirements;
 import io.github.santulator.model.DrawSelection;
-import io.github.santulator.session.SessionState;
+import io.github.santulator.model.SessionState;
 import io.github.santulator.session.SessionStateTranslator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

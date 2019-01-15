@@ -2,10 +2,11 @@ package io.github.santulator.session;
 
 import io.github.santulator.core.FileTool;
 import io.github.santulator.core.SantaException;
+import io.github.santulator.model.SessionState;
 
 import java.nio.file.Path;
 
-import static io.github.santulator.session.SessionFormatVersion.LATEST_VERSION;
+import static io.github.santulator.model.SessionFormatVersion.LATEST_VERSION;
 
 public class SessionSerialiserImpl implements SessionSerialiser {
     @Override

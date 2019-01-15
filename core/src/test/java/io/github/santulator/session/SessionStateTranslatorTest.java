@@ -1,10 +1,7 @@
 package io.github.santulator.session;
 
 import io.github.santulator.core.SantaException;
-import io.github.santulator.model.DrawRequirements;
-import io.github.santulator.model.ParticipantRole;
-import io.github.santulator.model.Person;
-import io.github.santulator.model.Restriction;
+import io.github.santulator.model.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

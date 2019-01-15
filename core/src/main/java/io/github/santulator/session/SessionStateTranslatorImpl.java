@@ -1,9 +1,7 @@
 package io.github.santulator.session;
 
 import io.github.santulator.core.SantaException;
-import io.github.santulator.model.DrawRequirements;
-import io.github.santulator.model.Person;
-import io.github.santulator.model.Restriction;
+import io.github.santulator.model.*;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;

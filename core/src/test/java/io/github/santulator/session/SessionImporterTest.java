@@ -2,6 +2,7 @@ package io.github.santulator.session;
 
 import io.github.santulator.core.SantaException;
 import io.github.santulator.model.ParticipantRole;
+import io.github.santulator.model.ParticipantState;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
