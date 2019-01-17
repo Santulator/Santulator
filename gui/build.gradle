@@ -53,10 +53,10 @@ dependencies {
     testRuntime 'commons-io:commons-io:2.6'
     testRuntime 'org.testfx:openjfx-monocle:jdk-11+26'
 
-    javafxCompile "org.openjfx:javafx-base:11.0.1:${platform}"
-    javafxCompile "org.openjfx:javafx-graphics:11.0.1:${platform}"
-    javafxCompile "org.openjfx:javafx-controls:11.0.1:${platform}"
-    javafxCompile "org.openjfx:javafx-fxml:11.0.1:${platform}"
+    javafxCompile "org.openjfx:javafx-base:11.0.2:${platform}"
+    javafxCompile "org.openjfx:javafx-graphics:11.0.2:${platform}"
+    javafxCompile "org.openjfx:javafx-controls:11.0.2:${platform}"
+    javafxCompile "org.openjfx:javafx-fxml:11.0.2:${platform}"
 
     compile configurations.javafxCompile
 }
