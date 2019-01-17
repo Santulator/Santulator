@@ -7,7 +7,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 ext {
     publishedVersion = project.version
     bundlerScript = file('bin/build-package.sh')
-    santulatorLibraryPath = new File(project(':gui').buildDir, 'libraries')
+    santulatorLibraryPath = file("${rootProject.project('gui').buildDir}/libraries")
     mainJar = project(':gui').jar.outputs.files[0].name
     bundlePath = file("${buildDir}/bundle")
     fileAssociations = file("${buildDir}/resources/main/file-associations.properties")
