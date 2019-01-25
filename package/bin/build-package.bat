@@ -1,9 +1,10 @@
 set MODULE_PATH=%1
-set INPUT=%2
-set OUTPUT=%3
-set JAR=%4
-set VERSION=%5
-set APP_ICON=%6
+set MODULES=%2
+set INPUT=%3
+set OUTPUT=%4
+set JAR=%5
+set VERSION=%6
+set APP_ICON=%7
 
 call "%JAVA_HOME%\bin\java.exe" ^
     -Xmx512M ^
@@ -14,7 +15,7 @@ call "%JAVA_HOME%\bin\java.exe" ^
     --module-path "%MODULE_PATH%" ^
     --verbose ^
     --echo-mode ^
-    --add-modules "java.base,java.datatransfer,java.desktop,java.scripting,java.xml,jdk.jsobject,jdk.unsupported,jdk.unsupported.desktop,jdk.xml.dom,javafx.controls,javafx.fxml,java.naming,java.sql,jdk.charsets" ^
+    --add-modules "%MODULES%" ^
     --input "%INPUT%" ^
     --output "%OUTPUT%" ^
     --name "Santulator" ^

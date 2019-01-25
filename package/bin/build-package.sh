@@ -5,20 +5,21 @@ set -e
 PACKAGER=${1}
 INSTALLER_TYPE=${2}
 MODULE_PATH=${3}
-INPUT=${4}
-OUTPUT=${5}
-JAR=${6}
-VERSION=${7}
-FILE_ASSOCIATIONS=${8}
-APP_ICON=${9}
-EXTRA_BUNDLER_ARGUMENTS=${10}
+MODULES=${4}
+INPUT=${5}
+OUTPUT=${6}
+JAR=${7}
+VERSION=${8}
+FILE_ASSOCIATIONS=${9}
+APP_ICON=${10}
+EXTRA_BUNDLER_ARGUMENTS=${11}
 
 ${PACKAGER} \
   create-installer ${INSTALLER_TYPE} \
   --module-path ${MODULE_PATH} \
   --verbose \
   --echo-mode \
-  --add-modules java.base,java.datatransfer,java.desktop,java.scripting,java.xml,jdk.jsobject,jdk.unsupported,jdk.unsupported.desktop,jdk.xml.dom,javafx.controls,javafx.fxml,java.naming,java.sql,jdk.charsets \
+  --add-modules "${MODULES}" \
   --input "${INPUT}" \
   --output "${OUTPUT}" \
   --name Santulator \
