@@ -7,11 +7,10 @@ import org.apache.tools.ant.filters.ReplaceTokens
 ext {
     publishedVersion = project.version
     bundlerScript = file('bin/build-package.sh')
-    applicationLibraryPath = file("${rootProject.project('gui').buildDir}/libraries")
+    santulatorLibraryPath = file("${rootProject.project('gui').buildDir}/libraries")
     mainJar = project(':gui').jar.outputs.files[0].name
     bundlePath = file("${buildDir}/bundle")
     fileAssociations = file("${buildDir}/resources/main/file-associations.properties")
-    modules = 'java.base,java.datatransfer,java.desktop,java.scripting,java.xml,jdk.jsobject,jdk.unsupported,jdk.unsupported.desktop,jdk.xml.dom,javafx.controls,javafx.fxml,java.naming,java.sql,jdk.charsets'
     extraBundlerArguments = []
     if (operatingSystem.isMacOsX()) {
         packageType = 'pkg'
@@ -26,7 +25,7 @@ ext {
         appIcon = file('icons/windows/Santulator.ico')
         sessionIcon = file('icons/windows/SantulatorSession.ico')
         bundlerScript = file('bin/build-package.bat')
-        generatedInnoSetupFile = file("${buildDir}/resources/main/application.iss")
+        generatedInnoSetupFile = file("${buildDir}/resources/main/santulator.iss")
         windowsExecutable = file("${bundlePath}/Santulator/Santulator.exe")
         bundleContent = file("${bundlePath}/Santulator/*")
         // Locations for the DLL workaround (see https://github.com/Santulator/Santulator/issues/5)
@@ -131,8 +130,7 @@ task createBundle(type: Exec, dependsOn: [processResources, checkBundlingEnviron
         commandLine 'cmd', '/c',
             bundlerScript,
             "${-> javafxJmodsPath}",
-            modules,
-            applicationLibraryPath,
+            santulatorLibraryPath,
             bundlePath,
             mainJar,
             publishedVersion,
@@ -143,8 +141,7 @@ task createBundle(type: Exec, dependsOn: [processResources, checkBundlingEnviron
            "${-> file("${javaPackagerPath}/jpackager")}",
             packageType,
            "${-> file("${javafxJmodsPath}")}",
-            modules,
-            applicationLibraryPath,
+            santulatorLibraryPath,
             bundlePath,
             mainJar,
             publishedVersion,
@@ -158,7 +155,7 @@ createBundle.dependsOn ':gui:copyDependencies'
 
 if (operatingSystem.isWindows()) {
     processResources {
-        filesMatching('application.iss') {
+        filesMatching('santulator.iss') {
             filter ReplaceTokens, tokens: [
                 'bundle.version': publishedVersion,
                 'executable.location': windowsExecutable.toString(),
