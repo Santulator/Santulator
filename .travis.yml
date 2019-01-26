@@ -6,6 +6,12 @@ jdk: openjdk11
 
 dist: xenial
 
+addons:
+  sonarcloud:
+    organization: santulator
+    token:
+      secure: "QR2/LYOZpKtaknxkbOj5d8Z6xxf816Ys2ph3vkKpOs8h/j+o+kwLJs/4b7bl1ZKMtRozR52KDiStM1cYA3LlF85ytJ/74+pGP/jGTqHFNdisiLH2VGhjPNSoCD5j7yG8Mk0S/4h136yu4iCkfpP3jldsDXTJEU4xUxo2CFqrdAE6e196v7/bTuEK82BfBbl/3NVcP82pW4Ibb2NW7vjFPBz2H4tesgwL7+1n/NTKPNUm4vSErbwQUkmAydoKyMuvjKUnJ2mWbuliK0XVg1tXMLddbNPt0rJjtY5ee+jv0PoDJw6olajFOdjnK/MZgJZgbaAN/UJZoyJUZr/bxY13/JpyTWcQly88scP3GDPQgAUoPfSAvjPn8yvcaqG5mcVfuV9WN0k2VNCMsVmQktr9/HhgEubXFB/5ObIdveI5Gup/K+3DiHx3Is8srtwHmzkcP+M3ult33zEeAazzllLBEWzwIn8xC3JdGteqJuRPihQgkzpSHwHNPV+MBfhShP9img9jEwTT6lili5Z3V2og6+27uA5KOW3tGPAXJ3yljDvnlRu4dR6yEYUkEKJxnkiigqS/LQO6rMENcKTSIPuLmrZ2IH8D6QQ4TQspzKT8lIgse+vTmswnPK9PPqC4rqEMDT2H10VJIbAik9FFtd2kg3z1MXZrUrFaEd807PChHNE="
+
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -15,7 +21,10 @@ cache:
     - $HOME/.gradle/wrapper/
 
 script:
-  - ./gradlew clean build jacocoTestReport -info
+  - ./gradlew clean build jacocoTestReport sonarqube -info
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+
+git:
+  depth: false

@@ -18,8 +18,8 @@ Download the Java Packager.  Choose the right link for your platform from those 
 
 | File               | Destination Directory |
 |--------------------|-----------------------|
-| `jpackager.exe`    | `%JAVA_HOME%\bin`      |
-| `jdk.packager.jar` | `%JAVA_HOME%\jmods`    |
+| `jpackager.exe`    | `%JAVA_HOME%\bin`     |
+| `jdk.packager.jar` | `%JAVA_HOME%\jmods`   |
 
 ### Windows: Inno Setup
 
@@ -57,10 +57,10 @@ gradlew clean -PjavafxJmodsPath=C:\javafx-jmods-11 createBundle
 When you run Java Packager as described in the previous step, you will see a line such as the following near the end of the console output:
 
 ~~~
-Inno Setup file: C:\repositories\Santulator\package\build\resources\main\santulator.iss
+Inno Setup file: C:\repositories\Santulator\package\build\resources\main\application.iss
 ~~~
 
-Open this file in Inno Setup.  Go to the "Build" menu and select "Compile".  Once this has completed you will find a directory `Output` at the same level as the `santulator.iss` file containing the Windows Installation bundle.
+Open this file in Inno Setup.  Go to the "Build" menu and select "Compile".  Once this has completed you will find a directory `Output` at the same level as the `application.iss` file containing the Windows Installation bundle.
 
 ## Using the Java Packager with JDK 11
 
