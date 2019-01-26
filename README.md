@@ -2,6 +2,7 @@
 
 [![Build Status](https://img.shields.io/travis/Santulator/Santulator/master.svg)](https://travis-ci.org/Santulator/Santulator)
 [![Code Coverage](https://img.shields.io/codecov/c/github/Santulator/Santulator.svg)](https://codecov.io/gh/Santulator/Santulator)
+[![SonarCloud](/assets/SonarCloud.svg)](https://sonarcloud.io/dashboard?id=io.github.santulator%3Asantulator)
 [![Latest Release](https://img.shields.io/github/release/Santulator/Santulator.svg)](https://github.com/Santulator/Santulator/releases/latest)
 [![Twitter Follow](https://img.shields.io/twitter/follow/vocabhunterapp.svg?style=social&label=Follow)](https://twitter.com/vocabhunterapp)
 
