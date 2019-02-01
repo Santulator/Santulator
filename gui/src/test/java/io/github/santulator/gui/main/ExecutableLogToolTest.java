@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ExecutableLogToolTest {
+    @SuppressWarnings("LoggerInitializedWithForeignClass")
     private static final Logger TARGET_LOG = (Logger) LoggerFactory.getLogger(ExecutableLogTool.class);
 
     private final LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
