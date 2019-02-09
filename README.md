@@ -45,4 +45,13 @@ In the article [Using the Java Packager with JDK 11] you can read about how the 
 
 You can also find full, step-by-step instructions for creating the Santulator installable bundle in [PACKAGING.md](package/PACKAGING.md).
 
+# Open Source & Secret Santa with Santulator
+
+[![Open Source & Secret Santa with Santulator](/assets/Open-Source-And-Secret-Santa-With-Santulator.png)][Open Source & Secret Santa with Santulator]
+
+Over on the King Tech Blog you can read more about the project in [Open Source & Secret Santa with Santulator]. The article includes information about how JavaFX CSS is used to give Santulator a festive colour scheme.
+
+[![Before and after colours](/assets/Before-And-After-Colours.png)][Open Source & Secret Santa with Santulator]
+
 [Using the Java Packager with JDK 11]:https://medium.com/@adam_carroll/java-packager-with-jdk11-31b3d620f4a8
+[Open Source & Secret Santa with Santulator]:https://medium.com/techking/open-source-secret-santa-with-santulator-9101972359fc
