@@ -41,7 +41,7 @@ public class RoleCell extends ListCell<ParticipantRole> {
         }
     }
 
-    private Map<ParticipantRole, Node> buildNodeMap() {
+    private static Map<ParticipantRole, Node> buildNodeMap() {
         Map<ParticipantRole, Node> nodes = new EnumMap<>(ParticipantRole.class);
 
         Node giver = buildNode(FontAwesome.Glyph.USER, FontAwesome.Glyph.LONG_ARROW_RIGHT, FontAwesome.Glyph.GIFT);
@@ -56,7 +56,7 @@ public class RoleCell extends ListCell<ParticipantRole> {
         return nodes;
     }
 
-    private Node buildNode(final FontAwesome.Glyph... icons) {
+    private static Node buildNode(final FontAwesome.Glyph... icons) {
         Glyph[] glyphs = Arrays.stream(icons)
             .map(IconTool::icon)
             .toArray(Glyph[]::new);
@@ -64,7 +64,7 @@ public class RoleCell extends ListCell<ParticipantRole> {
         return new HBox(glyphs);
     }
 
-    private Map<ParticipantRole, String> buildTextMap(final I18nManager i18nManager) {
+    private static Map<ParticipantRole, String> buildTextMap(final I18nManager i18nManager) {
         Map<ParticipantRole, String> texts = new EnumMap<>(ParticipantRole.class);
 
         texts.put(ParticipantRole.GIVER, i18nManager.text(I18nKey.SESSION_ROLE_GIVER));

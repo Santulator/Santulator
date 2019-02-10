@@ -73,11 +73,11 @@ public class FileDialogueImpl implements FileDialogue {
         } else {
             Path file = result.toPath();
             ExtensionFilter extensionFilter = chooser.getSelectedExtensionFilter();
-            FileFormatType type = FileFormatType.getByFilter(extensionFilter);
+            FileFormatType chosenType = FileFormatType.getByFilter(extensionFilter);
 
             pathSetter.accept(this.settingsManager, file.getParent());
 
-            return new FileChoice(file, type);
+            return new FileChoice(file, chosenType);
         }
     }
 

@@ -8,12 +8,12 @@ import javax.inject.Singleton;
 
 @Singleton
 public class CommandLineBundleProvider implements I18nBundleProvider {
-    public static final String BUNDLE = "bundles/CommandLineBundle";
+    public static final String BUNDLE_BASE_NAME = "bundles/CommandLineBundle";
 
     private final ResourceBundle bundle;
 
     public CommandLineBundleProvider(final Locale locale) {
-        bundle = ResourceBundle.getBundle(BUNDLE, locale);
+        bundle = ResourceBundle.getBundle(BUNDLE_BASE_NAME, locale);
     }
 
     @Override

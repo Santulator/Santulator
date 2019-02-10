@@ -9,9 +9,9 @@ import javax.inject.Singleton;
 
 @Singleton
 public class I18nManagerImpl implements I18nManager {
-    public static final String BUNDLE = "bundles/SantulatorBundle";
+    public static final String BUNDLE_BASE_NAME = "bundles/SantulatorBundle";
 
-    private final ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE);
+    private final ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_BASE_NAME);
 
     @Override
     public ResourceBundle bundle() {

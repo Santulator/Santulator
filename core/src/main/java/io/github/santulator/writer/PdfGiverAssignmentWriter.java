@@ -4,9 +4,9 @@
 
 package io.github.santulator.writer;
 
-import com.lowagie.text.*;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
+import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfWriter;
 import io.github.santulator.core.CoreConstants;
 import io.github.santulator.core.I18nBundleProvider;
@@ -76,7 +76,7 @@ public class PdfGiverAssignmentWriter implements GiverAssignmentWriter {
         }
     }
 
-    private void addParagraph(final Document document, final String text, final int size, final int style, final Color colour) throws DocumentException {
+    private void addParagraph(final Document document, final String text, final int size, final int style, final Color colour) {
         Font font = FontFactory.getFont(FONT_NAME, size, style, colour);
         Paragraph paragraph = new Paragraph(text, font);
 
