@@ -4,8 +4,6 @@
 
 package io.github.santulator.writer;
 
-import com.lowagie.text.Font;
-import com.lowagie.text.Image;
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfWriter;
 import io.github.santulator.core.CoreConstants;
@@ -14,7 +12,7 @@ import io.github.santulator.core.SantaException;
 import io.github.santulator.model.GiverAssignment;
 import org.apache.commons.lang3.StringUtils;
 
-import java.awt.*;
+import java.awt.Color;
 import java.io.OutputStream;
 import java.net.URL;
 import javax.inject.Inject;
