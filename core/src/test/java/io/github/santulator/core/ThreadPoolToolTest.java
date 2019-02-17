@@ -8,7 +8,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class ThreadPoolToolTest {
     private static final int EXPECTED_RESULT = 123;
@@ -16,15 +15,8 @@ public class ThreadPoolToolTest {
     private final ThreadPoolTool target = new ThreadPoolToolImpl();
 
     @Test
-    public void testSingleDaemonExecutor() {
-        Executor service = target.singleDaemonExecutor("test");
-
-        assertNotNull(service, "Executor service");
-    }
-
-    @Test
-    public void testSingleDaemonThreadRun() throws Exception {
-        Executor service = target.singleDaemonExecutor("test");
+    public void testGuiThreadPool() throws Exception {
+        Executor service = target.guiThreadPool();
 
         validateExecution(service);
     }

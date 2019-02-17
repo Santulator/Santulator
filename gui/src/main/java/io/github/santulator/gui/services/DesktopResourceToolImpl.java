@@ -32,7 +32,7 @@ public class DesktopResourceToolImpl implements DesktopResourceTool {
     }
 
     public DesktopResourceToolImpl(final ThreadPoolTool threadPoolTool, final Consumer<String> pageOpener, final Consumer<Path> pathOpener) {
-        this.executor = threadPoolTool.singleDaemonExecutor("External Resource Tool");
+        this.executor = threadPoolTool.guiThreadPool();
         this.pageOpener = pageOpener;
         this.pathOpener = pathOpener;
     }

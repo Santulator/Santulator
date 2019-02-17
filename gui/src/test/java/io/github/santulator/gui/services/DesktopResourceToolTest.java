@@ -11,10 +11,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.Consumer;
 
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -28,7 +27,7 @@ public class DesktopResourceToolTest {
     private ThreadPoolTool threadPoolTool;
 
     @Mock
-    private ExecutorService executorService;
+    private ScheduledExecutorService executorService;
 
     @Mock
     private Consumer<String> pageOpener;
@@ -43,7 +42,7 @@ public class DesktopResourceToolTest {
 
     @BeforeEach
     public void setUp() {
-        when(threadPoolTool.singleDaemonExecutor(anyString())).thenReturn(executorService);
+        when(threadPoolTool.guiThreadPool()).thenReturn(executorService);
         target = new DesktopResourceToolImpl(threadPoolTool, pageOpener, pathOpener);
     }
 
