@@ -12,7 +12,5 @@ public interface ThreadPoolTool {
 
     ScheduledExecutorService guiThreadPool();
 
-    DelayedExecutor delayedExecutor(String name, int threadCount);
-
     void forceShutdown();
 }

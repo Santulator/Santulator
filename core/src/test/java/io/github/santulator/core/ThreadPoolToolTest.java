@@ -13,8 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class ThreadPoolToolTest {
     private static final int EXPECTED_RESULT = 123;
 
-    private static final int THREAD_COUNT = 4;
-
     private final ThreadPoolTool target = new ThreadPoolToolImpl();
 
     @Test
@@ -25,24 +23,8 @@ public class ThreadPoolToolTest {
     }
 
     @Test
-    public void testMultipleDaemonExecutor() {
-        Executor service = target.delayedExecutor("test", THREAD_COUNT);
-
-        assertNotNull(service, "Executor service");
-    }
-
-    @Test
     public void testSingleDaemonThreadRun() throws Exception {
         Executor service = target.singleDaemonExecutor("test");
-
-        validateExecution(service);
-    }
-
-    @Test
-    public void testMultipleDaemonThreadRun() throws Exception {
-        DelayedExecutor service = target.delayedExecutor("test", THREAD_COUNT);
-
-        service.beginExecution();
 
         validateExecution(service);
     }
