@@ -1,7 +1,5 @@
-package io.github.santulator.gui.view;
+package io.github.santulator.gui.i18n;
 
-import io.github.santulator.gui.i18n.I18nManager;
-import io.github.santulator.gui.i18n.I18nManagerImpl;
 import org.junit.jupiter.api.Test;
 
 import static io.github.santulator.gui.i18n.I18nKey.ABOUT_TITLE;
