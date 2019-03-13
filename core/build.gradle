@@ -16,5 +16,5 @@ dependencies {
     runtime 'ch.qos.logback:logback-classic:1.2.3'
 
     // This is required by OpenPDF for password protection
-    runtime 'org.bouncycastle:bcprov-jdk15on:1.60'
+    runtime 'org.bouncycastle:bcprov-jdk15on:1.61'
 }
