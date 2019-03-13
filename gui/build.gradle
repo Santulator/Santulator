@@ -51,7 +51,7 @@ dependencies {
     runtime 'org.codehaus.janino:janino:3.0.12'
 
     testCompile project(':test-utils')
-    testCompile 'org.testfx:testfx-core:4.0.15-alpha'
+    testCompile 'org.testfx:testfx-junit5:4.0.15-alpha'
 
     testRuntime 'commons-io:commons-io:2.6'
     testRuntime 'org.testfx:openjfx-monocle:jdk-11+26'

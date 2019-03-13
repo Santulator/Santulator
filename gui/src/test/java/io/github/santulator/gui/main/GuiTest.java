@@ -36,6 +36,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import org.testfx.api.FxRobot;
+import org.testfx.framework.junit5.ApplicationExtension;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -53,8 +54,9 @@ import static org.testfx.api.FxToolkit.registerPrimaryStage;
 import static org.testfx.api.FxToolkit.setupApplication;
 
 @ExtendWith(MockitoExtension.class)
+@ExtendWith(ApplicationExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class GuiTest extends FxRobot implements GuiTestValidator {
+public class GuiTest implements GuiTestValidator {
     private TestFileManager manager;
 
     @Mock
@@ -143,8 +145,8 @@ public class GuiTest extends FxRobot implements GuiTestValidator {
     }
 
     @Test
-    public void testWalkThrough() {
-        GuiTestSteps steps = new GuiTestSteps(this, this, manager);
+    public void testWalkThrough(final FxRobot robot) {
+        GuiTestSteps steps = new GuiTestSteps(robot, this, manager);
 
         steps.part1SetupDraw();
         steps.part2ChangeSessions();
