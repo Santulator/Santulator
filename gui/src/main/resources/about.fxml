@@ -54,7 +54,7 @@
                                         <Glyph fontFamily="FontAwesome" icon="TWITTER" styleClass="fontAwesomeIcon" />
                                     </graphic>
                                 </Hyperlink>
-                                <HBox>
+                                <HBox alignment="CENTER_LEFT">
                                     <children>
                                         <Hyperlink fx:id="linkGithub" styleClass="github" text="%about.github">
                                             <graphic>
