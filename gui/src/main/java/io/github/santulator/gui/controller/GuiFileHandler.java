@@ -6,7 +6,6 @@ package io.github.santulator.gui.controller;
 
 import io.github.santulator.gui.common.GuiTaskHandler;
 import io.github.santulator.gui.dialogues.*;
-import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.MainModel;
 import io.github.santulator.gui.model.SessionModel;
 import io.github.santulator.gui.services.SessionModelTool;
@@ -14,7 +13,9 @@ import io.github.santulator.gui.status.GuiTask;
 import io.github.santulator.gui.status.StatusManager;
 import io.github.santulator.model.ParticipantState;
 import io.github.santulator.model.SessionState;
-import io.github.santulator.session.*;
+import io.github.santulator.session.FileNameTool;
+import io.github.santulator.session.SessionImporter;
+import io.github.santulator.session.SessionSerialiser;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,14 +45,14 @@ public class GuiFileHandler {
 
     private final SessionModelTool sessionModelTool;
 
-    private final I18nManager i18nManager;
+    private final DialogueTool dialogueTool;
 
     private Stage stage;
 
     @Inject
     public GuiFileHandler(final FileDialogueFactory fileDialogueFactory, final SessionSerialiser sessionSerialiser, final SessionImporter sessionImporter,
         final StatusManager statusManager, final MainModel model, final SessionStateHandler sessionStateHandler, final GuiTaskHandler guiTaskHandler,
-        final SessionModelTool sessionModelTool, final I18nManager i18nManager) {
+        final SessionModelTool sessionModelTool, final DialogueTool dialogueTool) {
         this.fileDialogueFactory = fileDialogueFactory;
         this.sessionSerialiser = sessionSerialiser;
         this.sessionImporter = sessionImporter;
@@ -60,7 +61,7 @@ public class GuiFileHandler {
         this.sessionStateHandler = sessionStateHandler;
         this.guiTaskHandler = guiTaskHandler;
         this.sessionModelTool = sessionModelTool;
-        this.i18nManager = i18nManager;
+        this.dialogueTool = dialogueTool;
     }
 
     public void initialise(final Stage stage) {
@@ -97,7 +98,7 @@ public class GuiFileHandler {
                 statusManager,
                 () -> readSession(file),
                 this::finishOpen,
-                e -> FileErrorTool.open(i18nManager, file, e));
+                e -> dialogueTool.errorOnOpen(file, e));
 
             guiTaskHandler.executeInBackground(task);
         }
@@ -138,7 +139,7 @@ public class GuiFileHandler {
                 statusManager,
                 () -> importSession(file),
                 this::finishOpen,
-                e -> FileErrorTool.importSession(i18nManager, file, e));
+                e -> dialogueTool.errorOnImportSession(file, e));
 
             guiTaskHandler.executeInBackground(task);
         }
@@ -214,7 +215,7 @@ public class GuiFileHandler {
             statusManager,
             () -> saveFile(file, sessionState),
             b -> model.setChangesSaved(true),
-            e -> FileErrorTool.save(i18nManager, file, e)
+            e -> dialogueTool.errorOnSave(file, e)
         );
 
         guiTaskHandler.executeInBackground(task);
@@ -249,7 +250,7 @@ public class GuiFileHandler {
         if (model.isChangesSaved()) {
             return true;
         } else {
-            UnsavedChangesDialogue dialogue = new UnsavedChangesDialogue(model.getSessionFile(), i18nManager);
+            UnsavedChangesDialogue dialogue = dialogueTool.unsavedChangesDialogue(model.getSessionFile());
 
             dialogue.showDialogue();
 
@@ -298,7 +299,7 @@ public class GuiFileHandler {
 
             return true;
         } catch (final RuntimeException e) {
-            FileErrorTool.save(i18nManager, file, e);
+            dialogueTool.errorOnSave(file, e);
 
             return false;
         }

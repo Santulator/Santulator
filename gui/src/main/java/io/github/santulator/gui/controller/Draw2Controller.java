@@ -1,10 +1,10 @@
 package io.github.santulator.gui.controller;
 
 import io.github.santulator.core.ThreadPoolTool;
+import io.github.santulator.gui.dialogues.DialogueTool;
 import io.github.santulator.gui.dialogues.FileDialogue;
 import io.github.santulator.gui.dialogues.FileDialogueFactory;
 import io.github.santulator.gui.dialogues.FileDialogueType;
-import io.github.santulator.gui.dialogues.FileErrorTool;
 import io.github.santulator.gui.i18n.I18nKey;
 import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.DrawModel;
@@ -54,19 +54,22 @@ public class Draw2Controller implements DrawController {
 
     private final Progressometer progressometer;
 
+    private final DialogueTool dialogueTool;
+
     private DrawModel drawModel;
 
     private Supplier<Window> windowSupplier;
 
     @Inject
     public Draw2Controller(final I18nManager i18nManager, final ThreadPoolTool threadPoolTool, final FileDialogueFactory fileDialogueFactory,
-        final StatusManager statusManager, final DrawSelectionWriter writer, final Progressometer progressometer) {
+        final StatusManager statusManager, final DrawSelectionWriter writer, final Progressometer progressometer, final DialogueTool dialogueTool) {
         this.i18nManager = i18nManager;
         this.threadPoolTool = threadPoolTool;
         this.fileDialogueFactory = fileDialogueFactory;
         this.statusManager = statusManager;
         this.writer = writer;
         this.progressometer = progressometer;
+        this.dialogueTool = dialogueTool;
     }
 
     @Override
@@ -102,7 +105,7 @@ public class Draw2Controller implements DrawController {
             statusManager.markSuccess();
         } catch (RuntimeException e) {
             progressometer.reset();
-            Platform.runLater(() -> FileErrorTool.saveResults(i18nManager, directory, e));
+            Platform.runLater(() -> dialogueTool.errorOnSaveResults(directory, e));
         }
     }
 
