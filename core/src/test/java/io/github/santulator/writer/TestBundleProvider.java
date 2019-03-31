@@ -8,7 +8,7 @@ import javax.inject.Singleton;
 
 @Singleton
 public class TestBundleProvider implements I18nBundleProvider {
-    public static final String BUNDLE = "bundles/TestBundle";
+    private static final String BUNDLE = "bundles/TestBundle";
 
     private final ResourceBundle bundle;
 

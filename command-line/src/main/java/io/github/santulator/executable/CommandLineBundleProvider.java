@@ -8,7 +8,7 @@ import javax.inject.Singleton;
 
 @Singleton
 public class CommandLineBundleProvider implements I18nBundleProvider {
-    public static final String BUNDLE_BASE_NAME = "bundles/CommandLineBundle";
+    private static final String BUNDLE_BASE_NAME = "bundles/CommandLineBundle";
 
     private final ResourceBundle bundle;
 

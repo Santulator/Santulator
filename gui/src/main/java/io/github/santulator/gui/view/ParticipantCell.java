@@ -19,13 +19,13 @@ import static io.github.santulator.gui.view.IconTool.icon;
 public class ParticipantCell extends ListCell<ParticipantModel> {
     public static final String CLASS_FIELD_NAME = "fieldParticipantName";
 
-    public static final String CLASS_LABEL_ROW_NUMBER = "labelRowNumber";
-
     public static final String CLASS_CHOICE_ROLE = "choiceRole";
 
     public static final String CLASS_FIELD_EXCLUSIONS = "fieldExclusions";
 
     public static final String CLASS_BUTTON_ACTION = "buttonParticipantAction";
+
+    private static final String CLASS_LABEL_ROW_NUMBER = "labelRowNumber";
 
     private final CustomTextField fieldName = new CustomTextField();
 

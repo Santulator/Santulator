@@ -62,7 +62,7 @@ public class SessionModelTool {
         return state;
     }
 
-    public ParticipantState buildParticipantState(final ParticipantModel model) {
+    private ParticipantState buildParticipantState(final ParticipantModel model) {
         return new ParticipantState(model.getName(), model.getRole(), model.getExclusions());
     }
 }
