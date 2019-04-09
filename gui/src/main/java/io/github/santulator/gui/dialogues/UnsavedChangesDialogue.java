@@ -12,12 +12,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
 import java.nio.file.Path;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.stream.Stream;
 
+import static io.github.santulator.gui.i18n.I18nKey.*;
 import static io.github.santulator.gui.view.CssTool.applyCss;
-import static java.util.function.Function.identity;
-import static java.util.stream.Collectors.toMap;
 
 public class UnsavedChangesDialogue {
     private static final String ALERT_ID = "unsavedChanges";
@@ -26,22 +25,19 @@ public class UnsavedChangesDialogue {
 
     private final I18nManager i18nManager;
 
-    private final Map<ButtonType, UnsavedResponse> map;
-
     private UnsavedResponse result;
 
     public UnsavedChangesDialogue(final Path file, final I18nManager i18nManager) {
         this.file = file;
         this.i18nManager = i18nManager;
-        this.map = Stream.of(UnsavedResponse.values())
-            .collect(toMap(this::buttonType, identity()));
     }
 
     public void showDialogue() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        String message = i18nManager.text(I18nKey.FILE_MODIFIED, filename());
+        String message = i18nManager.text(FILE_MODIFIED, filename());
+        Map<ButtonType, UnsavedResponse> map = unsavedResponseMap();
 
-        alert.setTitle(i18nManager.text(I18nKey.FILE_UNSAVED));
+        alert.setTitle(i18nManager.text(FILE_UNSAVED));
         alert.setHeaderText(message);
         alert.getButtonTypes().setAll(map.keySet());
         alert.getDialogPane().setId(ALERT_ID);
@@ -54,7 +50,7 @@ public class UnsavedChangesDialogue {
 
     private String filename() {
         if (file == null) {
-            return i18nManager.text(I18nKey.MAIN_WINDOW_UNTITLED);
+            return i18nManager.text(MAIN_WINDOW_UNTITLED);
         } else {
             return FileNameTool.filename(file);
         }
@@ -64,7 +60,17 @@ public class UnsavedChangesDialogue {
         return result;
     }
 
-    private ButtonType buttonType(final UnsavedResponse r) {
-        return new ButtonType(i18nManager.text(r.getKey()));
+    private Map<ButtonType, UnsavedResponse> unsavedResponseMap() {
+        Map<ButtonType, UnsavedResponse> map = new LinkedHashMap<>();
+
+        addButton(map, FILE_SAVE, UnsavedResponse.SAVE);
+        addButton(map, FILE_DISCARD, UnsavedResponse.DISCARD);
+        addButton(map, FILE_CANCEL, UnsavedResponse.CANCEL);
+
+        return map;
+    }
+
+    private void addButton(final Map<ButtonType, UnsavedResponse> map, final I18nKey key, final UnsavedResponse response) {
+        map.put(new ButtonType(i18nManager.text(key)), response);
     }
 }
