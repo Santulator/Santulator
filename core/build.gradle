@@ -8,8 +8,8 @@ dependencies {
     compile 'com.github.librepdf:openpdf:1.2.16'
     compile 'org.slf4j:slf4j-api:1.7.26'
     compile 'com.google.inject:guice:4.2.2'
-    compile 'org.apache.poi:poi:4.0.1'
-    compile 'org.apache.poi:poi-ooxml:4.0.1'
+    compile 'org.apache.poi:poi:4.1.0'
+    compile 'org.apache.poi:poi-ooxml:4.1.0'
 
     testCompile project(':test-utils')
 
