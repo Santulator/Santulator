@@ -1,3 +1,7 @@
+/*
+ * Open Source Software published under the Apache Licence, Version 2.0.
+ */
+
 package io.github.santulator.gui.settings;
 
 import io.github.santulator.test.core.TestFileManager;

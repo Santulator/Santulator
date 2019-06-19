@@ -1,8 +1,8 @@
-import org.apache.tools.ant.filters.ReplaceTokens
-
 /*
  * Open Source Software published under the Apache Licence, Version 2.0.
  */
+
+import org.apache.tools.ant.filters.ReplaceTokens
 
 ext {
     publishedVersion = project.version

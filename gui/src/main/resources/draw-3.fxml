@@ -7,6 +7,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.controlsfx.glyphfont.Glyph?>
 
+<!--
+  ~ Open Source Software published under the Apache Licence, Version 2.0.
+  -->
+
 <VBox fx:id="drawWizardPage3" prefHeight="300.0" prefWidth="600.0" styleClass="drawWizardPane" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.santulator.gui.controller.Draw3Controller">
    <children>
       <HBox alignment="TOP_CENTER" styleClass="title">
