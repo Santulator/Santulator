@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.usermodel.Row.MissingCellPolicy;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
@@ -24,13 +25,16 @@ public final class ExcelTool {
     }
 
     public static List<List<String>> readContent(final String name, final InputStream stream) {
-        Workbook wb = readWorkbook(name, stream);
-        Sheet sheet = wb.getSheetAt(0);
+        try (Workbook wb = readWorkbook(stream)) {
+            Sheet sheet = wb.getSheetAt(0);
 
-        return StreamSupport.stream(sheet.spliterator(), false)
-            .map(ExcelTool::row)
-            .filter(l -> !l.isEmpty())
-            .collect(toList());
+            return StreamSupport.stream(sheet.spliterator(), false)
+                .map(ExcelTool::row)
+                .filter(l -> !l.isEmpty())
+                .collect(toList());
+        } catch (final Exception e) {
+            throw new SantaException(String.format(ERROR_READ, name), e);
+        }
     }
 
     private static List<String> row(final Row row) {
@@ -52,11 +56,7 @@ public final class ExcelTool {
         }
     }
 
-    private static Workbook readWorkbook(final String name, final InputStream stream) {
-        try {
-            return WorkbookFactory.create(stream);
-        } catch (Exception e) {
-            throw new SantaException(String.format(ERROR_READ, name), e);
-        }
+    private static Workbook readWorkbook(final InputStream stream) throws IOException {
+        return WorkbookFactory.create(stream);
     }
 }

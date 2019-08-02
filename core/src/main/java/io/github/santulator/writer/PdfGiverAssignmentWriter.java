@@ -47,16 +47,8 @@ public class PdfGiverAssignmentWriter implements GiverAssignmentWriter {
 
     @Override
     public void writeGiverAssignment(final String name, final GiverAssignment assignment, final OutputStream out, final String password) {
-        try {
-            Document document = new Document(PageSize.A5);
-            PdfWriter writer = PdfWriter.getInstance(document, out);
-
-            if (StringUtils.isNotBlank(password)) {
-                byte[] bytes = password.getBytes(CoreConstants.CHARSET);
-
-                writer.setEncryption(bytes, null, PdfWriter.ALLOW_PRINTING, PdfWriter.STANDARD_ENCRYPTION_128);
-            }
-            writer.createXmpMetadata();
+        try (Document document = new Document(PageSize.A5)) {
+            handleMetaData(out, password, document);
 
             Image header = Image.getInstance(headerImage);
 
@@ -68,9 +60,20 @@ public class PdfGiverAssignmentWriter implements GiverAssignmentWriter {
             addParagraph(document, assignment.getFrom().getName(), FONT_SIZE_MAIN, Font.BOLDITALIC, Color.BLACK);
             addParagraph(document, phrase, FONT_SIZE_MAIN, Font.ITALIC, Color.BLACK);
             addParagraph(document, assignment.getTo().getName(), FONT_SIZE_GIFT_RECEIVER, Font.BOLDITALIC, Color.RED);
-            document.close();
         } catch (Exception e) {
             throw new SantaException(String.format("Unable to create PDF '%s'", name), e);
+        }
+    }
+
+    private void handleMetaData(final OutputStream out, final String password, final Document document) {
+        try (PdfWriter writer = PdfWriter.getInstance(document, out)) {
+
+            if (StringUtils.isNotBlank(password)) {
+                byte[] bytes = password.getBytes(CoreConstants.CHARSET);
+
+                writer.setEncryption(bytes, null, PdfWriter.ALLOW_PRINTING, PdfWriter.STANDARD_ENCRYPTION_128);
+            }
+            writer.createXmpMetadata();
         }
     }
 
