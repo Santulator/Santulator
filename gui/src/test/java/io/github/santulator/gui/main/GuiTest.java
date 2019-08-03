@@ -117,7 +117,7 @@ public class GuiTest implements GuiTestValidator {
                 bind(GuiTaskHandler.class).to(GuiTaskHandlerForTesting.class);
             }
         };
-        SantulatorGuiExecutable.setModules(coreModule, testModule, new WriterModule(), new StandardEventSourceModule());
+        SantulatorGuiExecutable.setModules(coreModule, testModule, new WriterModule());
 
         executable = (SantulatorGuiExecutable) setupApplication(SantulatorGuiExecutable.class);
     }

@@ -5,7 +5,6 @@
 package io.github.santulator.gui.controller;
 
 import io.github.santulator.gui.common.GuiConstants;
-import io.github.santulator.gui.event.ExternalEventBroker;
 import io.github.santulator.gui.model.MainModel;
 import io.github.santulator.gui.model.StatusModel;
 import io.github.santulator.gui.services.DesktopResourceTool;
@@ -108,12 +107,10 @@ public class MainController {
 
     private final AboutHandler aboutHandler;
 
-    private final ExternalEventBroker externalEventSource;
-
     @Inject
     public MainController(final StatusManager statusManager, final MainModel model, final StatusModel statusModel, final EnvironmentManager environmentManager,
         final DesktopResourceTool desktopResourceTool, final SessionStateHandler sessionStateHandler, final GuiFileHandler guiFileHandler,
-        final ExitRequestHandler exitRequestHandler, final DrawHandler drawHandler, final AboutHandler aboutHandler, final ExternalEventBroker externalEventSource) {
+        final ExitRequestHandler exitRequestHandler, final DrawHandler drawHandler, final AboutHandler aboutHandler) {
         this.statusManager = statusManager;
         this.model = model;
         this.statusModel = statusModel;
@@ -124,7 +121,6 @@ public class MainController {
         this.exitRequestHandler = exitRequestHandler;
         this.drawHandler = drawHandler;
         this.aboutHandler = aboutHandler;
-        this.externalEventSource = externalEventSource;
     }
 
     public void initialise(final Stage stage) {
@@ -143,8 +139,6 @@ public class MainController {
         menuHowTo.setOnAction(e -> desktopResourceTool.showWebPage(GuiConstants.WEBPAGE_HELP));
         menuIssue.setOnAction(e -> desktopResourceTool.showWebPage(GuiConstants.WEBPAGE_ISSUE));
         menuAbout.setOnAction(e -> processAbout());
-
-        externalEventSource.setListener(e -> guiFileHandler.handleOpenSession(e.getFile()));
 
         menuBar.setUseSystemMenuBar(environmentManager.useSystemMenuBar());
 

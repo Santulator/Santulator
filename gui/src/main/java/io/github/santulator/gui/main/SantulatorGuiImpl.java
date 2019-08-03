@@ -11,8 +11,10 @@ import io.github.santulator.gui.controller.MainController;
 import io.github.santulator.gui.controller.TitleHandler;
 import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.MainModel;
+import io.github.santulator.gui.services.ExternalEventBroker;
 import io.github.santulator.gui.services.PlacementManager;
 import io.github.santulator.gui.view.ViewFxml;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,6 +22,7 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.nio.file.Path;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -43,9 +46,12 @@ public class SantulatorGuiImpl implements SantulatorGui {
 
     private final ExitRequestHandler exitRequestHandler;
 
+    private final ExternalEventBroker externalEventBroker;
+
     @Inject
     public SantulatorGuiImpl(final FXMLLoader mainLoader, final I18nManager i18nManager, final PlacementManager placementManager, final GuiFileHandler guiFileHandler,
-        final MainController mainController, final TitleHandler titleHandler, final MainModel model, final ExitRequestHandler exitRequestHandler) {
+        final MainController mainController, final TitleHandler titleHandler, final MainModel model, final ExitRequestHandler exitRequestHandler,
+        final ExternalEventBroker externalEventBroker) {
         this.mainLoader = mainLoader;
         this.i18nManager = i18nManager;
         this.placementManager = placementManager;
@@ -54,6 +60,7 @@ public class SantulatorGuiImpl implements SantulatorGui {
         this.titleHandler = titleHandler;
         this.model = model;
         this.exitRequestHandler = exitRequestHandler;
+        this.externalEventBroker = externalEventBroker;
     }
 
     @Override
@@ -79,6 +86,8 @@ public class SantulatorGuiImpl implements SantulatorGui {
         }
         stage.show();
         LOG.info("User interface started");
+
+        externalEventBroker.markGuiOpen(this::handleOpenSession);
     }
 
     private void initialise(final Stage stage) {
@@ -88,5 +97,9 @@ public class SantulatorGuiImpl implements SantulatorGui {
         titleHandler.initialise();
 
         stage.titleProperty().bind(model.titleProperty());
+    }
+
+    private void handleOpenSession(final Path file) {
+        Platform.runLater(() -> guiFileHandler.handleOpenSession(file));
     }
 }
