@@ -101,8 +101,6 @@ public class MainController {
 
     private final GuiFileHandler guiFileHandler;
 
-    private final ExitRequestHandler exitRequestHandler;
-
     private final DrawHandler drawHandler;
 
     private final AboutHandler aboutHandler;
@@ -110,7 +108,7 @@ public class MainController {
     @Inject
     public MainController(final StatusManager statusManager, final MainModel model, final StatusModel statusModel, final EnvironmentManager environmentManager,
         final DesktopResourceTool desktopResourceTool, final SessionStateHandler sessionStateHandler, final GuiFileHandler guiFileHandler,
-        final ExitRequestHandler exitRequestHandler, final DrawHandler drawHandler, final AboutHandler aboutHandler) {
+        final DrawHandler drawHandler, final AboutHandler aboutHandler) {
         this.statusManager = statusManager;
         this.model = model;
         this.statusModel = statusModel;
@@ -118,7 +116,6 @@ public class MainController {
         this.desktopResourceTool = desktopResourceTool;
         this.sessionStateHandler = sessionStateHandler;
         this.guiFileHandler = guiFileHandler;
-        this.exitRequestHandler = exitRequestHandler;
         this.drawHandler = drawHandler;
         this.aboutHandler = aboutHandler;
     }
@@ -171,22 +168,6 @@ public class MainController {
             try {
                 aboutHandler.show();
                 statusManager.markSuccess();
-            } finally {
-                statusManager.completeAction();
-            }
-        }
-    }
-
-    public EventHandler<WindowEvent> getCloseRequestHandler() {
-        return this::processCloseRequest;
-    }
-
-    private void processCloseRequest(final WindowEvent e) {
-        if (statusManager.beginExit()) {
-            try {
-                if (exitRequestHandler.handleExitRequest(e)) {
-                    statusManager.markSuccess();
-                }
             } finally {
                 statusManager.completeAction();
             }

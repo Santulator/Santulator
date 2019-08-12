@@ -73,7 +73,7 @@ public class SantulatorGuiImpl implements SantulatorGui {
 
         Scene scene = new Scene(root);
 
-        stage.setOnCloseRequest(mainController.getCloseRequestHandler());
+        stage.setOnCloseRequest(exitRequestHandler::handleExitRequest);
 
         Placement placement = placementManager.getMainWindow();
 

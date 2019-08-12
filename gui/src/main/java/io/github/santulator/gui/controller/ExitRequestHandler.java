@@ -6,6 +6,7 @@ package io.github.santulator.gui.controller;
 
 import io.github.santulator.gui.settings.SettingsManager;
 import io.github.santulator.gui.settings.WindowSettings;
+import io.github.santulator.gui.status.StatusManager;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -18,19 +19,35 @@ public class ExitRequestHandler {
 
     private final SettingsManager settingsManager;
 
+    private final StatusManager statusManager;
+
     private Stage stage;
 
     @Inject
-    public ExitRequestHandler(final GuiFileHandler guiFileHandler, final SettingsManager settingsManager) {
+    public ExitRequestHandler(final GuiFileHandler guiFileHandler, final SettingsManager settingsManager, final StatusManager statusManager) {
         this.guiFileHandler = guiFileHandler;
         this.settingsManager = settingsManager;
+        this.statusManager = statusManager;
     }
 
     public void initialise(final Stage stage) {
         this.stage = stage;
     }
 
-    public boolean handleExitRequest(final WindowEvent e) {
+    public void handleExitRequest(final WindowEvent e) {
+        if (statusManager.beginExit()) {
+            try {
+                if (processCloseRequest(e)) {
+                    statusManager.markSuccess();
+                }
+            } finally {
+                statusManager.completeAction();
+            }
+        }
+    }
+
+
+    private boolean processCloseRequest(final WindowEvent e) {
         boolean isContinue = guiFileHandler.unsavedChangesCheck();
 
         if (isContinue) {
