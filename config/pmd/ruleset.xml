@@ -74,6 +74,5 @@
     <rule ref="category/java/security.xml"/>
 
     <exclude-pattern>.*/*AbstractBeanTest.java</exclude-pattern>
-    <exclude-pattern>.*/*MainController.java</exclude-pattern>
 
 </ruleset>
