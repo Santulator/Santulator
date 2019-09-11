@@ -66,15 +66,14 @@ public class PdfGiverAssignmentWriter implements GiverAssignmentWriter {
     }
 
     private void handleMetaData(final OutputStream out, final String password, final Document document) {
-        try (PdfWriter writer = PdfWriter.getInstance(document, out)) {
+        PdfWriter writer = PdfWriter.getInstance(document, out);
 
-            if (StringUtils.isNotBlank(password)) {
-                byte[] bytes = password.getBytes(CoreConstants.CHARSET);
+        if (StringUtils.isNotBlank(password)) {
+            byte[] bytes = password.getBytes(CoreConstants.CHARSET);
 
-                writer.setEncryption(bytes, null, PdfWriter.ALLOW_PRINTING, PdfWriter.STANDARD_ENCRYPTION_128);
-            }
-            writer.createXmpMetadata();
+            writer.setEncryption(bytes, null, PdfWriter.ALLOW_PRINTING, PdfWriter.STANDARD_ENCRYPTION_128);
         }
+        writer.createXmpMetadata();
     }
 
     private void addParagraph(final Document document, final String text, final int size, final int style, final Color colour) {
