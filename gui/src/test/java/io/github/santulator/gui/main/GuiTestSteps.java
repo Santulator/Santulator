@@ -7,6 +7,7 @@ package io.github.santulator.gui.main;
 import io.github.santulator.core.SantaException;
 import io.github.santulator.gui.dialogues.FileDialogueType;
 import io.github.santulator.gui.dialogues.FileFormatType;
+import io.github.santulator.gui.i18n.I18nKey;
 import io.github.santulator.test.core.TestFileManager;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableBooleanValue;
@@ -22,7 +23,6 @@ import java.nio.file.Path;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import static io.github.santulator.gui.common.GuiConstants.*;
 import static io.github.santulator.gui.view.ParticipantCell.*;
 import static io.github.santulator.test.session.TestSessionStateTool.*;
 import static org.testfx.api.FxAssert.verifyThat;
@@ -182,7 +182,7 @@ public class GuiTestSteps {
 
         step("Open website from About dialogue", () -> {
             robot.clickOn("#linkWebsite");
-            validator.validateWebPage(WEBSITE);
+            validator.validateWebPage(I18nKey.LINK_MAIN);
         });
 
         step("Close About dialogue", () -> {
@@ -194,19 +194,19 @@ public class GuiTestSteps {
         step("Open website", () -> {
             robot.clickOn("#menuHelp");
             robot.clickOn("#menuWebsite");
-            validator.validateWebPage(WEBSITE);
+            validator.validateWebPage(I18nKey.LINK_MAIN);
         });
 
         step("Open Santulator How To", () -> {
             robot.clickOn("#menuHelp");
             robot.clickOn("#menuHowTo");
-            validator.validateWebPage(WEBPAGE_HELP);
+            validator.validateWebPage(I18nKey.LINK_HELP);
         });
 
         step("Open Issue Reporting", () -> {
             robot.clickOn("#menuHelp");
             robot.clickOn("#menuIssue");
-            validator.validateWebPage(WEBPAGE_ISSUE);
+            validator.validateWebPage(I18nKey.LINK_ISSUE);
         });
     }
 

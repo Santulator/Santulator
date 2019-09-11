@@ -14,6 +14,7 @@ import io.github.santulator.gui.dialogues.FileDialogue;
 import io.github.santulator.gui.dialogues.FileDialogueFactory;
 import io.github.santulator.gui.dialogues.FileDialogueType;
 import io.github.santulator.gui.dialogues.FileFormatType;
+import io.github.santulator.gui.i18n.I18nKey;
 import io.github.santulator.gui.services.DesktopResourceTool;
 import io.github.santulator.gui.services.EnvironmentManager;
 import io.github.santulator.gui.services.PlacementManager;
@@ -75,7 +76,7 @@ public class GuiTest implements GuiTestValidator {
     private DesktopResourceTool desktopResourceTool;
 
     @Captor
-    private ArgumentCaptor<String> webPageCaptor;
+    private ArgumentCaptor<I18nKey> webPageCaptor;
 
     @Captor
     private ArgumentCaptor<Path> pathCaptor;
@@ -157,9 +158,9 @@ public class GuiTest implements GuiTestValidator {
     }
 
     @Override
-    public void validateWebPage(final String page) {
+    public void validateWebPage(final I18nKey key) {
         verify(desktopResourceTool, atLeastOnce()).showWebPage(webPageCaptor.capture());
-        assertEquals(page, webPageCaptor.getValue(), "Website");
+        assertEquals(key, webPageCaptor.getValue(), "Website");
     }
 
     @Override

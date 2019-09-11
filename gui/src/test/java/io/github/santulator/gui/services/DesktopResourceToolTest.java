@@ -4,22 +4,21 @@
 
 package io.github.santulator.gui.services;
 
-import io.github.santulator.core.ThreadPoolTool;
+import io.github.santulator.gui.common.GuiConstants;
+import io.github.santulator.gui.i18n.I18nKey;
+import io.github.santulator.gui.i18n.I18nManager;
+import io.github.santulator.gui.i18n.I18nManagerImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.Consumer;
 
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class DesktopResourceToolTest {
@@ -27,11 +26,7 @@ public class DesktopResourceToolTest {
 
     private static final Path PATH = Paths.get("PATH");
 
-    @Mock
-    private ThreadPoolTool threadPoolTool;
-
-    @Mock
-    private ScheduledExecutorService executorService;
+    private final I18nManager i18nManager = new I18nManagerImpl();
 
     @Mock
     private Consumer<String> pageOpener;
@@ -39,30 +34,28 @@ public class DesktopResourceToolTest {
     @Mock
     private Consumer<Path> pathOpener;
 
-    @Captor
-    private ArgumentCaptor<Runnable> captor;
-
     private DesktopResourceTool target;
 
     @BeforeEach
     public void setUp() {
-        when(threadPoolTool.guiThreadPool()).thenReturn(executorService);
-        target = new DesktopResourceToolImpl(threadPoolTool, pageOpener, pathOpener);
+        target = new DesktopResourceToolImpl(Runnable::run, pageOpener, pathOpener, i18nManager);
     }
 
     @Test
     public void testShowWebPage() {
         target.showWebPage(WEB_PAGE);
-        verify(executorService).execute(captor.capture());
-        captor.getValue().run();
         verify(pageOpener).accept(WEB_PAGE);
+    }
+
+    @Test
+    public void testShowWebPageWithLookup() {
+        target.showWebPage(I18nKey.LINK_MAIN);
+        verify(pageOpener).accept(GuiConstants.WEBSITE);
     }
 
     @Test
     public void testOpenPath() {
         target.openPath(PATH);
-        verify(executorService).execute(captor.capture());
-        captor.getValue().run();
         verify(pathOpener).accept(PATH);
     }
 }

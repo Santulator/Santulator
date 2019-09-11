@@ -5,10 +5,12 @@
 package io.github.santulator.gui.services;
 
 import io.github.santulator.core.ThreadPoolTool;
+import io.github.santulator.gui.i18n.I18nKey;
+import io.github.santulator.gui.i18n.I18nManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.awt.*;
+import java.awt.Desktop;
 import java.net.URI;
 import java.nio.file.Path;
 import java.util.concurrent.Executor;
@@ -26,20 +28,28 @@ public class DesktopResourceToolImpl implements DesktopResourceTool {
 
     private final Consumer<Path> pathOpener;
 
+    private final I18nManager i18nManager;
+
     @Inject
-    public DesktopResourceToolImpl(final ThreadPoolTool threadPoolTool) {
-        this(threadPoolTool, DesktopResourceToolImpl::openPageInternal, DesktopResourceToolImpl::openPathInternal);
+    public DesktopResourceToolImpl(final ThreadPoolTool threadPoolTool, final I18nManager i18nManager) {
+        this(threadPoolTool.guiThreadPool(), DesktopResourceToolImpl::openPageInternal, DesktopResourceToolImpl::openPathInternal, i18nManager);
     }
 
-    public DesktopResourceToolImpl(final ThreadPoolTool threadPoolTool, final Consumer<String> pageOpener, final Consumer<Path> pathOpener) {
-        this.executor = threadPoolTool.guiThreadPool();
+    public DesktopResourceToolImpl(final Executor executor, final Consumer<String> pageOpener, final Consumer<Path> pathOpener, final I18nManager i18nManager) {
+        this.executor = executor;
         this.pageOpener = pageOpener;
         this.pathOpener = pathOpener;
+        this.i18nManager = i18nManager;
     }
 
     @Override
     public void showWebPage(final String page) {
         executor.execute(() -> pageOpener.accept(page));
+    }
+
+    @Override
+    public void showWebPage(final I18nKey key) {
+        showWebPage(i18nManager.text(key));
     }
 
     @Override

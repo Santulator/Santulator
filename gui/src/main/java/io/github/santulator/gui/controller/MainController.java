@@ -4,7 +4,7 @@
 
 package io.github.santulator.gui.controller;
 
-import io.github.santulator.gui.common.GuiConstants;
+import io.github.santulator.gui.i18n.I18nKey;
 import io.github.santulator.gui.model.MainModel;
 import io.github.santulator.gui.model.StatusModel;
 import io.github.santulator.gui.services.DesktopResourceTool;
@@ -132,9 +132,9 @@ public class MainController {
         handler(menuSaveAs, guiFileHandler::handleSaveAs);
         handler(buttonRunDraw, menuRunDraw, drawHandler::handleRunDraw);
 
-        menuWebsite.setOnAction(e -> desktopResourceTool.showWebPage(GuiConstants.WEBSITE));
-        menuHowTo.setOnAction(e -> desktopResourceTool.showWebPage(GuiConstants.WEBPAGE_HELP));
-        menuIssue.setOnAction(e -> desktopResourceTool.showWebPage(GuiConstants.WEBPAGE_ISSUE));
+        menuWebsite.setOnAction(e -> desktopResourceTool.showWebPage(I18nKey.LINK_MAIN));
+        menuHowTo.setOnAction(e -> desktopResourceTool.showWebPage(I18nKey.LINK_HELP));
+        menuIssue.setOnAction(e -> desktopResourceTool.showWebPage(I18nKey.LINK_ISSUE));
         menuAbout.setOnAction(e -> processAbout());
 
         menuBar.setUseSystemMenuBar(environmentManager.useSystemMenuBar());

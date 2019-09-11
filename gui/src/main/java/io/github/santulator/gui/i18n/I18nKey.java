@@ -65,7 +65,11 @@ public enum I18nKey {
     VALIDATION_EXCLUSION_UNKNOWN("validation.exclusion.unknown"),
     VALIDATION_EXCLUSION_REPEAT("validation.exclusion.repeat"),
     VALIDATION_EXCLUSION_SELF("validation.exclusion.self"),
-    VALIDATION_DRAW_IMPOSSIBLE("validation.draw.impossible");
+    VALIDATION_DRAW_IMPOSSIBLE("validation.draw.impossible"),
+
+    LINK_MAIN("link.main"),
+    LINK_HELP("link.help"),
+    LINK_ISSUE("link.issue");
 
     private final String key;
 
