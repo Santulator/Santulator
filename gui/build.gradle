@@ -48,7 +48,7 @@ dependencies {
     compile 'org.controlsfx:controlsfx:11.0.0'
 
     // This is required for the conditional logic in the logback setup
-    runtime 'org.codehaus.janino:janino:3.0.15'
+    runtime 'org.codehaus.janino:janino:3.1.0'
 
     testCompile project(':test-utils')
     testCompile 'org.testfx:testfx-junit5:4.0.16-alpha'
