@@ -19,6 +19,8 @@ import javax.inject.Inject;
 import static io.github.santulator.gui.main.ExecutableLogTool.*;
 
 public class SantulatorGuiExecutable extends Application {
+    private static final long STARTUP_NANOS = System.nanoTime();
+
     private static Collection<Module> modules;
 
     private final GuiceContext context = new GuiceContext(this, () -> modules);
@@ -39,7 +41,7 @@ public class SantulatorGuiExecutable extends Application {
         Thread.currentThread().setUncaughtExceptionHandler((t, e) -> logError(e));
         try {
             context.init();
-            santulatorGui.start(stage);
+            santulatorGui.start(stage, STARTUP_NANOS);
         } catch (final RuntimeException e) {
             logError(e);
             Platform.exit();

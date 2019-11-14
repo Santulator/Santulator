@@ -30,6 +30,8 @@ import javax.inject.Singleton;
 public class SantulatorGuiImpl implements SantulatorGui {
     private static final Logger LOG = LoggerFactory.getLogger(SantulatorGuiImpl.class);
 
+    private static final int NANOS_PER_MILLI = 1_000_000;
+
     private final FXMLLoader mainLoader;
 
     private final I18nManager i18nManager;
@@ -64,7 +66,7 @@ public class SantulatorGuiImpl implements SantulatorGui {
     }
 
     @Override
-    public void start(final Stage stage) {
+    public void start(final Stage stage, final long startupTimestampNanos) {
         i18nManager.initialise();
 
         Parent root = ViewFxml.MAIN.loadNode(mainLoader, i18nManager);
@@ -85,7 +87,7 @@ public class SantulatorGuiImpl implements SantulatorGui {
             stage.setY(placement.getY());
         }
         stage.show();
-        LOG.info("User interface started");
+        Platform.runLater(() -> logStartup(startupTimestampNanos));
 
         externalEventBroker.markGuiOpen(this::handleOpenSession);
     }
@@ -97,6 +99,14 @@ public class SantulatorGuiImpl implements SantulatorGui {
         titleHandler.initialise();
 
         stage.titleProperty().bind(model.titleProperty());
+    }
+
+    private void logStartup(final long startupTimestampNanos) {
+        long currentTimestampNanos = System.nanoTime();
+        long startupMillis = (currentTimestampNanos - startupTimestampNanos) / NANOS_PER_MILLI;
+        String startupTimeText = String.format("%,d", startupMillis);
+
+        LOG.info("User interface started ({} ms)", startupTimeText);
     }
 
     private void handleOpenSession(final Path file) {
