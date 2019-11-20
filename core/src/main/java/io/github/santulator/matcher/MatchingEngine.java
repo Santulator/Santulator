@@ -11,19 +11,26 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class MatchingEngine {
-    public Optional<MatchExtender> findMatch(
-        final List<Person> givers, final Collection<Person> receivers, final Set<GiverAssignment> restrictions) {
-        MatchExtender matcher = new RootMatcher(restrictions);
+    public Optional<List<GiverAssignment>> findMatch(final List<Person> givers, final Collection<Person> receivers, final Set<GiverAssignment> restrictions) {
+        MatchExtender matcher = completeMatch(new RootMatcher(restrictions), givers, receivers);
 
-        return completeMatch(matcher, givers, receivers);
+        if (matcher == null) {
+            return Optional.empty();
+        } else {
+            List<GiverAssignment> assignments = matcher.assignmentStream()
+                .collect(Collectors.toUnmodifiableList());
+
+            return Optional.of(assignments);
+        }
     }
 
-    private Optional<MatchExtender> completeMatch(
+    private MatchExtender completeMatch(
         final MatchExtender matcher, final List<Person> remaining, final Collection<Person> receivers) {
         if (remaining.isEmpty()) {
-            return Optional.of(matcher);
+            return matcher;
         } else {
             Person head = remaining.get(0);
             List<Person> tail = remaining.subList(1, remaining.size());
@@ -32,15 +39,15 @@ public class MatchingEngine {
                 GiverAssignment pair = new GiverAssignment(head, rhs);
 
                 if (matcher.isPossibleExtension(pair)) {
-                    Optional<MatchExtender> result = completeMatch(new PairMatch(matcher, pair), tail, receivers);
+                    MatchExtender result = completeMatch(new PairMatch(matcher, pair), tail, receivers);
 
-                    if (result.isPresent()) {
+                    if (result != null) {
                         return result;
                     }
                 }
             }
 
-            return Optional.empty();
+            return null;
         }
     }
 }

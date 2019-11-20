@@ -7,7 +7,6 @@ package io.github.santulator.gui.validator;
 import io.github.santulator.core.CoreConstants;
 import io.github.santulator.gui.model.ParticipantModel;
 import io.github.santulator.gui.model.SessionModel;
-import io.github.santulator.matcher.MatchExtender;
 import io.github.santulator.matcher.MatchingEngine;
 import io.github.santulator.model.GiverAssignment;
 import io.github.santulator.model.ParticipantRole;
@@ -174,7 +173,7 @@ public class ValidationServiceImpl implements ValidationService {
         Set<GiverAssignment> restrictions = participantsStream(participants)
             .flatMap(p -> restrictions(people, p))
             .collect(toSet());
-        Optional<MatchExtender> match = engine.findMatch(givers, receivers, restrictions);
+        Optional<?> match = engine.findMatch(givers, receivers, restrictions);
 
         if (match.isPresent()) {
             return null;

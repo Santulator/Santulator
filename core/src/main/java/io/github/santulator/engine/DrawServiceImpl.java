@@ -5,7 +5,6 @@
 package io.github.santulator.engine;
 
 import io.github.santulator.core.SantaException;
-import io.github.santulator.matcher.MatchExtender;
 import io.github.santulator.matcher.MatchingEngine;
 import io.github.santulator.model.*;
 
@@ -27,9 +26,9 @@ public class DrawServiceImpl implements DrawService {
         List<Person> receivers = shuffle(participants(requirements, ParticipantRole::isReceiver));
         Set<GiverAssignment> restrictions = restrictions(requirements);
         MatchingEngine engine = new MatchingEngine();
-        MatchExtender match = engine.findMatch(givers, receivers, restrictions)
+        DrawSelection selection = engine.findMatch(givers, receivers, restrictions)
+            .map(DrawSelection::new)
             .orElseThrow(() -> new SantaException("Unable to find match"));
-        DrawSelection selection = selection(match);
 
         DrawValidationTool.validate(requirements, selection);
 
@@ -56,10 +55,4 @@ public class DrawServiceImpl implements DrawService {
             .collect(toSet());
     }
 
-    private DrawSelection selection(final MatchExtender found) {
-        List<GiverAssignment> givers = found.assignmentStream()
-            .collect(toList());
-
-        return new DrawSelection(givers);
-    }
 }

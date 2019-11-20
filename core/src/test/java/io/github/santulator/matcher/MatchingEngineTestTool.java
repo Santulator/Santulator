@@ -46,14 +46,9 @@ public class MatchingEngineTestTool {
         assertEquals(expectations, matches, "Match set");
     }
 
-    private Set<GiverAssignment> matchSet(final Optional<MatchExtender> match) {
-        return match.map(this::matchSet)
+    private Set<GiverAssignment> matchSet(final Optional<List<GiverAssignment>> match) {
+        return match.map(HashSet::new)
             .orElse(null);
-    }
-
-    private Set<GiverAssignment> matchSet(final MatchExtender match) {
-        return match.assignmentStream()
-            .collect(toSet());
     }
 
     private List<List<Person>> generatePermutations() {
