@@ -15,6 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.IntStream;
 
 import static io.github.santulator.test.model.TestRequirementsTool.REQUIREMENTS;
 import static io.github.santulator.test.model.TestRequirementsTool.person;
@@ -22,6 +23,8 @@ import static java.util.stream.Collectors.toSet;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DrawServiceTest {
+    public static final int LARGE_DRAW_PARTICIPANTS = 500;
+
     private final DrawService target = new DrawServiceImpl();
 
     @Test
@@ -126,6 +129,17 @@ public class DrawServiceTest {
     @Test
     public void testRealisticSelection() {
         validateNondeterministic(REQUIREMENTS);
+    }
+
+    @Test
+    public void testLargeDraw() {
+        RequirementsBuilder builder = new RequirementsBuilder();
+
+        IntStream.range(0, LARGE_DRAW_PARTICIPANTS)
+            .mapToObj(i -> String.format("%d", i))
+            .forEachOrdered(i -> builder.person(i, ParticipantRole.BOTH));
+
+        validateNondeterministic(builder.build());
     }
 
     private void validateNondeterministic(final DrawRequirements requirements) {

@@ -164,7 +164,6 @@ public class ValidationServiceImpl implements ValidationService {
     }
 
     private static ValidationError checkDrawPossible(final List<ParticipantModel> participants) {
-        MatchingEngine engine = new MatchingEngine();
         Map<String, Person> people = participantsStream(participants)
             .map(p -> new Person(p.getName(), p.getRole()))
             .collect(toMap(Person::getName, identity()));
@@ -173,7 +172,8 @@ public class ValidationServiceImpl implements ValidationService {
         Set<GiverAssignment> restrictions = participantsStream(participants)
             .flatMap(p -> restrictions(people, p))
             .collect(toSet());
-        Optional<?> match = engine.findMatch(givers, receivers, restrictions);
+        MatchingEngine engine = new MatchingEngine(givers, receivers, restrictions);
+        Optional<?> match = engine.findMatch();
 
         if (match.isPresent()) {
             return null;

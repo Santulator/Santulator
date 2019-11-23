@@ -7,39 +7,47 @@ package io.github.santulator.matcher;
 import io.github.santulator.model.GiverAssignment;
 import io.github.santulator.model.Person;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class MatchingEngine {
-    public Optional<List<GiverAssignment>> findMatch(final List<Person> givers, final Collection<Person> receivers, final Set<GiverAssignment> restrictions) {
-        MatchExtender matcher = completeMatch(new RootMatcher(restrictions), givers, receivers);
+    private final List<Person> givers;
 
-        if (matcher == null) {
-            return Optional.empty();
-        } else {
-            List<GiverAssignment> assignments = matcher.assignmentStream()
-                .collect(Collectors.toUnmodifiableList());
+    private final List<Person> receivers;
 
-            return Optional.of(assignments);
-        }
+    private final Set<GiverAssignment> restrictions;
+
+    private final int maxDepth;
+
+    private final Set<Person> remainingReceivers;
+
+    private final List<GiverAssignment> partialResult;
+
+    private int depth = 0;
+
+    public MatchingEngine(final List<Person> givers, final List<Person> receivers, final Set<GiverAssignment> restrictions) {
+        this.givers = List.copyOf(givers);
+        this.receivers = List.copyOf(receivers);
+        this.restrictions = Set.copyOf(restrictions);
+        this.remainingReceivers = new HashSet<>(receivers);
+        maxDepth = givers.size();
+        this.partialResult = new ArrayList<>(maxDepth);
     }
 
-    private MatchExtender completeMatch(
-        final MatchExtender matcher, final List<Person> remaining, final Collection<Person> receivers) {
-        if (remaining.isEmpty()) {
-            return matcher;
+    public Optional<List<GiverAssignment>> findMatch() {
+        List<GiverAssignment> result = buildMatch();
+
+        return Optional.ofNullable(result);
+    }
+
+    private List<GiverAssignment> buildMatch() {
+        if (depth == maxDepth) {
+            return partialResult;
         } else {
-            Person head = remaining.get(0);
-            List<Person> tail = remaining.subList(1, remaining.size());
+            Person lhs = givers.get(depth);
 
             for (Person rhs : receivers) {
-                GiverAssignment pair = new GiverAssignment(head, rhs);
-
-                if (matcher.isPossibleExtension(pair)) {
-                    MatchExtender result = completeMatch(new PairMatch(matcher, pair), tail, receivers);
+                if (!lhs.equals(rhs) && remainingReceivers.contains(rhs)) {
+                    List<GiverAssignment> result = buildMatch(lhs, rhs);
 
                     if (result != null) {
                         return result;
@@ -49,5 +57,27 @@ public class MatchingEngine {
 
             return null;
         }
+    }
+
+    private List<GiverAssignment> buildMatch(final Person lhs, final Person rhs) {
+        GiverAssignment pair = new GiverAssignment(lhs, rhs);
+
+        if (!restrictions.contains(pair)) {
+            ++depth;
+            partialResult.add(pair);
+            remainingReceivers.remove(rhs);
+
+            List<GiverAssignment> result = buildMatch();
+
+            if (result != null) {
+                return result;
+            }
+
+            --depth;
+            remainingReceivers.add(rhs);
+            partialResult.remove(depth);
+        }
+
+        return null;
     }
 }

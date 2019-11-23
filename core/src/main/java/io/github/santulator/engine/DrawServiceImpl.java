@@ -25,8 +25,8 @@ public class DrawServiceImpl implements DrawService {
         List<Person> givers = participants(requirements, ParticipantRole::isGiver);
         List<Person> receivers = shuffle(participants(requirements, ParticipantRole::isReceiver));
         Set<GiverAssignment> restrictions = restrictions(requirements);
-        MatchingEngine engine = new MatchingEngine();
-        DrawSelection selection = engine.findMatch(givers, receivers, restrictions)
+        MatchingEngine engine = new MatchingEngine(givers, receivers, restrictions);
+        DrawSelection selection = engine.findMatch()
             .map(DrawSelection::new)
             .orElseThrow(() -> new SantaException("Unable to find match"));
 

@@ -36,18 +36,19 @@ public class MatchingEngineTestTool {
     }
 
     public void performValidation() {
-        MatchingEngine engine = new MatchingEngine();
         List<List<Person>> permutations = generatePermutations();
         Set<Set<GiverAssignment>> matches = permutations.stream()
-            .map(list -> engine.findMatch(participants, list, restrictions))
-            .map(this::matchSet)
+            .map(list -> matchSet(participants, list, restrictions))
             .collect(toSet());
 
         assertEquals(expectations, matches, "Match set");
     }
 
-    private Set<GiverAssignment> matchSet(final Optional<List<GiverAssignment>> match) {
-        return match.map(HashSet::new)
+    private Set<GiverAssignment> matchSet(final List<Person> givers, final List<Person> receivers, final Set<GiverAssignment> restrictions) {
+        MatchingEngine engine = new MatchingEngine(givers, receivers, restrictions);
+
+        return engine.findMatch()
+            .map(Set::copyOf)
             .orElse(null);
     }
 
