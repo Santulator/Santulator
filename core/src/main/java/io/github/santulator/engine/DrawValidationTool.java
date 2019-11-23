@@ -69,7 +69,7 @@ public final class DrawValidationTool {
             .map(Map.Entry::getKey)
             .findFirst()
             .ifPresent(p -> {
-                throw new SantaException(String.format("Duplicate %s '%s", sideName, p.getName()));
+                throw new SantaException(String.format("Duplicate %s '%s'", sideName, p.getName()));
             });
         requirements.getParticipants().stream()
             .filter(roleFilter)
