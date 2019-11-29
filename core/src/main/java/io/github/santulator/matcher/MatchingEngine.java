@@ -9,6 +9,8 @@ import io.github.santulator.model.Person;
 
 import java.util.*;
 
+import static java.util.stream.Collectors.toUnmodifiableList;
+
 public class MatchingEngine {
     private final List<Person> givers;
 
@@ -20,64 +22,56 @@ public class MatchingEngine {
 
     private final Set<Person> remainingReceivers;
 
-    private final List<GiverAssignment> partialResult;
-
-    private int depth = 0;
+    private final Deque<MatcherFrame> stack;
 
     public MatchingEngine(final List<Person> givers, final List<Person> receivers, final Set<GiverAssignment> restrictions) {
         this.givers = List.copyOf(givers);
         this.receivers = List.copyOf(receivers);
         this.restrictions = Set.copyOf(restrictions);
         this.remainingReceivers = new HashSet<>(receivers);
-        maxDepth = givers.size();
-        this.partialResult = new ArrayList<>(maxDepth);
+        this.maxDepth = givers.size();
+        this.stack = new ArrayDeque<>(maxDepth);
     }
 
     public Optional<List<GiverAssignment>> findMatch() {
-        List<GiverAssignment> result = buildMatch();
-
-        return Optional.ofNullable(result);
-    }
-
-    private List<GiverAssignment> buildMatch() {
-        if (depth == maxDepth) {
-            return partialResult;
+        if (givers.isEmpty()) {
+            return Optional.of(List.of());
         } else {
-            Person lhs = givers.get(depth);
+            stack.clear();
+            if (buildMatch()) {
+                List<GiverAssignment> result = stack.stream()
+                    .map(MatcherFrame::getPair)
+                    .collect(toUnmodifiableList());
 
-            for (Person rhs : receivers) {
-                if (!lhs.equals(rhs) && remainingReceivers.contains(rhs)) {
-                    List<GiverAssignment> result = buildMatch(lhs, rhs);
-
-                    if (result != null) {
-                        return result;
-                    }
-                }
+                return Optional.of(result);
+            } else {
+                return Optional.empty();
             }
-
-            return null;
         }
     }
 
-    private List<GiverAssignment> buildMatch(final Person lhs, final Person rhs) {
-        GiverAssignment pair = new GiverAssignment(lhs, rhs);
+    private boolean buildMatch() {
+        push();
+        while (!stack.isEmpty()) {
+            MatcherFrame frame = stack.peek();
 
-        if (!restrictions.contains(pair)) {
-            ++depth;
-            partialResult.add(pair);
-            remainingReceivers.remove(rhs);
-
-            List<GiverAssignment> result = buildMatch();
-
-            if (result != null) {
-                return result;
+            if (frame.selectMatch(restrictions, remainingReceivers)) {
+                if (stack.size() == maxDepth) {
+                    return true;
+                } else {
+                    push();
+                }
+            } else {
+                stack.pop();
             }
-
-            --depth;
-            remainingReceivers.add(rhs);
-            partialResult.remove(depth);
         }
 
-        return null;
+        return false;
+    }
+
+    private void push() {
+        Person lhs = givers.get(stack.size());
+
+        stack.push(new MatcherFrame(lhs, receivers));
     }
 }
