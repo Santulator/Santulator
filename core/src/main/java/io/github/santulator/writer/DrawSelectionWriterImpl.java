@@ -7,16 +7,21 @@ package io.github.santulator.writer;
 import io.github.santulator.core.SantaException;
 import io.github.santulator.model.DrawSelection;
 import io.github.santulator.model.GiverAssignment;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.Duration;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
 public class DrawSelectionWriterImpl implements DrawSelectionWriter {
+    private static final Logger LOG = LoggerFactory.getLogger(DrawSelectionWriterImpl.class);
+
     private static final String ERROR_DIR = "Unable to create directory '%s'";
 
     private static final String ERROR_ASSIGNMENT = "Unable to create file '%s'";
@@ -30,9 +35,15 @@ public class DrawSelectionWriterImpl implements DrawSelectionWriter {
 
     @Override
     public void writeDrawSelection(final DrawSelection selection, final Path dir, final String password, final Runnable onWriteComplete) {
+        long start = System.nanoTime();
+
         mkdir(dir);
         selection.getGivers()
             .forEach(assignment -> writeGiverAssignment(dir, assignment, password, onWriteComplete));
+
+        String timeText = String.format("%,d", Duration.ofNanos(System.nanoTime() - start).toMillis());
+
+        LOG.info("{} files written ({} ms)", selection.getGivers().size(), timeText);
     }
 
     private void writeGiverAssignment(final Path dir, final GiverAssignment assignment, final String password, final Runnable onWriteComplete) {
