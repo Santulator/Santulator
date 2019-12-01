@@ -8,7 +8,6 @@ import io.github.santulator.model.GiverAssignment;
 import io.github.santulator.model.Person;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -35,79 +34,80 @@ public class MatcherFrameTest {
 
     @Test
     public void testEmpty() {
-        Set<Person> remainingReceivers = Set.of();
-        MatcherFrame target = new MatcherFrame(PERSON_1, RECEIVERS_NONE);
-        boolean isMatch = target.selectMatch(RESTRICTIONS_EMPTY, remainingReceivers);
+        MatcherContext context = new MatcherContext(RECEIVERS_NONE, RESTRICTIONS_EMPTY);
+        MatcherFrame target = new MatcherFrame(context, PERSON_1);
+        boolean isMatch = target.selectMatch();
 
         assertAll(
             () -> assertFalse(isMatch),
-            () -> assertEquals(Set.of(), remainingReceivers),
+            () -> assertEquals(Set.of(), context.getRemainingReceivers()),
             () -> assertThrows(IllegalStateException.class, target::getPair)
         );
     }
 
     @Test
     public void testBeforeFirstSelectMatch() {
-        MatcherFrame target = new MatcherFrame(PERSON_1, RECEIVERS_ALL);
+        MatcherContext context = new MatcherContext(RECEIVERS_ALL, RESTRICTIONS_EMPTY);
+        MatcherFrame target = new MatcherFrame(context, PERSON_1);
 
         assertThrows(IllegalStateException.class, target::getPair);
     }
 
     @Test
     public void testFirstSelectMatchWithoutRestrictions() {
-        Set<Person> remainingReceivers = new HashSet<>(RECEIVERS_ALL);
-        MatcherFrame target = new MatcherFrame(PERSON_1, RECEIVERS_ALL);
-        boolean isMatch = target.selectMatch(RESTRICTIONS_EMPTY, remainingReceivers);
+        MatcherContext context = new MatcherContext(RECEIVERS_ALL, RESTRICTIONS_EMPTY);
+        MatcherFrame target = new MatcherFrame(context, PERSON_1);
+        boolean isMatch = target.selectMatch();
 
         assertAll(
             () -> assertTrue(isMatch),
-            () -> assertEquals(Set.of(PERSON_1, PERSON_3), remainingReceivers),
+            () -> assertEquals(Set.of(PERSON_1, PERSON_3), context.getRemainingReceivers()),
             () -> assertEquals(ASSIGNMENT_1_2, target.getPair())
         );
     }
 
     @Test
     public void testFirstSelectMatchWithRestriction() {
-        Set<Person> remainingReceivers = new HashSet<>(RECEIVERS_ALL);
-        MatcherFrame target = new MatcherFrame(PERSON_1, RECEIVERS_ALL);
-        boolean isMatch = target.selectMatch(RESTRICTIONS_SINGLE, remainingReceivers);
+        MatcherContext context = new MatcherContext(RECEIVERS_ALL, RESTRICTIONS_SINGLE);
+        MatcherFrame target = new MatcherFrame(context, PERSON_1);
+        boolean isMatch = target.selectMatch();
 
         assertAll(
             () -> assertTrue(isMatch),
-            () -> assertEquals(Set.of(PERSON_1, PERSON_2), remainingReceivers),
+            () -> assertEquals(Set.of(PERSON_1, PERSON_2), context.getRemainingReceivers()),
             () -> assertEquals(ASSIGNMENT_1_3, target.getPair())
         );
     }
 
     @Test
     public void testSecondSelectMatch() {
-        Set<Person> remainingReceivers = new HashSet<>(RECEIVERS_ALL);
-        MatcherFrame target = new MatcherFrame(PERSON_1, RECEIVERS_ALL);
+        MatcherContext context = new MatcherContext(RECEIVERS_ALL, RESTRICTIONS_EMPTY);
+        MatcherFrame target = new MatcherFrame(context, PERSON_1);
 
-        target.selectMatch(RESTRICTIONS_EMPTY, remainingReceivers);
+        target.selectMatch();
 
-        boolean isMatch = target.selectMatch(RESTRICTIONS_EMPTY, remainingReceivers);
+        boolean isMatch = target.selectMatch();
 
         assertAll(
             () -> assertTrue(isMatch),
-            () -> assertEquals(Set.of(PERSON_1, PERSON_2), remainingReceivers),
+            () -> assertEquals(Set.of(PERSON_1, PERSON_2), context.getRemainingReceivers()),
             () -> assertEquals(ASSIGNMENT_1_3, target.getPair())
         );
     }
 
     @Test
     public void testThirdSelectMatch() {
-        Set<Person> remainingReceivers = new HashSet<>(RECEIVERS_ALL);
-        MatcherFrame target = new MatcherFrame(PERSON_1, RECEIVERS_ALL);
+        MatcherContext context = new MatcherContext(RECEIVERS_ALL, RESTRICTIONS_EMPTY);
+        MatcherFrame target = new MatcherFrame(context, PERSON_1);
 
-        target.selectMatch(RESTRICTIONS_EMPTY, remainingReceivers);
-        target.selectMatch(RESTRICTIONS_EMPTY, remainingReceivers);
+        target.selectMatch();
+        target.selectMatch();
 
-        boolean isMatch = target.selectMatch(RESTRICTIONS_EMPTY, remainingReceivers);
+        boolean isMatch = target.selectMatch();
 
         assertAll(
             () -> assertFalse(isMatch),
-            () -> assertEquals(Set.of(PERSON_1, PERSON_2, PERSON_3), remainingReceivers),
+            () -> assertEquals(Set.of(PERSON_1, PERSON_2, PERSON_3), context.getRemainingReceivers()),
             () -> assertThrows(IllegalStateException.class, target::getPair)
         );
     }

@@ -7,38 +7,38 @@ package io.github.santulator.matcher;
 import io.github.santulator.model.GiverAssignment;
 import io.github.santulator.model.Person;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.OptionalInt;
 
 public class MatcherFrame {
-    private final Person lhs;
+    private final MatcherContext context;
 
-    private Person rhs;
+    private final Person lhs;
 
     private GiverAssignment pair;
 
-    private final Iterator<Person> iterator;
+    private int receiverIndex = MatcherContext.NO_RECEIVER_ALLOCATED;
 
-    public MatcherFrame(final Person lhs, final List<Person> receivers) {
+    public MatcherFrame(final MatcherContext context, final Person lhs) {
+        this.context = context;
         this.lhs = lhs;
-        this.iterator = List.copyOf(receivers).iterator();
     }
 
-    public boolean selectMatch(final Set<GiverAssignment> restrictions, final Set<Person> remainingReceivers) {
-        if (rhs != null) {
-            remainingReceivers.add(rhs);
-        }
-        while (iterator.hasNext()) {
-            rhs = iterator.next();
-            if (!lhs.equals(rhs) && remainingReceivers.contains(rhs)) {
-                pair = new GiverAssignment(lhs, rhs);
-                if (!restrictions.contains(pair)) {
-                    remainingReceivers.remove(rhs);
+    public boolean selectMatch() {
+        OptionalInt receiver = context.allocateNextReceiver(receiverIndex);
 
+        while (receiver.isPresent()) {
+            receiverIndex = receiver.getAsInt();
+
+            Person rhs = context.lookupReceiver(receiverIndex);
+
+            if (!lhs.equals(rhs)) {
+                pair = new GiverAssignment(lhs, rhs);
+
+                if (context.isPossibleMatch(pair)) {
                     return true;
                 }
             }
+            receiver = context.allocateNextReceiver(receiverIndex);
         }
         pair = null;
 

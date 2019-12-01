@@ -20,15 +20,12 @@ public class MatchingEngine {
 
     private final int maxDepth;
 
-    private final Set<Person> remainingReceivers;
-
     private final Deque<MatcherFrame> stack;
 
     public MatchingEngine(final List<Person> givers, final List<Person> receivers, final Set<GiverAssignment> restrictions) {
         this.givers = List.copyOf(givers);
         this.receivers = List.copyOf(receivers);
         this.restrictions = Set.copyOf(restrictions);
-        this.remainingReceivers = new HashSet<>(receivers);
         this.maxDepth = givers.size();
         this.stack = new ArrayDeque<>(maxDepth);
     }
@@ -51,15 +48,17 @@ public class MatchingEngine {
     }
 
     private boolean buildMatch() {
-        push();
+        MatcherContext context = new MatcherContext(receivers, restrictions);
+
+        push(context);
         while (!stack.isEmpty()) {
             MatcherFrame frame = stack.peek();
 
-            if (frame.selectMatch(restrictions, remainingReceivers)) {
+            if (frame.selectMatch()) {
                 if (stack.size() == maxDepth) {
                     return true;
                 } else {
-                    push();
+                    push(context);
                 }
             } else {
                 stack.pop();
@@ -69,9 +68,9 @@ public class MatchingEngine {
         return false;
     }
 
-    private void push() {
+    private void push(final MatcherContext context) {
         Person lhs = givers.get(stack.size());
 
-        stack.push(new MatcherFrame(lhs, receivers));
+        stack.push(new MatcherFrame(context, lhs));
     }
 }
