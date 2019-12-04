@@ -115,7 +115,7 @@ public class SettingsManagerTest {
     }
 
     private <T> void validateOptional(final Supplier<Optional<T>> getter, final Consumer<T> setter, final T expected, final T value) {
-        validate(() -> getter.get().get(), setter, expected, value);
+        validate(() -> getter.get().orElseThrow(), setter, expected, value);
     }
 
     private void validate(final Supplier<Path> getter, final Consumer<Path> setter, final Path expected) {
