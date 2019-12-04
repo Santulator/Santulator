@@ -22,6 +22,8 @@ import io.github.santulator.gui.status.StatusManagerImpl;
 import io.github.santulator.gui.validator.ValidationService;
 import io.github.santulator.gui.validator.ValidationServiceImpl;
 import io.github.santulator.session.*;
+import io.github.santulator.writer.DrawSelectionWriter;
+import io.github.santulator.writer.DrawSelectionWriterImpl;
 
 import java.nio.file.Paths;
 import java.util.List;
@@ -42,6 +44,7 @@ public class CoreGuiModule extends AbstractModule {
         bind(SessionSerialiser.class).to(SessionSerialiserImpl.class);
         bind(SessionImporter.class).to(SessionImporterImpl.class);
         bind(SessionStateTranslator.class).to(SessionStateTranslatorImpl.class);
+        bind(DrawSelectionWriter.class).to(DrawSelectionWriterImpl.class);
         bind(DrawService.class).to(DrawServiceImpl.class);
         bind(ProgressSequencer.class).to(ProgressSequencerImpl.class);
         bind(I18nManager.class).to(I18nManagerImpl.class);

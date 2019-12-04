@@ -8,9 +8,7 @@ import io.github.santulator.core.CoreConstants;
 import io.github.santulator.core.I18nBundleProvider;
 
 import java.util.ResourceBundle;
-import javax.inject.Singleton;
 
-@Singleton
 public class TestBundleProvider implements I18nBundleProvider {
     private static final String BUNDLE = "bundles/TestBundle";
 

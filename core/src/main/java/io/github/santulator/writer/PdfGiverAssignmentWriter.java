@@ -13,12 +13,9 @@ import io.github.santulator.model.GiverAssignment;
 import org.apache.commons.lang3.StringUtils;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.io.OutputStream;
-import java.net.URL;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
-@Singleton
 public class PdfGiverAssignmentWriter implements GiverAssignmentWriter {
     public static final String FORMAT_SUFFIX = ".pdf";
 
@@ -34,23 +31,23 @@ public class PdfGiverAssignmentWriter implements GiverAssignmentWriter {
 
     private static final float IMAGE_SCALE_PERCENTAGE = 30;
 
-    private final URL headerImage;
+    private final Image header;
 
     private final String phrase;
 
-    @Inject
     public PdfGiverAssignmentWriter(final I18nBundleProvider provider) {
-        this.headerImage = PdfGiverAssignmentWriter.class.getResource(HEADER_IMAGE);
-
-        this.phrase = provider.bundle().getString(KEY_PHRASE);
+        try {
+            this.header = Image.getInstance(PdfGiverAssignmentWriter.class.getResource(HEADER_IMAGE));
+            this.phrase = provider.bundle().getString(KEY_PHRASE);
+        } catch (final IOException e) {
+            throw new SantaException("Unable to load header image", e);
+        }
     }
 
     @Override
     public void writeGiverAssignment(final String name, final GiverAssignment assignment, final OutputStream out, final String password) {
         try (Document document = new Document(PageSize.A5)) {
             handleMetaData(out, password, document);
-
-            Image header = Image.getInstance(headerImage);
 
             header.setAlignment(Element.ALIGN_CENTER);
             header.scalePercent(IMAGE_SCALE_PERCENTAGE);

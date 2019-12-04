@@ -11,6 +11,8 @@ import io.github.santulator.engine.DrawService;
 import io.github.santulator.engine.DrawServiceImpl;
 import io.github.santulator.reader.ExcelRequirementsReader;
 import io.github.santulator.reader.RequirementsReader;
+import io.github.santulator.writer.DrawSelectionWriter;
+import io.github.santulator.writer.DrawSelectionWriterImpl;
 
 import java.util.Locale;
 
@@ -23,6 +25,7 @@ public class SantaModule extends AbstractModule {
 
     @Override
     protected void configure() {
+        bind(DrawSelectionWriter.class).to(DrawSelectionWriterImpl.class);
         bind(DrawService.class).to(DrawServiceImpl.class);
         bind(RequirementsReader.class).to(ExcelRequirementsReader.class);
         bind(SimpleSantaRunner.class).to(SimpleSantaRunnerImpl.class);

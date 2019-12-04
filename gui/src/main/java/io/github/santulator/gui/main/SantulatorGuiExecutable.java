@@ -6,7 +6,6 @@ package io.github.santulator.gui.main;
 
 import com.gluonhq.ignite.guice.GuiceContext;
 import com.google.inject.Module;
-import io.github.santulator.writer.WriterModule;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -49,7 +48,7 @@ public class SantulatorGuiExecutable extends Application {
     }
 
     public static void main(final String... args) {
-        runApp(args, Application::launch, new CoreGuiModule(args), new WriterModule(), new LiveGuiModule());
+        runApp(args, Application::launch, new CoreGuiModule(args), new LiveGuiModule());
     }
 
     protected static void runApp(final String[] args, final Consumer<String[]> launcher, final Module... modules) {

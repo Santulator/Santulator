@@ -4,8 +4,7 @@
 
 package io.github.santulator.writer;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import io.github.santulator.core.I18nBundleProvider;
 import io.github.santulator.model.GiverAssignment;
 import io.github.santulator.test.core.TestFileManager;
 import org.apache.commons.io.FileUtils;
@@ -20,11 +19,13 @@ import java.nio.file.Path;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PdfGiverAssignmentWriterTest {
+    private final I18nBundleProvider bundleProvider = new TestBundleProvider();
+
+    private final GiverAssignmentWriter target = new PdfGiverAssignmentWriter(bundleProvider);
+
     private Path file;
 
     private TestFileManager manager;
-
-    private GiverAssignmentWriter target;
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -33,8 +34,6 @@ public class PdfGiverAssignmentWriterTest {
         if (Files.exists(file)) {
             FileUtils.forceDelete(file.toFile());
         }
-        Injector injector = Guice.createInjector(new WriterModule(), new TestResourcesModule());
-        target = injector.getInstance(GiverAssignmentWriter.class);
     }
 
     @AfterEach

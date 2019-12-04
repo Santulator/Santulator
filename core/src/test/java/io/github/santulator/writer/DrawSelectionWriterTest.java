@@ -4,8 +4,7 @@
 
 package io.github.santulator.writer;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import io.github.santulator.core.I18nBundleProvider;
 import io.github.santulator.model.DrawSelection;
 import io.github.santulator.model.GiverAssignment;
 import io.github.santulator.test.core.TestFileManager;
@@ -28,18 +27,18 @@ public class DrawSelectionWriterTest {
 
     private static final String PASSWORD = "password";
 
+    private final I18nBundleProvider bundleProvider = new TestBundleProvider();
+
+    private final DrawSelectionWriter target = new DrawSelectionWriterImpl(bundleProvider);
+
     private TestFileManager manager;
 
     private Path dir;
-
-    private DrawSelectionWriter target;
 
     @BeforeEach
     public void setUp() throws Exception {
         manager = new TestFileManager(DrawSelectionWriterTest.class);
         dir = manager.addFile("selection");
-        Injector injector = Guice.createInjector(new WriterModule(), new TestResourcesModule());
-        target = injector.getInstance(DrawSelectionWriter.class);
     }
 
     @AfterEach

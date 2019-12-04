@@ -23,7 +23,6 @@ import io.github.santulator.gui.settings.SettingsManagerImpl;
 import io.github.santulator.model.SessionState;
 import io.github.santulator.session.SessionSerialiser;
 import io.github.santulator.test.core.TestFileManager;
-import io.github.santulator.writer.WriterModule;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -118,7 +117,7 @@ public class GuiTest implements GuiTestValidator {
                 bind(GuiTaskHandler.class).to(GuiTaskHandlerForTesting.class);
             }
         };
-        SantulatorGuiExecutable.setModules(coreModule, testModule, new WriterModule());
+        SantulatorGuiExecutable.setModules(coreModule, testModule);
 
         executable = (SantulatorGuiExecutable) setupApplication(SantulatorGuiExecutable.class);
     }
