@@ -27,9 +27,10 @@ public final class ExcelTool {
     public static List<List<String>> readContent(final String name, final InputStream stream) {
         try (Workbook wb = readWorkbook(stream)) {
             Sheet sheet = wb.getSheetAt(0);
+            DataFormatter dataFormatter = new DataFormatter(CoreConstants.LOCALE);
 
             return StreamSupport.stream(sheet.spliterator(), false)
-                .map(ExcelTool::row)
+                .map(row -> row(row, dataFormatter))
                 .filter(l -> !l.isEmpty())
                 .collect(toList());
         } catch (final Exception e) {
@@ -37,10 +38,10 @@ public final class ExcelTool {
         }
     }
 
-    private static List<String> row(final Row row) {
+    private static List<String> row(final Row row, final DataFormatter dataFormatter) {
         List<String> result = IntStream.range(0, row.getLastCellNum())
             .mapToObj(i -> row.getCell(i, MissingCellPolicy.RETURN_BLANK_AS_NULL))
-            .map(ExcelTool::cellValue)
+            .map(cell -> cellValue(cell, dataFormatter))
             .map(StringUtils::trimToNull)
             .collect(toList());
         int last = CoreTool.findLast(result, Objects::nonNull).orElse(-1);
@@ -48,11 +49,11 @@ public final class ExcelTool {
         return result.subList(0, last + 1);
     }
 
-    private static String cellValue(final Cell cell) {
+    private static String cellValue(final Cell cell, final DataFormatter dataFormatter) {
         if (cell == null) {
             return null;
         } else {
-            return cell.getStringCellValue();
+            return dataFormatter.formatCellValue(cell);
         }
     }
 
