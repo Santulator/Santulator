@@ -117,6 +117,7 @@ public class GuiTest implements GuiTestValidator {
                 bind(GuiTaskHandler.class).to(GuiTaskHandlerForTesting.class);
             }
         };
+        SantulatorGuiExecutable.installLogBridge();
         SantulatorGuiExecutable.setModules(coreModule, testModule);
 
         executable = (SantulatorGuiExecutable) setupApplication(SantulatorGuiExecutable.class);
