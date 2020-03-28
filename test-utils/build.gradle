@@ -4,7 +4,7 @@
 
 dependencies {
     compile project(':core')
-    compile 'com.github.spotbugs:spotbugs-annotations:3.1.12'
+    compile 'com.github.spotbugs:spotbugs-annotations:4.0.1'
     compile 'org.junit.jupiter:junit-jupiter:5.6.0'
     compile 'commons-io:commons-io:2.6'
 }
