@@ -47,7 +47,7 @@ dependencies {
     compile ('com.gluonhq:ignite-guice:1.0.2') {
         exclude group: 'com.google.inject', module: 'guice'
     }
-    compile 'org.controlsfx:controlsfx:11.0.1'
+    compile 'org.controlsfx:controlsfx:11.1.0'
 
     // This is required for the conditional logic in the logback setup
     runtime 'org.codehaus.janino:janino:3.1.3'
