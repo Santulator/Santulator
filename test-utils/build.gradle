@@ -2,9 +2,14 @@
  * Open Source Software published under the Apache Licence, Version 2.0.
  */
 
+plugins {
+    id 'java-library'
+}
+
 dependencies {
-    compile project(':core')
-    compile 'com.github.spotbugs:spotbugs-annotations:4.2.1'
-    compile 'org.junit.jupiter:junit-jupiter:5.7.1'
-    compile 'commons-io:commons-io:2.8.0'
+    api 'com.github.spotbugs:spotbugs-annotations:4.2.1'
+
+    implementation project(':core')
+    implementation 'org.junit.jupiter:junit-jupiter:5.7.1'
+    implementation 'commons-io:commons-io:2.8.0'
 }

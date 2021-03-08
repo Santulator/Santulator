@@ -3,6 +3,6 @@
  */
 
 dependencies {
-    compile project(':core')
-    testCompile project(':test-utils')
+    implementation project(':core')
+    testImplementation project(':test-utils')
 }
