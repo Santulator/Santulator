@@ -76,12 +76,6 @@ test {
     }
 }
 
-run {
-    jvmArgs += [
-        '--add-exports', 'javafx.graphics/com.sun.javafx.css=ALL-UNNAMED'
-    ]
-}
-
 task copyDependencies(type: Copy) {
     from configurations.runtimeClasspath
     from jar
