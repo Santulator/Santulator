@@ -7,8 +7,8 @@ plugins {
 }
 
 dependencies {
-    api 'org.apache.commons:commons-lang3:3.11'
-    api 'com.fasterxml.jackson.core:jackson-databind:2.12.1'
+    api 'org.apache.commons:commons-lang3:3.12.0'
+    api 'com.fasterxml.jackson.core:jackson-databind:2.12.2'
     api 'org.slf4j:slf4j-api:1.7.30'
     api 'org.slf4j:jul-to-slf4j:1.7.30'
     api 'com.google.inject:guice:5.0.1'
@@ -22,5 +22,5 @@ dependencies {
     runtimeOnly 'ch.qos.logback:logback-classic:1.2.3'
 
     // This is required by OpenPDF for password protection
-    runtimeOnly 'org.bouncycastle:bcprov-jdk15on:1.67'
+    runtimeOnly 'org.bouncycastle:bcprov-jdk15on:1.68'
 }
