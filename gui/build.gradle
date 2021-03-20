@@ -29,19 +29,6 @@ jar {
     }
 }
 
-def platform
-if (operatingSystem.isWindows()) {
-    platform = 'win'
-} else if (operatingSystem.isLinux()) {
-    platform = 'linux'
-} else if (operatingSystem.isMacOsX()) {
-    platform = 'mac'
-}
-
-configurations {
-    javafxCompile
-}
-
 dependencies {
     implementation project(':core')
     implementation ('com.gluonhq:ignite-guice:1.0.2') {
