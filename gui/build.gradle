@@ -17,8 +17,8 @@ ext.buildTimestamp = new Date().format('yyyy-MM-dd HH:mm:ss')
 processResources {
     filesMatching('properties/*.properties') {
         filter ReplaceTokens, tokens: [
-                'build.version': project.property("version"),
-                'build.timestamp': project.buildTimestamp
+            'build.version': project.property("version"),
+            'build.timestamp': project.buildTimestamp
         ]
     }
 }
