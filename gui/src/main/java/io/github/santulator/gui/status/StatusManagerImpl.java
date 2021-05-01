@@ -104,7 +104,9 @@ public class StatusManagerImpl implements StatusManager {
 
     @Override
     public void markSuccess() {
-        LOG.debug("Success: {}", getActionKey());
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Success: {}", getActionKey());
+        }
     }
 
     @Override
@@ -112,7 +114,9 @@ public class StatusManagerImpl implements StatusManager {
         ActionStatus newStatus = model.getActionStatus().complete()
             .orElseThrow(() -> new IllegalStateException("No action to complete"));
 
-        LOG.debug("Complete: {}", getActionKey());
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Complete: {}", getActionKey());
+        }
         transition(model.getSecondaryAction(), newStatus);
     }
 
