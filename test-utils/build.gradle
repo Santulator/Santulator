@@ -10,6 +10,6 @@ dependencies {
     api 'com.github.spotbugs:spotbugs-annotations:4.2.3'
 
     implementation project(':core')
-    implementation 'org.junit.jupiter:junit-jupiter:5.7.1'
-    implementation 'commons-io:commons-io:2.8.0'
+    implementation 'org.junit.jupiter:junit-jupiter:5.7.2'
+    implementation 'commons-io:commons-io:2.9.0'
 }
