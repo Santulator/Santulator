@@ -36,7 +36,7 @@ dependencies {
     testImplementation 'org.testfx:testfx-junit5:4.0.16-alpha'
     testImplementation 'ch.qos.logback:logback-classic:1.2.3'
 
-    testRuntimeOnly 'commons-io:commons-io:2.9.0'
+    testRuntimeOnly 'commons-io:commons-io:2.10.0'
     testRuntimeOnly 'org.testfx:openjfx-monocle:jdk-12.0.1+2'
 }
 

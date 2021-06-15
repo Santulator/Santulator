@@ -11,5 +11,5 @@ dependencies {
 
     implementation project(':core')
     implementation 'org.junit.jupiter:junit-jupiter:5.7.2'
-    implementation 'commons-io:commons-io:2.9.0'
+    implementation 'commons-io:commons-io:2.10.0'
 }
