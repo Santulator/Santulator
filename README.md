@@ -39,11 +39,11 @@ $ ./gradlew :gui:test --tests io.github.santulator.gui.main.GuiTest --rerun-task
 
 # How to Build The Installable Bundle
 
+See [PACKAGING.md](package/PACKAGING.md) for full, step-by-step instructions for creating the Santulator installable bundle using JDK 16.
+
+Prior to the release of JDK 16, the Santulator installable bundle used to be created using JDK 11.  You can find more information about this in the article [Using the Java Packager with JDK 11].
+
 [![Using the Java Packager with JDK 11](/assets/Using-The-Java-Packager-With-JDK-11.png)][Using the Java Packager with JDK 11]
-
-In the article [Using the Java Packager with JDK 11] you can read about how the Santulator installable bundles for Mac, Windows and Linux are created and how you can do this in your own project.  These self-contained installers allow users to setup Santulator on their computer without the need to first install Java.
-
-You can also find full, step-by-step instructions for creating the Santulator installable bundle in [PACKAGING.md](package/PACKAGING.md).
 
 # Open Source & Secret Santa with Santulator
 
