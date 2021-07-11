@@ -39,11 +39,11 @@ $ ./gradlew :gui:test --tests io.github.santulator.gui.main.GuiTest --rerun-task
 
 # How to Build The Installable Bundle
 
-See [PACKAGING.md](package/PACKAGING.md) for full, step-by-step instructions for creating the Santulator installable bundle using JDK 16.
+[![Installable Java Apps with jpackage](/assets/jpackage-installable-java-apps.png)][Installable Java Apps with jpackage]
 
-Prior to the release of JDK 16, the Santulator installable bundle used to be created using JDK 11.  You can find more information about this in the article [Using the Java Packager with JDK 11].
+In the article [Installable Java Apps with jpackage] you can read about how installable bundles for Mac, Windows and Linux are created and how you can do this in your own project.  These self-contained installers allow users to setup Santulator on their computer without the need to first install Java.
 
-[![Using the Java Packager with JDK 11](/assets/Using-The-Java-Packager-With-JDK-11.png)][Using the Java Packager with JDK 11]
+You can also find full, step-by-step instructions for creating the Santulator installable bundle in [PACKAGING.md](package/PACKAGING.md).
 
 # Open Source & Secret Santa with Santulator
 
@@ -53,5 +53,5 @@ Over on the King Tech Blog you can read more about the project in [Open Source &
 
 [![Before and after colours](/assets/Before-And-After-Colours.png)][Open Source & Secret Santa with Santulator]
 
-[Using the Java Packager with JDK 11]:https://medium.com/@adam_carroll/java-packager-with-jdk11-31b3d620f4a8
+[Installable Java Apps with jpackage]:https://vocabhunter.github.io/2021/07/10/installable-java-apps-with-jpackage.html
 [Open Source & Secret Santa with Santulator]:https://medium.com/techking/open-source-secret-santa-with-santulator-9101972359fc
