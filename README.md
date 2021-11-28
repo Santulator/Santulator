@@ -16,7 +16,7 @@ Santulator is available for free from the [download page](https://santulator.git
 
 # Running The Development Version of Santulator
 
-You will need JDK 11.  The version used for building Santulator releases is OpenJDK 11 with Hotspot, from [AdoptOpenJDK](https://adoptopenjdk.net/).
+You will need JDK 17.  The version used for building Santulator releases is OpenJDK 17 with Hotspot, from [Adoptium](https://adoptium.net).
 
 With your JDK installed you can then clone this repository and run the following to start Santulator:
 ~~~
