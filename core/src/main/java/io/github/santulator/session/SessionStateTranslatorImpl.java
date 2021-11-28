@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.toList;
-
 public class SessionStateTranslatorImpl implements SessionStateTranslator {
     @Override
     public DrawRequirements toRequirements(final SessionState state) {
@@ -22,7 +20,7 @@ public class SessionStateTranslatorImpl implements SessionStateTranslator {
         Map<String, Person> people = buildMap(inputParticipants);
         List<Restriction> restrictions = inputParticipants.stream()
             .flatMap(p -> restrictions(people, p))
-            .collect(toList());
+            .toList();
 
         return new DrawRequirements(people.values(), restrictions);
     }

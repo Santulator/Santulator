@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.stream.IntStream;
 import javax.inject.Singleton;
 
-import static java.util.stream.Collectors.toList;
-
 @Singleton
 public class ProgressSequencerImpl implements ProgressSequencer {
     private static final int MINIMUM_PERCENTAGE = 20;
@@ -20,7 +18,7 @@ public class ProgressSequencerImpl implements ProgressSequencer {
     public List<ProgressPoint> sequence(final int size) {
         return IntStream.range(0, size)
             .mapToObj(i -> point(i, size))
-            .collect(toList());
+            .toList();
     }
 
     private ProgressPoint point(final int index, final int size) {

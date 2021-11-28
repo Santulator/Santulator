@@ -15,8 +15,6 @@ import java.util.Objects;
 import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
 
-import static java.util.stream.Collectors.toList;
-
 public final class ExcelTool {
     private static final String ERROR_READ = "Unable to read spreadsheet '%s'";
 
@@ -32,7 +30,7 @@ public final class ExcelTool {
             return StreamSupport.stream(sheet.spliterator(), false)
                 .map(row -> row(row, dataFormatter))
                 .filter(l -> !l.isEmpty())
-                .collect(toList());
+                .toList();
         } catch (final Exception e) {
             throw new SantaException(String.format(ERROR_READ, name), e);
         }
@@ -43,7 +41,7 @@ public final class ExcelTool {
             .mapToObj(i -> row.getCell(i, MissingCellPolicy.RETURN_BLANK_AS_NULL))
             .map(cell -> cellValue(cell, dataFormatter))
             .map(StringUtils::trimToNull)
-            .collect(toList());
+            .toList();
         int last = CoreTool.findLast(result, Objects::nonNull).orElse(-1);
 
         return result.subList(0, last + 1);

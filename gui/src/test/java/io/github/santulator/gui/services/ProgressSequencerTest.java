@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ProgressSequencerTest {
@@ -39,7 +38,7 @@ public class ProgressSequencerTest {
     public void testMaximumDistinctPoints() {
         List<ProgressPoint> expected = IntStream.range(20, 81)
             .mapToObj(i -> new ProgressPoint(i, i - 19))
-            .collect(toList());
+            .toList();
 
         validate(61, expected);
     }

@@ -21,7 +21,6 @@ import java.util.stream.Stream;
 import javax.inject.Singleton;
 
 import static io.github.santulator.core.CoreConstants.LOCALE;
-import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
 @Singleton
@@ -39,7 +38,7 @@ public class ExcelRequirementsReader implements RequirementsReader {
         List<List<String>> content = readContent(name, stream);
         List<Person> participants = content.stream()
             .map(l -> new Person(l.get(0), role(name, l)))
-            .collect(toList());
+            .toList();
         Map<String, Person> participantMap = participantMap(name, participants);
         List<Restriction> restrictions = restrictions(name, participantMap, content);
 
@@ -65,7 +64,7 @@ public class ExcelRequirementsReader implements RequirementsReader {
     private List<Restriction> restrictions(final String name, final Map<String, Person> people, final List<List<String>> content) {
         return content.stream()
             .flatMap(l -> restrictionsForPerson(name, people, l))
-            .collect(toList());
+            .toList();
     }
 
     private Stream<Restriction> restrictionsForPerson(final String name, final Map<String, Person> people, final List<String> line) {

@@ -15,8 +15,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import static java.util.stream.Collectors.toList;
-
 @Singleton
 public class SessionModelTool {
     private final I18nManager i18nManager;
@@ -39,7 +37,7 @@ public class SessionModelTool {
     public SessionModel buildGuiModel(final List<ParticipantState> participants) {
         List<ParticipantModel> participantModels = participants.stream()
             .map(this::buildParticipantModel)
-            .collect(toList());
+            .toList();
 
         return new SessionModel(i18nManager, participantModels);
     }
@@ -53,7 +51,7 @@ public class SessionModelTool {
         List<ParticipantState> participants = model.getParticipants().stream()
             .filter(p -> !p.isPlaceholder())
             .map(this::buildParticipantState)
-            .collect(toList());
+            .toList();
 
         state.setParticipants(participants);
         state.setDrawName(model.getDrawName());

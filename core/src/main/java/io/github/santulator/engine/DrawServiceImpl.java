@@ -15,7 +15,6 @@ import java.util.Set;
 import java.util.function.Predicate;
 import javax.inject.Singleton;
 
-import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 
 @Singleton
@@ -38,7 +37,7 @@ public class DrawServiceImpl implements DrawService {
     private List<Person> participants(final DrawRequirements requirements, final Predicate<ParticipantRole> roleFilter) {
         return requirements.getParticipants().stream()
             .filter(p -> roleFilter.test(p.getRole()))
-            .collect(toList());
+            .toList();
     }
 
     private <T> List<T> shuffle(final List<T> original) {

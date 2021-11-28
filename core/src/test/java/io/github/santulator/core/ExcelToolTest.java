@@ -10,7 +10,6 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ExcelToolTest {
@@ -32,7 +31,7 @@ public class ExcelToolTest {
 
     private static final List<List<String>> EXPECTED_CONTENT = Arrays.stream(EXPECTED_CONTENT_ARRAY)
         .map(Arrays::asList)
-        .collect(toList());
+        .toList();
 
     @Test
     public void testUnreadable() {

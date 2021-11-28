@@ -19,7 +19,6 @@ import java.util.Objects;
 import javax.inject.Singleton;
 
 import static io.github.santulator.session.FileNameTool.filename;
-import static java.util.stream.Collectors.toList;
 
 @Singleton
 public class SessionImporterImpl implements SessionImporter {
@@ -31,7 +30,7 @@ public class SessionImporterImpl implements SessionImporter {
                 .map(l -> l.get(0))
                 .filter(Objects::nonNull)
                 .map(n -> new ParticipantState(n, ParticipantRole.BOTH))
-                .collect(toList());
+                .toList();
 
             if (result.isEmpty()) {
                 throw new SantaException(String.format("No participants found in file '%s'", file));
