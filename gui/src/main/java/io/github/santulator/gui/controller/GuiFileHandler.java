@@ -254,14 +254,11 @@ public class GuiFileHandler {
 
             dialogue.showDialogue();
 
-            switch (dialogue.getUserResponse()) {
-                case SAVE:
-                    return saveChanges();
-                case DISCARD:
-                    return true;
-                default:
-                    return false;
-            }
+            return switch (dialogue.getUserResponse()) {
+                case SAVE -> saveChanges();
+                case DISCARD -> true;
+                case CANCEL -> false;
+            };
         }
     }
 
