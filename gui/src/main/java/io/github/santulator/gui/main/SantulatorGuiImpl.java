@@ -80,11 +80,11 @@ public class SantulatorGuiImpl implements SantulatorGui {
         Placement placement = placementManager.getMainWindow();
 
         stage.setScene(scene);
-        stage.setWidth(placement.getWidth());
-        stage.setHeight(placement.getHeight());
-        if (placement.isPositioned()) {
-            stage.setX(placement.getX());
-            stage.setY(placement.getY());
+        stage.setWidth(placement.width());
+        stage.setHeight(placement.height());
+        if (placement.positioned()) {
+            stage.setX(placement.x());
+            stage.setY(placement.y());
         }
         stage.show();
         Platform.runLater(() -> logStartup(startupTimestampNanos));
