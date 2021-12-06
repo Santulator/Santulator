@@ -28,6 +28,7 @@ public final class TestRequirementsTool {
         .mutualRestriction("Edith",  "Fred")
         .mutualRestriction("Gina",   "Harry")
         .mutualRestriction("Iris",   "John")
+        .restrictions("John", "Harry")
         .build();
 
     private TestRequirementsTool() {
