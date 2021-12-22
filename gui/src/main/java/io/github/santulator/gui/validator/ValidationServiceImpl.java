@@ -185,7 +185,7 @@ public class ValidationServiceImpl implements ValidationService {
     private static List<Person> peopleByRole(final Map<String, Person> people, final Predicate<ParticipantRole> rolePredicate) {
         return people.values().stream()
             .filter(p -> rolePredicate.test(p.getRole()))
-            .collect(toList());
+            .toList();
     }
 
     private static Stream<GiverAssignment> restrictions(final Map<String, Person> people, final ParticipantModel participant) {

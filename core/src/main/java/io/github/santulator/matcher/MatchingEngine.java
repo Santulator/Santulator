@@ -9,8 +9,6 @@ import io.github.santulator.model.Person;
 
 import java.util.*;
 
-import static java.util.stream.Collectors.toUnmodifiableList;
-
 public class MatchingEngine {
     private final List<Person> givers;
 
@@ -38,7 +36,7 @@ public class MatchingEngine {
             if (buildMatch()) {
                 List<GiverAssignment> result = stack.stream()
                     .map(MatcherFrame::getPair)
-                    .collect(toUnmodifiableList());
+                    .toList();
 
                 return Optional.of(result);
             } else {
