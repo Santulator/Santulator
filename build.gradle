@@ -52,13 +52,13 @@ subprojects {
     }
 
     pmd {
-        toolVersion = '6.41.0'
+        toolVersion = '6.55.0'
         ruleSetFiles = files("$rootProject.projectDir/config/pmd/ruleset.xml")
         ruleSets = []
     }
 
     checkstyle {
-        toolVersion = '8.44'
+        toolVersion = '10.11.0'
         configFile = file("$rootProject.projectDir/config/checkstyle/checkstyle.xml")
     }
 
@@ -77,13 +77,13 @@ subprojects {
     }
 
     jacoco {
-        toolVersion = '0.8.7'
+        toolVersion = '0.8.10'
     }
 
     jacocoTestReport {
         reports {
             xml.required = true
-            xml.destination file("${buildDir}/reports/jacoco/report.xml")
+            xml.outputLocation = file("${buildDir}/reports/jacoco/report.xml")
         }
     }
 

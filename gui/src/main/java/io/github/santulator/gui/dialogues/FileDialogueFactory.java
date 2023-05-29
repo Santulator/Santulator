@@ -7,5 +7,5 @@ package io.github.santulator.gui.dialogues;
 import javafx.stage.Window;
 
 public interface FileDialogueFactory {
-    FileDialogue create(final FileDialogueType type, final Window window);
+    FileDialogue create(FileDialogueType type, Window window);
 }

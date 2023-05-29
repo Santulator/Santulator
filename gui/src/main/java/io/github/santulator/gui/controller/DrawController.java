@@ -10,5 +10,5 @@ import javafx.stage.Window;
 import java.util.function.Supplier;
 
 public interface DrawController {
-    void initialise(final DrawModel drawModel, final Supplier<Window> windowSupplier);
+    void initialise(DrawModel drawModel, Supplier<Window> windowSupplier);
 }

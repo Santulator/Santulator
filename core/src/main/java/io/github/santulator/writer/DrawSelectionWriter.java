@@ -9,5 +9,5 @@ import io.github.santulator.model.DrawSelection;
 import java.nio.file.Path;
 
 public interface DrawSelectionWriter {
-    void writeDrawSelection(DrawSelection selection, Path output, String password, final Runnable onWriteComplete);
+    void writeDrawSelection(DrawSelection selection, Path output, String password, Runnable onWriteComplete);
 }

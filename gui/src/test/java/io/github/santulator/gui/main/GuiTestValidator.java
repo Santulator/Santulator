@@ -12,15 +12,15 @@ import io.github.santulator.model.SessionState;
 import java.nio.file.Path;
 
 public interface GuiTestValidator {
-    void validateWebPage(final I18nKey key);
+    void validateWebPage(I18nKey key);
 
-    void validateOpenPath(final Path path);
+    void validateOpenPath(Path path);
 
-    void validateSavedSession(Path file, final SessionState expected);
+    void validateSavedSession(Path file, SessionState expected);
 
-    void validateDraw(final Path directory, final String... names);
+    void validateDraw(Path directory, String... names);
 
-    void setUpFileDialogue(FileDialogueType dialogueType, final FileFormatType fileType, String file);
+    void setUpFileDialogue(FileDialogueType dialogueType, FileFormatType fileType, String file);
 
-    void setUpFileDialogue(FileDialogueType dialogueType, final FileFormatType fileType, Path file);
+    void setUpFileDialogue(FileDialogueType dialogueType, FileFormatType fileType, Path file);
 }

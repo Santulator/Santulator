@@ -9,9 +9,9 @@ import io.github.santulator.gui.i18n.I18nKey;
 import java.nio.file.Path;
 
 public interface DesktopResourceTool {
-    void showWebPage(final String page);
+    void showWebPage(String page);
 
-    void showWebPage(final I18nKey key);
+    void showWebPage(I18nKey key);
 
-    void openPath(final Path path);
+    void openPath(Path path);
 }
