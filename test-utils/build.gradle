@@ -7,9 +7,9 @@ plugins {
 }
 
 dependencies {
-    api 'com.github.spotbugs:spotbugs-annotations:4.2.3'
+    api 'com.github.spotbugs:spotbugs-annotations:4.7.3'
 
     implementation project(':core')
-    implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
-    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'org.junit.jupiter:junit-jupiter:5.9.3'
+    implementation 'commons-io:commons-io:2.12.0'
 }
