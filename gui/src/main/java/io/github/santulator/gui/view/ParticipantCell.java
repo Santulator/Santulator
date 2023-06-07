@@ -21,6 +21,8 @@ import java.util.function.Consumer;
 import static io.github.santulator.gui.view.IconTool.icon;
 
 public class ParticipantCell extends ListCell<ParticipantModel> {
+    public static final String CLASS_PARTICIPANT_CELL = "participantCell";
+
     public static final String CLASS_FIELD_NAME = "fieldParticipantName";
 
     public static final String CLASS_CHOICE_ROLE = "choiceRole";
@@ -47,12 +49,15 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
 
     private ParticipantModel lastItem;
 
+    private Integer rowNumber;
+
     public ParticipantCell(final I18nManager i18nManager, final Consumer<ParticipantModel> actionButtonHandler, final Consumer<ParticipantModel> enterPressHandler,
         final ParticipantSelectionTool tool) {
         this.tool = tool;
 
         choiceRole.getItems().setAll(ParticipantRole.values());
 
+        applyStyle(this, CLASS_PARTICIPANT_CELL);
         applyStyle(fieldName, CLASS_FIELD_NAME);
         fieldName.textProperty().addListener((o, old, v) -> lastItem.setName(v));
         fieldName.setOnAction(e -> enterPressHandler.accept(lastItem));
@@ -92,7 +97,8 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
             fieldName.setText(item.getName());
             fieldName.disableProperty().set(isPlaceholder);
 
-            labelRowNumber.setText(rowNumber(item));
+            rowNumber = rowNumber(item);
+            labelRowNumber.setText(rowNumberText());
 
             choiceRole.getSelectionModel().select(item.getRole());
             choiceRole.disableProperty().set(isPlaceholder);
@@ -105,12 +111,20 @@ public class ParticipantCell extends ListCell<ParticipantModel> {
         }
     }
 
-    private String rowNumber(final ParticipantModel item) {
+    private String rowNumberText() {
+        return rowNumber == null ? "" : rowNumber.toString();
+    }
+
+    private Integer rowNumber(final ParticipantModel item) {
         if (item.isPlaceholder()) {
-            return "";
+            return null;
         } else {
-            return Integer.toString(item.getRowNumber());
+            return item.getRowNumber();
         }
+    }
+
+    public Integer rowNumber() {
+        return rowNumber;
     }
 
     private Node buttonGraphic(final boolean isPlaceholder) {

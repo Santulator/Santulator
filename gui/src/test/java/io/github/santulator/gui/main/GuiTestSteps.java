@@ -8,6 +8,7 @@ import io.github.santulator.core.SantaException;
 import io.github.santulator.gui.dialogues.FileDialogueType;
 import io.github.santulator.gui.dialogues.FileFormatType;
 import io.github.santulator.gui.i18n.I18nKey;
+import io.github.santulator.gui.view.ParticipantCell;
 import io.github.santulator.test.core.TestFileManager;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableBooleanValue;
@@ -20,6 +21,8 @@ import org.testfx.api.FxRobot;
 import org.testfx.service.query.NodeQuery;
 
 import java.nio.file.Path;
+import java.util.Comparator;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
@@ -35,6 +38,9 @@ public class GuiTestSteps {
     private static final Logger LOG = LoggerFactory.getLogger(GuiTestSteps.class);
 
     private static final int BRIEF_PAUSE_MILLIS = 100;
+
+    public static final Comparator<ParticipantCell> PARTICIPANT_CELL_COMPARATOR
+        = Comparator.comparing(ParticipantCell::rowNumber, Comparator.nullsLast(Comparator.naturalOrder()));
 
     private final FxRobot robot;
 
@@ -118,10 +124,10 @@ public class GuiTestSteps {
             validator.setUpFileDialogue(FileDialogueType.IMPORT_SESSION, FileFormatType.SPREADSHEET, GuiTestConstants.SPREADSHEET);
             robot.clickOn("#buttonImport");
             verifyThat("#listParticipants", hasItems(5));
-            verifyThat(participantNodeQuery(CLASS_FIELD_NAME, 0), hasText("Abigail"));
-            verifyThat(participantNodeQuery(CLASS_FIELD_NAME, 1), hasText("Bill"));
-            verifyThat(participantNodeQuery(CLASS_FIELD_NAME, 2), hasText("Carol"));
-            verifyThat(participantNodeQuery(CLASS_FIELD_NAME, 3), hasText("Dean"));
+            verifyThat(participantNode(CLASS_FIELD_NAME, 0), hasText("Abigail"));
+            verifyThat(participantNode(CLASS_FIELD_NAME, 1), hasText("Bill"));
+            verifyThat(participantNode(CLASS_FIELD_NAME, 2), hasText("Carol"));
+            verifyThat(participantNode(CLASS_FIELD_NAME, 3), hasText("Dean"));
         });
     }
 
@@ -251,11 +257,18 @@ public class GuiTestSteps {
     }
 
     private Node participantNode(final String style, final int row) {
-        return participantNodeQuery(style, row).query();
-    }
+        Set<ParticipantCell> cells = robot.lookup("." + CLASS_PARTICIPANT_CELL)
+            .queryAll();
+        ParticipantCell cell = cells.stream()
+            .filter(participantCell -> !participantCell.isEmpty())
+            .sorted(PARTICIPANT_CELL_COMPARATOR)
+            .skip(row)
+            .findFirst()
+            .orElseThrow(() -> new SantaException(String.format("Unable to find participant row %d", row)));
 
-    private NodeQuery participantNodeQuery(final String style, final int row) {
-        return robot.lookup("." + style).nth(row);
+        return robot.from(cell)
+            .lookup("." + style)
+            .query();
     }
 
     private void waitUntilEnabled(final String query) {
