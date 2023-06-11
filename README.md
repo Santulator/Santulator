@@ -20,21 +20,21 @@ You will need JDK 17.  The version used for building Santulator releases is Open
 
 With your JDK installed you can then clone this repository and run the following to start Santulator:
 ~~~
-$ ./gradlew :gui:run
+./gradlew :gui:run
 ~~~
 
 # How To Build Santulator
 
 You can build the entire system with the following command:
 ~~~
-$ ./gradlew clean build
+./gradlew clean build
 ~~~
 
 # How To Run The GUI Test
 
 By default the GUI test runs as part of the standard Gradle build, in headless mode.  If you'd like to run the GUI test in a non-headless mode so that you can see what is happening, use the following command:
 ~~~
-$ ./gradlew :gui:test --tests io.github.santulator.gui.main.GuiTest --rerun-tasks -PnoHeadless
+./gradlew :gui:test --tests io.github.santulator.gui.main.GuiTest --rerun-tasks -PnoHeadless
 ~~~
 
 # How to Build The Installable Bundle
