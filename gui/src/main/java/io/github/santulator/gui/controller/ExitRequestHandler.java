@@ -7,11 +7,10 @@ package io.github.santulator.gui.controller;
 import io.github.santulator.gui.settings.SettingsManager;
 import io.github.santulator.gui.settings.WindowSettings;
 import io.github.santulator.gui.status.StatusManager;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 @Singleton
 public class ExitRequestHandler {

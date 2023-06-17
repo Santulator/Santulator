@@ -5,10 +5,10 @@
 package io.github.santulator.executable;
 
 import io.github.santulator.core.I18nBundleProvider;
+import jakarta.inject.Singleton;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
-import javax.inject.Singleton;
 
 @Singleton
 public class CommandLineBundleProvider implements I18nBundleProvider {

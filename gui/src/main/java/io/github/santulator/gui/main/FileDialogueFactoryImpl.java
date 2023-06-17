@@ -7,14 +7,14 @@ package io.github.santulator.gui.main;
 import io.github.santulator.gui.dialogues.*;
 import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.settings.SettingsManager;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Function;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import static io.github.santulator.gui.dialogues.FileDialogueType.*;
 import static io.github.santulator.gui.dialogues.FileFormatType.DRAW;

@@ -11,12 +11,12 @@ import io.github.santulator.matcher.MatchingEngine;
 import io.github.santulator.model.GiverAssignment;
 import io.github.santulator.model.ParticipantRole;
 import io.github.santulator.model.Person;
+import jakarta.inject.Singleton;
 
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
-import javax.inject.Singleton;
 
 import static io.github.santulator.gui.i18n.I18nKey.*;
 import static java.util.function.Function.identity;

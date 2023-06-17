@@ -9,11 +9,11 @@ import io.github.santulator.gui.model.ParticipantModel;
 import io.github.santulator.gui.model.SessionModel;
 import io.github.santulator.model.ParticipantState;
 import io.github.santulator.model.SessionState;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 import java.nio.file.Path;
 import java.util.List;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 @Singleton
 public class SessionModelTool {

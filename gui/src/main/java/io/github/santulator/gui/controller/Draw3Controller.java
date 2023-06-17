@@ -8,6 +8,7 @@ import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.DrawModel;
 import io.github.santulator.gui.services.DesktopResourceTool;
 import io.github.santulator.gui.view.IconTool;
+import jakarta.inject.Inject;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,7 +17,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.controlsfx.glyphfont.FontAwesome;
 
 import java.util.function.Supplier;
-import javax.inject.Inject;
 
 import static io.github.santulator.gui.i18n.I18nKey.DRAW3_PASSWORD_SET;
 

@@ -4,12 +4,12 @@
 
 package io.github.santulator.gui.model;
 
+import jakarta.inject.Singleton;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.nio.file.Path;
-import javax.inject.Singleton;
 
 @Singleton
 public class MainModel {

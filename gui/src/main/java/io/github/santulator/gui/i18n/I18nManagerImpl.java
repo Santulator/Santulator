@@ -5,11 +5,11 @@
 package io.github.santulator.gui.i18n;
 
 import io.github.santulator.core.CoreConstants;
+import jakarta.inject.Singleton;
 
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import javax.inject.Singleton;
 
 @Singleton
 public class I18nManagerImpl implements I18nManager {

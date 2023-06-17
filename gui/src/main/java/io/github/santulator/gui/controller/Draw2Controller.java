@@ -16,6 +16,7 @@ import io.github.santulator.gui.services.Progressometer;
 import io.github.santulator.gui.status.StatusManager;
 import io.github.santulator.model.DrawSelection;
 import io.github.santulator.writer.DrawSelectionWriter;
+import jakarta.inject.Inject;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -27,7 +28,6 @@ import org.slf4j.LoggerFactory;
 
 import java.nio.file.Path;
 import java.util.function.Supplier;
-import javax.inject.Inject;
 
 import static io.github.santulator.session.FileNameTool.filename;
 

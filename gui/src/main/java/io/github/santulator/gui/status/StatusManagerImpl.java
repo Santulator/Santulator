@@ -9,13 +9,13 @@ import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.ActionStatus;
 import io.github.santulator.gui.model.StatusModel;
 import io.github.santulator.session.FileNameTool;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.nio.file.Path;
 import java.util.Optional;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import static io.github.santulator.gui.i18n.I18nKey.*;
 

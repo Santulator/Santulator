@@ -10,6 +10,7 @@ import io.github.santulator.model.DrawRequirements;
 import io.github.santulator.model.ParticipantRole;
 import io.github.santulator.model.Person;
 import io.github.santulator.model.Restriction;
+import jakarta.inject.Singleton;
 
 import java.io.InputStream;
 import java.util.List;
@@ -18,7 +19,6 @@ import java.util.OptionalInt;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-import javax.inject.Singleton;
 
 import static io.github.santulator.core.CoreConstants.LOCALE;
 import static java.util.stream.Collectors.toMap;

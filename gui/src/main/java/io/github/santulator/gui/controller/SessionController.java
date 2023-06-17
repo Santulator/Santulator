@@ -12,12 +12,11 @@ import io.github.santulator.gui.services.UnsavedChangesTool;
 import io.github.santulator.gui.view.NoSelectionModel;
 import io.github.santulator.gui.view.ParticipantCell;
 import io.github.santulator.gui.view.ParticipantSelectionTool;
+import jakarta.inject.Inject;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-
-import javax.inject.Inject;
 
 public class SessionController {
     private final I18nManager i18nManager;

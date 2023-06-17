@@ -16,14 +16,14 @@ import io.github.santulator.gui.validator.ValidationError;
 import io.github.santulator.gui.validator.ValidationService;
 import io.github.santulator.gui.view.TrackedWizardPane;
 import io.github.santulator.gui.view.ViewFxml;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import org.controlsfx.dialog.Wizard;
 import org.controlsfx.dialog.WizardPane;
 
 import java.util.Optional;
-import javax.inject.Inject;
-import javax.inject.Provider;
 
 import static io.github.santulator.gui.view.CssTool.applyCss;
 

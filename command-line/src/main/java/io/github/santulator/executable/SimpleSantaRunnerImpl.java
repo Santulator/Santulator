@@ -13,6 +13,8 @@ import io.github.santulator.model.DrawRequirements;
 import io.github.santulator.model.DrawSelection;
 import io.github.santulator.reader.RequirementsReader;
 import io.github.santulator.writer.DrawSelectionWriter;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,8 +23,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 @Singleton
 public class SimpleSantaRunnerImpl implements SimpleSantaRunner {

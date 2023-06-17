@@ -6,12 +6,12 @@ package io.github.santulator.gui.dialogues;
 
 import io.github.santulator.gui.i18n.I18nKey;
 import io.github.santulator.gui.i18n.I18nManager;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.nio.file.Path;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import static io.github.santulator.gui.i18n.I18nKey.*;
 

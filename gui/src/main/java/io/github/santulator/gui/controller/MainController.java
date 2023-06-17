@@ -10,6 +10,8 @@ import io.github.santulator.gui.model.StatusModel;
 import io.github.santulator.gui.services.DesktopResourceTool;
 import io.github.santulator.gui.services.EnvironmentManager;
 import io.github.santulator.gui.status.StatusManager;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -21,9 +23,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.controlsfx.control.StatusBar;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 @Singleton
 public class MainController {

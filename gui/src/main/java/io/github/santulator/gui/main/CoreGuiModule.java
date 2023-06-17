@@ -24,10 +24,10 @@ import io.github.santulator.gui.validator.ValidationServiceImpl;
 import io.github.santulator.session.*;
 import io.github.santulator.writer.DrawSelectionWriter;
 import io.github.santulator.writer.DrawSelectionWriterImpl;
+import jakarta.inject.Singleton;
 
 import java.nio.file.Paths;
 import java.util.List;
-import javax.inject.Singleton;
 
 public class CoreGuiModule extends AbstractModule {
     private final List<String> args;

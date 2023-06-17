@@ -16,14 +16,14 @@ import io.github.santulator.model.SessionState;
 import io.github.santulator.session.FileNameTool;
 import io.github.santulator.session.SessionImporter;
 import io.github.santulator.session.SessionSerialiser;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.nio.file.Path;
 import java.util.List;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 @Singleton
 public class GuiFileHandler {

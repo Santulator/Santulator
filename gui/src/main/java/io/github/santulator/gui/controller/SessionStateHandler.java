@@ -7,11 +7,10 @@ package io.github.santulator.gui.controller;
 import io.github.santulator.gui.common.ControllerAndView;
 import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.SessionModel;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 @Singleton
 public class SessionStateHandler {

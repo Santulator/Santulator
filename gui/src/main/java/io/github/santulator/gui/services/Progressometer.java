@@ -5,6 +5,7 @@
 package io.github.santulator.gui.services;
 
 import io.github.santulator.core.ThreadPoolTool;
+import jakarta.inject.Inject;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
@@ -16,7 +17,6 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
-import javax.inject.Inject;
 
 public class Progressometer {
     private static final int PROGRESS_WAIT = 1_000;

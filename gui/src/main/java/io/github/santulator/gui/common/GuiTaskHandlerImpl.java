@@ -5,14 +5,14 @@
 package io.github.santulator.gui.common;
 
 import io.github.santulator.core.ThreadPoolTool;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import javafx.application.Platform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 @Singleton
 public class GuiTaskHandlerImpl implements GuiTaskHandler {

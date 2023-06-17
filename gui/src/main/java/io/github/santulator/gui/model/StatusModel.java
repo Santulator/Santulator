@@ -5,11 +5,10 @@
 package io.github.santulator.gui.model;
 
 import io.github.santulator.gui.i18n.I18nKey;
+import jakarta.inject.Singleton;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
-
-import javax.inject.Singleton;
 
 @Singleton
 public class StatusModel {

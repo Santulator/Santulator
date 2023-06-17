@@ -6,16 +6,15 @@ package io.github.santulator.gui.controller;
 
 import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.view.ViewFxml;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
+import jakarta.inject.Singleton;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
-import javax.inject.Inject;
-import javax.inject.Provider;
-import javax.inject.Singleton;
 
 @Singleton
 public class AboutHandler {

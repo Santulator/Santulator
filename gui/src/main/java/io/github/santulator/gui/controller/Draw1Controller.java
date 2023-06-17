@@ -17,6 +17,7 @@ import io.github.santulator.model.DrawRequirements;
 import io.github.santulator.model.DrawSelection;
 import io.github.santulator.model.SessionState;
 import io.github.santulator.session.SessionStateTranslator;
+import jakarta.inject.Inject;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -26,7 +27,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.function.Supplier;
-import javax.inject.Inject;
 
 import static io.github.santulator.gui.i18n.I18nKey.DRAW1_FAILURE;
 import static io.github.santulator.gui.i18n.I18nKey.DRAW1_SUCCESS;

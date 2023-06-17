@@ -4,13 +4,14 @@
 
 package io.github.santulator.gui.settings;
 
+import jakarta.inject.Singleton;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
-import javax.inject.Singleton;
 
 @Singleton
 public class SettingsManagerImpl extends BaseSettingsManager<SantulatorSettings> implements SettingsManager {

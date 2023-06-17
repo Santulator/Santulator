@@ -7,11 +7,10 @@ package io.github.santulator.gui.controller;
 import io.github.santulator.gui.i18n.I18nKey;
 import io.github.santulator.gui.i18n.I18nManager;
 import io.github.santulator.gui.model.MainModel;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import javafx.beans.value.ChangeListener;
 import org.apache.commons.lang3.StringUtils;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 @Singleton
 public class TitleHandler {

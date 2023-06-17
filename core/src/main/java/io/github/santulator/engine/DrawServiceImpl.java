@@ -7,13 +7,13 @@ package io.github.santulator.engine;
 import io.github.santulator.core.SantaException;
 import io.github.santulator.matcher.MatchingEngine;
 import io.github.santulator.model.*;
+import jakarta.inject.Singleton;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
-import javax.inject.Singleton;
 
 import static java.util.stream.Collectors.toSet;
 

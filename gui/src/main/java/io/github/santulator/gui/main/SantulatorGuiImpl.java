@@ -14,6 +14,8 @@ import io.github.santulator.gui.model.MainModel;
 import io.github.santulator.gui.services.ExternalEventBroker;
 import io.github.santulator.gui.services.PlacementManager;
 import io.github.santulator.gui.view.ViewFxml;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,8 +25,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.nio.file.Path;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 @Singleton
 public class SantulatorGuiImpl implements SantulatorGui {

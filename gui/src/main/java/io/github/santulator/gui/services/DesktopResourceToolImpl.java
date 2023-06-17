@@ -7,16 +7,16 @@ package io.github.santulator.gui.services;
 import io.github.santulator.core.ThreadPoolTool;
 import io.github.santulator.gui.i18n.I18nKey;
 import io.github.santulator.gui.i18n.I18nManager;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.awt.Desktop;
+import java.awt.*;
 import java.net.URI;
 import java.nio.file.Path;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 @Singleton
 public class DesktopResourceToolImpl implements DesktopResourceTool {

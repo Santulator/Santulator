@@ -4,9 +4,10 @@
 
 package io.github.santulator.gui.services;
 
+import jakarta.inject.Singleton;
+
 import java.util.List;
 import java.util.stream.IntStream;
-import javax.inject.Singleton;
 
 @Singleton
 public class ProgressSequencerImpl implements ProgressSequencer {

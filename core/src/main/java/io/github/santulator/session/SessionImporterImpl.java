@@ -8,6 +8,7 @@ import io.github.santulator.core.ExcelTool;
 import io.github.santulator.core.SantaException;
 import io.github.santulator.model.ParticipantRole;
 import io.github.santulator.model.ParticipantState;
+import jakarta.inject.Singleton;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -16,7 +17,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
-import javax.inject.Singleton;
 
 import static io.github.santulator.session.FileNameTool.filename;
 

@@ -8,6 +8,8 @@ import io.github.santulator.core.I18nBundleProvider;
 import io.github.santulator.core.SantaException;
 import io.github.santulator.model.DrawSelection;
 import io.github.santulator.model.GiverAssignment;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,8 +18,6 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 @Singleton
 public class DrawSelectionWriterImpl implements DrawSelectionWriter {

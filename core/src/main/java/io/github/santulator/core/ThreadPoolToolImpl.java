@@ -4,10 +4,11 @@
 
 package io.github.santulator.core;
 
+import jakarta.inject.Singleton;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
-import javax.inject.Singleton;
 
 @Singleton
 public class ThreadPoolToolImpl implements ThreadPoolTool {

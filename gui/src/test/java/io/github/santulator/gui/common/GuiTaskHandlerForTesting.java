@@ -4,7 +4,7 @@
 
 package io.github.santulator.gui.common;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 @Singleton
 public class GuiTaskHandlerForTesting implements GuiTaskHandler {

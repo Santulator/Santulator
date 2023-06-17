@@ -7,10 +7,10 @@ package io.github.santulator.gui.services;
 import io.github.santulator.gui.common.Placement;
 import io.github.santulator.gui.settings.SettingsManager;
 import io.github.santulator.gui.settings.WindowSettings;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 import java.util.Optional;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 @Singleton
 public class PlacementManagerImpl implements PlacementManager {
