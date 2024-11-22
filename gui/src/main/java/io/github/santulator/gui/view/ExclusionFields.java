@@ -19,7 +19,7 @@ import static io.github.santulator.gui.view.IconTool.icon;
 import static io.github.santulator.gui.view.ParticipantCell.CLASS_FIELD_EXCLUSIONS;
 
 public class ExclusionFields {
-    private static final int MAX_EXCLUSION_FIELDS = 5;
+    private static final int MAX_EXCLUSION_FIELDS = 9;
 
     private final TextField[] fields = IntStream.range(0, MAX_EXCLUSION_FIELDS)
         .mapToObj(this::prepareExclusionField)
