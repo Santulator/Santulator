@@ -30,14 +30,14 @@ dependencies {
     implementation 'org.controlsfx:controlsfx:11.1.2'
 
     // This is required for the conditional logic in the logback setup
-    runtimeOnly 'org.codehaus.janino:janino:3.1.9'
+    runtimeOnly 'org.codehaus.janino:janino:3.1.12'
 
     testImplementation project(':test-utils')
     testImplementation 'org.testfx:testfx-junit5:4.0.18'
     testImplementation 'org.hamcrest:hamcrest:3.0'
-    testImplementation 'ch.qos.logback:logback-classic:1.4.8'
+    testImplementation 'ch.qos.logback:logback-classic:1.5.12'
 
-    testRuntimeOnly 'commons-io:commons-io:2.13.0'
+    testRuntimeOnly 'commons-io:commons-io:2.18.0'
     testRuntimeOnly 'org.testfx:openjfx-monocle:jdk-12.0.1+2'
 }
 
