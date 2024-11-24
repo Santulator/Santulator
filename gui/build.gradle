@@ -33,7 +33,8 @@ dependencies {
     runtimeOnly 'org.codehaus.janino:janino:3.1.9'
 
     testImplementation project(':test-utils')
-    testImplementation 'org.testfx:testfx-junit5:4.0.16-alpha'
+    testImplementation 'org.testfx:testfx-junit5:4.0.18'
+    testImplementation 'org.hamcrest:hamcrest:3.0'
     testImplementation 'ch.qos.logback:logback-classic:1.4.8'
 
     testRuntimeOnly 'commons-io:commons-io:2.13.0'

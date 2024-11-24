@@ -29,9 +29,9 @@ import java.util.concurrent.TimeoutException;
 import static io.github.santulator.gui.view.ParticipantCell.*;
 import static io.github.santulator.test.session.TestSessionStateTool.*;
 import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.matcher.base.NodeMatchers.isVisible;
 import static org.testfx.matcher.control.ListViewMatchers.hasItems;
 import static org.testfx.util.NodeQueryUtils.hasText;
+import static org.testfx.util.NodeQueryUtils.isVisible;
 import static org.testfx.util.WaitForAsyncUtils.waitFor;
 
 public class GuiTestSteps {
