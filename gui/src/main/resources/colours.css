@@ -133,7 +133,7 @@ MenuBar {
  * Hyperlinks.
  */
 
-.about .website Glyph *, .about .twitter Glyph * {
+.about .website Glyph * {
     -fx-fill: derive(-fx-base, 130%);
 }
 Hyperlink {

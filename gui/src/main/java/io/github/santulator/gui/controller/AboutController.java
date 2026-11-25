@@ -28,9 +28,6 @@ public class AboutController {
     private Hyperlink linkWebsite;
 
     @FXML
-    private Hyperlink linkTwitter;
-
-    @FXML
     private Hyperlink linkGithub;
 
     @FXML
@@ -48,7 +45,6 @@ public class AboutController {
     public void initialise(final Stage stage) {
         buttonClose.setOnAction(e -> stage.close());
         linkWebsite.setOnAction(e -> desktopResourceTool.showWebPage(I18nKey.LINK_MAIN));
-        linkTwitter.setOnAction(e -> desktopResourceTool.showWebPage(GuiConstants.TWITTER));
         linkGithub.setOnAction(e -> desktopResourceTool.showWebPage(GuiConstants.GITHUB));
         linkGithubStar.setOnAction(e -> desktopResourceTool.showWebPage(GuiConstants.GITHUB));
 

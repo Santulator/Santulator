@@ -19,6 +19,6 @@
     -fx-font-style: italic;
     -fx-stroke-width: 1;
 }
-.about .website Glyph *, .about .twitter Glyph *, .about .github Glyph * {
+.about .website Glyph *, .about .github Glyph * {
     -fx-font-size: 25;
 }

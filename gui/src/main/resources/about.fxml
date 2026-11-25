@@ -49,11 +49,6 @@
                                         <Glyph fontFamily="FontAwesome" icon="HOME" styleClass="fontAwesomeIcon" />
                                     </graphic>
                                 </Hyperlink>
-                                <Hyperlink fx:id="linkTwitter" styleClass="twitter" text="\@vocabhunterapp">
-                                    <graphic>
-                                        <Glyph fontFamily="FontAwesome" icon="TWITTER" styleClass="fontAwesomeIcon" />
-                                    </graphic>
-                                </Hyperlink>
                                 <HBox alignment="CENTER_LEFT">
                                     <children>
                                         <Hyperlink fx:id="linkGithub" styleClass="github" text="%about.github">
