@@ -21,6 +21,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.stage.WindowEvent;
 import org.controlsfx.control.StatusBar;
 
@@ -134,7 +135,7 @@ public class MainController {
         menuWebsite.setOnAction(e -> desktopResourceTool.showWebPage(I18nKey.LINK_MAIN));
         menuHowTo.setOnAction(e -> desktopResourceTool.showWebPage(I18nKey.LINK_HELP));
         menuIssue.setOnAction(e -> desktopResourceTool.showWebPage(I18nKey.LINK_ISSUE));
-        menuAbout.setOnAction(e -> processAbout());
+        menuAbout.setOnAction(e -> processAbout(stage));
 
         menuBar.setUseSystemMenuBar(environmentManager.useSystemMenuBar());
 
@@ -162,10 +163,10 @@ public class MainController {
         menuItem.setOnAction(handler);
     }
 
-    private void processAbout() {
+    private void processAbout(final Window owner) {
         if (statusManager.beginAbout()) {
             try {
-                aboutHandler.show();
+                aboutHandler.show(owner);
                 statusManager.markSuccess();
             } finally {
                 statusManager.completeAction();
